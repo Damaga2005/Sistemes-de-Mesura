@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ca"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unitat 5 — Sensors resistius · Lectura prèvia</title>
+<style>
+:root{--acc:#0b6fb8;--acc2:#0a5a8a;--ink:#1b2733;--mut:#5a6b7a;--line:#d7e0e8;--soft:#f4f8fb}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 64px}
+header{border-bottom:2px solid var(--acc);padding:28px 0 16px;margin-bottom:18px}
+.crumb{font-size:13.5px;color:var(--mut);letter-spacing:.02em;margin-bottom:8px}
+h1{font-size:28px;margin:2px 0 6px}
+.sub{color:var(--mut);font-size:15px;margin:6px 0 0}
+.intro{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:18px 0}
+.intro p{margin:8px 0}
+.card{display:flex;gap:16px;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:11px;padding:14px 16px;margin:12px 0;transition:box-shadow .15s,border-color .15s,transform .05s;background:#fff}
+.card:hover{border-color:var(--acc);box-shadow:0 3px 14px rgba(11,111,184,.10);transform:translateY(-1px)}
+.cnum{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--acc);color:#fff;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center}
+.ctitle{font-weight:650;color:var(--acc2);font-size:17.5px;margin-bottom:3px}
+.cdesc{color:var(--mut);font-size:14.5px;line-height:1.5}
+.cmeta{color:var(--acc2);font-size:13px;margin-top:6px;font-weight:600}
+footer{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;color:var(--mut);font-size:13.5px}
+</style></head>
+<body><div class="wrap">
+<header>
+  <div class="crumb">Sistemes de Mesura (230920) · ETSETB-UPC</div>
+  <h1>Unitat 5 — Sensors resistius</h1>
+  <p class="sub">Materials de lectura prèvia · dedicació total estimada: 64 minuts</p>
+</header>
+<div class="intro">
+  <p>Aquesta unitat es treballa amb metodologia d'<strong>aula inversa</strong>: les sessions presencials no exposen aquests continguts, sinó que resolen activitats que els pressuposen. Aquests documents <strong>substitueixen els apunts</strong> i contenen tot el que cal per preparar la unitat.</p>
+  <p>Llegeix els vuit documents en ordre <strong>abans de la primera sessió</strong> i resol el qüestionari corresponent dins del termini indicat pel professor. </p>
+</div>
+<a class="card" href="Unitat5_01_Sensors_moduladors_i_model_general.html"><div class="cnum">1</div><div class="cbody"><div class="ctitle">Sensors moduladors, fonaments físics i model general</div><div class="cdesc">Sensors generadors i moduladors; classificació per la impedància Z=R+jX; resistius enfront de reactius; R=rho·l/A i la descomposició de la variació relativa; efecte de Poisson i dilatació tèrmica; sigma=n·q·mu i el contrast entre metalls i semiconductors; model general R(x)=R0[1+g(x-x0)] i especificacions del fabricant; estratègies d&#x27;excitació i panorama de les famílies.</div><div class="cmeta">Dedicació estimada: 7 min</div></div></a>
+<a class="card" href="Unitat5_02_RTD.html"><div class="cnum">2</div><div class="cbody"><div class="ctitle">Detectors de temperatura resistius (RTD)</div><div class="cdesc">Mecanisme de la resistivitat en un metall; platí, coure i níquel; model polinòmic i Callendar-Van Dusen segons IEC 60751; model lineal i error de linealització (0,382 °C entre 0 i 100 °C); Pt-100, Pt-500 i Pt-1000; sensibilitat absoluta i relativa; classes d&#x27;exactitud i intercanviabilitat; construccions de pel·lícula metàl·lica i de fil enrotllat.</div><div class="cmeta">Dedicació estimada: 8 min</div></div></a>
+<a class="card" href="Unitat5_03_Autoescalfament_i_resposta_dinamica.html"><div class="cnum">3</div><div class="cbody"><div class="ctitle">Autoescalfament, excitació i resposta dinàmica</div><div class="cdesc">Coeficient de dissipació tèrmica i error sistemàtic d&#x27;autoescalfament; potència dissipada amb corrent constant, tensió constant, divisor de tensió i divisor de corrent; la condició R=Rdiv; exemple resolt amb Pt-100; estratègies de reducció (corrent baix, excitació polsada, dissipació, disseny del condicionament); model tèrmic de primer ordre i constant de temps.</div><div class="cmeta">Dedicació estimada: 8 min</div></div></a>
+<a class="card" href="Unitat5_04_Termistors_NTC.html"><div class="cnum">4</div><div class="cbody"><div class="ctitle">Termistors NTC: models i linealització</div><div class="cdesc">NTC i PTC; model exponencial de dos paràmetres amb temperatures en kelvin; significat de beta; exemple resolt; coeficient de temperatura local; equació de Steinhart-Hart; linealització analògica amb resistència en paral·lel, amb la deducció completa del punt d&#x27;inflexió; linealització amb divisor de tensió i compromís entre linealitat i sensibilitat.</div><div class="cmeta">Dedicació estimada: 8 min</div></div></a>
+<a class="card" href="Unitat5_05_Termistors_construccio_PTC_aplicacions.html"><div class="cnum">5</div><div class="cbody"><div class="ctitle">Termistors: construcció, PTC i aplicacions</div><div class="cdesc">Fabricació ceràmica per sinterització i origen de la dispersió de R0 i beta; formats de forat passant i SMD; criteris de tria; comparació NTC-RTD; aplicacions de mesura, detecció de nivell i flux per autoescalfament, i limitació de transitoris de corrent; posistors i silistors; proteccions tèrmiques i circuits de desmagnetització.</div><div class="cmeta">Dedicació estimada: 7 min</div></div></a>
+<a class="card" href="Unitat5_06_Sensors_piezoresistius_i_galgues.html"><div class="cnum">6</div><div class="cbody"><div class="ctitle">Sensors piezoresistius i galgues extensiomètriques</div><div class="cdesc">Tensió mecànica i deformació unitària; zones elàstica, plàstica i de fallida; llei de Hooke i efecte de Poisson; deducció del factor de galga k=1+2nu+k1; galgues metàl·liques (k entre 2 i 3) i semiconductores (k entre 50 i 150); sensibilitat longitudinal i transversal; rosetes; compensació tèrmica; muntatge i adhesius; cèl·lules de càrrega, acceleròmetres i transductors de pressió.</div><div class="cmeta">Dedicació estimada: 8 min</div></div></a>
+<a class="card" href="Unitat5_07_Magnetoresistencies.html"><div class="cnum">7</div><div class="cbody"><div class="ctitle">Magnetoresistències</div><div class="cdesc">AMR, GMR i TMR: mecanismes, sensibilitats i complexitat; permalloy i model de l&#x27;AMR bàsica; pèrdua d&#x27;informació de signe; estructura barber pole; dispersió dependent de l&#x27;espín i correspondència antiparal·lel-resistència alta; camp de saturació; compensació tèrmica amb ponts; posició sense contacte, encoders, lectura de discos durs i mesura de corrent amb aïllament galvànic.</div><div class="cmeta">Dedicació estimada: 8 min</div></div></a>
+<a class="card" href="Unitat5_08_LDR_higrometres_i_criteris.html"><div class="cnum">8</div><div class="cbody"><div class="ctitle">Fotoresistències, higròmetres resistius i criteris de selecció</div><div class="cdesc">LDR: efecte fotoelèctric intern, condició sobre l&#x27;energia del fotó, resposta espectral segons material, elèctrodes interdigitats, llei de potència empírica i limitacions. Higròmetres resistius: conducció iònica, excitació en alterna, calibratge i compensació de temperatura, histèresi i contaminació. Recapitulació de la unitat, compromisos entre famílies, criteris de selecció i tendències.</div><div class="cmeta">Dedicació estimada: 10 min</div></div></a>
+<footer>Sistemes de Mesura · Grau en Enginyeria Electrònica de Telecomunicació · ETSETB-UPC. Prof. Miguel Ángel García González.</footer>
+</div></body></html>

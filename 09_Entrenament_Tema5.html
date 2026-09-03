@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrenament V/F · Unitat 5: Sensors resistius</title>
+<style>
+:root{--tinta:#1b2430;--suau:#3d4a5c;--accent:#1d4e89;--accent2:#e8eff7;--vora:#d5dce4;
+ --ok:#0f6e4f;--okf:#e9f5f0;--no:#a03030;--nof:#fbeceb;--fons:#f4f6f9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fons);color:var(--tinta);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;background:#fff;box-shadow:0 1px 40px rgba(20,30,45,.07);padding-bottom:56px;min-height:100vh}
+header{background:linear-gradient(135deg,#1d4e89,#2f6db0);color:#fff;padding:34px 44px 28px}
+.crumb{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:13px;color:#cfe0f2;margin:0 0 8px}
+header h1{margin:.1em 0 .3em;font-size:28px}
+header p{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:15px;color:#eaf2fb;margin:0;max-width:62ch}
+main{padding:0 44px}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--vora);
+ padding:14px 44px;margin:0 -44px 18px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;
+ font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px}
+.bar .stat{color:var(--suau)} .bar .stat b{color:var(--accent);font-size:16px}
+.prog{flex:1 1 160px;height:8px;background:var(--accent2);border-radius:5px;overflow:hidden;min-width:120px}
+.prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+button{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px;cursor:pointer;
+ border-radius:8px;border:1px solid var(--vora);background:#fff;color:var(--tinta);padding:7px 14px;transition:.15s}
+button:hover{border-color:var(--accent);color:var(--accent)}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+button.primary:hover{background:#17406f;color:#fff}
+select{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px;padding:6px 8px;
+ border-radius:8px;border:1px solid var(--vora);background:#fff;color:var(--tinta)}
+.q{border:1px solid var(--vora);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fff}
+.q.ok{border-color:#bfe3d4;background:var(--okf)} .q.no{border-color:#eec9c6;background:var(--nof)}
+.qhead{display:flex;gap:12px;align-items:baseline}
+.qn{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-weight:700;color:var(--accent);font-size:14px;flex:0 0 auto}
+.qtext{font-size:17px;margin:0}
+.qbloc{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:12px;color:var(--suau);
+ margin:6px 0 0 34px;text-transform:uppercase;letter-spacing:.04em}
+.acts{display:flex;gap:10px;margin:12px 0 0 34px}
+.acts button{min-width:74px;font-weight:600}
+.acts button.v:hover{border-color:var(--ok);color:var(--ok)}
+.acts button.f:hover{border-color:var(--no);color:var(--no)}
+.acts button.sel-v{background:var(--ok);color:#fff;border-color:var(--ok)}
+.acts button.sel-f{background:var(--no);color:#fff;border-color:var(--no)}
+.acts button[disabled]{opacity:.55;cursor:default}
+.fb{margin:12px 0 0 34px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14.5px;
+ padding:10px 13px;border-radius:8px;display:none}
+.fb.show{display:block}
+.fb .verdict{font-weight:700;display:block;margin-bottom:3px}
+.q.ok .fb{background:#fff;border:1px solid #bfe3d4} .q.ok .verdict{color:var(--ok)}
+.q.no .fb{background:#fff;border:1px solid #eec9c6} .q.no .verdict{color:var(--no)}
+.done{background:var(--accent2);border:1px solid #c6d9ef;border-radius:12px;padding:20px 22px;margin:20px 0;
+ font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;display:none}
+.done.show{display:block}
+.done h3{margin:0 0 .3em;color:var(--accent);font-size:19px}
+.score{font-size:30px;font-weight:700;color:var(--accent)}
+footer{padding:22px 44px 0;color:var(--suau);font-size:13px;
+ font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;border-top:1px solid var(--vora);margin:26px 44px 0;
+ margin-left:0;margin-right:0;padding-left:44px}
+@media(max-width:620px){header,main,.bar,footer{padding-left:20px;padding-right:20px}
+ .bar{margin-left:-20px;margin-right:-20px} .qbloc,.acts,.fb{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<p class="crumb"><b>Sistemes de Mesura</b> (230920) · ETSETB–UPC</p>
+<h1>Entrenament V/F · Unitat 5: Sensors resistius</h1>
+<p>Marqueu si cada afirmació és vertadera o falsa. Rebreu la correcció immediata amb una justificació breu. Aquest entrenament no es lliura ni es puntua.</p>
+</header>
+<main>
+<div class="bar">
+  <span class="stat">Encerts: <b id="ok">0</b> / <span id="ans">0</span></span>
+  <div class="prog"><i id="pg"></i></div>
+  <select id="filtre" title="Filtra per bloc"><option value="-1">Tots els blocs</option></select>
+  <button id="ordre">Ordre aleatori</button>
+  <button class="primary" id="reset">Reinicia</button>
+</div>
+<div id="llista"></div>
+<div class="done" id="done">
+  <h3>Entrenament completat</h3>
+  <p class="score" id="final"></p>
+  <p id="consell"></p>
+  <button class="primary" id="retry">Torna-ho a provar</button>
+</div>
+</main>
+<footer>
+Sistemes de Mesura (230920) · ETSETB–UPC · Unitat 5: Sensors resistius<br>
+Material d'autoestudi. Les respostes no s'envien enlloc: tot el càlcul es fa al vostre navegador.
+</footer>
+</div>
+<script>
+const DATA = {"blocs": ["1. Sensors moduladors, fonaments físics i model general", "2. Detectors de temperatura resistius (RTD)", "3. Autoescalfament, excitació i resposta dinàmica", "4. Termistors NTC: models i linealització", "5. Termistors: construcció, PTC i aplicacions", "6. Sensors piezoresistius i galgues extensiomètriques", "7. Magnetoresistències", "8. Fotoresistències, higròmetres i criteris de selecció"], "items": [{"n": 1, "bloc": 0, "text": "Els sensors capacitius i inductius requereixen excitació en corrent altern i condicionament que tingui en compte el desfasament.", "resp": "V", "just": "En els sensors reactius el mesurand afecta la part imaginària de la impedància, de manera que cal excitació alterna i condicionament sensible al desfasament (unitats 7 i 8)."}, {"n": 2, "bloc": 0, "text": "La temperatura pot actuar com a magnitud d'influència en sensors resistius que mesuren magnituds diferents de la temperatura.", "resp": "V", "just": "Una galga, una magnetoresistència, una LDR o un higròmetre canvien de resistència amb la temperatura encara que no sigui el mesurand: és un problema recurrent a tota la unitat."}, {"n": 3, "bloc": 0, "text": "Amb un coeficient de Poisson d'aproximadament 0,3, el factor geomètric 1+2nu val de l'ordre d'1,6.", "resp": "V", "just": "Amb ν ≈ 0,3 resulta 1 + 2·0,3 = 1,6, que és la part geomètrica del factor de galga."}, {"n": 4, "bloc": 0, "text": "El pont de Wheatstone només es pot utilitzar amb galgues extensiomètriques.", "resp": "F", "just": "El pont s'utilitza amb galgues, però també amb RTD i amb magnetoresistències."}, {"n": 5, "bloc": 0, "text": "En un sensor resistiu, el mesurand afecta sobretot la part imaginària de la impedància.", "resp": "F", "just": "En un sensor resistiu el mesurand afecta sobretot la part real; si afectés la imaginària seria un sensor capacitiu o inductiu."}, {"n": 6, "bloc": 0, "text": "Que un sensor resistiu admeti un model en contínua implica que la seva reactància paràsita és rigorosament nul·la.", "resp": "F", "just": "Tot dispositiu real té capacitats i inductàncies paràsites. El model en contínua val perquè són negligibles davant de R en les condicions habituals, no perquè siguin nul·les."}, {"n": 7, "bloc": 1, "text": "El coeficient de temperatura nominal d'una Pt-100 val aproximadament 0,00385 per grau Celsius.", "resp": "V", "just": "És el valor nominal del platí normalitzat: la resistència augmenta un 0,385 % per kelvin, és a dir 0,385 Ω/°C en una Pt-100."}, {"n": 8, "bloc": 1, "text": "En un RTD metàl·lic, la generació de portadors és el mecanisme dominant de la variació de resistència.", "resp": "F", "just": "En un metall la densitat de portadors és pràcticament constant; el que canvia és la mobilitat. La generació de portadors és el mecanisme dels semiconductors, i dona el comportament contrari dels NTC."}, {"n": 9, "bloc": 1, "text": "L'error referit a l'entrada s'obté multiplicant la diferència de resistència per la sensibilitat del sensor.", "resp": "F", "just": "S'obté dividint la diferència de resistència per la sensibilitat del sensor, aproximadament R0·α. És el procediment general per referir un error de sortida a l'escala d'entrada."}, {"n": 10, "bloc": 1, "text": "El coeficient B del model de Callendar-Van Dusen d'una Pt-100 és petit i negatiu.", "resp": "V", "just": "B ≈ −5,775·10⁻⁷ °C⁻²: és petit i negatiu, i és el que corba la característica per sota de la recta del model lineal."}, {"n": 11, "bloc": 1, "text": "Els RTD de fil enrotllat encapsulats destaquen per la seva robustesa davant vibració i ambients agressius.", "resp": "V", "just": "Encapsulats en tub d'acer inoxidable resisteixen bé vibració, impactes i ambients agressius, a canvi de ser més lents i més cars que els de pel·lícula metàl·lica."}, {"n": 12, "bloc": 2, "text": "El coeficient de dissipació tèrmica té unitats de volts per grau.", "resp": "F", "just": "Les unitats són de potència dividida per temperatura, habitualment mW/K, i el valor depèn sobretot del sensor, l'encapsulat i el medi."}, {"n": 13, "bloc": 2, "text": "Amb excitació a corrent constant, la potència dissipada és proporcional al corrent i al quadrat de la resistència.", "resp": "F", "just": "És proporcional al quadrat del corrent i a la primera potència de la resistència: P = I²R. Duplicar el corrent multiplica la potència per quatre."}, {"n": 14, "bloc": 2, "text": "Com millor és la transferència tèrmica amb el medi, menor és l'autoescalfament.", "resp": "V", "just": "En líquids la transferència és molt millor que en aire quiet, i pitjor que tot en buit, on només hi ha radiació."}, {"n": 15, "bloc": 2, "text": "En buit, la dissipació de calor del sensor es produeix principalment per radiació i és el cas més desfavorable.", "resp": "V", "just": "Sense convecció ni conducció cap al medi, només queda la radiació, i per això el buit és la situació més desfavorable."}, {"n": 16, "bloc": 2, "text": "La resposta temporal d'un RTD és instantània perquè la resistència elèctrica canvia sense retard.", "resp": "F", "just": "El retard l'introdueix la transferència de calor, no l'electricitat: el sensor es comporta com un sistema de primer ordre amb una constant de temps tèrmica."}, {"n": 17, "bloc": 2, "text": "L'excitació polsada només redueix l'escalfament mitjà si el pols és curt comparat amb la dinàmica tèrmica del sensor.", "resp": "V", "just": "Si el pols és llarg comparat amb la constant de temps tèrmica, el sensor arriba igualment a la temperatura d'equilibri i no es guanya res."}, {"n": 18, "bloc": 3, "text": "El coeficient de temperatura local d'una NTC és negatiu.", "resp": "V", "just": "El coeficient local val α ≈ −β/Tx², i el signe negatiu reflecteix que la resistència d'una NTC decreix quan puja la temperatura."}, {"n": 19, "bloc": 3, "text": "Els termistors presenten una sensibilitat relativa més baixa que els RTD de platí.", "resp": "F", "just": "És al revés: el canvi relatiu de resistència per grau d'un termistor pot ser fins a vint vegades superior al d'un RTD."}, {"n": 20, "bloc": 3, "text": "La temperatura de referència habitual d'una NTC és 298,15 K, és a dir 25 graus Celsius.", "resp": "V", "just": "El model exponencial de dos paràmetres es referencia habitualment a T0 = 298,15 K, i totes les temperatures hi han d'anar en kelvin."}, {"n": 21, "bloc": 3, "text": "Un valor de beta més gran implica una variació de resistència més feble amb la temperatura.", "resp": "F", "just": "És al revés: un β més gran significa una caiguda més abrupta de la resistència amb la temperatura, és a dir més sensibilitat."}, {"n": 22, "bloc": 3, "text": "La linealització analògica manté exactament la mateixa sensibilitat que la NTC sense linealitzar.", "resp": "F", "just": "La corba equivalent varia menys amb la temperatura que la NTC nua: es guanya linealitat a canvi de sensibilitat."}, {"n": 23, "bloc": 3, "text": "Perquè la resistència de linealització sigui positiva cal que beta sigui més gran que dues vegades la temperatura d'interès.", "resp": "V", "just": "De R = Rth(Tx)·(β−2Tx)/(β+2Tx), el numerador ha de ser positiu. Amb valors habituals es compleix folgadament: β de milers de kelvin davant de 2Tx d'uns 600 K."}, {"n": 24, "bloc": 4, "text": "Les NTC tenen resistències nominals de diversos kilohms a desenes de kilohms a 25 graus Celsius.", "resp": "V", "just": "Els valors típics van de diversos kΩ a desenes de kΩ a 25 °C, i és precisament el que minimitza l'efecte de les resistències de cablejat."}, {"n": 25, "bloc": 4, "text": "La sinterització a alta temperatura forma una ceràmica densa amb les propietats elèctriques buscades.", "resp": "V", "just": "És el pas del procés que fixa les propietats elèctriques, i per això R0 i β depenen tant del cicle de sinterització: d'aquí ve la dispersió entre unitats."}, {"n": 26, "bloc": 4, "text": "En augmentar el corrent, la corba tensió-corrent d'un termistor queda per damunt de la recta òhmica.", "resp": "F", "just": "Queda per sota: en autoescalfar-se, la NTC baixa de resistència i el quocient tensió-corrent disminueix respecte del valor nominal en fred."}, {"n": 27, "bloc": 4, "text": "Els encapsulats SMD de NTC són incompatibles amb el muntatge automatitzat en plaques de circuit imprès.", "resp": "F", "just": "És al contrari: els encapsulats SMD estan pensats per a la soldadura per reflow i el muntatge automatitzat."}, {"n": 28, "bloc": 4, "text": "Les NTC són més barates que els RTD de platí.", "resp": "V", "just": "El cost molt inferior és el primer avantatge de les NTC enfront dels RTD de platí, juntament amb la sensibilitat i la mida."}, {"n": 29, "bloc": 5, "text": "El mòdul de Young té dimensions de pressió i mesura la rigidesa del material.", "resp": "V", "just": "El mòdul de Young té dimensions de pressió —uns 200 GPa per a l'acer, 70 GPa per a l'alumini— i mesura la rigidesa, no cap propietat elèctrica."}, {"n": 30, "bloc": 5, "text": "Un transductor de pressió piezoresistiu necessita que la pressió generi una tensió termoelèctrica.", "resp": "F", "just": "La cadena causal és pressió → deformació de la membrana → canvi de resistència. La tensió termoelèctrica correspondria a un termoparell."}, {"n": 31, "bloc": 5, "text": "Una roseta de tres galgues a 0, 45 i 90 graus permet inferir el mòdul i la direcció de la tensió aplicada.", "resp": "V", "just": "Coneguts el mòdul de Young i el coeficient de Poisson, les tres lectures resolen les equacions de transformació de tensió plana."}, {"n": 32, "bloc": 5, "text": "El factor de galga és la relació entre la tensió d'alimentació i la intensitat de corrent.", "resp": "F", "just": "El factor de galga és el quocient entre el canvi relatiu de resistència i la deformació unitària; no hi intervenen ni tensions d'alimentació ni corrents."}, {"n": 33, "bloc": 5, "text": "Les galgues de referència no carregades mecànicament permeten compensar derives tèrmiques en pont.", "resp": "V", "just": "Situades on no reben tensió mecànica i connectades en pont, la seva variació tèrmica cancel·la la de les galgues actives."}, {"n": 34, "bloc": 5, "text": "El model R = R0(1+k·epsilon) és vàlid dins de la zona elàstica i dels límits del fabricant.", "resp": "V", "just": "El model lineal val en zona elàstica i dins dels límits de deformació del fabricant: uns 40.000 µε en galgues metàl·liques i de 1000 a 3000 µε en semiconductores."}, {"n": 35, "bloc": 5, "text": "La deformació unitària s'expressa en pascals.", "resp": "F", "just": "La deformació unitària és un quocient de longituds i, per tant, adimensional; els pascals corresponen a la tensió mecànica."}, {"n": 36, "bloc": 6, "text": "Els fabricants integren magnetoresistències en ponts de Wheatstone per amplificar les variacions comunes de temperatura.", "resp": "F", "just": "El pont cancel·la les variacions comunes i deixa passar el diferencial: serveix per compensar la deriva tèrmica, no per amplificar-la."}, {"n": 37, "bloc": 6, "text": "Al model de l'AMR bàsica, el camp transversal apareix elevat al quadrat.", "resp": "V", "just": "El model conté (Hy/Hx)²: la funció és parell i, per tant, simètrica respecte de camp nul."}, {"n": 38, "bloc": 6, "text": "Les TMR són tecnològicament més simples que les AMR perquè no requereixen control de capes fines.", "resp": "F", "just": "És al revés: una TMR exigeix un control nanomètric del gruix de la barrera aïllant que l'AMR no necessita. La complexitat creix en el mateix ordre que la sensibilitat."}, {"n": 39, "bloc": 6, "text": "La resposta d'una AMR bàsica és una funció imparell del camp transversal.", "resp": "F", "just": "És una funció parell: el model depèn del quadrat del camp, de manera que l'AMR bàsica dona el mòdul però no el signe."}, {"n": 40, "bloc": 6, "text": "En una GMR, la dispersió dependent de l'espín dels electrons és clau per entendre el canvi de resistència.", "resp": "V", "just": "La probabilitat de dispersió a les capes ferromagnètiques depèn de si l'espín està alineat amb la magnetització local: antiparal·lel dona resistència alta i paral·lel, baixa."}, {"n": 41, "bloc": 6, "text": "L'estructura barber pole intercala seccions de permalloy amb seccions d'alumini.", "resp": "V", "just": "Les seccions d'alumini, paramagnètic, formen contactes inclinats 45° que obliguen el corrent efectiu a formar aquest angle dins del permalloy."}, {"n": 42, "bloc": 7, "text": "En una LDR, la conductivitat disminueix quan augmenta el flux de fotons absorbits.", "resp": "F", "just": "En absorbir fotons amb prou energia es generen parells electró-forat: creix el nombre de portadors, la conductivitat augmenta i la resistència baixa."}, {"n": 43, "bloc": 7, "text": "En un higròmetre resistiu, l'absorció d'aigua fa augmentar la resistència diversos ordres de magnitud.", "resp": "F", "just": "És al revés: l'aigua adsorbida facilita camins iònics de conducció i la resistivitat cau diversos ordres de magnitud. Més humitat, menys resistència."}, {"n": 44, "bloc": 7, "text": "La resposta dinàmica d'un sensor resistiu la limita el fenomen físic, no la part elèctrica.", "resp": "V", "just": "El que limita la velocitat és la difusió tèrmica, la difusió d'aigua o la recombinació de portadors segons la família; la resistència elèctrica canvia sense retard apreciable."}, {"n": 45, "bloc": 7, "text": "La histèresi entre cicles d'humitat creixent i decreixent és una limitació dels higròmetres resistius.", "resp": "V", "just": "La corba R(HR) segueix camins diferents en pujada i en baixada. És una de les limitacions dels higròmetres, juntament amb la lentitud, l'envelliment i la contaminació."}, {"n": 46, "bloc": 7, "text": "En foscor, una LDR presenta una resistència molt baixa perquè no es generen parells electró-forat.", "resp": "F", "just": "En foscor gairebé total el material és pràcticament aïllant i la resistència pot superar les desenes de megaohm; no és nul·la ni baixa."}, {"n": 47, "bloc": 7, "text": "Un fotó genera portadors en una LDR només si la seva energia supera l'energia de banda prohibida.", "resp": "V", "just": "L'efecte fotoelèctric intern exigeix que l'energia del fotó superi l'energia de banda prohibida; per sota, la resposta és pràcticament nul·la."}, {"n": 48, "bloc": 7, "text": "Els elèctrodes interdigitats són habituals en higròmetres resistius perquè augmenten la zona de contacte.", "resp": "V", "just": "Augmenten la zona de contacte amb el material sensible i faciliten mesurar canvis de conductivitat en una capa fina."}, {"n": 49, "bloc": 7, "text": "Per a una mateixa humitat relativa, un augment de temperatura acostuma a disminuir la resistència del sensor.", "resp": "V", "just": "L'augment de temperatura incrementa la conductivitat iònica de l'aigua adsorbida, de manera que a HR constant la resistència baixa. Per això cal compensació tèrmica."}, {"n": 50, "bloc": 7, "text": "Tots els fotons generen portadors útils en una LDR, independentment de la seva energia.", "resp": "F", "just": "Els fotons amb energia inferior a l'energia de banda prohibida no poden promoure electrons a la banda de conducció."}]};
+let ordre = DATA.items.map((_,i)=>i), aleatori=false, filtre=-1;
+let estat = {};
+
+const $ = s=>document.querySelector(s);
+const llista = $('#llista');
+
+DATA.blocs.forEach((b,i)=>{
+  const o=document.createElement('option'); o.value=i; o.textContent=b; $('#filtre').appendChild(o);
+});
+
+function visibles(){
+  return ordre.filter(i=> filtre<0 || DATA.items[i].bloc===filtre);
+}
+
+function render(){
+  llista.innerHTML='';
+  visibles().forEach(i=>{
+    const it=DATA.items[i], st=estat[i];
+    const d=document.createElement('div');
+    d.className='q'+(st? (st.ok?' ok':' no') : '');
+    d.innerHTML=
+      '<div class="qhead"><span class="qn">'+it.n+'</span><p class="qtext">'+it.text+'</p></div>'+
+      '<div class="qbloc">'+DATA.blocs[it.bloc]+'</div>'+
+      '<div class="acts">'+
+        '<button class="v'+(st&&st.tria==='V'?' sel-v':'')+'" data-i="'+i+'" data-r="V"'+(st?' disabled':'')+'>Vertader</button>'+
+        '<button class="f'+(st&&st.tria==='F'?' sel-f':'')+'" data-i="'+i+'" data-r="F"'+(st?' disabled':'')+'>Fals</button>'+
+      '</div>'+
+      '<div class="fb'+(st?' show':'')+'">'+
+        (st? '<span class="verdict">'+(st.ok?'Correcte':'Incorrecte — la resposta és '+it.resp)+'</span>'+it.just : '')+
+      '</div>';
+    llista.appendChild(d);
+  });
+  actualitza();
+}
+
+llista.addEventListener('click', e=>{
+  const b=e.target.closest('button[data-r]'); if(!b) return;
+  const i=+b.dataset.i; if(estat[i]) return;
+  const tria=b.dataset.r;
+  estat[i]={tria, ok: tria===DATA.items[i].resp};
+  render();
+});
+
+function actualitza(){
+  const vis=visibles();
+  const fets=vis.filter(i=>estat[i]).length;
+  const encerts=vis.filter(i=>estat[i]&&estat[i].ok).length;
+  $('#ok').textContent=encerts; $('#ans').textContent=fets;
+  $('#pg').style.width=(vis.length? fets/vis.length*100:0)+'%';
+  const done=$('#done');
+  if(vis.length && fets===vis.length){
+    const pct=Math.round(encerts/vis.length*100);
+    $('#final').textContent=encerts+' / '+vis.length+'  ('+pct+'%)';
+    $('#consell').textContent = pct>=90 ? 'Domini sòlid dels continguts de la unitat.'
+      : pct>=70 ? 'Bon nivell. Reviseu els ítems errats i el passatge dels documents que els sustenta.'
+      : 'Convé rellegir els documents de la unitat abans de tornar a intentar-ho.';
+    done.classList.add('show');
+  } else done.classList.remove('show');
+}
+
+$('#filtre').addEventListener('change',e=>{filtre=+e.target.value; render(); window.scrollTo({top:0,behavior:'smooth'});});
+$('#ordre').addEventListener('click',()=>{
+  aleatori=!aleatori;
+  $('#ordre').textContent = aleatori? 'Ordre original':'Ordre aleatori';
+  ordre = DATA.items.map((_,i)=>i);
+  if(aleatori) for(let i=ordre.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[ordre[i],ordre[j]]=[ordre[j],ordre[i]];}
+  render(); window.scrollTo({top:0,behavior:'smooth'});
+});
+function reinicia(){estat={}; render(); window.scrollTo({top:0,behavior:'smooth'});}
+$('#reset').addEventListener('click',reinicia);
+$('#retry').addEventListener('click',reinicia);
+
+render();
+</script>
+</body>
+</html>
