@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ca"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unitat 6 — Condicionament de sensors en contínua · Lectura prèvia</title>
+<style>
+:root{--acc:#0b6fb8;--acc2:#0a5a8a;--ink:#1b2733;--mut:#5a6b7a;--line:#d7e0e8;--soft:#f4f8fb}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 64px}
+header{border-bottom:2px solid var(--acc);padding:28px 0 16px;margin-bottom:18px}
+.crumb{font-size:13.5px;color:var(--mut);letter-spacing:.02em;margin-bottom:8px}
+h1{font-size:28px;margin:2px 0 6px}
+.sub{color:var(--mut);font-size:15px;margin:6px 0 0}
+.intro{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:18px 0}
+.intro p{margin:8px 0}
+.card{display:flex;gap:16px;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:11px;padding:14px 16px;margin:12px 0;transition:box-shadow .15s,border-color .15s,transform .05s;background:#fff}
+.card:hover{border-color:var(--acc);box-shadow:0 3px 14px rgba(11,111,184,.10);transform:translateY(-1px)}
+.cnum{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--acc);color:#fff;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center}
+.ctitle{font-weight:650;color:var(--acc2);font-size:17.5px;margin-bottom:3px}
+.cdesc{color:var(--mut);font-size:14.5px;line-height:1.5}
+.cmeta{color:var(--acc2);font-size:13px;margin-top:6px;font-weight:600}
+.card.entrena .cnum{background:#2f7d4f}
+.card.entrena .ctitle{color:#2f7d4f}
+.card.entrena .cmeta{color:#2f7d4f}
+.card.entrena:hover{border-color:#2f7d4f;box-shadow:0 3px 14px rgba(47,125,79,.10)}
+footer{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;color:var(--mut);font-size:13.5px}
+</style></head>
+<body><div class="wrap">
+<header>
+  <div class="crumb">Sistemes de Mesura (230920) · ETSETB-UPC</div>
+  <h1>Unitat 6 — Condicionament de sensors en contínua</h1>
+  <p class="sub">Materials de lectura prèvia · dedicació total estimada: 61 minuts</p>
+</header>
+<div class="intro">
+  <p>Aquesta unitat es treballa amb metodologia d'<strong>aula inversa</strong>: les sessions presencials no exposen aquests continguts, sinó que resolen activitats que els pressuposen. Aquests documents <strong>substitueixen els apunts</strong> i contenen tot el que cal per preparar la unitat.</p>
+  <p>Llegeix els sis documents en ordre <strong>abans de la primera sessió</strong> i resol el qüestionari corresponent dins del termini indicat pel professor.</p>
+</div>
+<a class="card" href="Unitat6_01_Cadena_de_condicionament_en_continua.html"><div class="cnum">1</div><div class="cbody"><div class="ctitle">La cadena de condicionament en contínua</div><div class="cdesc">Què vol dir sortida en contínua i quins criteris de disseny en deriven: precisió DC, deriva, soroll de baixa freqüència i autoescalfament. L&#x27;objectiu del condicionador en termes del marge dinàmic de l&#x27;ADC. Blocs de la cadena: excitació, conversió, front end analògic, multiplexatge, filtratge i conversió A/D. AFE monolítics comercials. Model R=R0(1+alfa·x) i per què interessa la variació i no el valor absolut. Contribucions a la incertesa global i interaccions entre blocs.</div><div class="cmeta">Dedicació estimada: 9 min</div></div></a>
+<a class="card" href="Unitat6_02_Conversio_resistencia_tensio.html"><div class="cnum">2</div><div class="cbody"><div class="ctitle">Conversió resistència–tensió: cables, fonts de corrent, divisor i pont</div><div class="cdesc">Biaix de la resistència dels cables i mesura a 2, 3 i 4 fils, amb els criteris de tria. Conversió amb font de corrent: sensibilitat I·R0·alfa i la limitació de la component contínua gran; dues fonts aparellades per anul·lar-la. Divisor de tensió: no-linealitat, sensibilitat màxima Vref·alfa/4 amb R=R0 i el compromís amb l&#x27;autoescalfament. Pont de Wheatstone: equilibri, paràmetre k i el seu efecte simultani sobre sensibilitat, linealitat, consum i mode comú; mig pont i pont complet.</div><div class="cmeta">Dedicació estimada: 11 min</div></div></a>
+<a class="card" href="Unitat6_03_Conversio_corrent_tensio_i_amplificadors_diferencials.html"><div class="cnum">3</div><div class="cbody"><div class="ctitle">Conversió corrent–tensió i amplificadors diferencials</div><div class="cdesc">Models de sensor de corrent amb offset i proporcional. Resistència de càrrega: quan serveix i per què el soroll tèrmic creix amb l&#x27;arrel de R. Amplificador de transimpedància, massa virtual i Vout=Ip·Rf, amb els corrents de polarització com a limitació. Amplificador diferencial de quatre resistències: guany diferencial i en mode comú, la condició R1/R2=R3/R4 i un exemple resolt de combinació de CMRR. Impedàncies d&#x27;entrada i efecte de càrrega sobre el pont.</div><div class="cmeta">Dedicació estimada: 12 min</div></div></a>
+<a class="card" href="Unitat6_04_Amplificadors_dinstrumentacio.html"><div class="cnum">4</div><div class="cbody"><div class="ctitle">Amplificadors d&#x27;instrumentació</div><div class="cdesc">Què resol respecte de l&#x27;amplificador diferencial simple. Estructura de tres amplificadors operacionals, guany G1=1+2Rf/Rg ajustable amb una sola resistència, i la impedància d&#x27;entrada elevada de la primera etapa no inversora. Especificacions DC: exactitud i no-linealitat de guany, offset referit a l&#x27;entrada, corrents de polarització, CMRR, PSRR, derives tèrmiques, soroll i producte guany–amplada de banda. L&#x27;INA317 com a cas concret i els criteris de selecció.</div><div class="cmeta">Dedicació estimada: 8 min</div></div></a>
+<a class="card" href="Unitat6_05_Interruptors_multiplexors_i_PGA.html"><div class="cnum">5</div><div class="cbody"><div class="ctitle">Interruptors, multiplexors analògics i PGA</div><div class="cdesc">Interruptor ideal enfront del real: Ron, fuites i capacitats paràsites. Per què el CMOS combina canal N i canal P. Errors en contínua amb l&#x27;interruptor tancat i obert, i la resistència de càrrega de compromís. Limitacions en commutació: pol i zero, injecció de càrrega, crosstalk i temps d&#x27;establiment. Especificacions dels multiplexors i calibratge per canal. PGA i VGA: error de guany introduït per Ron amb exemple resolt i l&#x27;arquitectura que l&#x27;elimina.</div><div class="cmeta">Dedicació estimada: 13 min</div></div></a>
+<a class="card" href="Unitat6_06_Referencies_i_mesures_ratiometriques.html"><div class="cnum">6</div><div class="cbody"><div class="ctitle">Referències de tensió i de corrent i mesures ratiomètriques</div><div class="cdesc">Per què l&#x27;estabilitat de l&#x27;excitació limita l&#x27;exactitud global. Díodes, Zener i referències bandgap: la combinació de coeficients tèrmics oposats. Referències sèrie i shunt. Especificacions: exactitud inicial, deriva tèrmica, soroll, estabilitat a llarg termini i la distinció entre regulació de línia i de càrrega. Referències de corrent amb resistència de sensat i el rang de tensió de càrrega. Mesura ratiomètrica: la cancel·lació de l&#x27;excitació, les seves condicions i què no cancel·la.</div><div class="cmeta">Dedicació estimada: 8 min</div></div></a>
+<a class="card entrena" href="Unitat6_07_Entrenament.html">
+  <div class="cnum">&#10003;</div>
+  <div class="cbody"><div class="ctitle">Entrenament V/F</div>
+  <div class="cdesc">50 afirmacions repartides entre els sis documents, en dues modalitats: simulacre en ordre aleatori amb cronòmetre i correcció al final, i entrenament lliure en l'ordre dels documents amb resposta immediata. Cada afirmació porta justificació i enllaç al document que la sustenta.</div>
+  <div class="cmeta">Simulacre cronometrat al ritme del qüestionari real</div></div>
+</a>
+<footer>Sistemes de Mesura · Grau en Enginyeria Electrònica de Telecomunicació · ETSETB-UPC. Prof. Miguel Ángel García González.</footer>
+</div></body></html>
