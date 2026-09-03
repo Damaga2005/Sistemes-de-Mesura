@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ca"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unitat 8 — Condicionament de sensors en alterna · Lectura prèvia</title>
+<style>
+:root{--acc:#0b6fb8;--acc2:#0a5a8a;--ink:#1b2733;--mut:#5a6b7a;--line:#d7e0e8;--soft:#f4f8fb}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 64px}
+header{border-bottom:2px solid var(--acc);padding:28px 0 16px;margin-bottom:18px}
+.crumb{font-size:13.5px;color:var(--mut);letter-spacing:.02em;margin-bottom:8px}
+h1{font-size:28px;margin:2px 0 6px}
+.sub{color:var(--mut);font-size:15px;margin:6px 0 0}
+.intro{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:18px 0}
+.intro p{margin:8px 0}
+.card{display:flex;gap:16px;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:11px;padding:14px 16px;margin:12px 0;transition:box-shadow .15s,border-color .15s,transform .05s;background:#fff}
+.card:hover{border-color:var(--acc);box-shadow:0 3px 14px rgba(11,111,184,.10);transform:translateY(-1px)}
+.cnum{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--acc);color:#fff;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center}
+.ctitle{font-weight:650;color:var(--acc2);font-size:17.5px;margin-bottom:3px}
+.cdesc{color:var(--mut);font-size:14.5px;line-height:1.5}
+.cmeta{color:var(--acc2);font-size:13px;margin-top:6px;font-weight:600}
+.card.entrena .cnum{background:#2f7d4f}
+.card.entrena .ctitle{color:#2f7d4f}
+.card.entrena .cmeta{color:#2f7d4f}
+.card.entrena:hover{border-color:#2f7d4f;box-shadow:0 3px 14px rgba(47,125,79,.10)}
+footer{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;color:var(--mut);font-size:13.5px}
+</style></head>
+<body><div class="wrap">
+<header>
+  <div class="crumb">Sistemes de Mesura (230920) · ETSETB-UPC</div>
+  <h1>Unitat 8 — Condicionament de sensors en alterna</h1>
+  <p class="sub">Materials de lectura prèvia · dedicació total estimada: 61 minuts</p>
+</header>
+<div class="intro">
+  <p>Aquesta unitat es treballa amb metodologia d'<strong>aula inversa</strong>: les sessions presencials no exposen aquests continguts, sinó que resolen activitats que els pressuposen. Aquests documents contenen tot el que cal per preparar la unitat.</p>
+  <p>Llegeix els sis documents en ordre <strong>abans de la primera sessió</strong> i resol el qüestionari corresponent dins del termini indicat pel professor.</p>
+</div>
+<a class="card" href="Unitat8_01_Sensors_reactius_i_cadena_de_condicionament.html"><div class="cnum">1</div><div class="cbody"><div class="ctitle">Sensors reactius, freqüència de treball i cadena de condicionament</div><div class="cdesc">El model d&#x27;impedància complexa Z(f,x)=R+jX i la condició que fa que un sensor es pugui tractar com a reactiu. Com es tria la freqüència de treball: el que hi imposa el sensor —nucli ferromagnètic, corrents de Foucault, capacitiu— i el que hi imposa el sistema, allunyar-se de la xarxa i del soroll 1/f. Les dues aproximacions al condicionament, la lineal i la basada en oscil·ladors. Els quatre blocs de la cadena lineal i la funció de cadascun. Els quatre models canònics de sensor. Dos condicionadors integrats comercials com a il·lustració de les dues aproximacions.</div><div class="cmeta">Dedicació estimada: 10 min</div></div></a>
+<a class="card" href="Unitat8_02_Conversio_impedancia_tensio.html"><div class="cnum">2</div><div class="cbody"><div class="ctitle">Conversió impedància–tensió: divisors, inversor, ponts i pseudoponts</div><div class="cdesc">El divisor d&#x27;impedàncies i quan la freqüència s&#x27;hi cancel·la. La no linealitat del divisor amb un sol sensor i la linealitat exacta del divisor diferencial, amb el seu rebuig de mode comú. El problema de la impedància de sortida del divisor passiu i les seves mitigacions, de l&#x27;apantallament a l&#x27;amplificador operacional. L&#x27;amplificador inversor capacitiu, la resistència de polarització i les seves dues condicions contraposades, i on col·locar el sensor. El pont d&#x27;alterna: homogeneïtat de branques, condició d&#x27;equilibri, sortida amb sensor diferencial i impedància de sortida. El pseudopont i els seus dos avantatges.</div><div class="cmeta">Dedicació estimada: 9 min</div></div></a>
+<a class="card" href="Unitat8_03_Amplificadors_d_alterna.html"><div class="cnum">3</div><div class="cbody"><div class="ctitle">Amplificadors d&#x27;alterna i limitacions dels operacionals</div><div class="cdesc">Per què l&#x27;amplificació ha de ser passa-banda: supressió dels errors de contínua, reducció del soroll 1/f i rebuig de la xarxa. La banda que ocupa el senyal modulat i la condició de guany pla als seus extrems. Centrat per mitjana geomètrica i el compromís d&#x27;amplada de banda entre error de guany i rebuig de soroll. Les dues topologies —no inversora i d&#x27;instrumentació— amb l&#x27;anàlisi en tres règims i les freqüències de tall. Les quatre limitacions de l&#x27;operacional a la freqüència de treball: GBW, slew rate, capacitat d&#x27;entrada i de les pistes, i degradació de CMRR i PSRR, amb el desacoblament de l&#x27;alimentació.</div><div class="cmeta">Dedicació estimada: 12 min</div></div></a>
+<a class="card" href="Unitat8_04_Metodes_no_coherents.html"><div class="cnum">4</div><div class="cbody"><div class="ctitle">Estimació de l&#x27;amplitud: mètodes no coherents</div><div class="cdesc">Modulació AM clàssica davant de modulació DSB i què determina quines tècniques són admissibles. Els convertidors de valor eficaç: tèrmics, de càlcul explícit i implícit, i per rectificació amb el seu factor de forma, comparats en exactitud, amplada de banda, velocitat i cost. Per què tot mètode no coherent introdueix un biaix positiu davant del soroll i les interferències. Els multiplicadors analògics i els seus quadrants, les implementacions amb amplificadors logarítmics i antilogarítmics i la cèl·lula de Gilbert. Els detectors de pic: arrissat, criteri de la constant de temps i sensibilitat al soroll impulsiu.</div><div class="cmeta">Dedicació estimada: 12 min</div></div></a>
+<a class="card" href="Unitat8_05_Deteccio_coherent.html"><div class="cnum">5</div><div class="cbody"><div class="ctitle">Detecció coherent: homodina, rectificació síncrona i mostreig síncron</div><div class="cdesc">Què aporta la referència de fase: recuperació del signe en DSB, rebuig de la quadratura i reducció del soroll. La detecció homodina, el terme a 2f0 que el filtre elimina i la interpretació de la sortida en funció del desfasament. La tria de la freqüència de tall, l&#x27;atenuació d&#x27;una interferència i la reducció de soroll respecte de l&#x27;amplada de banda de l&#x27;amplificador. La rectificació síncrona amb referència quadrada i commutador, i el preu dels seus harmònics imparells. El mostreig síncron: què elimina cada combinació de mostres, per què la taxa la fixa el mesurand i no la portadora, i la validesa del sub-mostreig.</div><div class="cmeta">Dedicació estimada: 10 min</div></div></a>
+<a class="card" href="Unitat8_06_Oscil_ladors_de_frequencia_variable.html"><div class="cnum">6</div><div class="cbody"><div class="ctitle">Mètodes basats en oscil·ladors i mesura de freqüència</div><div class="cdesc">Codificar el mesurand en la freqüència: senzillesa, sortida digital directa i immunitat a les pertorbacions d&#x27;amplitud, davant de la no linealitat, la deriva dels components i el temps d&#x27;integració. Els tres oscil·ladors de relaxació —555 astable, amplificador operacional amb histèresi i inversors CMOS de Schmitt— amb les seves expressions i el seu cicle de treball. La conversió freqüència–tensió amb monoestable i la condició sobre la durada del pols. El comptatge digital de flancs, la resolució 1/Tgate i el compromís amb la velocitat de resposta.</div><div class="cmeta">Dedicació estimada: 8 min</div></div></a>
+
+<footer>Sistemes de Mesura · Grau en Enginyeria Electrònica de Telecomunicació · ETSETB-UPC. Prof. Miguel Ángel García González.</footer>
+</div></body></html>
