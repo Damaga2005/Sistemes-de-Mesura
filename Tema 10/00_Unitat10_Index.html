@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ca"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unitat 10 — Condicionament singular de senyals · Lectura prèvia</title>
+<style>
+:root{--acc:#0b6fb8;--acc2:#0a5a8a;--ink:#1b2733;--mut:#5a6b7a;--line:#d7e0e8;--soft:#f4f8fb}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 64px}
+header{border-bottom:2px solid var(--acc);padding:28px 0 16px;margin-bottom:18px}
+.crumb{font-size:13.5px;color:var(--mut);letter-spacing:.02em;margin-bottom:8px}
+h1{font-size:28px;margin:2px 0 6px}
+.sub{color:var(--mut);font-size:15px;margin:6px 0 0}
+.intro{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:18px 0}
+.intro p{margin:8px 0}
+.card{display:flex;gap:16px;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:11px;padding:14px 16px;margin:12px 0;transition:box-shadow .15s,border-color .15s,transform .05s;background:#fff}
+.card:hover{border-color:var(--acc);box-shadow:0 3px 14px rgba(11,111,184,.10);transform:translateY(-1px)}
+.cnum{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--acc);color:#fff;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center}
+.ctitle{font-weight:650;color:var(--acc2);font-size:17.5px;margin-bottom:3px}
+.cdesc{color:var(--mut);font-size:14.5px;line-height:1.5}
+.cmeta{color:var(--acc2);font-size:13px;margin-top:6px;font-weight:600}
+footer{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;color:var(--mut);font-size:13.5px}
+</style></head>
+<body><div class="wrap">
+<header>
+  <div class="crumb">Sistemes de Mesura (230920) · ETSETB-UPC</div>
+  <h1>Unitat 10 — Condicionament singular de senyals</h1>
+  <p class="sub">Materials de lectura prèvia · dedicació total estimada: 54 minuts</p>
+</header>
+<div class="intro">
+  <p>Aquesta unitat es treballa amb metodologia d'<strong>aula inversa</strong>: les sessions presencials no exposen aquests continguts, sinó que resolen activitats que els pressuposen.</p>
+  <p>Llegeix els cinc documents en ordre <strong>abans de la primera sessió</strong>.</p>
+</div>
+<a class="card" href="Unitat10_01_Condicionament_singular_i_limits_de_loperacional.html"><div class="cnum">1</div><div class="cbody"><div class="ctitle">Condicionament singular: sensors, l&#x27;operacional real i les seves derives</div><div class="cdesc">Què fa singular un sensor: la classificació electrònica, complementària de la física, en dos blocs segons si el problema dominant és el nivell de senyal o la impedància de sortida, i les tres famílies de circuits que se&#x27;n deriven. Tres mesures on l&#x27;operacional de propòsit general queda curt. El model de l&#x27;operacional real: tensió d&#x27;offset, corrents de polarització i d&#x27;offset, i l&#x27;error que produeixen en circular per les resistències del circuit. Deriva tèrmica i envelliment, i la diferència pràctica entre un error constant i un que deriva. Soroll blanc i soroll 1/f, la freqüència de cantonada i la integral sobre la banda útil. Ordres de magnitud per tecnologia d&#x27;entrada.</div><div class="cmeta">Dedicació estimada: 12 min</div></div></a>
+<a class="card" href="Unitat10_02_Amplificadors_de_baixes_derives.html"><div class="cnum">2</div><div class="cbody"><div class="ctitle">Amplificadors de baixes derives: compensació de la polarització i ajust d&#x27;offset</div><div class="cdesc">L&#x27;especificació del problema del termoparell: sensibilitats, resolució exigida i contingut freqüencial fins a la contínua, amb les cinc condicions simultànies que ha de satisfer l&#x27;amplificador i el criteri d&#x27;error referit a l&#x27;entrada. La resistència auxiliar que canvia un error proporcional al corrent de polarització per un de proporcional al corrent d&#x27;offset, i en quines tecnologies compensa. El guany de soroll com a factor que multiplica l&#x27;offset. L&#x27;ajust intern amb pins d&#x27;offset null i la seva degradació tèrmica. La compensació externa en les topologies inversora i no inversora, la doble compensació simultània i el dimensionament de la tensió de referència.</div><div class="cmeta">Dedicació estimada: 10 min</div></div></a>
+<a class="card" href="Unitat10_03_Chopper_i_autozero.html"><div class="cnum">3</div><div class="cbody"><div class="ctitle">Amplificadors chopper i amplificadors amb autozero</div><div class="cdesc">La modulació a la freqüència de commutació, l&#x27;amplificació lluny de la zona de soroll 1/f i la desmodulació síncrona, seguides en el temps als cinc punts interns i en el domini freqüencial. El guany en llaç tancat i la seva equivalència amb el d&#x27;un amplificador convencional. Les tres limitacions intrínseques: banda útil, plegament de soroll de bandes laterals i residus de commutació. Els amplificadors amb autozero: les dues fases, l&#x27;emmagatzematge capacitiu de les correccions i la tensió d&#x27;offset efectiva reduïda pel factor de correcció. Arquitectures híbrides i els sis criteris de selecció d&#x27;un amplificador.</div><div class="cmeta">Dedicació estimada: 10 min</div></div></a>
+<a class="card" href="Unitat10_04_Electrometrics_i_transimpedancia.html"><div class="cnum">4</div><div class="cbody"><div class="ctitle">Amplificadors electromètrics i de transimpedància</div><div class="cdesc">El model de Thevenin i el de Norton com a descripcions equivalents d&#x27;un mateix sensor, i la topologia que cadascun suggereix. L&#x27;amplificador electromètric: condicions de funcionament, divisor amb la impedància d&#x27;entrada finita i aplicació a l&#x27;elèctrode de vidre. L&#x27;amplificador de transimpedància: curtcircuit virtual, transimpedància en ohms o volts per ampere, estabilitat i la capacitat de realimentació. Errors de contínua i soroll de totes dues topologies, amb el guany de soroll que creix amb la freqüència. La xarxa en T per sintetitzar transimpedàncies de gigaohms i el seu preu en offset i soroll. Guardes, apantallament, aïllants, neteja i control d&#x27;humitat.</div><div class="cmeta">Dedicació estimada: 14 min</div></div></a>
+<a class="card" href="Unitat10_05_Amplificadors_de_carrega.html"><div class="cnum">5</div><div class="cbody"><div class="ctitle">Amplificadors de càrrega</div><div class="cdesc">El model del sensor amb sortida en càrrega i les capacitats paràsites del cable i de l&#x27;entrada, comparables o superiors a la del sensor. La relació entre corrent i càrrega, l&#x27;integrador amb condensador de realimentació i la sortida proporcional a la càrrega, independent de les capacitats paràsites mentre el guany en llaç obert ho permeti. La resistència en paral·lel que evita la saturació, la condició que ha de complir a la freqüència mínima d&#x27;interès i la freqüència de tall inferior que en resulta. Errors de contínua en el model amb els condensadors oberts, i la tecnologia d&#x27;entrada que se&#x27;n dedueix. L&#x27;efecte triboelèctric i les mesures que el mitiguen.</div><div class="cmeta">Dedicació estimada: 8 min</div></div></a>
+<footer>Sistemes de Mesura · Grau en Enginyeria Electrònica de Telecomunicació · ETSETB-UPC. Prof. Miguel Ángel García González.</footer>
+</div></body></html>
