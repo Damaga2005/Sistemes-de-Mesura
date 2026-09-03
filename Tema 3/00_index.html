@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unitat 3 · Interferències en Sistemes de Mesura</title>
+<style>
+:root{--tinta:#1b2430;--accent:#1d4e89;--vora:#d5dce4;--fons-suau:#f4f6f9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fons-suau);color:var(--tinta);
+ font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;background:#fff;box-shadow:0 1px 40px rgba(20,30,45,.07);padding-bottom:56px}
+header{background:linear-gradient(135deg,#1d4e89,#2f6db0);color:#fff;padding:40px 48px 34px}
+.crumb{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:13px;color:#cfe0f2;margin:0 0 10px;letter-spacing:.02em}
+header h1{margin:.1em 0 .3em;font-size:31px}
+header p{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:15px;color:#eaf2fb;margin:0;max-width:60ch}
+main{padding:10px 48px 0}
+.intro{font-size:17px;margin:1.4em 0}
+.card{display:flex;gap:18px;align-items:flex-start;text-decoration:none;color:inherit;
+ border:1px solid var(--vora);border-radius:12px;padding:18px 20px;margin:14px 0;background:#fff;transition:.15s}
+.card:hover{border-color:var(--accent);box-shadow:0 4px 18px rgba(29,78,137,.12);transform:translateY(-1px)}
+.cardnum{flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;
+ font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-weight:700;font-size:20px;
+ display:flex;align-items:center;justify-content:center}
+.cardbody h3{margin:.1em 0 .3em;font-size:19px;color:#12325a}
+.cardbody p{margin:.2em 0 .5em;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14.5px;color:#3d4a5c}
+.mins{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:13px;color:var(--accent);font-weight:600}
+h2{font-size:21px;margin:1.8em 0 .5em;border-bottom:2px solid #e8eff7;padding-bottom:.15em}
+table{border-collapse:collapse;width:100%;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:15px;margin:.8em 0}
+th,td{border:1px solid var(--vora);padding:8px 11px}
+thead th{background:#e8eff7;color:#12325a;text-align:left}
+tr.tot td{font-weight:700;background:#f4f6f9}
+.nota{background:#eaf1f9;border:1px solid #c6d9ef;border-radius:10px;padding:16px 20px;margin:1.4em 0;
+ font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:15px}
+.nota h4{margin:0 0 .4em;color:var(--accent);font-size:15px;text-transform:uppercase;letter-spacing:.04em}
+footer{padding:24px 48px 0;color:#3d4a5c;font-size:13.5px;
+ font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;border-top:1px solid var(--vora);margin-top:2em}
+@media(max-width:620px){header,main,footer{padding-left:22px;padding-right:22px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<p class="crumb"><b>Sistemes de Mesura</b> (230920) · Grau en Enginyeria Electrònica de Telecomunicació · ETSETB–UPC</p>
+<h1>Unitat 3 · Interferències en Sistemes de Mesura</h1>
+<p>Materials de lectura prèvia per a les sessions d'aula inversa. Llegiu-los en ordre abans de la primera sessió del tema.</p>
+</header>
+<main>
+<p class="intro">La unitat es divideix en quatre documents. Cadascun inclou els objectius d'aprenentatge, exercicis resolts on escau i una síntesi final dels conceptes clau.</p>
+
+  <a class="card" href="doc_01.html">
+    <div class="cardnum">1</div>
+    <div class="cardbody">
+      <h3>Fonaments i classificació de les interferències</h3>
+      <p>Soroll enfront d'interferència, representació temporal i espectral, estructura font–canal–receptor, marc EMC (Directiva 2014/30/UE i IEC 61000) i classificació per origen i per canal.</p>
+      <span class="mins">Dedicació estimada: 16 minuts</span>
+    </div>
+  </a>
+  <a class="card" href="doc_02.html">
+    <div class="cardnum">2</div>
+    <div class="cardbody">
+      <h3>Mode diferencial i comú. Interferències conduïdes</h3>
+      <p>Mode diferencial i comú, rebuig de mode comú (CMRR), els quatre casos de connexió a terra, interferències conduïdes internes pel transformador d'alimentació i tècniques de mitigació.</p>
+      <span class="mins">Dedicació estimada: 18 minuts</span>
+    </div>
+  </a>
+  <a class="card" href="doc_03.html">
+    <div class="cardnum">3</div>
+    <div class="cardbody">
+      <h3>Interferències capacitives i blindatge</h3>
+      <p>Acoblament capacitiu i corrent de desplaçament, geometries de la capacitat paràsita, blindatge com a gàbia de Faraday, cable coaxial i sondes atenuadores compensades.</p>
+      <span class="mins">Dedicació estimada: 13 minuts</span>
+    </div>
+  </a>
+  <a class="card" href="doc_04.html">
+    <div class="cardnum">4</div>
+    <div class="cardbody">
+      <h3>Interferències inductives i efecte sobre la mesura</h3>
+      <p>Acoblament inductiu i inductància mútua, blindatge magnètic i trenat, efecte de la interferència sobre el resultat (valor mitjà nul, distribució en U, promitjat i biaix) i diagnosi.</p>
+      <span class="mins">Dedicació estimada: 11 minuts</span>
+    </div>
+  </a>
+
+<h2>Distribució del temps</h2>
+<table>
+<thead><tr><th>Doc.</th><th>Títol</th><th style="text-align:right">Dedicació</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Fonaments i classificació de les interferències</td><td style="text-align:right">16 min</td></tr>
+<tr><td>2</td><td>Mode diferencial i comú. Interferències conduïdes</td><td style="text-align:right">18 min</td></tr>
+<tr><td>3</td><td>Interferències capacitives i blindatge</td><td style="text-align:right">13 min</td></tr>
+<tr><td>4</td><td>Interferències inductives i efecte sobre la mesura</td><td style="text-align:right">11 min</td></tr>
+<tr class="tot"><td colspan="2">Total de lectura</td><td style="text-align:right">58 min</td></tr>
+</tbody>
+</table>
+
+<div class="nota">
+<h4>Abans de la primera sessió</h4>
+<p>Un cop llegits els quatre documents, cal resoldre el qüestionari d'avaluació corresponent al tema. Les condicions concretes s'explicaran a la primera sessió de classe.</p>
+</div>
+
+
+</main>
+<footer>
+Sistemes de Mesura (230920) · ETSETB–UPC · Prof. Miguel Ángel García González<br>
+Unitat 3: Interferències en Sistemes de Mesura · Material de lectura prèvia
+</footer>
+</div>
+</body>
+</html>

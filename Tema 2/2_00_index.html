@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unitat 2 — Estimació de la incertesa a la mesura</title>
+<style>
+:root{
+  --ink:#1c2530; --muted:#5b6875; --line:#dde3ea; --bg:#f6f8fb;
+  --accent:#0a4d8c; --accent-soft:#e8f0f9; --gold:#b9812f;
+  --warn:#8a5a00; --warn-bg:#fbf3e0; --ok:#0d6b4f; --ok-bg:#e6f4ee;
+  --maxw:820px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Georgia","Times New Roman",serif; line-height:1.62; font-size:18px;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 80px}
+header.hero{
+  background:linear-gradient(135deg,#0a4d8c 0%,#0c3a68 100%); color:#fff;
+  padding:34px 0 30px; margin-bottom:34px;
+}
+header.hero .wrap{padding-bottom:0}
+.breadcrumb{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:13px; letter-spacing:.02em;
+  color:#bcd4ee; margin-bottom:14px;
+}
+.breadcrumb span{color:#7fb0e0}
+header.hero h1{
+  font-size:30px; line-height:1.2; margin:0 0 6px; font-weight:700;
+}
+header.hero .kicker{
+  font-family:"Segoe UI",system-ui,sans-serif; text-transform:uppercase;
+  letter-spacing:.12em; font-size:12px; color:#9cc3ea; margin:0 0 10px;
+}
+p.lead{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:15px; color:#dce9f6;
+  margin:16px 0 0; padding-top:14px; border-top:1px solid rgba(255,255,255,.2);
+}
+p.lead b{color:#fff}
+h2{
+  font-size:23px; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--accent-soft);
+  line-height:1.25;
+}
+h2 .num{
+  display:inline-block; min-width:1.7em; color:var(--accent); font-weight:700;
+}
+h3{font-size:19px; margin:30px 0 8px; color:var(--accent)}
+p{margin:0 0 14px}
+a{color:var(--accent)}
+strong{color:#12324f}
+ul,ol{margin:0 0 16px; padding-left:1.3em}
+li{margin:6px 0}
+.box{
+  border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin:22px 0;
+  background:#fff;
+}
+.box .box-title{
+  font-family:"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:13px;
+  text-transform:uppercase; letter-spacing:.08em; margin:0 0 10px; color:var(--accent);
+}
+.box.objectius{background:var(--accent-soft); border-color:#c9ddf1}
+.box.objectius .box-title{color:#0c3a68}
+.box.resum{background:#fbfcfe; border-left:4px solid var(--accent)}
+.box.nota{background:var(--warn-bg); border-color:#e7d9b4}
+.box.nota .box-title{color:var(--warn)}
+figure{margin:26px auto; text-align:center}
+figure img{max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px; background:#fff; padding:8px}
+figcaption{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; color:var(--muted);
+  margin-top:8px; line-height:1.45;
+}
+.eqwrap{margin:18px 0; display:flex; align-items:center; gap:14px}
+.eqwrap .eq{flex:1; overflow-x:auto; text-align:center}
+.eqwrap .eqn{
+  font-family:"Segoe UI",system-ui,sans-serif; color:var(--muted); font-size:15px; white-space:nowrap;
+}
+.md-svg{display:inline-block; max-width:100%}
+.md-svg svg{max-width:100%; height:auto}
+.mi-svg{display:inline-block}
+p .mi-svg svg,li .mi-svg svg,td .mi-svg svg{vertical-align:-0.28em}
+table.data{border-collapse:collapse; width:100%; margin:22px 0; font-size:15px;
+  font-family:"Segoe UI",system-ui,sans-serif}
+table.data th,table.data td{border:1px solid var(--line); padding:8px 11px; text-align:left; vertical-align:top}
+table.data th{background:var(--accent-soft); color:#0c3a68}
+table.data caption{caption-side:bottom; font-size:13px; color:var(--muted); margin-top:8px; text-align:left}
+pre.code{background:#0f2438; color:#e6eef7; border-radius:10px; padding:14px 16px; overflow-x:auto;
+  font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace; font-size:14px; line-height:1.5; margin:18px 0}
+pre.code .cm{color:#8fb4d6}
+code.inl{background:#eef2f6; border:1px solid #dde3ea; border-radius:5px; padding:1px 5px;
+  font-family:"SFMono-Regular",Consolas,monospace; font-size:.9em}
+.example{border:1px solid #cfe0d6; background:#f2f9f5; border-radius:12px; padding:6px 20px 14px; margin:24px 0}
+.example .box-title{color:var(--ok)}
+.step{margin:10px 0 10px}
+.step b{color:#0c3a68}
+footer.doc{
+  margin-top:48px; padding-top:18px; border-top:1px solid var(--line);
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; color:var(--muted);
+  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+}
+footer.doc a{text-decoration:none}
+
+.cards{display:grid; grid-template-columns:1fr; gap:12px; margin:26px 0}
+.card{display:flex; gap:16px; align-items:flex-start; text-decoration:none; color:inherit;
+  border:1px solid var(--line); border-radius:12px; padding:16px 18px; background:#fff; transition:.15s}
+.card:hover{border-color:var(--accent); box-shadow:0 2px 12px rgba(10,77,140,.10)}
+.card-num{flex:0 0 auto; width:38px; height:38px; border-radius:9px; background:var(--accent-soft);
+  color:var(--accent); font-weight:700; font-family:"Segoe UI",system-ui,sans-serif;
+  display:flex; align-items:center; justify-content:center; font-size:18px}
+.card-title{font-weight:700; color:#12324f; margin-bottom:3px}
+.card-desc{font-family:"Segoe UI",system-ui,sans-serif; font-size:14px; color:var(--muted); line-height:1.45}
+.card-min{font-family:"Segoe UI",system-ui,sans-serif; font-size:12px; color:var(--accent); margin-top:6px; font-weight:600}
+
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb">Sistemes de Mesura (230920) · ETSETB–UPC <span>›</span> Unitat 2. Estimació de la incertesa a la mesura</div>
+    <p class="kicker">Material de lectura prèvia</p>
+    <h1>Estimació de la incertesa a la mesura</h1>
+    <p class="lead">Materials de lectura prèvia · Dedicació total estimada: <b>50 minuts</b></p>
+  </div>
+</header>
+<main class="wrap">
+
+<div class="box objectius">
+  <p class="box-title">Com treballar aquesta unitat</p>
+  <p style="margin:0 0 8px">Aquests documents substitueixen els apunts per a la lectura prèvia de la Unitat 2. Segueixen la metodologia d'<strong>aula inversa</strong>: cal llegir-los <strong>abans</strong> de la sessió presencial, on es resoldran activitats que en pressuposen el contingut.</p>
+  <p style="margin:0"><strong>Abans de la primera sessió</strong> d'aquesta unitat cal haver llegit els materials i resoldre el qüestionari corresponent disponible a Atenea.</p>
+</div>
+
+<p>La Unitat 2 desenvolupa l'estimació de la incertesa a la mesura seguint la <em>Guide to the Expression of Uncertainty in Measurement</em> (GUM): des del concepte d'incertesa i el model de mesura fins a l'avaluació de tipus A i B, la combinació d'incerteses, la incertesa expandida i l'expressió final del resultat, amb dos exemples resolts pas a pas.</p>
+
+<div class="cards">
+<a class="card" href="2_01_introduccio.html"><div class="card-num">1</div><div class="card-body"><div class="card-title">Concepte d'incertesa, GUM i error vs. incertesa</div><div class="card-desc">Definició d'incertesa de la GUM, origen normatiu i distinció rigorosa entre error i incertesa.</div><div class="card-min">8 min</div></div></a>
+<a class="card" href="2_02_marc_teoric.html"><div class="card-num">2</div><div class="card-body"><div class="card-title">Marc teòric i definicions fonamentals</div><div class="card-desc">El resultat com a variable aleatòria; valor veritable i estimació; incertesa típica, expandida i factor de cobertura.</div><div class="card-min">7 min</div></div></a>
+<a class="card" href="2_03_model_matematic.html"><div class="card-num">3</div><div class="card-body"><div class="card-title">El model matemàtic de la mesura</div><div class="card-desc">El model Y=f(X); mesures directes i indirectes; avaluacions tipus A i B; hipòtesis i mètode de Monte Carlo.</div><div class="card-min">6 min</div></div></a>
+<a class="card" href="2_04_tipus_A.html"><div class="card-num">4</div><div class="card-body"><div class="card-title">Avaluació de la incertesa de tipus A</div><div class="card-desc">Repetibilitat, independència i biaix; valors aberrants; la mitjana i uA = s/√N, amb la seva deducció.</div><div class="card-min">6 min</div></div></a>
+<a class="card" href="2_05_tipus_B.html"><div class="card-num">5</div><div class="card-body"><div class="card-title">Avaluació de la incertesa de tipus B</div><div class="card-desc">Fonts d'informació, principi de màxima entropia i les distribucions uniforme, triangular, normal i en U.</div><div class="card-min">7 min</div></div></a>
+<a class="card" href="2_06_combinacio.html"><div class="card-num">6</div><div class="card-body"><div class="card-title">Combinació d'incerteses en mesures indirectes</div><div class="card-desc">Llei de propagació, coeficients de sensibilitat, suma en quadratura, covariància i Monte Carlo.</div><div class="card-min">7 min</div></div></a>
+<a class="card" href="2_07_incertesa_expandida.html"><div class="card-num">7</div><div class="card-body"><div class="card-title">Incertesa expandida i graus de llibertat</div><div class="card-desc">Factor de cobertura, distribució t de Student i graus de llibertat efectius (Welch-Satterthwaite).</div><div class="card-min">5 min</div></div></a>
+<a class="card" href="2_08_expressio_final.html"><div class="card-num">8</div><div class="card-body"><div class="card-title">Expressió final del resultat i balanç d'incertesa</div><div class="card-desc">Construcció del balanç, anàlisi de dominància i regles d'arrodoniment del resultat.</div><div class="card-min">4 min</div></div></a>
+</div>
+
+<h2><span class="num"></span>Dedicació estimada</h2>
+<table class="data"><caption>Distribució orientativa de la dedicació (mesurada a 166 paraules/min, més els passos d'exercici i les qüestions de reflexió).</caption><thead><tr><th>#</th><th>Document</th><th style="text-align:right">Minuts</th></tr></thead><tbody><tr><td>1</td><td>Concepte d'incertesa, GUM i error vs. incertesa</td><td style="text-align:right">8</td></tr><tr><td>2</td><td>Marc teòric i definicions fonamentals</td><td style="text-align:right">7</td></tr><tr><td>3</td><td>El model matemàtic de la mesura</td><td style="text-align:right">6</td></tr><tr><td>4</td><td>Avaluació de la incertesa de tipus A</td><td style="text-align:right">6</td></tr><tr><td>5</td><td>Avaluació de la incertesa de tipus B</td><td style="text-align:right">7</td></tr><tr><td>6</td><td>Combinació d'incerteses en mesures indirectes</td><td style="text-align:right">7</td></tr><tr><td>7</td><td>Incertesa expandida i graus de llibertat</td><td style="text-align:right">5</td></tr><tr><td>8</td><td>Expressió final del resultat i balanç d'incertesa</td><td style="text-align:right">4</td></tr><tr><th colspan="2">Total</th><th style="text-align:right">50 min</th></tr></tbody></table>
+
+<footer class="doc"><span>Sistemes de Mesura (230920) · ETSETB–UPC</span></footer>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var data = window.__IMG__ || {};
+  document.querySelectorAll('img[data-fig]').forEach(function(img){
+    var k = img.getAttribute('data-fig');
+    if(data[k]) img.src = data[k];
+  });
+});
+</script>
+
+</body>
+</html>

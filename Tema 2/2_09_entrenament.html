@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ca"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SM · Unitat 2 · Entrenament</title>
+<style>
+:root{--brand:#1F3864;--brand2:#4472C4;--ink:#1c2430;--ink2:#5a6674;--line:#dfe6ee;
+  --bg:#fbfcfe;--ok:#1e7a4d;--okbg:#e9f7ef;--ko:#b3261e;--kobg:#fdecea;--warn:#8a6100;--warnbg:#fff6e0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 22px 70px}
+header.hero{background:linear-gradient(135deg,#1F3864,#2b4c86);color:#fff;padding:34px 0 30px;margin-bottom:26px}
+header.hero .wrap{padding-bottom:0}
+.crumb{font-size:13px;letter-spacing:.06em;text-transform:uppercase;opacity:.72;margin-bottom:8px}
+h1{margin:0 0 8px;font-size:29px;line-height:1.24;font-weight:650}
+.lead{margin:0;opacity:.85;font-size:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:18px 0;
+  box-shadow:0 1px 2px rgba(20,40,80,.05)}
+h2{font-size:20px;margin:0 0 12px;color:var(--brand)}
+button{font:inherit;cursor:pointer;border-radius:9px;border:1px solid var(--line);background:#fff;
+  padding:9px 16px;transition:.13s}
+button:hover{border-color:var(--brand2)}
+.modes{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+.mode{flex:1 1 300px;text-align:left;padding:18px 20px;border:1.5px solid var(--line);border-radius:13px;background:#fff}
+.mode:hover{border-color:var(--brand2);background:#f7faff}
+.mode b{display:block;font-size:17px;color:var(--brand);margin-bottom:5px}
+.mode span{font-size:14.5px;color:var(--ink2);line-height:1.5}
+.bar{position:sticky;top:0;z-index:9;background:rgba(251,252,254,.96);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);padding:11px 0;margin-bottom:16px;display:none}
+.bar .wrap{display:flex;align-items:center;gap:16px;padding-bottom:0;flex-wrap:wrap}
+.clock{font-variant-numeric:tabular-nums;font-weight:650;font-size:19px;color:var(--brand)}
+.clock.urgent{color:var(--ko)}
+.prog{flex:1;min-width:120px;height:7px;background:#e8eef6;border-radius:4px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--brand2);width:0;transition:.25s}
+.meta{font-size:14px;color:var(--ink2)}
+.q{border:1px solid var(--line);border-radius:13px;background:#fff;padding:18px 20px;margin:14px 0}
+.q .num{font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);margin-bottom:7px}
+.q .txt{font-size:16.5px;line-height:1.55;margin-bottom:13px}
+.btns{display:flex;gap:9px;flex-wrap:wrap}
+.btns button{min-width:104px;font-weight:600}
+.btns button.sel{background:var(--brand);color:#fff;border-color:var(--brand)}
+.btns button.dk{font-weight:400;color:var(--ink2)}
+.fb{display:none;margin-top:13px;padding:12px 15px;border-radius:10px;font-size:15px;line-height:1.55}
+.fb.show{display:block}
+.fb.ok{background:var(--okbg);border-left:4px solid var(--ok)}
+.fb.ko{background:var(--kobg);border-left:4px solid var(--ko)}
+.fb b{display:block;margin-bottom:3px}
+.fb a{color:var(--brand);font-weight:600}
+.q.done .btns button{opacity:.55;pointer-events:none}
+.q.done .btns button.sel{opacity:1}
+.q.done .btns button.corr{opacity:1;border-color:var(--ok);color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok)}
+.res{text-align:center;padding:30px 24px}
+.score{font-size:56px;font-weight:700;color:var(--brand);line-height:1.05}
+.score small{display:block;font-size:16px;font-weight:400;color:var(--ink2);margin-top:6px}
+table{border-collapse:collapse;width:100%;margin:18px 0;font-size:15px}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left}
+th{background:#f2f6fb;font-weight:600;color:var(--brand)}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:13px;font-weight:600}
+.pill.ok{background:var(--okbg);color:var(--ok)}
+.pill.mid{background:var(--warnbg);color:var(--warn)}
+.pill.ko{background:var(--kobg);color:var(--ko)}
+.note{font-size:14.5px;color:var(--ink2)}
+.actions{display:flex;gap:11px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.actions button.primary{background:var(--brand);color:#fff;border-color:var(--brand);font-weight:600}
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink2);text-align:center}
+@media print{.bar,.btns,.actions{display:none!important}.fb{display:block!important}}
+</style></head><body>
+
+<header class="hero"><div class="wrap">
+  <div class="crumb">Sistemes de Mesura · Unitat 2</div>
+  <h1>Entrenament d'afirmacions vertader/fals</h1>
+  <p class="lead">Les 50 afirmacions sobre els documents de lectura prèvia</p>
+</div></header>
+
+<div class="bar" id="bar"><div class="wrap">
+  <span class="clock" id="clock">25:00</span>
+  <span class="prog"><i id="prog"></i></span>
+  <span class="meta" id="meta"></span>
+  <button id="finish">Corregir</button>
+</div></div>
+
+<div class="wrap">
+  <div class="card" id="home">
+    <h2>Tria com vols entrenar</h2>
+    <p class="note">Les dues modalitats presenten <strong>les 50 afirmacions senceres</strong>; el que canvia és l'ordre, el cronòmetre i el moment de veure la solució. En acabar, cada resposta mostra la justificació i el document on tornar.</p>
+    <div class="modes">
+      <button class="mode" data-mode="sim"><b>Simulacre cronometrat</b>
+        <span>Les 50 en ordre aleatori i en menys de 25 minuts, amb correcció al final. És el mateix ritme que exigeix el qüestionari d'Atenea: 20 qüestions en 10 minuts.</span></button>
+      <button class="mode" data-mode="lliure"><b>Entrenament lliure</b>
+        <span>Les 50 en l'ordre dels documents, amb resposta immediata i sense cronòmetre. Per estudiar amb calma.</span></button>
+    </div>
+  </div>
+  <div id="app"></div>
+  <footer>
+    <strong>Sistemes de Mesura</strong> · Grau en Enginyeria Electrònica de Telecomunicacions · ETSETB — UPC<br>
+    Unitat 2 · Material d'entrenament · Curs 2026-T
+  </footer>
+</div>
+
+<script>
+var BANC = [{"n": 1, "d": "01", "a": "V", "q": "La incertesa de mesura quantifica la dispersió de valors atribuïble al mesurand.", "j": "És la definició de la GUM: un nombre que quantifica la dispersió de valors atribuïble al mesurand, expressat en les unitats del mesurand.", "dt": "Concepte d'incertesa, la GUM i la diferència entre error i incertesa", "df": "2_01_introduccio.html"}, {"n": 2, "d": "01", "a": "F", "q": "L'error de mesura es pot calcular exactament sempre que la mesura es repeteixi moltes vegades.", "j": "L'error exigeix conèixer el valor veritable, que és incognoscible. Repetir mesures redueix la component aleatòria, però no revela el valor veritable.", "dt": "Concepte d'incertesa, la GUM i la diferència entre error i incertesa", "df": "2_01_introduccio.html"}, {"n": 3, "d": "01", "a": "V", "q": "El valor veritable del mesurand es considera, en sentit estricte, desconegut i incognoscible.", "j": "Conèixer-lo requeriria un instrument perfecte, que no existeix; fins i tot els patrons primaris tenen incertesa.", "dt": "Concepte d'incertesa, la GUM i la diferència entre error i incertesa", "df": "2_01_introduccio.html"}, {"n": 4, "d": "01", "a": "F", "q": "La incertesa i l'error de mesura són conceptes equivalents.", "j": "L'error és la diferència respecte del valor veritable i és desconegut; la incertesa és un paràmetre positiu que quantifica el dubte i sí que es pot calcular.", "dt": "Concepte d'incertesa, la GUM i la diferència entre error i incertesa", "df": "2_01_introduccio.html"}, {"n": 5, "d": "01", "a": "V", "q": "Un patró de referència també té una incertesa associada.", "j": "Per això un patró permet estimar l'error, però l'estimació arrossega la incertesa pròpia del patró.", "dt": "Concepte d'incertesa, la GUM i la diferència entre error i incertesa", "df": "2_01_introduccio.html"}, {"n": 6, "d": "01", "a": "F", "q": "La GUM només s'aplica a mesures mecàniques i no a mesures elèctriques.", "j": "La GUM s'aplica a qualsevol domini de mesura; de fet és un requisit de la ISO/IEC 17025 també en calibratge elèctric i electrònic.", "dt": "Concepte d'incertesa, la GUM i la diferència entre error i incertesa", "df": "2_01_introduccio.html"}, {"n": 7, "d": "01", "a": "V", "q": "La incertesa s'expressa habitualment en les mateixes unitats que el mesurand.", "j": "És una magnitud quantitativa en les unitats del mesurand, no un simple percentatge.", "dt": "Concepte d'incertesa, la GUM i la diferència entre error i incertesa", "df": "2_01_introduccio.html"}, {"n": 8, "d": "02", "a": "V", "q": "El resultat d'una mesura es pot interpretar com una realització d'una variable aleatòria.", "j": "És el marc probabilístic de la GUM: soroll, quantització, interferències i variacions ambientals fan que cada resultat sigui una realització.", "dt": "Marc teòric i definicions fonamentals", "df": "2_02_marc_teoric.html"}, {"n": 9, "d": "02", "a": "F", "q": "Si el mesurand és constant, les lectures repetides d'un instrument real han de ser exactament iguals.", "j": "Encara amb un mesurand constant, les fonts de variació dispersen les lectures i en resulta una distribució de resultats.", "dt": "Marc teòric i definicions fonamentals", "df": "2_02_marc_teoric.html"}, {"n": 10, "d": "02", "a": "V", "q": "La variància mostral no esbiaixada utilitza N−1 al denominador.", "j": "És l'estimador no esbiaixat de l'expressió (2.3).", "dt": "Marc teòric i definicions fonamentals", "df": "2_02_marc_teoric.html"}, {"n": 11, "d": "02", "a": "F", "q": "La desviació estàndard de la mitjana augmenta quan augmenta el nombre de mesures independents.", "j": "Disminueix com s/√N. El que no es redueix en augmentar N és la dispersió de les lectures individuals.", "dt": "Marc teòric i definicions fonamentals", "df": "2_02_marc_teoric.html"}, {"n": 12, "d": "02", "a": "V", "q": "El factor de cobertura k connecta la incertesa típica amb un interval de confiança.", "j": "U = k·uc: el factor determina quantes desviacions estàndard calen per cobrir la probabilitat desitjada.", "dt": "Marc teòric i definicions fonamentals", "df": "2_02_marc_teoric.html"}, {"n": 13, "d": "02", "a": "F", "q": "La incertesa expandida U s'obté dividint la incertesa típica combinada pel factor de cobertura.", "j": "Es multiplica: U = k·uc. Dividir per k és el pas invers, per passar d'una U donada a la incertesa típica.", "dt": "Marc teòric i definicions fonamentals", "df": "2_02_marc_teoric.html"}, {"n": 14, "d": "02", "a": "V", "q": "Un nivell de confiança més alt requereix, en general, un interval de cobertura més ample.", "j": "Com més probabilitat es vol cobrir, més gran ha de ser k i, per tant, més ample l'interval.", "dt": "Marc teòric i definicions fonamentals", "df": "2_02_marc_teoric.html"}, {"n": 15, "d": "03", "a": "V", "q": "El model de mesura relaciona el mesurand amb les magnituds d'entrada que l'afecten.", "j": "És l'expressió Y = f(X₁,…,X_N) (2.9), i escriure-la és el primer pas de tota anàlisi d'incertesa.", "dt": "El model matemàtic de la mesura", "df": "2_03_model_matematic.html"}, {"n": 16, "d": "03", "a": "F", "q": "Les magnituds d'entrada només poden ser lectures directes d'instruments.", "j": "També hi entren constants físiques, correccions per efectes sistemàtics i factors ambientals que modifiquen la resposta.", "dt": "El model matemàtic de la mesura", "df": "2_03_model_matematic.html"}, {"n": 17, "d": "03", "a": "V", "q": "Les correccions per calibratge o temperatura poden formar part del model de mesura.", "j": "Un bon model explicita les correccions rellevants, com la dilatació tèrmica de l'expressió (2.10).", "dt": "El model matemàtic de la mesura", "df": "2_03_model_matematic.html"}, {"n": 18, "d": "03", "a": "F", "q": "La classificació d'una incertesa com a tipus A o tipus B depèn del signe de l'error produït.", "j": "Depèn del mètode d'avaluació: estadística sobre observacions repetides (tipus A) o judici i informació prèvia (tipus B).", "dt": "El model matemàtic de la mesura", "df": "2_03_model_matematic.html"}, {"n": 19, "d": "03", "a": "V", "q": "Les incerteses de tipus A i de tipus B s'expressen finalment com a incerteses típiques i es poden combinar.", "j": "Totes dues acaben sent desviacions estàndard, i és això el que permet combinar-les matemàticament.", "dt": "El model matemàtic de la mesura", "df": "2_03_model_matematic.html"}, {"n": 20, "d": "03", "a": "F", "q": "En una mesura indirecta no cal definir cap model matemàtic.", "j": "És precisament el que la defineix: combinar diverses mesures directes mitjançant un model no trivial.", "dt": "El model matemàtic de la mesura", "df": "2_03_model_matematic.html"}, {"n": 21, "d": "03", "a": "V", "q": "Una correcció aplicada al resultat pot tenir una incertesa associada.", "j": "No coneixem exactament els paràmetres de la correcció, i aquest dubte es propaga al resultat final.", "dt": "El model matemàtic de la mesura", "df": "2_03_model_matematic.html"}, {"n": 22, "d": "04", "a": "V", "q": "La incertesa típica de tipus A de la mitjana es calcula com s/√N.", "j": "És la desviació estàndard de la mitjana (2.13), que no s'ha de confondre amb la de les lectures individuals.", "dt": "Avaluació de la incertesa de tipus A", "df": "2_04_tipus_A.html"}, {"n": 23, "d": "04", "a": "F", "q": "L'avaluació de tipus A es basa exclusivament en les especificacions del fabricant.", "j": "Això és una avaluació de tipus B. La de tipus A es basa en l'anàlisi estadística d'observacions repetides.", "dt": "Avaluació de la incertesa de tipus A", "df": "2_04_tipus_A.html"}, {"n": 24, "d": "04", "a": "V", "q": "Els valors aberrants poden alterar de manera important la mitjana i la desviació estàndard.", "j": "Els errors s'eleven al quadrat, de manera que un sol outlier pot multiplicar la incertesa aparent.", "dt": "Avaluació de la incertesa de tipus A", "df": "2_04_tipus_A.html"}, {"n": 25, "d": "04", "a": "F", "q": "Fer més mesures permet reduir la incertesa total fins a fer-la nul·la.", "j": "Només combat la component aleatòria; hi queden el biaix residual, la deriva i les components de tipus B.", "dt": "Avaluació de la incertesa de tipus A", "df": "2_04_tipus_A.html"}, {"n": 26, "d": "04", "a": "V", "q": "La dispersió de la mitjana descriu quant variaria la mitjana si es repetís l'experiment complet.", "j": "És la magnitud rellevant per a la incertesa i, a diferència de s, decreix en augmentar N.", "dt": "Avaluació de la incertesa de tipus A", "df": "2_04_tipus_A.html"}, {"n": 27, "d": "04", "a": "F", "q": "L'expressió s/√N continua essent vàlida encara que les lectures estiguin fortament correlacionades.", "j": "La deducció necessita que s'anul·lin els termes de covariància; amb lectures correlacionades, s/√N subestima la incertesa real.", "dt": "Avaluació de la incertesa de tipus A", "df": "2_04_tipus_A.html"}, {"n": 28, "d": "04", "a": "V", "q": "Multiplicar per quatre el nombre de mesures redueix la incertesa de tipus A aproximadament a la meitat.", "j": "La millora va amb l'arrel quadrada de N: √4 = 2. D'aquí els rendiments decreixents d'augmentar N.", "dt": "Avaluació de la incertesa de tipus A", "df": "2_04_tipus_A.html"}, {"n": 29, "d": "05", "a": "V", "q": "Per a una distribució uniforme de semiamplada a, la incertesa típica és a/√3.", "j": "Expressió (2.22); és l'opció per defecte quan només es coneixen uns límits sense nivell de confiança.", "dt": "Avaluació de la incertesa de tipus B", "df": "2_05_tipus_B.html"}, {"n": 30, "d": "05", "a": "F", "q": "Per a una distribució triangular de semiamplada a, la incertesa típica és a/√2.", "j": "És a/√6 (2.23). El divisor √2 correspon a la distribució en forma de U.", "dt": "Avaluació de la incertesa de tipus B", "df": "2_05_tipus_B.html"}, {"n": 31, "d": "05", "a": "V", "q": "Per a una oscil·lació sinusoïdal d'amplitud de pic A, la incertesa típica és A/√2.", "j": "Expressió (2.25): és el valor eficaç d'una sinusoide, el cas de la distribució en forma de U.", "dt": "Avaluació de la incertesa de tipus B", "df": "2_05_tipus_B.html"}, {"n": 32, "d": "05", "a": "F", "q": "La distribució triangular concentra més probabilitat als extrems que al centre.", "j": "És al revés: la probabilitat creix linealment des dels extrems cap al centre. La que carrega als extrems és la distribució en U.", "dt": "Avaluació de la incertesa de tipus B", "df": "2_05_tipus_B.html"}, {"n": 33, "d": "05", "a": "V", "q": "Si es coneixen la incertesa expandida U i el factor k, la incertesa típica associada és U/k.", "j": "Expressió (2.24): es desfà el camí de l'expansió, tal com permeten els certificats de calibratge.", "dt": "Avaluació de la incertesa de tipus B", "df": "2_05_tipus_B.html"}, {"n": 34, "d": "05", "a": "F", "q": "El principi de màxima entropia recomana afegir hipòtesis no justificades per obtenir una incertesa més petita.", "j": "Recomana just el contrari: incorporar tota la informació que es té i cap que no es tingui.", "dt": "Avaluació de la incertesa de tipus B", "df": "2_05_tipus_B.html"}, {"n": 35, "d": "05", "a": "F", "q": "Per a un mateix semi-interval a, la distribució en U dona una incertesa típica més petita que la triangular.", "j": "És la més dispersa de totes: a/√2 ≈ 0,707a, enfront de a/√6 ≈ 0,408a de la triangular.", "dt": "Avaluació de la incertesa de tipus B", "df": "2_05_tipus_B.html"}, {"n": 36, "d": "05", "a": "V", "q": "La tolerància d'una resistència comercial es pot convertir en una incertesa típica de tipus B.", "j": "La tolerància fixa la semiamplada; assumint distribució rectangular, u = a/√3.", "dt": "Avaluació de la incertesa de tipus B", "df": "2_05_tipus_B.html"}, {"n": 37, "d": "06", "a": "V", "q": "Els coeficients de sensibilitat són derivades parcials de la funció de mesura respecte de les variables d'entrada.", "j": "cᵢ = ∂f/∂xᵢ (2.27), avaluades als valors nominals de les entrades.", "dt": "Combinació d'incerteses en mesures indirectes", "df": "2_06_combinacio.html"}, {"n": 38, "d": "06", "a": "F", "q": "La incertesa típica combinada s'obté sumant aritmèticament totes les contribucions.", "j": "Es combinen en quadratura (2.29): l'arrel quadrada de la suma dels quadrats de les contribucions.", "dt": "Combinació d'incerteses en mesures indirectes", "df": "2_06_combinacio.html"}, {"n": 39, "d": "06", "a": "V", "q": "Per a variables independents, les contribucions d'incertesa es combinen en quadratura.", "j": "Expressions (2.28)-(2.29). La independència és el que permet sumar variàncies sense termes creuats.", "dt": "Combinació d'incerteses en mesures indirectes", "df": "2_06_combinacio.html"}, {"n": 40, "d": "06", "a": "F", "q": "Un coeficient de sensibilitat gran indica que aquella magnitud d'entrada és irrellevant per al resultat.", "j": "Al contrari: com més gran és cᵢ, més crítica és aquella variable, perquè una petita incertesa seva provoca una gran incertesa a la sortida.", "dt": "Combinació d'incerteses en mesures indirectes", "df": "2_06_combinacio.html"}, {"n": 41, "d": "06", "a": "V", "q": "El mètode de Monte Carlo permet propagar incerteses sense substituir el model per una aproximació lineal.", "j": "Calcula el resultat amb el model exacte per a moltes realitzacions aleatòries de les entrades.", "dt": "Combinació d'incerteses en mesures indirectes", "df": "2_06_combinacio.html"}, {"n": 42, "d": "06", "a": "F", "q": "En una simulació de Monte Carlo no cal assignar cap distribució a les magnituds d'entrada.", "j": "Assignar una fdp a cada magnitud d'entrada és justament el primer pas del mètode.", "dt": "Combinació d'incerteses en mesures indirectes", "df": "2_06_combinacio.html"}, {"n": 43, "d": "06", "a": "F", "q": "La linealització és exacta encara que la funció presenti una curvatura molt elevada dins de l'interval d'incertesa.", "j": "És una aproximació de primer ordre: amb curvatura important deixa de ser fiable i cal recórrer a Monte Carlo.", "dt": "Combinació d'incerteses en mesures indirectes", "df": "2_06_combinacio.html"}, {"n": 44, "d": "07", "a": "V", "q": "Per a una distribució normal, k = 3 s'associa aproximadament amb una cobertura del 99,73 %.", "j": "Taula 2.2 dels factors de cobertura; k = 2 correspon a aproximadament el 95 %.", "dt": "Incertesa expandida, factor de cobertura i graus de llibertat", "df": "2_07_incertesa_expandida.html"}, {"n": 45, "d": "07", "a": "F", "q": "El factor de cobertura és independent del nivell de confiança desitjat.", "j": "Depèn tant del nivell de confiança com de la distribució de probabilitat assumida.", "dt": "Incertesa expandida, factor de cobertura i graus de llibertat", "df": "2_07_incertesa_expandida.html"}, {"n": 46, "d": "07", "a": "V", "q": "Amb poques mesures de tipus A, la distribució t de Student pot ser més adequada que la normal.", "j": "Amb pocs graus de llibertat l'estimació de la dispersió és poc fiable, i la t té cues més amples per compensar-ho.", "dt": "Incertesa expandida, factor de cobertura i graus de llibertat", "df": "2_07_incertesa_expandida.html"}, {"n": 47, "d": "07", "a": "F", "q": "Els graus de llibertat d'una avaluació de tipus A basada en N mesures són N + 1.", "j": "Són N − 1, i és el valor que entra a la fórmula de Welch-Satterthwaite.", "dt": "Incertesa expandida, factor de cobertura i graus de llibertat", "df": "2_07_incertesa_expandida.html"}, {"n": 48, "d": "07", "a": "F", "q": "Amb pocs graus de llibertat, el factor k per al 95 % és sempre menor que 1,96.", "j": "És més gran: per exemple, amb ν = 3 cal k ≈ 3,18. L'interval s'ha d'eixamplar per compensar la manca d'informació.", "dt": "Incertesa expandida, factor de cobertura i graus de llibertat", "df": "2_07_incertesa_expandida.html"}, {"n": 49, "d": "08", "a": "F", "q": "El resultat numèric s'ha d'arrodonir sempre a més decimals que la incertesa expandida.", "j": "S'arrodoneix al mateix dígit menys significatiu que la incertesa: si U = 0,012 V, el resultat porta tres decimals.", "dt": "Expressió final del resultat i balanç d'incertesa", "df": "2_08_expressio_final.html"}, {"n": 50, "d": "08", "a": "F", "q": "La columna de contribucions d'un balanç d'incertesa impedeix identificar les fonts dominants.", "j": "És justament el que permet: l'anàlisi de dominància es fa mirant aquesta columna per decidir on millorar.", "dt": "Expressió final del resultat i balanç d'incertesa", "df": "2_08_expressio_final.html"}];
+var mode=null, sel={}, ordre=[], tid=null, TOTAL=1500, restant=TOTAL, corregit=false;
+
+function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!==undefined)e.innerHTML=h; return e;}
+function barreja(a){a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x;} return a;}
+function mmss(s){var m=Math.floor(s/60),r=s%60; return m+':'+(r<10?'0':'')+r;}
+
+function pinta(){
+  var app=document.getElementById('app'); app.innerHTML='';
+  ordre.forEach(function(q,i){
+    var d=el('div','q'); d.id='q'+q.n;
+    d.appendChild(el('div','num','Afirmació '+(i+1)+' de '+ordre.length));
+    d.appendChild(el('div','txt',q.q));
+    var b=el('div','btns');
+    [['V','Vertader'],['F','Fals'],['?','No ho sé']].forEach(function(o){
+      var bt=el('button',o[0]==='?'?'dk':'',o[1]); bt.dataset.v=o[0];
+      bt.onclick=function(){ respon(q,o[0],d); };
+      b.appendChild(bt);
+    });
+    d.appendChild(b);
+    d.appendChild(el('div','fb',''));
+    app.appendChild(d);
+  });
+  actualitza();
+}
+
+function respon(q,v,d){
+  if(d.classList.contains('done')) return;
+  sel[q.n]=v;
+  Array.prototype.forEach.call(d.querySelectorAll('.btns button'),function(b){
+    b.classList.toggle('sel', b.dataset.v===v);});
+  if(mode==='lliure') mostra(q,d);
+  actualitza();
+}
+
+function mostra(q,d){
+  var v=sel[q.n], ok=(v===q.a);
+  d.classList.add('done');
+  Array.prototype.forEach.call(d.querySelectorAll('.btns button'),function(b){
+    if(b.dataset.v===q.a) b.classList.add('corr');});
+  var f=d.querySelector('.fb');
+  f.className='fb show '+(ok?'ok':'ko');
+  var cap = ok ? 'Correcte' : (v==='?'||!v ? 'Sense resposta · la solució és '+(q.a==='V'?'vertader':'fals')
+                                           : 'Incorrecte · la solució és '+(q.a==='V'?'vertader':'fals'));
+  f.innerHTML='<b>'+cap+'</b>'+q.j+' <a href="'+q.df+'">→ Document '+parseInt(q.d,10)+': '+q.dt+'</a>';
+}
+
+function actualitza(){
+  var n=ordre.filter(function(q){return sel[q.n];}).length;
+  document.getElementById('prog').style.width=(100*n/ordre.length)+'%';
+  document.getElementById('meta').textContent=n+' de '+ordre.length+' respostes';
+}
+
+function tic(){
+  restant--;
+  var c=document.getElementById('clock');
+  c.textContent=mmss(Math.max(0,restant));
+  c.classList.toggle('urgent',restant<=60);
+  if(restant<=0){ clearInterval(tid); corregeix(true); }
+}
+
+function corregeix(pertemps){
+  if(corregit) return; corregit=true;
+  if(tid) clearInterval(tid);
+  var be=0, mal=0, blanc=0, perdoc={};
+  ordre.forEach(function(q){
+    var d=document.getElementById('q'+q.n); mostra(q,d);
+    var v=sel[q.n];
+    perdoc[q.d]=perdoc[q.d]||{b:0,t:0}; perdoc[q.d].t++;
+    if(v===q.a){be++; perdoc[q.d].b++;} else if(!v||v==='?') blanc++; else mal++;
+  });
+  var pct=Math.round(100*be/ordre.length);
+  var r=el('div','card res');
+  var temps = pertemps ? 'S’ha acabat el temps.' : (mode==='sim' ? 'Has trigat '+mmss(TOTAL-restant)+'.' : '');
+  r.innerHTML='<div class="score">'+be+' / '+ordre.length+'<small>'+pct+' % · '+mal+' errades · '+blanc+' en blanc'+(temps?' · '+temps:'')+'</small></div>';
+  var rows='';
+  Object.keys(perdoc).sort().forEach(function(k){
+    var p=perdoc[k], q=Math.round(100*p.b/p.t);
+    var cl = q>=80?'ok':(q>=60?'mid':'ko');
+    rows+='<tr><td>Document '+parseInt(k,10)+' · '+BANC.filter(function(x){return x.d===k;})[0].dt+'</td>'+
+          '<td class="n">'+p.b+' / '+p.t+'</td><td class="n"><span class="pill '+cl+'">'+q+' %</span></td></tr>';
+  });
+  r.innerHTML+='<table><thead><tr><th>Bloc</th><th class="n">Encerts</th><th class="n"></th></tr></thead><tbody>'+rows+'</tbody></table>'+
+    '<p class="note">Els blocs per sota del 80 % són els que convé rellegir. Cada afirmació de sota enllaça amb el document que la sustenta.</p>';
+  var acc=el('div','actions');
+  var b1=el('button','primary','Repetir'); b1.onclick=function(){location.reload();};
+  var b2=el('button','','Tornar a l’inici'); b2.onclick=function(){location.reload();};
+  acc.appendChild(b1); acc.appendChild(b2); r.appendChild(acc);
+  var app=document.getElementById('app'); app.insertBefore(r,app.firstChild);
+  document.getElementById('bar').style.display='none';
+  r.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+Array.prototype.forEach.call(document.querySelectorAll('.mode'),function(b){
+  b.onclick=function(){
+    mode=b.dataset.mode;
+    document.getElementById('home').style.display='none';
+    if(mode==='sim'){
+      ordre=barreja(BANC);
+      document.getElementById('bar').style.display='block';
+      document.getElementById('finish').onclick=function(){corregeix(false);};
+      tid=setInterval(tic,1000);
+    } else {
+      ordre=BANC.slice();
+      document.getElementById('bar').style.display='block';
+      document.getElementById('clock').style.display='none';
+      document.getElementById('finish').textContent='Veure el resum';
+      document.getElementById('finish').onclick=function(){corregeix(false);};
+    }
+    pinta();
+  };
+});
+</script></body></html>
