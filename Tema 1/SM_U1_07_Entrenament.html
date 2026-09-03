@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ca"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SM · Unitat 1 · Entrenament</title>
+<style>
+:root{--brand:#1F3864;--brand2:#4472C4;--ink:#1c2430;--ink2:#5a6674;--line:#dfe6ee;
+  --bg:#fbfcfe;--ok:#1e7a4d;--okbg:#e9f7ef;--ko:#b3261e;--kobg:#fdecea;--warn:#8a6100;--warnbg:#fff6e0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 22px 70px}
+header.hero{background:linear-gradient(135deg,#1F3864,#2b4c86);color:#fff;padding:34px 0 30px;margin-bottom:26px}
+header.hero .wrap{padding-bottom:0}
+.crumb{font-size:13px;letter-spacing:.06em;text-transform:uppercase;opacity:.72;margin-bottom:8px}
+h1{margin:0 0 8px;font-size:29px;line-height:1.24;font-weight:650}
+.lead{margin:0;opacity:.85;font-size:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:18px 0;
+  box-shadow:0 1px 2px rgba(20,40,80,.05)}
+h2{font-size:20px;margin:0 0 12px;color:var(--brand)}
+button{font:inherit;cursor:pointer;border-radius:9px;border:1px solid var(--line);background:#fff;
+  padding:9px 16px;transition:.13s}
+button:hover{border-color:var(--brand2)}
+.modes{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+.mode{flex:1 1 300px;text-align:left;padding:18px 20px;border:1.5px solid var(--line);border-radius:13px;background:#fff}
+.mode:hover{border-color:var(--brand2);background:#f7faff}
+.mode b{display:block;font-size:17px;color:var(--brand);margin-bottom:5px}
+.mode span{font-size:14.5px;color:var(--ink2);line-height:1.5}
+.bar{position:sticky;top:0;z-index:9;background:rgba(251,252,254,.96);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);padding:11px 0;margin-bottom:16px;display:none}
+.bar .wrap{display:flex;align-items:center;gap:16px;padding-bottom:0;flex-wrap:wrap}
+.clock{font-variant-numeric:tabular-nums;font-weight:650;font-size:19px;color:var(--brand)}
+.clock.urgent{color:var(--ko)}
+.prog{flex:1;min-width:120px;height:7px;background:#e8eef6;border-radius:4px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--brand2);width:0;transition:.25s}
+.meta{font-size:14px;color:var(--ink2)}
+.q{border:1px solid var(--line);border-radius:13px;background:#fff;padding:18px 20px;margin:14px 0}
+.q .num{font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);margin-bottom:7px}
+.q .txt{font-size:16.5px;line-height:1.55;margin-bottom:13px}
+.btns{display:flex;gap:9px;flex-wrap:wrap}
+.btns button{min-width:104px;font-weight:600}
+.btns button.sel{background:var(--brand);color:#fff;border-color:var(--brand)}
+.btns button.dk{font-weight:400;color:var(--ink2)}
+.fb{display:none;margin-top:13px;padding:12px 15px;border-radius:10px;font-size:15px;line-height:1.55}
+.fb.show{display:block}
+.fb.ok{background:var(--okbg);border-left:4px solid var(--ok)}
+.fb.ko{background:var(--kobg);border-left:4px solid var(--ko)}
+.fb b{display:block;margin-bottom:3px}
+.fb a{color:var(--brand);font-weight:600}
+.q.done .btns button{opacity:.55;pointer-events:none}
+.q.done .btns button.sel{opacity:1}
+.q.done .btns button.corr{opacity:1;border-color:var(--ok);color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok)}
+.res{text-align:center;padding:30px 24px}
+.score{font-size:56px;font-weight:700;color:var(--brand);line-height:1.05}
+.score small{display:block;font-size:16px;font-weight:400;color:var(--ink2);margin-top:6px}
+table{border-collapse:collapse;width:100%;margin:18px 0;font-size:15px}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left}
+th{background:#f2f6fb;font-weight:600;color:var(--brand)}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:13px;font-weight:600}
+.pill.ok{background:var(--okbg);color:var(--ok)}
+.pill.mid{background:var(--warnbg);color:var(--warn)}
+.pill.ko{background:var(--kobg);color:var(--ko)}
+.note{font-size:14.5px;color:var(--ink2)}
+.actions{display:flex;gap:11px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.actions button.primary{background:var(--brand);color:#fff;border-color:var(--brand);font-weight:600}
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink2);text-align:center}
+@media print{.bar,.btns,.actions{display:none!important}.fb{display:block!important}}
+</style></head><body>
+
+<header class="hero"><div class="wrap">
+  <div class="crumb">Sistemes de Mesura · Unitat 1</div>
+  <h1>Entrenament d'afirmacions vertader/fals</h1>
+  <p class="lead">Les 50 afirmacions sobre els documents de lectura prèvia</p>
+</div></header>
+
+<div class="bar" id="bar"><div class="wrap">
+  <span class="clock" id="clock">25:00</span>
+  <span class="prog"><i id="prog"></i></span>
+  <span class="meta" id="meta"></span>
+  <button id="finish">Corregir</button>
+</div></div>
+
+<div class="wrap">
+  <div class="card" id="home">
+    <h2>Tria com vols entrenar</h2>
+    <p class="note">Les dues modalitats presenten <strong>les 50 afirmacions senceres</strong>; el que canvia és l'ordre, el cronòmetre i el moment de veure la solució. En acabar, cada resposta mostra la justificació i el document on tornar.</p>
+    <div class="modes">
+      <button class="mode" data-mode="sim"><b>Simulacre cronometrat</b>
+        <span>Les 50 en ordre aleatori i en menys de 25 minuts, amb correcció al final. És el mateix ritme que exigeix el qüestionari d'Atenea: 20 qüestions en 10 minuts.</span></button>
+      <button class="mode" data-mode="lliure"><b>Entrenament lliure</b>
+        <span>Les 50 en l'ordre dels documents, amb resposta immediata i sense cronòmetre. Per estudiar amb calma.</span></button>
+    </div>
+  </div>
+  <div id="app"></div>
+  <footer>
+    <strong>Sistemes de Mesura</strong> · Grau en Enginyeria Electrònica de Telecomunicacions · ETSETB — UPC<br>
+    Unitat 1 · Material d'entrenament · Curs 2026-T
+  </footer>
+</div>
+
+<script>
+var BANC = [{"n": 1, "d": "01", "a": "V", "q": "La representativitat d'una escala numèrica es defineix respecte d'un atribut concret i no de manera absoluta.", "j": "La representativitat no és una propietat absoluta d'una escala: es defineix respecte d'un atribut concret. Una escala pot ser representativa per a la duresa i no dir res del color.", "dt": "Concepte de mesura", "df": "SM_U1_01_Concepte_de_mesura.html"}, {"n": 2, "d": "01", "a": "F", "q": "Un valor obtingut exclusivament per simulació, si el model és exacte, constitueix una mesura del sistema real.", "j": "L'assignació ha de ser empírica. Un valor obtingut només per simulació, per exacte que sigui el model, és una predicció sobre el sistema, no una mesura del sistema.", "dt": "Concepte de mesura", "df": "SM_U1_01_Concepte_de_mesura.html"}, {"n": 3, "d": "01", "a": "V", "q": "Dos enginyers independents que segueixin el mateix protocol amb instruments calibrats han d'obtenir resultats compatibles.", "j": "És la definició operativa d'objectivitat: el resultat depèn del procediment i dels instruments, no de qui mesura.", "dt": "Concepte de mesura", "df": "SM_U1_01_Concepte_de_mesura.html"}, {"n": 4, "d": "01", "a": "F", "q": "Que una mesura sigui directa o indirecta és una propietat de la magnitud mesurada i no del procediment emprat.", "j": "És una propietat del procediment. La mateixa magnitud pot ser directa amb un instrument i indirecta amb un altre.", "dt": "Concepte de mesura", "df": "SM_U1_01_Concepte_de_mesura.html"}, {"n": 5, "d": "01", "a": "F", "q": "Si es disposa d'un wattímetre, la mesura de la potència continua sent indirecta.", "j": "Amb wattímetre, la potència s'obté per lectura sense càlculs de l'usuari, i per tant passa a ser directa.", "dt": "Concepte de mesura", "df": "SM_U1_01_Concepte_de_mesura.html"}, {"n": 6, "d": "01", "a": "F", "q": "El resultat d'un producte es pot expressar amb més xifres significatives que el factor que menys en té.", "j": "El resultat no pot tenir més xifres significatives que el factor que menys en té; altrament s'atribueix a la mesura una precisió que els instruments no tenen.", "dt": "Concepte de mesura", "df": "SM_U1_01_Concepte_de_mesura.html"}, {"n": 7, "d": "01", "a": "V", "q": "Un ohmímetre que injecta un corrent i mesura la tensió és una mesura directa per a l'usuari i indirecta per al dissenyador.", "j": "La classificació depèn del punt de vista: l'usuari llegeix un valor, però el dissenyador ha combinat una mesura de tensió amb una font de corrent.", "dt": "Concepte de mesura", "df": "SM_U1_01_Concepte_de_mesura.html"}, {"n": 8, "d": "02", "a": "V", "q": "La coherència del SI elimina la necessitat de factors de conversió dins del mateix sistema.", "j": "És la definició de coherència: les unitats derivades es formen sense factors numèrics, de manera que les fórmules no en necessiten cap.", "dt": "El Sistema Internacional d'Unitats", "df": "SM_U1_02_El_Sistema_Internacional_dUnitats.html"}, {"n": 9, "d": "02", "a": "F", "q": "Com que la unitat base de massa és el quilogram, els prefixos s'apliquen al quilogram i no al gram.", "j": "El quilogram és l'excepció: com que ja incorpora un prefix, els prefixos s'apliquen al gram. 10⁻⁶ kg és un mil·ligram.", "dt": "El Sistema Internacional d'Unitats", "df": "SM_U1_02_El_Sistema_Internacional_dUnitats.html"}, {"n": 10, "d": "02", "a": "V", "q": "Des que es va fixar la velocitat de la llum com a valor exacte, el metre depèn del segon.", "j": "Des de 1983 la velocitat de la llum és un valor fixat, i el metre es defineix com el que recorre la llum en 1/299 792 458 s.", "dt": "El Sistema Internacional d'Unitats", "df": "SM_U1_02_El_Sistema_Internacional_dUnitats.html"}, {"n": 11, "d": "02", "a": "F", "q": "La candela és una unitat derivada perquè la seva definició depèn de la percepció visual humana.", "j": "És una de les set unitats base. Que depengui de la percepció humana no la converteix en derivada.", "dt": "El Sistema Internacional d'Unitats", "df": "SM_U1_02_El_Sistema_Internacional_dUnitats.html"}, {"n": 12, "d": "02", "a": "V", "q": "El símbol del kelvin s'escriu amb majúscula perquè la unitat prové d'un nom propi.", "j": "Els símbols van en minúscula excepte si la unitat prové d'un nom propi: K de Kelvin, A d'Ampère, V de Volta, N de Newton.", "dt": "El Sistema Internacional d'Unitats", "df": "SM_U1_02_El_Sistema_Internacional_dUnitats.html"}, {"n": 13, "d": "02", "a": "F", "q": "La denominació correcta de la unitat de temperatura termodinàmica és «grau Kelvin».", "j": "La denominació correcta és «kelvin», sense «grau». El grau només s'usa amb el Celsius.", "dt": "El Sistema Internacional d'Unitats", "df": "SM_U1_02_El_Sistema_Internacional_dUnitats.html"}, {"n": 14, "d": "02", "a": "V", "q": "El radian és adimensional, però conservar-lo permet distingir la freqüència angular de la freqüència.", "j": "Dimensionalment és la unitat, però escriure'l permet distingir la freqüència angular en rad/s de la freqüència en Hz, i un factor 2π omès té conseqüències greus.", "dt": "El Sistema Internacional d'Unitats", "df": "SM_U1_02_El_Sistema_Internacional_dUnitats.html"}, {"n": 15, "d": "02", "a": "F", "q": "En context tècnic el SI recomana emprar preferentment els prefixos hecto, deca, deci i centi.", "j": "És al revés: en context tècnic es recomanen els prefixos que són potències de mil, i hecto, deca, deci i centi es desaconsellen.", "dt": "El Sistema Internacional d'Unitats", "df": "SM_U1_02_El_Sistema_Internacional_dUnitats.html"}, {"n": 16, "d": "02", "a": "V", "q": "A la pèrdua del Mars Climate Orbiter, tots dos programaris eren internament correctes i l'error va aparèixer a la frontera entre subsistemes.", "j": "Cap dels dos programaris tenia cap error intern: Lockheed Martin lliurava lliures-força segon i el JPL llegia newton segon. L'error va aparèixer a la interfície.", "dt": "El Sistema Internacional d'Unitats", "df": "SM_U1_02_El_Sistema_Internacional_dUnitats.html"}, {"n": 17, "d": "03", "a": "V", "q": "Si el sensor s'adhereix a l'encapsulat i es vol la temperatura del nucli, la resistència tèrmica entre ambdós introdueix un error sistemàtic.", "j": "El mesurand és la temperatura del nucli i la quantitat sota mesura és la de l'encapsulat. La diferència no és soroll sinó error sistemàtic del muntatge.", "dt": "Estructura dels sistemes de mesura", "df": "SM_U1_03_Estructura_dels_sistemes_de_mesura.html"}, {"n": 18, "d": "03", "a": "F", "q": "L'efecte de càrrega es pot eliminar completament amb un disseny prou acurat del sensor.", "j": "És inevitable: el sensor ha d'extreure energia o informació del sistema. Es pot minimitzar i, si cal, caracteritzar per corregir-lo, però no eliminar.", "dt": "Estructura dels sistemes de mesura", "df": "SM_U1_03_Estructura_dels_sistemes_de_mesura.html"}, {"n": 19, "d": "03", "a": "V", "q": "Un error conegut i quantificat és menys perillós que un error petit però ignorat.", "j": "Un error conegut es corregeix; un error petit però ignorat es propaga silenciosament fins a la decisió final.", "dt": "Estructura dels sistemes de mesura", "df": "SM_U1_03_Estructura_dels_sistemes_de_mesura.html"}, {"n": 20, "d": "03", "a": "F", "q": "El pont de Wheatstone permet amplificar el valor absolut de la resistència del sensor sense saturar l'amplificador.", "j": "El pont fa justament el contrari: el senyal útil és el desequilibri i no el valor absolut, i per això es pot amplificar amb guany elevat sense saturar.", "dt": "Estructura dels sistemes de mesura", "df": "SM_U1_03_Estructura_dels_sistemes_de_mesura.html"}, {"n": 21, "d": "03", "a": "F", "q": "Les variacions tèrmiques dels quatre braços d'un pont de Wheatstone s'acumulen i degraden la mesura.", "j": "Si totes les resistències són a la mateixa temperatura, les variacions tèrmiques es compensen mútuament. És un mecanisme de rebuig d'interferències.", "dt": "Estructura dels sistemes de mesura", "df": "SM_U1_03_Estructura_dels_sistemes_de_mesura.html"}, {"n": 22, "d": "03", "a": "F", "q": "En una transmissió de 0-10 V, una lectura de 0 V permet distingir un mesurand nul d'un cable tallat.", "j": "És l'inconvenient del 0-10 V: 0 V és ambigu entre mesurand nul i cable tallat. El llaç de 4-20 mA sí que els distingeix, perquè el zero són 4 mA.", "dt": "Estructura dels sistemes de mesura", "df": "SM_U1_03_Estructura_dels_sistemes_de_mesura.html"}, {"n": 23, "d": "03", "a": "V", "q": "La freqüència de Nyquist designa la meitat de la freqüència de mostreig, mentre que la taxa de Nyquist designa el doble de la freqüència màxima del senyal.", "j": "Són les dues convencions que conviuen a la literatura. L'assignatura adopta la primera: f_N = f_s/2.", "dt": "Estructura dels sistemes de mesura", "df": "SM_U1_03_Estructura_dels_sistemes_de_mesura.html"}, {"n": 24, "d": "03", "a": "F", "q": "Un filtre digital aplicat després de la conversió pot desfer un plegament que ja s'ha produït.", "j": "L'aliàsing és irreversible. Un filtre digital elimina banda alta de l'espectre mostrejat, però un component ja plegat no és separable del contingut genuí.", "dt": "Estructura dels sistemes de mesura", "df": "SM_U1_03_Estructura_dels_sistemes_de_mesura.html"}, {"n": 25, "d": "03", "a": "V", "q": "L'error de quantificació d'un convertidor ideal està acotat per la meitat del pas de quantificació.", "j": "El valor s'arrodoneix al nivell disponible més proper, de manera que l'error queda acotat per ±q/2. A diferència de l'aliàsing, és predictible.", "dt": "Estructura dels sistemes de mesura", "df": "SM_U1_03_Estructura_dels_sistemes_de_mesura.html"}, {"n": 26, "d": "03", "a": "F", "q": "Un model de processament basat en aprenentatge facilita l'establiment de la traçabilitat metrològica.", "j": "La dificulta: com que no es pot descompondre el resultat en contribucions atribuïbles a patrons, la cadena de traçabilitat i el càlcul d'incertesa es compliquen.", "dt": "Estructura dels sistemes de mesura", "df": "SM_U1_03_Estructura_dels_sistemes_de_mesura.html"}, {"n": 27, "d": "03", "a": "V", "q": "Un sensor virtual hereta la incertesa de totes les mesures que hi intervenen i, a més, la del model.", "j": "No és una mesura gratuïta: és una mesura indirecta, amb totes les conseqüències sobre la propagació d'incerteses.", "dt": "Estructura dels sistemes de mesura", "df": "SM_U1_03_Estructura_dels_sistemes_de_mesura.html"}, {"n": 28, "d": "04", "a": "V", "q": "Sensor i actuador són dues classes de transductor definides pel seu propòsit.", "j": "Transductor és el terme general; sensor i actuador se'n distingeixen pel propòsit, i tenen criteris de disseny oposats.", "dt": "Sensors: definició i classificació", "df": "SM_U1_04_Sensors_definicio_i_classificacio.html"}, {"n": 29, "d": "04", "a": "F", "q": "Un sensor generador necessita una font d'excitació externa per produir el seu senyal.", "j": "És al revés: el generador produeix el senyal a partir de l'energia del mesurand. Qui necessita excitació externa és el modulador, també anomenat passiu.", "dt": "Sensors: definició i classificació", "df": "SM_U1_04_Sensors_definicio_i_classificacio.html"}, {"n": 30, "d": "04", "a": "V", "q": "Un sensor d'efecte Hall és modulador tot i que la seva magnitud de sortida sigui una tensió.", "j": "Sense corrent de polarització no hi ha portadors en moviment i no apareix cap tensió de Hall, per intens que sigui el camp. Que la sortida sigui una tensió no el fa generador.", "dt": "Sensors: definició i classificació", "df": "SM_U1_04_Sensors_definicio_i_classificacio.html"}, {"n": 31, "d": "04", "a": "F", "q": "Un detector de temperatura resistiu de platí presenta un coeficient de temperatura negatiu.", "j": "El coeficient positiu i gairebé constant és el del RTD. El negatiu és el del termistor NTC.", "dt": "Sensors: definició i classificació", "df": "SM_U1_04_Sensors_definicio_i_classificacio.html"}, {"n": 32, "d": "04", "a": "V", "q": "Un termistor NTC ofereix més sensibilitat que un RTD a canvi d'una no-linealitat més pronunciada.", "j": "La resistència d'un semiconductor varia molt més abruptament amb la temperatura que la d'un metall pur.", "dt": "Sensors: definició i classificació", "df": "SM_U1_04_Sensors_definicio_i_classificacio.html"}, {"n": 33, "d": "04", "a": "F", "q": "La impedància d'un sensor capacitiu o inductiu es pot caracteritzar amb una excitació contínua.", "j": "Una capacitat o una inductància no es poden mesurar amb excitació contínua: cal alimentar-los amb un senyal altern i extreure la informació de l'amplitud o de la fase.", "dt": "Sensors: definició i classificació", "df": "SM_U1_04_Sensors_definicio_i_classificacio.html"}, {"n": 34, "d": "04", "a": "V", "q": "Utilitzar un termoparell exigeix disposar d'un segon sensor de temperatura per compensar la unió freda.", "j": "El termoparell mesura una diferència entre la unió de mesura i la unió freda, de manera que cal conèixer la temperatura d'aquesta darrera amb un altre sensor.", "dt": "Sensors: definició i classificació", "df": "SM_U1_04_Sensors_definicio_i_classificacio.html"}, {"n": 35, "d": "04", "a": "F", "q": "El corrent d'un fotodíode es mesura habitualment amb un voltímetre sobre una resistència de càrrega sense degradar-ne la linealitat.", "j": "Un voltímetre sobre una resistència de càrrega degrada la linealitat i l'ample de banda. Cal un amplificador de transimpedància, que manté el fotodíode a tensió pràcticament nul·la.", "dt": "Sensors: definició i classificació", "df": "SM_U1_04_Sensors_definicio_i_classificacio.html"}, {"n": 36, "d": "04", "a": "V", "q": "La compensació estructural de la sensibilitat creuada consisteix a dissenyar el muntatge perquè l'efecte parasitari es cancel·li per construcció.", "j": "És la primera de les tres estratègies, i la preferible: el pont de Wheatstone amb galgues en configuració diferencial.", "dt": "Sensors: definició i classificació", "df": "SM_U1_04_Sensors_definicio_i_classificacio.html"}, {"n": 37, "d": "04", "a": "F", "q": "La classificació dels sensors per magnitud mesurada determina de manera única el circuit de lectura.", "j": "És la dels catàlegs i la més útil per a l'usuari final, però no determina el circuit: dos sensors de temperatura poden exigir electròniques ben diferents.", "dt": "Sensors: definició i classificació", "df": "SM_U1_04_Sensors_definicio_i_classificacio.html"}, {"n": 38, "d": "05", "a": "V", "q": "La preferència per un model de resposta lineal prové sobretot de la facilitat d'inversió.", "j": "L'objectiu no és obtenir y sinó estimar x. Amb un model lineal la inversió són dues operacions; amb un polinomi de grau elevat caldrien mètodes numèrics iteratius.", "dt": "Característiques estàtiques", "df": "SM_U1_05_Caracteristiques_estatiques.html"}, {"n": 39, "d": "05", "a": "F", "q": "La sensibilitat relativa té les mateixes unitats que la sensibilitat absoluta.", "j": "Està normalitzada per la sortida i, per tant, no té les mateixes unitats. Als catàlegs, «sensibilitat» sense qualificar designa l'absoluta.", "dt": "Característiques estàtiques", "df": "SM_U1_05_Caracteristiques_estatiques.html"}, {"n": 40, "d": "05", "a": "V", "q": "L'error de zero s'ha d'expressar referit a l'entrada, dividint-lo per la sensibilitat.", "j": "Un error de 20 mV no significa res per si sol; amb una sensibilitat de 100 mV/°C equival a 0,2 °C, que ja es pot comparar amb l'exigència de l'aplicació.", "dt": "Característiques estàtiques", "df": "SM_U1_05_Caracteristiques_estatiques.html"}, {"n": 41, "d": "05", "a": "F", "q": "L'error de linealitat és un únic nombre, independent de la recta que s'hagi adoptat com a aproximació.", "j": "És una funció de x, no un nombre, i el seu valor depèn de si la recta és tangent, de dos punts o de mínims quadrats.", "dt": "Característiques estàtiques", "df": "SM_U1_05_Caracteristiques_estatiques.html"}, {"n": 42, "d": "05", "a": "V", "q": "La recta que passa pels extrems del rang força un error nul als extrems i el concentra al centre.", "j": "Per construcció passa pels extrems, de manera que hi força error nul; el màxim se sol desplaçar al centre del rang.", "dt": "Característiques estàtiques", "df": "SM_U1_05_Caracteristiques_estatiques.html"}, {"n": 43, "d": "05", "a": "F", "q": "Un sistema de mesura molt fidel és necessàriament veraç.", "j": "És la combinació més perillosa: un instrument descalibrat pot ser extraordinàriament fidel mentre menteix de manera consistent.", "dt": "Característiques estàtiques", "df": "SM_U1_05_Caracteristiques_estatiques.html"}, {"n": 44, "d": "05", "a": "V", "q": "La reproductibilitat és sempre igual o pitjor que la repetibilitat.", "j": "Canviar operador, instrument, laboratori o moment només pot afegir dispersió. Una diferència gran indica factors no controlats pel procediment.", "dt": "Característiques estàtiques", "df": "SM_U1_05_Caracteristiques_estatiques.html"}, {"n": 45, "d": "05", "a": "F", "q": "L'error aleatori es redueix corregint-lo mitjançant calibratge.", "j": "El calibratge corregeix l'error sistemàtic. L'aleatori es redueix promitjant lectures repetides.", "dt": "Característiques estàtiques", "df": "SM_U1_05_Caracteristiques_estatiques.html"}, {"n": 46, "d": "05", "a": "V", "q": "La histèresi no es corregeix amb un simple calibratge perquè caldria conèixer el sentit de l'aproximació.", "j": "La sortida depèn de la història prèvia, de manera que corregir-la exigiria conèixer el sentit de l'aproximació i sovint tot l'historial recent del mesurand.", "dt": "Característiques estàtiques", "df": "SM_U1_05_Caracteristiques_estatiques.html"}, {"n": 47, "d": "06", "a": "V", "q": "Un sistema dinàmic de primer ordre queda completament caracteritzat per una única constant de temps.", "j": "És l'únic paràmetre que cal per caracteritzar-ne la dinàmica. El segon ordre necessita freqüència natural i coeficient d'amortiment.", "dt": "Característiques dinàmiques", "df": "SM_U1_06_Caracteristiques_dinamiques.html"}, {"n": 48, "d": "06", "a": "F", "q": "L'error dinàmic es corregeix mitjançant un calibratge estàtic prou acurat.", "j": "No prové d'un desajust sinó d'una limitació d'ample de banda. Un calibratge estàtic perfecte no el redueix gens.", "dt": "Característiques dinàmiques", "df": "SM_U1_06_Caracteristiques_dinamiques.html"}, {"n": 49, "d": "06", "a": "V", "q": "Reduir la constant de temps d'un sistema de primer ordre n'eixampla l'ample de banda.", "j": "La freqüència de tall val 1/(2πτ): la relació és inversa.", "dt": "Característiques dinàmiques", "df": "SM_U1_06_Caracteristiques_dinamiques.html"}, {"n": 50, "d": "06", "a": "F", "q": "Un sensor piezoelèctric és adequat per mesurar una força constant aplicada durant molt de temps.", "j": "Té resposta nul·la en contínua. Davant d'una força estàtica genera una càrrega que es descarrega per la resistència de fuita fins que la indicació torna a zero.", "dt": "Característiques dinàmiques", "df": "SM_U1_06_Caracteristiques_dinamiques.html"}];
+var mode=null, sel={}, ordre=[], tid=null, TOTAL=1500, restant=TOTAL, corregit=false;
+
+function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!==undefined)e.innerHTML=h; return e;}
+function barreja(a){a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x;} return a;}
+function mmss(s){var m=Math.floor(s/60),r=s%60; return m+':'+(r<10?'0':'')+r;}
+
+function pinta(){
+  var app=document.getElementById('app'); app.innerHTML='';
+  ordre.forEach(function(q,i){
+    var d=el('div','q'); d.id='q'+q.n;
+    d.appendChild(el('div','num','Afirmació '+(i+1)+' de '+ordre.length));
+    d.appendChild(el('div','txt',q.q));
+    var b=el('div','btns');
+    [['V','Vertader'],['F','Fals'],['?','No ho sé']].forEach(function(o){
+      var bt=el('button',o[0]==='?'?'dk':'',o[1]); bt.dataset.v=o[0];
+      bt.onclick=function(){ respon(q,o[0],d); };
+      b.appendChild(bt);
+    });
+    d.appendChild(b);
+    d.appendChild(el('div','fb',''));
+    app.appendChild(d);
+  });
+  actualitza();
+}
+
+function respon(q,v,d){
+  if(d.classList.contains('done')) return;
+  sel[q.n]=v;
+  Array.prototype.forEach.call(d.querySelectorAll('.btns button'),function(b){
+    b.classList.toggle('sel', b.dataset.v===v);});
+  if(mode==='lliure') mostra(q,d);
+  actualitza();
+}
+
+function mostra(q,d){
+  var v=sel[q.n], ok=(v===q.a);
+  d.classList.add('done');
+  Array.prototype.forEach.call(d.querySelectorAll('.btns button'),function(b){
+    if(b.dataset.v===q.a) b.classList.add('corr');});
+  var f=d.querySelector('.fb');
+  f.className='fb show '+(ok?'ok':'ko');
+  var cap = ok ? 'Correcte' : (v==='?'||!v ? 'Sense resposta · la solució és '+(q.a==='V'?'vertader':'fals')
+                                           : 'Incorrecte · la solució és '+(q.a==='V'?'vertader':'fals'));
+  f.innerHTML='<b>'+cap+'</b>'+q.j+' <a href="'+q.df+'">→ Document '+parseInt(q.d,10)+': '+q.dt+'</a>';
+}
+
+function actualitza(){
+  var n=ordre.filter(function(q){return sel[q.n];}).length;
+  document.getElementById('prog').style.width=(100*n/ordre.length)+'%';
+  document.getElementById('meta').textContent=n+' de '+ordre.length+' respostes';
+}
+
+function tic(){
+  restant--;
+  var c=document.getElementById('clock');
+  c.textContent=mmss(Math.max(0,restant));
+  c.classList.toggle('urgent',restant<=60);
+  if(restant<=0){ clearInterval(tid); corregeix(true); }
+}
+
+function corregeix(pertemps){
+  if(corregit) return; corregit=true;
+  if(tid) clearInterval(tid);
+  var be=0, mal=0, blanc=0, perdoc={};
+  ordre.forEach(function(q){
+    var d=document.getElementById('q'+q.n); mostra(q,d);
+    var v=sel[q.n];
+    perdoc[q.d]=perdoc[q.d]||{b:0,t:0}; perdoc[q.d].t++;
+    if(v===q.a){be++; perdoc[q.d].b++;} else if(!v||v==='?') blanc++; else mal++;
+  });
+  var pct=Math.round(100*be/ordre.length);
+  var r=el('div','card res');
+  var temps = pertemps ? 'S’ha acabat el temps.' : (mode==='sim' ? 'Has trigat '+mmss(TOTAL-restant)+'.' : '');
+  r.innerHTML='<div class="score">'+be+' / '+ordre.length+'<small>'+pct+' % · '+mal+' errades · '+blanc+' en blanc'+(temps?' · '+temps:'')+'</small></div>';
+  var rows='';
+  Object.keys(perdoc).sort().forEach(function(k){
+    var p=perdoc[k], q=Math.round(100*p.b/p.t);
+    var cl = q>=80?'ok':(q>=60?'mid':'ko');
+    rows+='<tr><td>Document '+parseInt(k,10)+' · '+BANC.filter(function(x){return x.d===k;})[0].dt+'</td>'+
+          '<td class="n">'+p.b+' / '+p.t+'</td><td class="n"><span class="pill '+cl+'">'+q+' %</span></td></tr>';
+  });
+  r.innerHTML+='<table><thead><tr><th>Bloc</th><th class="n">Encerts</th><th class="n"></th></tr></thead><tbody>'+rows+'</tbody></table>'+
+    '<p class="note">Els blocs per sota del 80 % són els que convé rellegir. Cada afirmació de sota enllaça amb el document que la sustenta.</p>';
+  var acc=el('div','actions');
+  var b1=el('button','primary','Repetir'); b1.onclick=function(){location.reload();};
+  var b2=el('button','','Tornar a l’inici'); b2.onclick=function(){location.reload();};
+  acc.appendChild(b1); acc.appendChild(b2); r.appendChild(acc);
+  var app=document.getElementById('app'); app.insertBefore(r,app.firstChild);
+  document.getElementById('bar').style.display='none';
+  r.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+Array.prototype.forEach.call(document.querySelectorAll('.mode'),function(b){
+  b.onclick=function(){
+    mode=b.dataset.mode;
+    document.getElementById('home').style.display='none';
+    if(mode==='sim'){
+      ordre=barreja(BANC);
+      document.getElementById('bar').style.display='block';
+      document.getElementById('finish').onclick=function(){corregeix(false);};
+      tid=setInterval(tic,1000);
+    } else {
+      ordre=BANC.slice();
+      document.getElementById('bar').style.display='block';
+      document.getElementById('clock').style.display='none';
+      document.getElementById('finish').textContent='Veure el resum';
+      document.getElementById('finish').onclick=function(){corregeix(false);};
+    }
+    pinta();
+  };
+});
+</script></body></html>
