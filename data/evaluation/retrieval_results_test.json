@@ -1,0 +1,518 @@
+{
+ "summary": {
+  "n": 16,
+  "recall_topic@1": 0.857,
+  "recall_text@1": 0.786,
+  "recall_topic@3": 0.929,
+  "recall_text@3": 0.929,
+  "recall_topic@5": 1.0,
+  "recall_text@5": 0.929,
+  "recall_topic@10": 1.0,
+  "recall_text@10": 0.929,
+  "formula_recall@5": 0.857,
+  "topic_accuracy@1": 0.857,
+  "sufficiency@5": 1.0,
+  "mrr": 0.78,
+  "precision@5": 0.7,
+  "hit_rate@5": 1.0,
+  "abstention_precision": 1.0,
+  "abstention_recall": 1.0,
+  "false_positive_rate": 0.0
+ },
+ "items": [
+  {
+   "id": "A03",
+   "abstain": false,
+   "n": 10,
+   "ms": 355.65,
+   "topic": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": "na",
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 1,
+   "p5": 0.6,
+   "_exp_abst": false
+  },
+  {
+   "id": "A06",
+   "abstain": false,
+   "n": 10,
+   "ms": 334.57,
+   "topic": {
+    "1": false,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": false,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 3,
+   "p5": 0.6,
+   "_exp_abst": false
+  },
+  {
+   "id": "B03",
+   "abstain": false,
+   "n": 10,
+   "ms": 297.47,
+   "topic": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 1,
+   "p5": 1.0,
+   "_exp_abst": false
+  },
+  {
+   "id": "B06",
+   "abstain": false,
+   "n": 10,
+   "ms": 190.67,
+   "topic": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 1,
+   "p5": 1.0,
+   "_exp_abst": false
+  },
+  {
+   "id": "C03",
+   "abstain": false,
+   "n": 10,
+   "ms": 327.99,
+   "topic": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": false,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 1,
+   "p5": 1.0,
+   "_exp_abst": false
+  },
+  {
+   "id": "D03",
+   "abstain": false,
+   "n": 10,
+   "ms": 352.4,
+   "topic": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": false,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": "na",
+    "3": "na",
+    "5": "na",
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 3,
+   "p5": 0.2,
+   "_exp_abst": false
+  },
+  {
+   "id": "E03",
+   "abstain": false,
+   "n": 10,
+   "ms": 519.39,
+   "topic": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": false,
+    "3": false,
+    "5": false,
+    "10": false
+   },
+   "formula": {
+    "1": "na",
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": null,
+   "p5": 0.0,
+   "_exp_abst": false
+  },
+  {
+   "id": "F03",
+   "abstain": false,
+   "n": 10,
+   "ms": 176.83,
+   "topic": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": "na",
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 1,
+   "p5": 1.0,
+   "_exp_abst": false
+  },
+  {
+   "id": "G03",
+   "abstain": false,
+   "n": 10,
+   "ms": 180.11,
+   "topic": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 1,
+   "p5": 0.8,
+   "_exp_abst": false
+  },
+  {
+   "id": "G06",
+   "abstain": false,
+   "n": 10,
+   "ms": 184.2,
+   "topic": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": "na",
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 1,
+   "p5": 0.8,
+   "_exp_abst": false
+  },
+  {
+   "id": "H03",
+   "abstain": false,
+   "n": 10,
+   "ms": 396.83,
+   "topic": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": "na",
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 1,
+   "p5": 0.4,
+   "_exp_abst": false
+  },
+  {
+   "id": "I03",
+   "abstain": false,
+   "n": 10,
+   "ms": 226.02,
+   "topic": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": "na",
+    "3": "na",
+    "5": "na",
+    "10": "na"
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 1,
+   "p5": 1.0,
+   "_exp_abst": false
+  },
+  {
+   "id": "I06",
+   "abstain": false,
+   "n": 10,
+   "ms": 279.1,
+   "topic": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 1,
+   "p5": 1.0,
+   "_exp_abst": false
+  },
+  {
+   "id": "T03",
+   "abstain": false,
+   "n": 10,
+   "ms": 623.48,
+   "topic": {
+    "1": false,
+    "3": false,
+    "5": true,
+    "10": true
+   },
+   "text": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "formula": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "source": {
+    "1": true,
+    "3": true,
+    "5": true,
+    "10": true
+   },
+   "sufficient": true,
+   "mrr_rank": 4,
+   "p5": 0.4,
+   "_exp_abst": false
+  },
+  {
+   "id": "J03",
+   "abstain": true,
+   "n": 0,
+   "ms": 109.32,
+   "sufficient": true,
+   "mrr_rank": null,
+   "_exp_abst": true
+  },
+  {
+   "id": "J06",
+   "abstain": true,
+   "n": 0,
+   "ms": 143.5,
+   "sufficient": true,
+   "mrr_rank": null,
+   "_exp_abst": true
+  }
+ ]
+}

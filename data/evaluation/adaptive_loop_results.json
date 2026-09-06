@@ -1,0 +1,1102 @@
+{
+ "cases": [
+  {
+   "case_id": "L01",
+   "fails": [],
+   "result": [
+    {
+     "action": "REINFORCE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "topic:T02",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 41.0,
+     "reason_codes": [
+      "mastery:0.40",
+      "evidencia:MODERATE(n=2)",
+      "confianza_baja:0.40",
+      "sin_recencia",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.00,conf=0.40,n=0))",
+      "categoria:3:reinforce_errors",
+      "spacing:bucket:OLD",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:disponible"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 2,
+      "bucket": "OLD",
+      "critical": false,
+      "failure_count": 1,
+      "has_roots": false,
+      "knowledge_unit_id": "topic:T02",
+      "last_correct": "",
+      "last_seen": "",
+      "mastery": 0.4,
+      "reasons": [
+       "bucket:OLD",
+       "veredicto:ALLOW",
+       "motivo:disponible"
+      ],
+      "success_count": 1,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l01",
+     "target_concepts": [],
+     "target_formulas": [],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "topic"
+    },
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0001",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 35.0,
+     "reason_codes": [
+      "exploracion_unseen",
+      "nunca_practicado",
+      "confianza_baja:0.00",
+      "sin_recencia",
+      "dificultad:EASY(baja_evidencia(n=0))",
+      "categoria:6:exploration",
+      "spacing:bucket:NEVER_SEEN",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:nunca_visto"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 0,
+      "bucket": "NEVER_SEEN",
+      "critical": false,
+      "failure_count": 0,
+      "has_roots": false,
+      "knowledge_unit_id": "formula:eq-02-0001",
+      "last_correct": "",
+      "last_seen": "",
+      "mastery": 0.0,
+      "reasons": [
+       "bucket:NEVER_SEEN",
+       "veredicto:ALLOW",
+       "motivo:nunca_visto"
+      ],
+      "success_count": 0,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l01",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0001"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "L02",
+   "fails": [],
+   "result": [
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 40.0,
+     "reason_codes": [
+      "mastery:0.00",
+      "evidencia:LOW(n=1)",
+      "confianza_baja:0.25",
+      "raiz:FORMULA_ERROR",
+      "fallo_reciente:0d",
+      "dificultad:EASY(baja_evidencia(n=1))",
+      "categoria:2:high_priority_practice",
+      "spacing:bucket:VERY_RECENT",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:fallo_reciente"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 1,
+      "bucket": "VERY_RECENT",
+      "critical": false,
+      "failure_count": 1,
+      "has_roots": true,
+      "knowledge_unit_id": "formula:eq-02-0034",
+      "last_correct": "",
+      "last_seen": "2026-06-01T10:00:00+00:00",
+      "mastery": 0.0,
+      "reasons": [
+       "bucket:VERY_RECENT",
+       "veredicto:ALLOW",
+       "motivo:fallo_reciente"
+      ],
+      "success_count": 0,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l02",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0034"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "L03",
+   "fails": [],
+   "result": [
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 53.0,
+     "reason_codes": [
+      "mastery:0.20",
+      "evidencia:MODERATE(n=3)",
+      "confianza_baja:0.30",
+      "raiz_repetida:FORMULA_ERROR",
+      "fallo_reciente:0d",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.00,conf=0.30,n=3))",
+      "categoria:1:critical_weakness",
+      "debilidad_critica",
+      "spacing:bucket:VERY_RECENT",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:debilidad_critica"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 3,
+      "bucket": "VERY_RECENT",
+      "critical": true,
+      "failure_count": 3,
+      "has_roots": true,
+      "knowledge_unit_id": "formula:eq-02-0034",
+      "last_correct": "",
+      "last_seen": "2026-06-01T10:00:00+00:00",
+      "mastery": 0.2,
+      "reasons": [
+       "bucket:VERY_RECENT",
+       "veredicto:ALLOW",
+       "motivo:debilidad_critica"
+      ],
+      "success_count": 0,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l03",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0034"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "L04",
+   "fails": [],
+   "result": [
+    {
+     "action": "REINFORCE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0005",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 27.5,
+     "reason_codes": [
+      "mastery:0.50",
+      "evidencia:MODERATE(n=2)",
+      "fallo_reciente:0d",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.50,conf=0.50,n=2))",
+      "categoria:3:reinforce_errors",
+      "spacing:bucket:VERY_RECENT",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:fallo_reciente"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 2,
+      "bucket": "VERY_RECENT",
+      "critical": false,
+      "failure_count": 1,
+      "has_roots": false,
+      "knowledge_unit_id": "formula:eq-02-0005",
+      "last_correct": "",
+      "last_seen": "2026-06-01T09:00:00+00:00",
+      "mastery": 0.5,
+      "reasons": [
+       "bucket:VERY_RECENT",
+       "veredicto:ALLOW",
+       "motivo:fallo_reciente"
+      ],
+      "success_count": 1,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l04",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0005"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "L05",
+   "fails": [],
+   "result": [
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 36.5,
+     "reason_codes": [
+      "mastery:0.30",
+      "evidencia:MODERATE(n=2)",
+      "confianza_baja:0.30",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.50,conf=0.30,n=2))",
+      "categoria:1:critical_weakness",
+      "debilidad_critica",
+      "spacing:bucket:NORMAL",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:debilidad_critica"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 2,
+      "bucket": "NORMAL",
+      "critical": true,
+      "failure_count": 2,
+      "has_roots": false,
+      "knowledge_unit_id": "formula:eq-02-0034",
+      "last_correct": "",
+      "last_seen": "2026-05-20T09:00:00+00:00",
+      "mastery": 0.3,
+      "reasons": [
+       "bucket:NORMAL",
+       "veredicto:ALLOW",
+       "motivo:debilidad_critica"
+      ],
+      "success_count": 0,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l05",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0034"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "L06",
+   "fails": [],
+   "result": [
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 36.5,
+     "reason_codes": [
+      "mastery:0.30",
+      "evidencia:MODERATE(n=2)",
+      "confianza_baja:0.30",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.50,conf=0.30,n=2))",
+      "categoria:1:critical_weakness",
+      "debilidad_critica",
+      "spacing:bucket:NORMAL",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:debilidad_critica"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 2,
+      "bucket": "NORMAL",
+      "critical": true,
+      "failure_count": 2,
+      "has_roots": false,
+      "knowledge_unit_id": "formula:eq-02-0034",
+      "last_correct": "",
+      "last_seen": "2026-05-20T09:00:00+00:00",
+      "mastery": 0.3,
+      "reasons": [
+       "bucket:NORMAL",
+       "veredicto:ALLOW",
+       "motivo:debilidad_critica"
+      ],
+      "success_count": 0,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l06",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0034"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "L07",
+   "fails": [],
+   "result": [
+    {
+     "action": "MAINTAIN",
+     "difficulty": "HARD",
+     "knowledge_unit_id": "topic:T04",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 22.5,
+     "reason_codes": [
+      "mastery:0.95",
+      "evidencia:HIGH(n=6)",
+      "sin_practicar_desde:61d",
+      "dificultad:HARD(mantenimiento)",
+      "categoria:5:maintenance",
+      "spacing:bucket:OLD",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:disponible"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 6,
+      "bucket": "OLD",
+      "critical": false,
+      "failure_count": 0,
+      "has_roots": false,
+      "knowledge_unit_id": "topic:T04",
+      "last_correct": "2026-04-01T09:00:00+00:00",
+      "last_seen": "2026-04-01T09:00:00+00:00",
+      "mastery": 0.95,
+      "reasons": [
+       "bucket:OLD",
+       "veredicto:ALLOW",
+       "motivo:disponible"
+      ],
+      "success_count": 6,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l07",
+     "target_concepts": [],
+     "target_formulas": [],
+     "target_section": null,
+     "target_topic": 4,
+     "unit_kind": "topic"
+    }
+   ]
+  },
+  {
+   "case_id": "L08",
+   "fails": [],
+   "result": [
+    {
+     "action": "REINFORCE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0007",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 60.0,
+     "reason_codes": [
+      "mastery:0.00",
+      "evidencia:MODERATE(n=3)",
+      "confianza_baja:0.20",
+      "raiz_repetida:FORMULA_ERROR",
+      "fallo_reciente:0d",
+      "dificultad:EASY(at_risk_consolida)",
+      "categoria:1:critical_weakness",
+      "debilidad_critica",
+      "spacing:bucket:VERY_RECENT",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:debilidad_critica"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 3,
+      "bucket": "VERY_RECENT",
+      "critical": true,
+      "failure_count": 3,
+      "has_roots": true,
+      "knowledge_unit_id": "formula:eq-02-0007",
+      "last_correct": "",
+      "last_seen": "2026-06-01T09:00:00+00:00",
+      "mastery": 0.0,
+      "reasons": [
+       "bucket:VERY_RECENT",
+       "veredicto:ALLOW",
+       "motivo:debilidad_critica"
+      ],
+      "success_count": 0,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l08",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0007"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "L09",
+   "fails": [],
+   "result": [
+    {
+     "action": "REINFORCE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 57.5,
+     "reason_codes": [
+      "mastery:0.55",
+      "evidencia:HIGH(n=4)",
+      "raiz:FORMULA_ERROR",
+      "sin_practicar_desde:31d",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.50,conf=0.50,n=4))",
+      "categoria:3:reinforce_errors",
+      "spacing:bucket:OLD",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:fallo_reciente"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 4,
+      "bucket": "OLD",
+      "critical": false,
+      "failure_count": 1,
+      "has_roots": true,
+      "knowledge_unit_id": "formula:eq-02-0034",
+      "last_correct": "",
+      "last_seen": "2026-05-01T09:00:00+00:00",
+      "mastery": 0.55,
+      "reasons": [
+       "bucket:OLD",
+       "veredicto:ALLOW",
+       "motivo:fallo_reciente"
+      ],
+      "success_count": 3,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l09",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0034"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "L10",
+   "fails": [],
+   "result": [
+    {
+     "action": "REINFORCE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "concept:incertesa",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 27.5,
+     "reason_codes": [
+      "mastery:0.50",
+      "evidencia:MODERATE(n=2)",
+      "fallo_reciente:4d",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.50,conf=0.50,n=2))",
+      "categoria:3:reinforce_errors",
+      "spacing:bucket:RECENT",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:fallo_reciente"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 2,
+      "bucket": "RECENT",
+      "critical": false,
+      "failure_count": 1,
+      "has_roots": false,
+      "knowledge_unit_id": "concept:incertesa",
+      "last_correct": "",
+      "last_seen": "2026-05-28T09:00:00+00:00",
+      "mastery": 0.5,
+      "reasons": [
+       "bucket:RECENT",
+       "veredicto:ALLOW",
+       "motivo:fallo_reciente"
+      ],
+      "success_count": 1,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l10",
+     "target_concepts": [
+      "incertesa"
+     ],
+     "target_formulas": [],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "concept"
+    }
+   ]
+  },
+  {
+   "case_id": "L11",
+   "fails": [],
+   "result": [
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 48.0,
+     "reason_codes": [
+      "mastery:0.20",
+      "evidencia:MODERATE(n=3)",
+      "confianza_baja:0.30",
+      "sin_practicar_desde:31d",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.00,conf=0.30,n=0))",
+      "ancestro_en_contexto:topic:T02",
+      "categoria:1:critical_weakness",
+      "debilidad_critica",
+      "spacing:bucket:OLD",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:debilidad_critica"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 3,
+      "bucket": "OLD",
+      "critical": true,
+      "failure_count": 3,
+      "has_roots": false,
+      "knowledge_unit_id": "formula:eq-02-0034",
+      "last_correct": "",
+      "last_seen": "2026-05-01T09:00:00+00:00",
+      "mastery": 0.2,
+      "reasons": [
+       "bucket:OLD",
+       "veredicto:ALLOW",
+       "motivo:debilidad_critica"
+      ],
+      "success_count": 0,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l11",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0034"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "L12",
+   "fails": [],
+   "result": [
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0005",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 56.5,
+     "reason_codes": [
+      "mastery:0.10",
+      "evidencia:MODERATE(n=3)",
+      "confianza_baja:0.20",
+      "raiz_repetida:FORMULA_ERROR",
+      "fallo_reciente:0d",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.00,conf=0.20,n=3))",
+      "categoria:1:critical_weakness",
+      "debilidad_critica",
+      "spacing:bucket:VERY_RECENT",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:debilidad_critica"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 3,
+      "bucket": "VERY_RECENT",
+      "critical": true,
+      "failure_count": 3,
+      "has_roots": true,
+      "knowledge_unit_id": "formula:eq-02-0005",
+      "last_correct": "",
+      "last_seen": "2026-06-01T09:00:00+00:00",
+      "mastery": 0.1,
+      "reasons": [
+       "bucket:VERY_RECENT",
+       "veredicto:ALLOW",
+       "motivo:debilidad_critica"
+      ],
+      "success_count": 0,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l12",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0005"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    },
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0006",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 44.5,
+     "reason_codes": [
+      "mastery:0.30",
+      "evidencia:MODERATE(n=2)",
+      "confianza_baja:0.30",
+      "sin_recencia",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.00,conf=0.30,n=0))",
+      "categoria:1:critical_weakness",
+      "debilidad_critica",
+      "spacing:bucket:OLD",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:debilidad_critica"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 2,
+      "bucket": "OLD",
+      "critical": true,
+      "failure_count": 2,
+      "has_roots": false,
+      "knowledge_unit_id": "formula:eq-02-0006",
+      "last_correct": "",
+      "last_seen": "",
+      "mastery": 0.3,
+      "reasons": [
+       "bucket:OLD",
+       "veredicto:ALLOW",
+       "motivo:debilidad_critica"
+      ],
+      "success_count": 0,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l12",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0006"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "L13",
+   "fails": [],
+   "result": [
+    {
+     "action": "REINFORCE",
+     "difficulty": "MEDIUM",
+     "knowledge_unit_id": "formula:eq-02-0005",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 37.5,
+     "reason_codes": [
+      "mastery:0.50",
+      "evidencia:MODERATE(n=2)",
+      "sin_practicar_desde:31d",
+      "dificultad:MEDIUM(progresion_conservadora(+1))",
+      "categoria:3:reinforce_errors",
+      "spacing:bucket:OLD",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:disponible"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 2,
+      "bucket": "OLD",
+      "critical": false,
+      "failure_count": 1,
+      "has_roots": false,
+      "knowledge_unit_id": "formula:eq-02-0005",
+      "last_correct": "",
+      "last_seen": "2026-05-01T09:00:00+00:00",
+      "mastery": 0.5,
+      "reasons": [
+       "bucket:OLD",
+       "veredicto:ALLOW",
+       "motivo:disponible"
+      ],
+      "success_count": 1,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l13",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0005"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    },
+    {
+     "action": "REINFORCE",
+     "difficulty": "MEDIUM",
+     "knowledge_unit_id": "formula:eq-02-0006",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 37.5,
+     "reason_codes": [
+      "mastery:0.50",
+      "evidencia:MODERATE(n=2)",
+      "sin_practicar_desde:31d",
+      "dificultad:MEDIUM(progresion_conservadora(+1))",
+      "categoria:3:reinforce_errors",
+      "spacing:bucket:OLD",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:disponible"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 2,
+      "bucket": "OLD",
+      "critical": false,
+      "failure_count": 1,
+      "has_roots": false,
+      "knowledge_unit_id": "formula:eq-02-0006",
+      "last_correct": "",
+      "last_seen": "2026-05-01T09:00:00+00:00",
+      "mastery": 0.5,
+      "reasons": [
+       "bucket:OLD",
+       "veredicto:ALLOW",
+       "motivo:disponible"
+      ],
+      "success_count": 1,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l13",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0006"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "L14",
+   "fails": [],
+   "result": [
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 44.5,
+     "reason_codes": [
+      "mastery:0.30",
+      "evidencia:MODERATE(n=2)",
+      "confianza_baja:0.30",
+      "sin_recencia",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.00,conf=0.30,n=0))",
+      "ancestro_en_contexto:topic:T02",
+      "categoria:1:critical_weakness",
+      "debilidad_critica",
+      "spacing:bucket:OLD",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:debilidad_critica"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 2,
+      "bucket": "OLD",
+      "critical": true,
+      "failure_count": 2,
+      "has_roots": false,
+      "knowledge_unit_id": "formula:eq-02-0034",
+      "last_correct": "",
+      "last_seen": "",
+      "mastery": 0.3,
+      "reasons": [
+       "bucket:OLD",
+       "veredicto:ALLOW",
+       "motivo:debilidad_critica"
+      ],
+      "success_count": 0,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l14",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0034"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    },
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0001",
+     "policy_id": "spacing-policy",
+     "policy_version": "v1",
+     "priority_score": 35.0,
+     "reason_codes": [
+      "exploracion_unseen",
+      "nunca_practicado",
+      "confianza_baja:0.00",
+      "sin_recencia",
+      "dificultad:EASY(baja_evidencia(n=0))",
+      "categoria:6:exploration",
+      "spacing:bucket:NEVER_SEEN",
+      "spacing:veredicto:ALLOW",
+      "spacing:motivo:nunca_visto"
+     ],
+     "source_policies": {
+      "difficulty": "difficulty-policy@v1",
+      "priority": "priority-policy@v1"
+     },
+     "spacing_state": {
+      "attempt_count": 0,
+      "bucket": "NEVER_SEEN",
+      "critical": false,
+      "failure_count": 0,
+      "has_roots": false,
+      "knowledge_unit_id": "formula:eq-02-0001",
+      "last_correct": "",
+      "last_seen": "",
+      "mastery": 0.0,
+      "reasons": [
+       "bucket:NEVER_SEEN",
+       "veredicto:ALLOW",
+       "motivo:nunca_visto"
+      ],
+      "success_count": 0,
+      "verdict": "ALLOW"
+     },
+     "student_id": "l14",
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0001"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "L15",
+   "correction_status": "CORRECT",
+   "fails": [],
+   "post": {
+    "bad": 0,
+    "last_correct_eq_last_attempt": true,
+    "n": 4,
+    "ok": 4,
+    "score": 1.0,
+    "status": "MASTERED"
+   },
+   "post_ids": [
+    "section:T02:3Error i incertesa: dos conceptes que no s'han de confondre",
+    "topic:T02"
+   ],
+   "pre_score": 1.0
+  },
+  {
+   "case_id": "L16",
+   "fails": [],
+   "generated": {
+    "formula:eq-02-0034": {
+     "correct_answer": "$U=k\\,u_c(y)$",
+     "difficulty": "EASY",
+     "formula_ids": [
+      "eq-02-0034"
+     ],
+     "question_id": "q-01982e7de509",
+     "section": "4Incertesa típica, incertesa expandida i factor de cobertura",
+     "validation": "VALID"
+    }
+   }
+  },
+  {
+   "case_id": "L17",
+   "correction_status": "CORRECT",
+   "fails": [],
+   "post": {
+    "bad": 1,
+    "last_correct_eq_last_attempt": true,
+    "n": 3,
+    "ok": 2,
+    "score": 0.697,
+    "status": "DEVELOPING"
+   },
+   "post_ids": [
+    "topic:T02",
+    "section:T02:3Error i incertesa: dos conceptes que no s'han de confondre"
+   ],
+   "pre_score": 0.5238
+  },
+  {
+   "case_id": "L18",
+   "correction_status": "INCORRECT",
+   "fails": [],
+   "post": {
+    "bad": 1,
+    "last_correct_eq_last_attempt": false,
+    "n": 3,
+    "ok": 2,
+    "score": 0.6364,
+    "status": "DEVELOPING"
+   },
+   "post_ids": [
+    "formula:eq-02-0034"
+   ],
+   "pre_score": 1.0
+  },
+  {
+   "case_id": "L19",
+   "fails": [],
+   "replay": {
+    "attempt_count": 3,
+    "correct": 2,
+    "incorrect": 1,
+    "score": 0.6667
+   }
+  },
+  {
+   "case_id": "L20",
+   "events_stable": true,
+   "fails": [],
+   "replayed": true,
+   "same_correction": true,
+   "score_stable": true
+  },
+  {
+   "case_id": "L21",
+   "fails": [],
+   "result": {
+    "hits": [],
+    "llm_hits": 0,
+    "provider_params": []
+   }
+  },
+  {
+   "case_id": "L22",
+   "checked": [
+    "knowledge.sqlite",
+    "chunks.jsonl",
+    "source_manifest.json"
+   ],
+   "fails": [],
+   "matches": true
+  },
+  {
+   "case_id": "L23",
+   "checked": [
+    "eval.sqlite"
+   ],
+   "fails": [],
+   "matches": true,
+   "no_eval_refs": true
+  },
+  {
+   "a_final": 0.4762,
+   "a_score": 1.0,
+   "b_attempts": 1,
+   "b_score": 0.0,
+   "b_stable": true,
+   "case_id": "L24",
+   "fails": []
+  }
+ ],
+ "policies": [
+  "priority-policy@v1",
+  "difficulty-policy@v1",
+  "spacing-policy@v1"
+ ]
+}

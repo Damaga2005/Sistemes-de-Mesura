@@ -1,0 +1,377 @@
+{"kind": "subsection", "section_h2": "", "source_path": "Tema 1/SM_U1_01_Concepte_de_mesura.html", "term_ca": "Objectius", "topic": 1}
+{"kind": "section", "section_h2": "1 Definició", "source_path": "Tema 1/SM_U1_01_Concepte_de_mesura.html", "term_ca": "1 Definició", "topic": 1}
+{"kind": "section", "section_h2": "2 Mesurar és comparar", "source_path": "Tema 1/SM_U1_01_Concepte_de_mesura.html", "term_ca": "2 Mesurar és comparar", "topic": 1}
+{"kind": "subsection", "section_h2": "2 Mesurar és comparar", "source_path": "Tema 1/SM_U1_01_Concepte_de_mesura.html", "term_ca": "Les tres preguntes", "topic": 1}
+{"kind": "section", "section_h2": "3 Atributs d'objectes i esdeveniments", "source_path": "Tema 1/SM_U1_01_Concepte_de_mesura.html", "term_ca": "3 Atributs d'objectes i esdeveniments", "topic": 1}
+{"kind": "section", "section_h2": "4 El resultat i la unitat", "source_path": "Tema 1/SM_U1_01_Concepte_de_mesura.html", "term_ca": "4 El resultat i la unitat", "topic": 1}
+{"kind": "subsection", "section_h2": "4 El resultat i la unitat", "source_path": "Tema 1/SM_U1_01_Concepte_de_mesura.html", "term_ca": "Xifres significatives en una mesura indirecta", "topic": 1}
+{"kind": "section", "section_h2": "5 Mesura directa i mesura indirecta", "source_path": "Tema 1/SM_U1_01_Concepte_de_mesura.html", "term_ca": "5 Mesura directa i mesura indirecta", "topic": 1}
+{"kind": "subsection", "section_h2": "5 Mesura directa i mesura indirecta", "source_path": "Tema 1/SM_U1_01_Concepte_de_mesura.html", "term_ca": "Síntesi", "topic": 1}
+{"kind": "subsection", "section_h2": "", "source_path": "Tema 1/SM_U1_02_El_Sistema_Internacional_dUnitats.html", "term_ca": "Objectius", "topic": 1}
+{"kind": "section", "section_h2": "1 De l'artefacte a la constant", "source_path": "Tema 1/SM_U1_02_El_Sistema_Internacional_dUnitats.html", "term_ca": "1 De l'artefacte a la constant", "topic": 1}
+{"kind": "section", "section_h2": "2 Unitats base", "source_path": "Tema 1/SM_U1_02_El_Sistema_Internacional_dUnitats.html", "term_ca": "2 Unitats base", "topic": 1}
+{"kind": "subsection", "section_h2": "2 Unitats base", "source_path": "Tema 1/SM_U1_02_El_Sistema_Internacional_dUnitats.html", "term_ca": "Notació", "topic": 1}
+{"kind": "section", "section_h2": "3 Unitats derivades i coherència", "source_path": "Tema 1/SM_U1_02_El_Sistema_Internacional_dUnitats.html", "term_ca": "3 Unitats derivades i coherència", "topic": 1}
+{"kind": "section", "section_h2": "4 Les set constants", "source_path": "Tema 1/SM_U1_02_El_Sistema_Internacional_dUnitats.html", "term_ca": "4 Les set constants", "topic": 1}
+{"kind": "section", "section_h2": "5 Prefixos", "source_path": "Tema 1/SM_U1_02_El_Sistema_Internacional_dUnitats.html", "term_ca": "5 Prefixos", "topic": 1}
+{"kind": "subsection", "section_h2": "5 Prefixos", "source_path": "Tema 1/SM_U1_02_El_Sistema_Internacional_dUnitats.html", "term_ca": "Normes", "topic": 1}
+{"kind": "section", "section_h2": "6 El Mars Climate Orbiter", "source_path": "Tema 1/SM_U1_02_El_Sistema_Internacional_dUnitats.html", "term_ca": "6 El Mars Climate Orbiter", "topic": 1}
+{"kind": "subsection", "section_h2": "6 El Mars Climate Orbiter", "source_path": "Tema 1/SM_U1_02_El_Sistema_Internacional_dUnitats.html", "term_ca": "Tres principis", "topic": 1}
+{"kind": "subsection", "section_h2": "6 El Mars Climate Orbiter", "source_path": "Tema 1/SM_U1_02_El_Sistema_Internacional_dUnitats.html", "term_ca": "Síntesi", "topic": 1}
+{"kind": "section", "section_h2": "▤ Annex de consulta", "source_path": "Tema 1/SM_U1_02_El_Sistema_Internacional_dUnitats.html", "term_ca": "▤ Annex de consulta", "topic": 1}
+{"kind": "subsection", "section_h2": "", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "Objectius", "topic": 1}
+{"kind": "section", "section_h2": "1 Del mesurand al resultat", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "1 Del mesurand al resultat", "topic": 1}
+{"kind": "section", "section_h2": "2 Adquisició i efecte de càrrega", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "2 Adquisició i efecte de càrrega", "topic": 1}
+{"kind": "section", "section_h2": "3 Condicionament", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "3 Condicionament", "topic": 1}
+{"kind": "subsection", "section_h2": "3 Condicionament", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "3.1 · Pont de Wheatstone", "topic": 1}
+{"kind": "subsection", "section_h2": "3 Condicionament", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "3.2 · Llaç de 4-20 mA i alternativa 0-10 V", "topic": 1}
+{"kind": "section", "section_h2": "4 Conversió analògica-digital", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "4 Conversió analògica-digital", "topic": 1}
+{"kind": "subsection", "section_h2": "4 Conversió analògica-digital", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "4.1 · Mostreig i Nyquist", "topic": 1}
+{"kind": "subsection", "section_h2": "4 Conversió analògica-digital", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "4.2 · Quantificació i resolució", "topic": 1}
+{"kind": "subsection", "section_h2": "4 Conversió analògica-digital", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "Dimensionament d'una cadena d'adquisició", "topic": 1}
+{"kind": "section", "section_h2": "5 Processament digital", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "5 Processament digital", "topic": 1}
+{"kind": "subsection", "section_h2": "5 Processament digital", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "5.1 · Models de processament", "topic": 1}
+{"kind": "subsection", "section_h2": "5 Processament digital", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "5.2 · Sensors virtuals, registre i integració", "topic": 1}
+{"kind": "section", "section_h2": "6 Presentació", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "6 Presentació", "topic": 1}
+{"kind": "subsection", "section_h2": "6 Presentació", "source_path": "Tema 1/SM_U1_03_Estructura_dels_sistemes_de_mesura.html", "term_ca": "Síntesi", "topic": 1}
+{"kind": "subsection", "section_h2": "", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "Objectius", "topic": 1}
+{"kind": "section", "section_h2": "1 Sensor, transductor i actuador", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "1 Sensor, transductor i actuador", "topic": 1}
+{"kind": "section", "section_h2": "2 Classificacions", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "2 Classificacions", "topic": 1}
+{"kind": "subsection", "section_h2": "2 Classificacions", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "2.1 · Per aportació d'energia", "topic": 1}
+{"kind": "subsection", "section_h2": "2 Classificacions", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "2.2 · Per tipus de sortida i per referència", "topic": 1}
+{"kind": "section", "section_h2": "3 Principis de transducció", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "3 Principis de transducció", "topic": 1}
+{"kind": "subsection", "section_h2": "3 Principis de transducció", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "3.1 · Resistius", "topic": 1}
+{"kind": "subsection", "section_h2": "3 Principis de transducció", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "3.2 · Capacitius i inductius", "topic": 1}
+{"kind": "subsection", "section_h2": "3 Principis de transducció", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "3.3 · Efecte Hall", "topic": 1}
+{"kind": "subsection", "section_h2": "3 Principis de transducció", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "3.4 · Termoparell", "topic": 1}
+{"kind": "subsection", "section_h2": "3 Principis de transducció", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "La unió freda", "topic": 1}
+{"kind": "subsection", "section_h2": "3 Principis de transducció", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "3.5 · Òptics i electroquímics", "topic": 1}
+{"kind": "section", "section_h2": "4 Model elèctric", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "4 Model elèctric", "topic": 1}
+{"kind": "section", "section_h2": "5 Sensibilitat creuada", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "5 Sensibilitat creuada", "topic": 1}
+{"kind": "section", "section_h2": "6 Selecció", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "6 Selecció", "topic": 1}
+{"kind": "subsection", "section_h2": "6 Selecció", "source_path": "Tema 1/SM_U1_04_Sensors_definicio_i_classificacio.html", "term_ca": "Síntesi", "topic": 1}
+{"kind": "subsection", "section_h2": "", "source_path": "Tema 1/SM_U1_05_Caracteristiques_estatiques.html", "term_ca": "Objectius", "topic": 1}
+{"kind": "section", "section_h2": "1 Règim permanent i funció de resposta", "source_path": "Tema 1/SM_U1_05_Caracteristiques_estatiques.html", "term_ca": "1 Règim permanent i funció de resposta", "topic": 1}
+{"kind": "section", "section_h2": "2 Sensibilitat i error de zero", "source_path": "Tema 1/SM_U1_05_Caracteristiques_estatiques.html", "term_ca": "2 Sensibilitat i error de zero", "topic": 1}
+{"kind": "section", "section_h2": "3 Error de linealitat", "source_path": "Tema 1/SM_U1_05_Caracteristiques_estatiques.html", "term_ca": "3 Error de linealitat", "topic": 1}
+{"kind": "subsection", "section_h2": "3 Error de linealitat", "source_path": "Tema 1/SM_U1_05_Caracteristiques_estatiques.html", "term_ca": "Caracterització amb dos punts", "topic": 1}
+{"kind": "section", "section_h2": "4 Exactitud, veracitat i fidelitat", "source_path": "Tema 1/SM_U1_05_Caracteristiques_estatiques.html", "term_ca": "4 Exactitud, veracitat i fidelitat", "topic": 1}
+{"kind": "section", "section_h2": "5 Errors sistemàtics i aleatoris", "source_path": "Tema 1/SM_U1_05_Caracteristiques_estatiques.html", "term_ca": "5 Errors sistemàtics i aleatoris", "topic": 1}
+{"kind": "section", "section_h2": "6 Histèresi, zona morta i resolució", "source_path": "Tema 1/SM_U1_05_Caracteristiques_estatiques.html", "term_ca": "6 Histèresi, zona morta i resolució", "topic": 1}
+{"kind": "subsection", "section_h2": "6 Histèresi, zona morta i resolució", "source_path": "Tema 1/SM_U1_05_Caracteristiques_estatiques.html", "term_ca": "Caracterització d'una bàscula", "topic": 1}
+{"kind": "subsection", "section_h2": "6 Histèresi, zona morta i resolució", "source_path": "Tema 1/SM_U1_05_Caracteristiques_estatiques.html", "term_ca": "Síntesi", "topic": 1}
+{"kind": "subsection", "section_h2": "", "source_path": "Tema 1/SM_U1_06_Caracteristiques_dinamiques.html", "term_ca": "Objectius", "topic": 1}
+{"kind": "section", "section_h2": "1 Quan el mesurand varia", "source_path": "Tema 1/SM_U1_06_Caracteristiques_dinamiques.html", "term_ca": "1 Quan el mesurand varia", "topic": 1}
+{"kind": "section", "section_h2": "2 Tres models", "source_path": "Tema 1/SM_U1_06_Caracteristiques_dinamiques.html", "term_ca": "2 Tres models", "topic": 1}
+{"kind": "section", "section_h2": "3 Resposta del sistema de primer ordre", "source_path": "Tema 1/SM_U1_06_Caracteristiques_dinamiques.html", "term_ca": "3 Resposta del sistema de primer ordre", "topic": 1}
+{"kind": "section", "section_h2": "4 Estimació de la constant de temps d'un primer ordre", "source_path": "Tema 1/SM_U1_06_Caracteristiques_dinamiques.html", "term_ca": "4 Estimació de la constant de temps d'un primer ordre", "topic": 1}
+{"kind": "section", "section_h2": "5 Una excepció", "source_path": "Tema 1/SM_U1_06_Caracteristiques_dinamiques.html", "term_ca": "5 Una excepció", "topic": 1}
+{"kind": "subsection", "section_h2": "5 Una excepció", "source_path": "Tema 1/SM_U1_06_Caracteristiques_dinamiques.html", "term_ca": "Síntesi", "topic": 1}
+{"kind": "section", "section_h2": "1Sensors singulars", "source_path": "Tema 10/01_Unitat10_Condicionament_singular_i_limits_de_loperacional.html", "term_ca": "1Sensors singulars", "topic": 10}
+{"kind": "subsection", "section_h2": "1Sensors singulars", "source_path": "Tema 10/01_Unitat10_Condicionament_singular_i_limits_de_loperacional.html", "term_ca": "El límit de l'amplificador de propòsit general", "topic": 10}
+{"kind": "section", "section_h2": "2L'operacional real: errors estàtics", "source_path": "Tema 10/01_Unitat10_Condicionament_singular_i_limits_de_loperacional.html", "term_ca": "2L'operacional real: errors estàtics", "topic": 10}
+{"kind": "section", "section_h2": "3Derives: temperatura i envelliment", "source_path": "Tema 10/01_Unitat10_Condicionament_singular_i_limits_de_loperacional.html", "term_ca": "3Derives: temperatura i envelliment", "topic": 10}
+{"kind": "section", "section_h2": "4Soroll: blanc i 1/f", "source_path": "Tema 10/01_Unitat10_Condicionament_singular_i_limits_de_loperacional.html", "term_ca": "4Soroll: blanc i 1/f", "topic": 10}
+{"kind": "section", "section_h2": "5Tecnologies d'entrada", "source_path": "Tema 10/01_Unitat10_Condicionament_singular_i_limits_de_loperacional.html", "term_ca": "5Tecnologies d'entrada", "topic": 10}
+{"kind": "section", "section_h2": "1L'especificació del problema", "source_path": "Tema 10/02_Unitat10_Amplificadors_de_baixes_derives.html", "term_ca": "1L'especificació del problema", "topic": 10}
+{"kind": "section", "section_h2": "2Compensació dels corrents de polarització", "source_path": "Tema 10/02_Unitat10_Amplificadors_de_baixes_derives.html", "term_ca": "2Compensació dels corrents de polarització", "topic": 10}
+{"kind": "section", "section_h2": "3Compensació de la tensió d'offset", "source_path": "Tema 10/02_Unitat10_Amplificadors_de_baixes_derives.html", "term_ca": "3Compensació de la tensió d'offset", "topic": 10}
+{"kind": "subsection", "section_h2": "3Compensació de la tensió d'offset", "source_path": "Tema 10/02_Unitat10_Amplificadors_de_baixes_derives.html", "term_ca": "Ajust intern", "topic": 10}
+{"kind": "subsection", "section_h2": "3Compensació de la tensió d'offset", "source_path": "Tema 10/02_Unitat10_Amplificadors_de_baixes_derives.html", "term_ca": "Compensació externa", "topic": 10}
+{"kind": "subsection", "section_h2": "3Compensació de la tensió d'offset", "source_path": "Tema 10/02_Unitat10_Amplificadors_de_baixes_derives.html", "term_ca": "Tria de la tensió de referència", "topic": 10}
+{"kind": "section", "section_h2": "1Amplificadors chopper", "source_path": "Tema 10/03_Unitat10_Chopper_i_autozero.html", "term_ca": "1Amplificadors chopper", "topic": 10}
+{"kind": "section", "section_h2": "2Amplificadors amb autozero", "source_path": "Tema 10/03_Unitat10_Chopper_i_autozero.html", "term_ca": "2Amplificadors amb autozero", "topic": 10}
+{"kind": "section", "section_h2": "3Criteris de selecció", "source_path": "Tema 10/03_Unitat10_Chopper_i_autozero.html", "term_ca": "3Criteris de selecció", "topic": 10}
+{"kind": "section", "section_h2": "1Thevenin o Norton: quina topologia", "source_path": "Tema 10/04_Unitat10_Electrometrics_i_transimpedancia.html", "term_ca": "1Thevenin o Norton: quina topologia", "topic": 10}
+{"kind": "section", "section_h2": "2Amplificadors electromètrics", "source_path": "Tema 10/04_Unitat10_Electrometrics_i_transimpedancia.html", "term_ca": "2Amplificadors electromètrics", "topic": 10}
+{"kind": "section", "section_h2": "3Amplificadors de transimpedància", "source_path": "Tema 10/04_Unitat10_Electrometrics_i_transimpedancia.html", "term_ca": "3Amplificadors de transimpedància", "topic": 10}
+{"kind": "subsection", "section_h2": "3Amplificadors de transimpedància", "source_path": "Tema 10/04_Unitat10_Electrometrics_i_transimpedancia.html", "term_ca": "Errors de contínua i soroll", "topic": 10}
+{"kind": "section", "section_h2": "4La xarxa en T", "source_path": "Tema 10/04_Unitat10_Electrometrics_i_transimpedancia.html", "term_ca": "4La xarxa en T", "topic": 10}
+{"kind": "section", "section_h2": "5Disseny físic del node d'alta impedància", "source_path": "Tema 10/04_Unitat10_Electrometrics_i_transimpedancia.html", "term_ca": "5Disseny físic del node d'alta impedància", "topic": 10}
+{"kind": "section", "section_h2": "1Model del sensor en càrrega", "source_path": "Tema 10/05_Unitat10_Amplificadors_de_carrega.html", "term_ca": "1Model del sensor en càrrega", "topic": 10}
+{"kind": "section", "section_h2": "2L'amplificador de càrrega", "source_path": "Tema 10/05_Unitat10_Amplificadors_de_carrega.html", "term_ca": "2L'amplificador de càrrega", "topic": 10}
+{"kind": "section", "section_h2": "3La resistència de realimentació", "source_path": "Tema 10/05_Unitat10_Amplificadors_de_carrega.html", "term_ca": "3La resistència de realimentació", "topic": 10}
+{"kind": "section", "section_h2": "4Errors de contínua", "source_path": "Tema 10/05_Unitat10_Amplificadors_de_carrega.html", "term_ca": "4Errors de contínua", "topic": 10}
+{"kind": "section", "section_h2": "5L'efecte triboelèctric", "source_path": "Tema 10/05_Unitat10_Amplificadors_de_carrega.html", "term_ca": "5L'efecte triboelèctric", "topic": 10}
+{"kind": "section", "section_h2": "1La definició d'incertesa segons la GUM", "source_path": "Tema 2/2_01_introduccio.html", "term_ca": "1La definició d'incertesa segons la GUM", "topic": 2}
+{"kind": "section", "section_h2": "2Origen normatiu: per què calia estandarditzar el dubte", "source_path": "Tema 2/2_01_introduccio.html", "term_ca": "2Origen normatiu: per què calia estandarditzar el dubte", "topic": 2}
+{"kind": "section", "section_h2": "3Error i incertesa: dos conceptes que no s'han de confondre", "source_path": "Tema 2/2_01_introduccio.html", "term_ca": "3Error i incertesa: dos conceptes que no s'han de confondre", "topic": 2}
+{"kind": "section", "section_h2": "4Per a què serveix calcular la incertesa", "source_path": "Tema 2/2_01_introduccio.html", "term_ca": "4Per a què serveix calcular la incertesa", "topic": 2}
+{"kind": "section", "section_h2": "1El resultat de mesura com a variable aleatòria", "source_path": "Tema 2/2_02_marc_teoric.html", "term_ca": "1El resultat de mesura com a variable aleatòria", "topic": 2}
+{"kind": "section", "section_h2": "2Valor veritable, estimació i interval de confiança", "source_path": "Tema 2/2_02_marc_teoric.html", "term_ca": "2Valor veritable, estimació i interval de confiança", "topic": 2}
+{"kind": "section", "section_h2": "3Paràmetres estadístics fonamentals", "source_path": "Tema 2/2_02_marc_teoric.html", "term_ca": "3Paràmetres estadístics fonamentals", "topic": 2}
+{"kind": "section", "section_h2": "4Incertesa típica, incertesa expandida i factor de cobertura", "source_path": "Tema 2/2_02_marc_teoric.html", "term_ca": "4Incertesa típica, incertesa expandida i factor de cobertura", "topic": 2}
+{"kind": "section", "section_h2": "1La funció de mesura", "source_path": "Tema 2/2_03_model_matematic.html", "term_ca": "1La funció de mesura", "topic": 2}
+{"kind": "section", "section_h2": "2El model ha de ser complet", "source_path": "Tema 2/2_03_model_matematic.html", "term_ca": "2El model ha de ser complet", "topic": 2}
+{"kind": "section", "section_h2": "3Mesures directes i indirectes", "source_path": "Tema 2/2_03_model_matematic.html", "term_ca": "3Mesures directes i indirectes", "topic": 2}
+{"kind": "section", "section_h2": "4Tipus A i tipus B: una classificació pel mètode", "source_path": "Tema 2/2_03_model_matematic.html", "term_ca": "4Tipus A i tipus B: una classificació pel mètode", "topic": 2}
+{"kind": "section", "section_h2": "5Hipòtesis del model", "source_path": "Tema 2/2_03_model_matematic.html", "term_ca": "5Hipòtesis del model", "topic": 2}
+{"kind": "section", "section_h2": "1Requisits per aplicar l'avaluació de tipus A", "source_path": "Tema 2/2_04_tipus_A.html", "term_ca": "1Requisits per aplicar l'avaluació de tipus A", "topic": 2}
+{"kind": "section", "section_h2": "2Neteja de dades: valors aberrants", "source_path": "Tema 2/2_04_tipus_A.html", "term_ca": "2Neteja de dades: valors aberrants", "topic": 2}
+{"kind": "section", "section_h2": "3Estimació del mesurand i dispersions", "source_path": "Tema 2/2_04_tipus_A.html", "term_ca": "3Estimació del mesurand i dispersions", "topic": 2}
+{"kind": "section", "section_h2": "4La incertesa típica de tipus A", "source_path": "Tema 2/2_04_tipus_A.html", "term_ca": "4La incertesa típica de tipus A", "topic": 2}
+{"kind": "subsection", "section_h2": "4La incertesa típica de tipus A", "source_path": "Tema 2/2_04_tipus_A.html", "term_ca": "D'on surt l'expressió", "topic": 2}
+{"kind": "section", "section_h2": "5La llei de l'arrel de N i els seus límits", "source_path": "Tema 2/2_04_tipus_A.html", "term_ca": "5La llei de l'arrel de N i els seus límits", "topic": 2}
+{"kind": "section", "section_h2": "1Fonts d'informació", "source_path": "Tema 2/2_05_tipus_B.html", "term_ca": "1Fonts d'informació", "topic": 2}
+{"kind": "section", "section_h2": "2Com escollir la distribució: màxima entropia", "source_path": "Tema 2/2_05_tipus_B.html", "term_ca": "2Com escollir la distribució: màxima entropia", "topic": 2}
+{"kind": "section", "section_h2": "3Les quatre distribucions", "source_path": "Tema 2/2_05_tipus_B.html", "term_ca": "3Les quatre distribucions", "topic": 2}
+{"kind": "subsection", "section_h2": "3Les quatre distribucions", "source_path": "Tema 2/2_05_tipus_B.html", "term_ca": "Distribució uniforme (rectangular)", "topic": 2}
+{"kind": "subsection", "section_h2": "3Les quatre distribucions", "source_path": "Tema 2/2_05_tipus_B.html", "term_ca": "Distribució triangular", "topic": 2}
+{"kind": "subsection", "section_h2": "3Les quatre distribucions", "source_path": "Tema 2/2_05_tipus_B.html", "term_ca": "Distribució normal (gaussiana)", "topic": 2}
+{"kind": "subsection", "section_h2": "3Les quatre distribucions", "source_path": "Tema 2/2_05_tipus_B.html", "term_ca": "Distribució en forma de U (arcsinus)", "topic": 2}
+{"kind": "section", "section_h2": "4Comparació per a un mateix semi-interval", "source_path": "Tema 2/2_05_tipus_B.html", "term_ca": "4Comparació per a un mateix semi-interval", "topic": 2}
+{"kind": "section", "section_h2": "1Linealització del model", "source_path": "Tema 2/2_06_combinacio.html", "term_ca": "1Linealització del model", "topic": 2}
+{"kind": "section", "section_h2": "2Coeficients de sensibilitat", "source_path": "Tema 2/2_06_combinacio.html", "term_ca": "2Coeficients de sensibilitat", "topic": 2}
+{"kind": "section", "section_h2": "3La incertesa típica combinada", "source_path": "Tema 2/2_06_combinacio.html", "term_ca": "3La incertesa típica combinada", "topic": 2}
+{"kind": "section", "section_h2": "4Variables correlacionades: termes de covariància", "source_path": "Tema 2/2_06_combinacio.html", "term_ca": "4Variables correlacionades: termes de covariància", "topic": 2}
+{"kind": "section", "section_h2": "5Quan la linealització no és fiable: Monte Carlo", "source_path": "Tema 2/2_06_combinacio.html", "term_ca": "5Quan la linealització no és fiable: Monte Carlo", "topic": 2}
+{"kind": "section", "section_h2": "1Definició i expressió del resultat", "source_path": "Tema 2/2_07_incertesa_expandida.html", "term_ca": "1Definició i expressió del resultat", "topic": 2}
+{"kind": "section", "section_h2": "2El factor de cobertura en el cas normal", "source_path": "Tema 2/2_07_incertesa_expandida.html", "term_ca": "2El factor de cobertura en el cas normal", "topic": 2}
+{"kind": "section", "section_h2": "3Poques dades: la distribució t de Student", "source_path": "Tema 2/2_07_incertesa_expandida.html", "term_ca": "3Poques dades: la distribució t de Student", "topic": 2}
+{"kind": "section", "section_h2": "4Graus de llibertat efectius: Welch-Satterthwaite", "source_path": "Tema 2/2_07_incertesa_expandida.html", "term_ca": "4Graus de llibertat efectius: Welch-Satterthwaite", "topic": 2}
+{"kind": "section", "section_h2": "1El balanç d'incertesa", "source_path": "Tema 2/2_08_expressio_final.html", "term_ca": "1El balanç d'incertesa", "topic": 2}
+{"kind": "section", "section_h2": "2Anàlisi de dominància", "source_path": "Tema 2/2_08_expressio_final.html", "term_ca": "2Anàlisi de dominància", "topic": 2}
+{"kind": "section", "section_h2": "3Regles de format del resultat final", "source_path": "Tema 2/2_08_expressio_final.html", "term_ca": "3Regles de format del resultat final", "topic": 2}
+{"kind": "section", "section_h2": "1 Soroll i interferència en la mesura", "source_path": "Tema 3/01_doc.html", "term_ca": "1 Soroll i interferència en la mesura", "topic": 3}
+{"kind": "subsection", "section_h2": "1 Soroll i interferència en la mesura", "source_path": "Tema 3/01_doc.html", "term_ca": "Representació temporal i espectral", "topic": 3}
+{"kind": "section", "section_h2": "2 Compatibilitat electromagnètica", "source_path": "Tema 3/01_doc.html", "term_ca": "2 Compatibilitat electromagnètica", "topic": 3}
+{"kind": "subsection", "section_h2": "2 Compatibilitat electromagnètica", "source_path": "Tema 3/01_doc.html", "term_ca": "El marc normatiu", "topic": 3}
+{"kind": "section", "section_h2": "3 Classificació per origen de la font", "source_path": "Tema 3/01_doc.html", "term_ca": "3 Classificació per origen de la font", "topic": 3}
+{"kind": "subsection", "section_h2": "3 Classificació per origen de la font", "source_path": "Tema 3/01_doc.html", "term_ca": "Interferències naturals", "topic": 3}
+{"kind": "subsection", "section_h2": "3 Classificació per origen de la font", "source_path": "Tema 3/01_doc.html", "term_ca": "Interferències artificials", "topic": 3}
+{"kind": "section", "section_h2": "4 Classificació per canal de transmissió", "source_path": "Tema 3/01_doc.html", "term_ca": "4 Classificació per canal de transmissió", "topic": 3}
+{"kind": "subsection", "section_h2": "4 Classificació per canal de transmissió", "source_path": "Tema 3/01_doc.html", "term_ca": "Interferències conduïdes", "topic": 3}
+{"kind": "subsection", "section_h2": "4 Classificació per canal de transmissió", "source_path": "Tema 3/01_doc.html", "term_ca": "Interferències radiades: camp proper i camp llunyà", "topic": 3}
+{"kind": "section", "section_h2": "1 Mode diferencial i mode comú", "source_path": "Tema 3/02_doc.html", "term_ca": "1 Mode diferencial i mode comú", "topic": 3}
+{"kind": "subsection", "section_h2": "1 Mode diferencial i mode comú", "source_path": "Tema 3/02_doc.html", "term_ca": "Rebuig de mode comú (CMRR)", "topic": 3}
+{"kind": "section", "section_h2": "2 Interferències conduïdes externes", "source_path": "Tema 3/02_doc.html", "term_ca": "2 Interferències conduïdes externes", "topic": 3}
+{"kind": "subsection", "section_h2": "2 Interferències conduïdes externes", "source_path": "Tema 3/02_doc.html", "term_ca": "Cas 1: font a terra + mesura a terra", "topic": 3}
+{"kind": "subsection", "section_h2": "2 Interferències conduïdes externes", "source_path": "Tema 3/02_doc.html", "term_ca": "Cas 2: font flotant + mesura a terra", "topic": 3}
+{"kind": "subsection", "section_h2": "2 Interferències conduïdes externes", "source_path": "Tema 3/02_doc.html", "term_ca": "Cas 3: font a terra + mesura flotant", "topic": 3}
+{"kind": "subsection", "section_h2": "2 Interferències conduïdes externes", "source_path": "Tema 3/02_doc.html", "term_ca": "Cas 4: font flotant + mesura flotant", "topic": 3}
+{"kind": "section", "section_h2": "3 Interferències conduïdes internes", "source_path": "Tema 3/02_doc.html", "term_ca": "3 Interferències conduïdes internes", "topic": 3}
+{"kind": "section", "section_h2": "4 Tècniques de mitigació de les interferències conduïdes", "source_path": "Tema 3/02_doc.html", "term_ca": "4 Tècniques de mitigació de les interferències conduïdes", "topic": 3}
+{"kind": "section", "section_h2": "1 Mecanisme de l'acoblament capacitiu", "source_path": "Tema 3/03_doc.html", "term_ca": "1 Mecanisme de l'acoblament capacitiu", "topic": 3}
+{"kind": "subsection", "section_h2": "1 Mecanisme de l'acoblament capacitiu", "source_path": "Tema 3/03_doc.html", "term_ca": "Geometries habituals", "topic": 3}
+{"kind": "section", "section_h2": "2 Blindatge", "source_path": "Tema 3/03_doc.html", "term_ca": "2 Blindatge", "topic": 3}
+{"kind": "section", "section_h2": "3 Cable coaxial i limitació d'amplada de banda", "source_path": "Tema 3/03_doc.html", "term_ca": "3 Cable coaxial i limitació d'amplada de banda", "topic": 3}
+{"kind": "section", "section_h2": "4 Sondes atenuadores compensades", "source_path": "Tema 3/03_doc.html", "term_ca": "4 Sondes atenuadores compensades", "topic": 3}
+{"kind": "section", "section_h2": "1 Acoblament inductiu", "source_path": "Tema 3/04_doc.html", "term_ca": "1 Acoblament inductiu", "topic": 3}
+{"kind": "subsection", "section_h2": "1 Acoblament inductiu", "source_path": "Tema 3/04_doc.html", "term_ca": "Geometria de la inductància mútua", "topic": 3}
+{"kind": "section", "section_h2": "2 Mitigació de les interferències inductives", "source_path": "Tema 3/04_doc.html", "term_ca": "2 Mitigació de les interferències inductives", "topic": 3}
+{"kind": "section", "section_h2": "3 Efecte de les interferències sobre el resultat de mesura", "source_path": "Tema 3/04_doc.html", "term_ca": "3 Efecte de les interferències sobre el resultat de mesura", "topic": 3}
+{"kind": "subsection", "section_h2": "3 Efecte de les interferències sobre el resultat de mesura", "source_path": "Tema 3/04_doc.html", "term_ca": "Distribució del mostreig d'una sinusoide", "topic": 3}
+{"kind": "subsection", "section_h2": "3 Efecte de les interferències sobre el resultat de mesura", "source_path": "Tema 3/04_doc.html", "term_ca": "Mesura d'una magnitud constant: promitjat", "topic": 3}
+{"kind": "subsection", "section_h2": "3 Efecte de les interferències sobre el resultat de mesura", "source_path": "Tema 3/04_doc.html", "term_ca": "Mesura d'un valor eficaç: biaix", "topic": 3}
+{"kind": "section", "section_h2": "4 Diagnosi i selecció de la mitigació", "source_path": "Tema 3/04_doc.html", "term_ca": "4 Diagnosi i selecció de la mitigació", "topic": 3}
+{"kind": "section", "section_h2": "1Què és el soroll en un sistema de mesura", "source_path": "Tema 4/01_Unitat4_Introduccio_i_estadistica.html", "term_ca": "1Què és el soroll en un sistema de mesura", "topic": 4}
+{"kind": "subsection", "section_h2": "1Què és el soroll en un sistema de mesura", "source_path": "Tema 4/01_Unitat4_Introduccio_i_estadistica.html", "term_ca": "Soroll intrínsec i extrínsec", "topic": 4}
+{"kind": "subsection", "section_h2": "1Què és el soroll en un sistema de mesura", "source_path": "Tema 4/01_Unitat4_Introduccio_i_estadistica.html", "term_ca": "El soroll fixa el límit de detecció", "topic": 4}
+{"kind": "section", "section_h2": "2El soroll com a procés estocàstic", "source_path": "Tema 4/01_Unitat4_Introduccio_i_estadistica.html", "term_ca": "2El soroll com a procés estocàstic", "topic": 4}
+{"kind": "subsection", "section_h2": "2El soroll com a procés estocàstic", "source_path": "Tema 4/01_Unitat4_Introduccio_i_estadistica.html", "term_ca": "Mitjana, variància i valor eficaç", "topic": 4}
+{"kind": "subsection", "section_h2": "2El soroll com a procés estocàstic", "source_path": "Tema 4/01_Unitat4_Introduccio_i_estadistica.html", "term_ca": "Funció de densitat de probabilitat", "topic": 4}
+{"kind": "subsection", "section_h2": "2El soroll com a procés estocàstic", "source_path": "Tema 4/01_Unitat4_Introduccio_i_estadistica.html", "term_ca": "Autocorrelació, espectre i soroll blanc", "topic": 4}
+{"kind": "subsection", "section_h2": "2El soroll com a procés estocàstic", "source_path": "Tema 4/01_Unitat4_Introduccio_i_estadistica.html", "term_ca": "Parseval i densitats espectrals", "topic": 4}
+{"kind": "section", "section_h2": "1Origen i models del soroll tèrmic", "source_path": "Tema 4/02_Unitat4_Soroll_termic.html", "term_ca": "1Origen i models del soroll tèrmic", "topic": 4}
+{"kind": "subsection", "section_h2": "1Origen i models del soroll tèrmic", "source_path": "Tema 4/02_Unitat4_Soroll_termic.html", "term_ca": "Models de Thévenin i de Norton", "topic": 4}
+{"kind": "section", "section_h2": "2Les expressions fonamentals", "source_path": "Tema 4/02_Unitat4_Soroll_termic.html", "term_ca": "2Les expressions fonamentals", "topic": 4}
+{"kind": "subsection", "section_h2": "2Les expressions fonamentals", "source_path": "Tema 4/02_Unitat4_Soroll_termic.html", "term_ca": "Potència de soroll disponible", "topic": 4}
+{"kind": "subsection", "section_h2": "2Les expressions fonamentals", "source_path": "Tema 4/02_Unitat4_Soroll_termic.html", "term_ca": "Densitats espectrals", "topic": 4}
+{"kind": "subsection", "section_h2": "2Les expressions fonamentals", "source_path": "Tema 4/02_Unitat4_Soroll_termic.html", "term_ca": "Caràcter blanc, distribució normal i promitjat", "topic": 4}
+{"kind": "section", "section_h2": "3Soroll en excés i xarxes passives", "source_path": "Tema 4/02_Unitat4_Soroll_termic.html", "term_ca": "3Soroll en excés i xarxes passives", "topic": 4}
+{"kind": "subsection", "section_h2": "3Soroll en excés i xarxes passives", "source_path": "Tema 4/02_Unitat4_Soroll_termic.html", "term_ca": "Extensió a xarxes passives", "topic": 4}
+{"kind": "section", "section_h2": "1Per què una amplada de banda «equivalent»", "source_path": "Tema 4/03_Unitat4_Amplada_banda_equivalent.html", "term_ca": "1Per què una amplada de banda «equivalent»", "topic": 4}
+{"kind": "subsection", "section_h2": "1Per què una amplada de banda «equivalent»", "source_path": "Tema 4/03_Unitat4_Amplada_banda_equivalent.html", "term_ca": "Sistemes reals: banda de transició", "topic": 4}
+{"kind": "section", "section_h2": "2Definició formal i càlcul", "source_path": "Tema 4/03_Unitat4_Amplada_banda_equivalent.html", "term_ca": "2Definició formal i càlcul", "topic": 4}
+{"kind": "subsection", "section_h2": "2Definició formal i càlcul", "source_path": "Tema 4/03_Unitat4_Amplada_banda_equivalent.html", "term_ca": "Casos analítics habituals", "topic": 4}
+{"kind": "section", "section_h2": "3Exemple resolt: soroll tèrmic d'un sensor", "source_path": "Tema 4/03_Unitat4_Amplada_banda_equivalent.html", "term_ca": "3Exemple resolt: soroll tèrmic d'un sensor", "topic": 4}
+{"kind": "section", "section_h2": "1Soroll shot (Schottky)", "source_path": "Tema 4/04_Unitat4_Soroll_shot_i_1f.html", "term_ca": "1Soroll shot (Schottky)", "topic": 4}
+{"kind": "section", "section_h2": "2Soroll de contacte, soroll en excés i soroll 1/f", "source_path": "Tema 4/04_Unitat4_Soroll_shot_i_1f.html", "term_ca": "2Soroll de contacte, soroll en excés i soroll 1/f", "topic": 4}
+{"kind": "subsection", "section_h2": "2Soroll de contacte, soroll en excés i soroll 1/f", "source_path": "Tema 4/04_Unitat4_Soroll_shot_i_1f.html", "term_ca": "Integració logarítmica", "topic": 4}
+{"kind": "section", "section_h2": "1Model de soroll d'un dispositiu actiu", "source_path": "Tema 4/05_Unitat4_Dispositius_actius.html", "term_ca": "1Model de soroll d'un dispositiu actiu", "topic": 4}
+{"kind": "subsection", "section_h2": "1Model de soroll d'un dispositiu actiu", "source_path": "Tema 4/05_Unitat4_Dispositius_actius.html", "term_ca": "Combinació de fonts: suma quadràtica", "topic": 4}
+{"kind": "subsection", "section_h2": "1Model de soroll d'un dispositiu actiu", "source_path": "Tema 4/05_Unitat4_Dispositius_actius.html", "term_ca": "Quan el datasheet no ho diu tot: hipòtesis i aproximacions", "topic": 4}
+{"kind": "section", "section_h2": "2Exemple 1: valor eficaç de soroll d'un operacional", "source_path": "Tema 4/05_Unitat4_Dispositius_actius.html", "term_ca": "2Exemple 1: valor eficaç de soroll d'un operacional", "topic": 4}
+{"kind": "section", "section_h2": "1Exemple 2: soroll en un amplificador inversor", "source_path": "Tema 4/06_Unitat4_Amplificador_inversor_i_disseny.html", "term_ca": "1Exemple 2: soroll en un amplificador inversor", "topic": 4}
+{"kind": "section", "section_h2": "2Guia de disseny de circuits de baix soroll", "source_path": "Tema 4/06_Unitat4_Amplificador_inversor_i_disseny.html", "term_ca": "2Guia de disseny de circuits de baix soroll", "topic": 4}
+{"kind": "subsection", "section_h2": "2Guia de disseny de circuits de baix soroll", "source_path": "Tema 4/06_Unitat4_Amplificador_inversor_i_disseny.html", "term_ca": "Resistències", "topic": 4}
+{"kind": "subsection", "section_h2": "2Guia de disseny de circuits de baix soroll", "source_path": "Tema 4/06_Unitat4_Amplificador_inversor_i_disseny.html", "term_ca": "Amplada de banda", "topic": 4}
+{"kind": "subsection", "section_h2": "2Guia de disseny de circuits de baix soroll", "source_path": "Tema 4/06_Unitat4_Amplificador_inversor_i_disseny.html", "term_ca": "Dispositius actius i arquitectura", "topic": 4}
+{"kind": "subsection", "section_h2": "2Guia de disseny de circuits de baix soroll", "source_path": "Tema 4/06_Unitat4_Amplificador_inversor_i_disseny.html", "term_ca": "Corrents de polarització i temperatura", "topic": 4}
+{"kind": "section", "section_h2": "1Sensors generadors i moduladors", "source_path": "Tema 5/01_Unitat5_Sensors_moduladors_i_model_general.html", "term_ca": "1Sensors generadors i moduladors", "topic": 5}
+{"kind": "section", "section_h2": "2Fonaments físics", "source_path": "Tema 5/01_Unitat5_Sensors_moduladors_i_model_general.html", "term_ca": "2Fonaments físics", "topic": 5}
+{"kind": "subsection", "section_h2": "2Fonaments físics", "source_path": "Tema 5/01_Unitat5_Sensors_moduladors_i_model_general.html", "term_ca": "Deformació mecànica", "topic": 5}
+{"kind": "subsection", "section_h2": "2Fonaments físics", "source_path": "Tema 5/01_Unitat5_Sensors_moduladors_i_model_general.html", "term_ca": "Dilatació tèrmica", "topic": 5}
+{"kind": "subsection", "section_h2": "2Fonaments físics", "source_path": "Tema 5/01_Unitat5_Sensors_moduladors_i_model_general.html", "term_ca": "Origen microscòpic de la resistivitat", "topic": 5}
+{"kind": "section", "section_h2": "3Model general i excitació", "source_path": "Tema 5/01_Unitat5_Sensors_moduladors_i_model_general.html", "term_ca": "3Model general i excitació", "topic": 5}
+{"kind": "section", "section_h2": "4Panorama de la unitat", "source_path": "Tema 5/01_Unitat5_Sensors_moduladors_i_model_general.html", "term_ca": "4Panorama de la unitat", "topic": 5}
+{"kind": "section", "section_h2": "1Principi de funcionament", "source_path": "Tema 5/02_Unitat5_RTD.html", "term_ca": "1Principi de funcionament", "topic": 5}
+{"kind": "section", "section_h2": "2Model resistència-temperatura", "source_path": "Tema 5/02_Unitat5_RTD.html", "term_ca": "2Model resistència-temperatura", "topic": 5}
+{"kind": "subsection", "section_h2": "2Model resistència-temperatura", "source_path": "Tema 5/02_Unitat5_RTD.html", "term_ca": "Model lineal i error de linealització", "topic": 5}
+{"kind": "section", "section_h2": "3Valors nominals, marge i intercanviabilitat", "source_path": "Tema 5/02_Unitat5_RTD.html", "term_ca": "3Valors nominals, marge i intercanviabilitat", "topic": 5}
+{"kind": "section", "section_h2": "4Construcció i aplicacions", "source_path": "Tema 5/02_Unitat5_RTD.html", "term_ca": "4Construcció i aplicacions", "topic": 5}
+{"kind": "section", "section_h2": "1Coeficient de dissipació tèrmica", "source_path": "Tema 5/03_Unitat5_Autoescalfament_i_resposta_dinamica.html", "term_ca": "1Coeficient de dissipació tèrmica", "topic": 5}
+{"kind": "section", "section_h2": "2Potència dissipada segons l'excitació", "source_path": "Tema 5/03_Unitat5_Autoescalfament_i_resposta_dinamica.html", "term_ca": "2Potència dissipada segons l'excitació", "topic": 5}
+{"kind": "section", "section_h2": "3Com limitar-lo", "source_path": "Tema 5/03_Unitat5_Autoescalfament_i_resposta_dinamica.html", "term_ca": "3Com limitar-lo", "topic": 5}
+{"kind": "section", "section_h2": "4Resposta dinàmica", "source_path": "Tema 5/03_Unitat5_Autoescalfament_i_resposta_dinamica.html", "term_ca": "4Resposta dinàmica", "topic": 5}
+{"kind": "section", "section_h2": "1Model exponencial", "source_path": "Tema 5/04_Unitat5_Termistors_NTC.html", "term_ca": "1Model exponencial", "topic": 5}
+{"kind": "subsection", "section_h2": "1Model exponencial", "source_path": "Tema 5/04_Unitat5_Termistors_NTC.html", "term_ca": "Linealització local", "topic": 5}
+{"kind": "subsection", "section_h2": "1Model exponencial", "source_path": "Tema 5/04_Unitat5_Termistors_NTC.html", "term_ca": "Equació de Steinhart-Hart", "topic": 5}
+{"kind": "section", "section_h2": "2Linealització analògica", "source_path": "Tema 5/04_Unitat5_Termistors_NTC.html", "term_ca": "2Linealització analògica", "topic": 5}
+{"kind": "subsection", "section_h2": "2Linealització analògica", "source_path": "Tema 5/04_Unitat5_Termistors_NTC.html", "term_ca": "Divisor de tensió", "topic": 5}
+{"kind": "section", "section_h2": "1Fabricació i formats de les NTC", "source_path": "Tema 5/05_Unitat5_Termistors_construccio_PTC_aplicacions.html", "term_ca": "1Fabricació i formats de les NTC", "topic": 5}
+{"kind": "section", "section_h2": "2NTC enfront de RTD", "source_path": "Tema 5/05_Unitat5_Termistors_construccio_PTC_aplicacions.html", "term_ca": "2NTC enfront de RTD", "topic": 5}
+{"kind": "section", "section_h2": "3Aplicacions de les NTC", "source_path": "Tema 5/05_Unitat5_Termistors_construccio_PTC_aplicacions.html", "term_ca": "3Aplicacions de les NTC", "topic": 5}
+{"kind": "subsection", "section_h2": "3Aplicacions de les NTC", "source_path": "Tema 5/05_Unitat5_Termistors_construccio_PTC_aplicacions.html", "term_ca": "Detecció de nivell i de flux per autoescalfament", "topic": 5}
+{"kind": "subsection", "section_h2": "3Aplicacions de les NTC", "source_path": "Tema 5/05_Unitat5_Termistors_construccio_PTC_aplicacions.html", "term_ca": "Limitació de transitoris de corrent", "topic": 5}
+{"kind": "section", "section_h2": "4Termistors PTC", "source_path": "Tema 5/05_Unitat5_Termistors_construccio_PTC_aplicacions.html", "term_ca": "4Termistors PTC", "topic": 5}
+{"kind": "subsection", "section_h2": "4Termistors PTC", "source_path": "Tema 5/05_Unitat5_Termistors_construccio_PTC_aplicacions.html", "term_ca": "Aplicacions de les PTC", "topic": 5}
+{"kind": "section", "section_h2": "1Tensió mecànica i deformació", "source_path": "Tema 5/06_Unitat5_Sensors_piezoresistius_i_galgues.html", "term_ca": "1Tensió mecànica i deformació", "topic": 5}
+{"kind": "section", "section_h2": "2El factor de galga", "source_path": "Tema 5/06_Unitat5_Sensors_piezoresistius_i_galgues.html", "term_ca": "2El factor de galga", "topic": 5}
+{"kind": "section", "section_h2": "3Construcció i paràmetres geomètrics", "source_path": "Tema 5/06_Unitat5_Sensors_piezoresistius_i_galgues.html", "term_ca": "3Construcció i paràmetres geomètrics", "topic": 5}
+{"kind": "section", "section_h2": "4Temperatura, rosetes i muntatge", "source_path": "Tema 5/06_Unitat5_Sensors_piezoresistius_i_galgues.html", "term_ca": "4Temperatura, rosetes i muntatge", "topic": 5}
+{"kind": "section", "section_h2": "5Aplicacions", "source_path": "Tema 5/06_Unitat5_Sensors_piezoresistius_i_galgues.html", "term_ca": "5Aplicacions", "topic": 5}
+{"kind": "section", "section_h2": "1Les tres famílies", "source_path": "Tema 5/07_Unitat5_Magnetoresistencies.html", "term_ca": "1Les tres famílies", "topic": 5}
+{"kind": "section", "section_h2": "2Magnetoresistència anisòtropa (AMR)", "source_path": "Tema 5/07_Unitat5_Magnetoresistencies.html", "term_ca": "2Magnetoresistència anisòtropa (AMR)", "topic": 5}
+{"kind": "subsection", "section_h2": "2Magnetoresistència anisòtropa (AMR)", "source_path": "Tema 5/07_Unitat5_Magnetoresistencies.html", "term_ca": "L'estructura barber pole", "topic": 5}
+{"kind": "section", "section_h2": "3Magnetoresistència gegant (GMR)", "source_path": "Tema 5/07_Unitat5_Magnetoresistencies.html", "term_ca": "3Magnetoresistència gegant (GMR)", "topic": 5}
+{"kind": "section", "section_h2": "4Temperatura i aplicacions", "source_path": "Tema 5/07_Unitat5_Magnetoresistencies.html", "term_ca": "4Temperatura i aplicacions", "topic": 5}
+{"kind": "section", "section_h2": "1Fotoresistències (LDR)", "source_path": "Tema 5/08_Unitat5_LDR_higrometres_i_criteris.html", "term_ca": "1Fotoresistències (LDR)", "topic": 5}
+{"kind": "subsection", "section_h2": "1Fotoresistències (LDR)", "source_path": "Tema 5/08_Unitat5_LDR_higrometres_i_criteris.html", "term_ca": "Mecanisme físic i resposta espectral", "topic": 5}
+{"kind": "subsection", "section_h2": "1Fotoresistències (LDR)", "source_path": "Tema 5/08_Unitat5_LDR_higrometres_i_criteris.html", "term_ca": "Model empíric, limitacions i aplicacions", "topic": 5}
+{"kind": "section", "section_h2": "2Higròmetres resistius", "source_path": "Tema 5/08_Unitat5_LDR_higrometres_i_criteris.html", "term_ca": "2Higròmetres resistius", "topic": 5}
+{"kind": "section", "section_h2": "3Recapitulació de la unitat", "source_path": "Tema 5/08_Unitat5_LDR_higrometres_i_criteris.html", "term_ca": "3Recapitulació de la unitat", "topic": 5}
+{"kind": "section", "section_h2": "1Sensors de sortida en contínua", "source_path": "Tema 6/01_Unitat6_Cadena_de_condicionament_en_continua.html", "term_ca": "1Sensors de sortida en contínua", "topic": 6}
+{"kind": "section", "section_h2": "2L'objectiu: adequar el senyal a l'ADC", "source_path": "Tema 6/01_Unitat6_Cadena_de_condicionament_en_continua.html", "term_ca": "2L'objectiu: adequar el senyal a l'ADC", "topic": 6}
+{"kind": "section", "section_h2": "3Blocs de la cadena", "source_path": "Tema 6/01_Unitat6_Cadena_de_condicionament_en_continua.html", "term_ca": "3Blocs de la cadena", "topic": 6}
+{"kind": "section", "section_h2": "4AFE monolítics comercials", "source_path": "Tema 6/01_Unitat6_Cadena_de_condicionament_en_continua.html", "term_ca": "4AFE monolítics comercials", "topic": 6}
+{"kind": "section", "section_h2": "5Model del sensor i objecte de la mesura", "source_path": "Tema 6/01_Unitat6_Cadena_de_condicionament_en_continua.html", "term_ca": "5Model del sensor i objecte de la mesura", "topic": 6}
+{"kind": "section", "section_h2": "6Els compromisos que cal tancar", "source_path": "Tema 6/01_Unitat6_Cadena_de_condicionament_en_continua.html", "term_ca": "6Els compromisos que cal tancar", "topic": 6}
+{"kind": "section", "section_h2": "1Resistència dels cables: mesura a 2, 3 i 4 fils", "source_path": "Tema 6/02_Unitat6_Conversio_resistencia_tensio.html", "term_ca": "1Resistència dels cables: mesura a 2, 3 i 4 fils", "topic": 6}
+{"kind": "section", "section_h2": "2Conversió amb font de corrent", "source_path": "Tema 6/02_Unitat6_Conversio_resistencia_tensio.html", "term_ca": "2Conversió amb font de corrent", "topic": 6}
+{"kind": "section", "section_h2": "3Divisor de tensió", "source_path": "Tema 6/02_Unitat6_Conversio_resistencia_tensio.html", "term_ca": "3Divisor de tensió", "topic": 6}
+{"kind": "section", "section_h2": "4El pont de Wheatstone", "source_path": "Tema 6/02_Unitat6_Conversio_resistencia_tensio.html", "term_ca": "4El pont de Wheatstone", "topic": 6}
+{"kind": "section", "section_h2": "5Ponts amb diversos sensors", "source_path": "Tema 6/02_Unitat6_Conversio_resistencia_tensio.html", "term_ca": "5Ponts amb diversos sensors", "topic": 6}
+{"kind": "section", "section_h2": "1Models de sensor amb sortida en corrent", "source_path": "Tema 6/03_Unitat6_Conversio_corrent_tensio_i_amplificadors_diferencials.html", "term_ca": "1Models de sensor amb sortida en corrent", "topic": 6}
+{"kind": "section", "section_h2": "2Resistència de càrrega", "source_path": "Tema 6/03_Unitat6_Conversio_corrent_tensio_i_amplificadors_diferencials.html", "term_ca": "2Resistència de càrrega", "topic": 6}
+{"kind": "section", "section_h2": "3Amplificador de transimpedància", "source_path": "Tema 6/03_Unitat6_Conversio_corrent_tensio_i_amplificadors_diferencials.html", "term_ca": "3Amplificador de transimpedància", "topic": 6}
+{"kind": "section", "section_h2": "4L'amplificador diferencial", "source_path": "Tema 6/03_Unitat6_Conversio_corrent_tensio_i_amplificadors_diferencials.html", "term_ca": "4L'amplificador diferencial", "topic": 6}
+{"kind": "section", "section_h2": "5Impedàncies d'entrada i efecte de càrrega", "source_path": "Tema 6/03_Unitat6_Conversio_corrent_tensio_i_amplificadors_diferencials.html", "term_ca": "5Impedàncies d'entrada i efecte de càrrega", "topic": 6}
+{"kind": "section", "section_h2": "1L'estructura de tres amplificadors operacionals", "source_path": "Tema 6/04_Unitat6_Amplificadors_dinstrumentacio.html", "term_ca": "1L'estructura de tres amplificadors operacionals", "topic": 6}
+{"kind": "section", "section_h2": "2Especificacions que cal llegir", "source_path": "Tema 6/04_Unitat6_Amplificadors_dinstrumentacio.html", "term_ca": "2Especificacions que cal llegir", "topic": 6}
+{"kind": "section", "section_h2": "3Un cas concret: l'INA317", "source_path": "Tema 6/04_Unitat6_Amplificadors_dinstrumentacio.html", "term_ca": "3Un cas concret: l'INA317", "topic": 6}
+{"kind": "section", "section_h2": "4Criteris de selecció", "source_path": "Tema 6/04_Unitat6_Amplificadors_dinstrumentacio.html", "term_ca": "4Criteris de selecció", "topic": 6}
+{"kind": "section", "section_h2": "1Interruptor ideal i interruptor real", "source_path": "Tema 6/05_Unitat6_Interruptors_multiplexors_i_PGA.html", "term_ca": "1Interruptor ideal i interruptor real", "topic": 6}
+{"kind": "section", "section_h2": "2De MOSFET a CMOS", "source_path": "Tema 6/05_Unitat6_Interruptors_multiplexors_i_PGA.html", "term_ca": "2De MOSFET a CMOS", "topic": 6}
+{"kind": "section", "section_h2": "3Errors en contínua", "source_path": "Tema 6/05_Unitat6_Interruptors_multiplexors_i_PGA.html", "term_ca": "3Errors en contínua", "topic": 6}
+{"kind": "section", "section_h2": "4Limitacions en alterna i en commutació", "source_path": "Tema 6/05_Unitat6_Interruptors_multiplexors_i_PGA.html", "term_ca": "4Limitacions en alterna i en commutació", "topic": 6}
+{"kind": "section", "section_h2": "5Multiplexors i ús pràctic", "source_path": "Tema 6/05_Unitat6_Interruptors_multiplexors_i_PGA.html", "term_ca": "5Multiplexors i ús pràctic", "topic": 6}
+{"kind": "section", "section_h2": "6Amplificadors de guany programable", "source_path": "Tema 6/05_Unitat6_Interruptors_multiplexors_i_PGA.html", "term_ca": "6Amplificadors de guany programable", "topic": 6}
+{"kind": "section", "section_h2": "1Solucions elementals i les seves limitacions", "source_path": "Tema 6/06_Unitat6_Referencies_i_mesures_ratiometriques.html", "term_ca": "1Solucions elementals i les seves limitacions", "topic": 6}
+{"kind": "section", "section_h2": "2Referències sèrie i shunt", "source_path": "Tema 6/06_Unitat6_Referencies_i_mesures_ratiometriques.html", "term_ca": "2Referències sèrie i shunt", "topic": 6}
+{"kind": "section", "section_h2": "3Especificacions", "source_path": "Tema 6/06_Unitat6_Referencies_i_mesures_ratiometriques.html", "term_ca": "3Especificacions", "topic": 6}
+{"kind": "section", "section_h2": "4Mesures ratiomètriques", "source_path": "Tema 6/06_Unitat6_Referencies_i_mesures_ratiometriques.html", "term_ca": "4Mesures ratiomètriques", "topic": 6}
+{"kind": "section", "section_h2": "1Què és un sensor reactiu", "source_path": "Tema 7/01_Unitat7_Fonaments_dels_sensors_reactius.html", "term_ca": "1Què és un sensor reactiu", "topic": 7}
+{"kind": "section", "section_h2": "2Per què reactius i no resistius", "source_path": "Tema 7/01_Unitat7_Fonaments_dels_sensors_reactius.html", "term_ca": "2Per què reactius i no resistius", "topic": 7}
+{"kind": "section", "section_h2": "3El cost: cal treballar en alterna", "source_path": "Tema 7/01_Unitat7_Fonaments_dels_sensors_reactius.html", "term_ca": "3El cost: cal treballar en alterna", "topic": 7}
+{"kind": "section", "section_h2": "4La freqüència de treball com a paràmetre de disseny", "source_path": "Tema 7/01_Unitat7_Fonaments_dels_sensors_reactius.html", "term_ca": "4La freqüència de treball com a paràmetre de disseny", "topic": 7}
+{"kind": "section", "section_h2": "5Els quatre mecanismes de transducció de la unitat", "source_path": "Tema 7/01_Unitat7_Fonaments_dels_sensors_reactius.html", "term_ca": "5Els quatre mecanismes de transducció de la unitat", "topic": 7}
+{"kind": "section", "section_h2": "6On es troben aquests sensors", "source_path": "Tema 7/01_Unitat7_Fonaments_dels_sensors_reactius.html", "term_ca": "6On es troben aquests sensors", "topic": 7}
+{"kind": "section", "section_h2": "1La capacitat com a variable de mesura", "source_path": "Tema 7/02_Unitat7_El_sensor_capacitiu_model_i_geometries.html", "term_ca": "1La capacitat com a variable de mesura", "topic": 7}
+{"kind": "section", "section_h2": "2El condensador pla", "source_path": "Tema 7/02_Unitat7_El_sensor_capacitiu_model_i_geometries.html", "term_ca": "2El condensador pla", "topic": 7}
+{"kind": "section", "section_h2": "3Impedància i linealitat", "source_path": "Tema 7/02_Unitat7_El_sensor_capacitiu_model_i_geometries.html", "term_ca": "3Impedància i linealitat", "topic": 7}
+{"kind": "section", "section_h2": "4Les tres variants del condensador pla", "source_path": "Tema 7/02_Unitat7_El_sensor_capacitiu_model_i_geometries.html", "term_ca": "4Les tres variants del condensador pla", "topic": 7}
+{"kind": "subsection", "section_h2": "4Les tres variants del condensador pla", "source_path": "Tema 7/02_Unitat7_El_sensor_capacitiu_model_i_geometries.html", "term_ca": "Àrea de solapament variable", "topic": 7}
+{"kind": "subsection", "section_h2": "4Les tres variants del condensador pla", "source_path": "Tema 7/02_Unitat7_El_sensor_capacitiu_model_i_geometries.html", "term_ca": "Separació variable", "topic": 7}
+{"kind": "subsection", "section_h2": "4Les tres variants del condensador pla", "source_path": "Tema 7/02_Unitat7_El_sensor_capacitiu_model_i_geometries.html", "term_ca": "Dielèctric variable", "topic": 7}
+{"kind": "section", "section_h2": "5Altres geometries", "source_path": "Tema 7/02_Unitat7_El_sensor_capacitiu_model_i_geometries.html", "term_ca": "5Altres geometries", "topic": 7}
+{"kind": "section", "section_h2": "6La tria del dielèctric", "source_path": "Tema 7/02_Unitat7_El_sensor_capacitiu_model_i_geometries.html", "term_ca": "6La tria del dielèctric", "topic": 7}
+{"kind": "section", "section_h2": "1Avantatges i limitacions", "source_path": "Tema 7/03_Unitat7_El_sensor_capacitiu_real.html", "term_ca": "1Avantatges i limitacions", "topic": 7}
+{"kind": "section", "section_h2": "2L'efecte de vores", "source_path": "Tema 7/03_Unitat7_El_sensor_capacitiu_real.html", "term_ca": "2L'efecte de vores", "topic": 7}
+{"kind": "section", "section_h2": "3Les guardes de Kelvin", "source_path": "Tema 7/03_Unitat7_El_sensor_capacitiu_real.html", "term_ca": "3Les guardes de Kelvin", "topic": 7}
+{"kind": "section", "section_h2": "4La resistència de fuita del dielèctric", "source_path": "Tema 7/03_Unitat7_El_sensor_capacitiu_real.html", "term_ca": "4La resistència de fuita del dielèctric", "topic": 7}
+{"kind": "section", "section_h2": "5La tria de la freqüència de treball", "source_path": "Tema 7/03_Unitat7_El_sensor_capacitiu_real.html", "term_ca": "5La tria de la freqüència de treball", "topic": 7}
+{"kind": "section", "section_h2": "6Conseqüències per al condicionador", "source_path": "Tema 7/03_Unitat7_El_sensor_capacitiu_real.html", "term_ca": "6Conseqüències per al condicionador", "topic": 7}
+{"kind": "section", "section_h2": "1Distància, desplaçament i presència", "source_path": "Tema 7/04_Unitat7_Aplicacions_capacitives_i_condensador_diferencial.html", "term_ca": "1Distància, desplaçament i presència", "topic": 7}
+{"kind": "section", "section_h2": "2Força i pressió", "source_path": "Tema 7/04_Unitat7_Aplicacions_capacitives_i_condensador_diferencial.html", "term_ca": "2Força i pressió", "topic": 7}
+{"kind": "section", "section_h2": "3Angle, nivell i inclinació", "source_path": "Tema 7/04_Unitat7_Aplicacions_capacitives_i_condensador_diferencial.html", "term_ca": "3Angle, nivell i inclinació", "topic": 7}
+{"kind": "section", "section_h2": "4Acceleració: els acceleròmetres MEMS", "source_path": "Tema 7/04_Unitat7_Aplicacions_capacitives_i_condensador_diferencial.html", "term_ca": "4Acceleració: els acceleròmetres MEMS", "topic": 7}
+{"kind": "section", "section_h2": "5El condensador diferencial", "source_path": "Tema 7/04_Unitat7_Aplicacions_capacitives_i_condensador_diferencial.html", "term_ca": "5El condensador diferencial", "topic": 7}
+{"kind": "section", "section_h2": "1L'autoinductància", "source_path": "Tema 7/05_Unitat7_Sensors_inductius_i_corrents_de_Foucault.html", "term_ca": "1L'autoinductància", "topic": 7}
+{"kind": "section", "section_h2": "2Reluctància i entreferro", "source_path": "Tema 7/05_Unitat7_Sensors_inductius_i_corrents_de_Foucault.html", "term_ca": "2Reluctància i entreferro", "topic": 7}
+{"kind": "section", "section_h2": "3Què fa variar la inductància", "source_path": "Tema 7/05_Unitat7_Sensors_inductius_i_corrents_de_Foucault.html", "term_ca": "3Què fa variar la inductància", "topic": 7}
+{"kind": "section", "section_h2": "4Inductància mútua i necessitat d'excitació alterna", "source_path": "Tema 7/05_Unitat7_Sensors_inductius_i_corrents_de_Foucault.html", "term_ca": "4Inductància mútua i necessitat d'excitació alterna", "topic": 7}
+{"kind": "section", "section_h2": "5Objectiu metàl·lic: limitació i fortalesa", "source_path": "Tema 7/05_Unitat7_Sensors_inductius_i_corrents_de_Foucault.html", "term_ca": "5Objectiu metàl·lic: limitació i fortalesa", "topic": 7}
+{"kind": "section", "section_h2": "6La tria del nucli i del conductor", "source_path": "Tema 7/05_Unitat7_Sensors_inductius_i_corrents_de_Foucault.html", "term_ca": "6La tria del nucli i del conductor", "topic": 7}
+{"kind": "section", "section_h2": "7Aplicacions dels sensors de bobina", "source_path": "Tema 7/05_Unitat7_Sensors_inductius_i_corrents_de_Foucault.html", "term_ca": "7Aplicacions dels sensors de bobina", "topic": 7}
+{"kind": "section", "section_h2": "8Corrents de Foucault", "source_path": "Tema 7/05_Unitat7_Sensors_inductius_i_corrents_de_Foucault.html", "term_ca": "8Corrents de Foucault", "topic": 7}
+{"kind": "section", "section_h2": "1Transformadors variables", "source_path": "Tema 7/06_Unitat7_Transformadors_variables_Hall_i_magnetostriccio.html", "term_ca": "1Transformadors variables", "topic": 7}
+{"kind": "section", "section_h2": "2La LVDT", "source_path": "Tema 7/06_Unitat7_Transformadors_variables_Hall_i_magnetostriccio.html", "term_ca": "2La LVDT", "topic": 7}
+{"kind": "subsection", "section_h2": "2La LVDT", "source_path": "Tema 7/06_Unitat7_Transformadors_variables_Hall_i_magnetostriccio.html", "term_ca": "La posició de nul i el signe del desplaçament", "topic": 7}
+{"kind": "subsection", "section_h2": "2La LVDT", "source_path": "Tema 7/06_Unitat7_Transformadors_variables_Hall_i_magnetostriccio.html", "term_ca": "Efectes no ideals i freqüència òptima", "topic": 7}
+{"kind": "section", "section_h2": "3El resolver", "source_path": "Tema 7/06_Unitat7_Transformadors_variables_Hall_i_magnetostriccio.html", "term_ca": "3El resolver", "topic": 7}
+{"kind": "section", "section_h2": "4Sensors d'efecte Hall", "source_path": "Tema 7/06_Unitat7_Transformadors_variables_Hall_i_magnetostriccio.html", "term_ca": "4Sensors d'efecte Hall", "topic": 7}
+{"kind": "subsection", "section_h2": "4Sensors d'efecte Hall", "source_path": "Tema 7/06_Unitat7_Transformadors_variables_Hall_i_magnetostriccio.html", "term_ca": "Aplicacions", "topic": 7}
+{"kind": "section", "section_h2": "5Sensors magnetostrictius", "source_path": "Tema 7/06_Unitat7_Transformadors_variables_Hall_i_magnetostriccio.html", "term_ca": "5Sensors magnetostrictius", "topic": 7}
+{"kind": "subsection", "section_h2": "5Sensors magnetostrictius", "source_path": "Tema 7/06_Unitat7_Transformadors_variables_Hall_i_magnetostriccio.html", "term_ca": "Sensor de temps de vol", "topic": 7}
+{"kind": "subsection", "section_h2": "5Sensors magnetostrictius", "source_path": "Tema 7/06_Unitat7_Transformadors_variables_Hall_i_magnetostriccio.html", "term_ca": "Força, pressió i torsió", "topic": 7}
+{"kind": "section", "section_h2": "1El sensor reactiu com a impedància complexa", "source_path": "Tema 8/01_Unitat8_Sensors_reactius_i_cadena_de_condicionament.html", "term_ca": "1El sensor reactiu com a impedància complexa", "topic": 8}
+{"kind": "section", "section_h2": "2La freqüència de treball", "source_path": "Tema 8/01_Unitat8_Sensors_reactius_i_cadena_de_condicionament.html", "term_ca": "2La freqüència de treball", "topic": 8}
+{"kind": "section", "section_h2": "3Les dues aproximacions al condicionament", "source_path": "Tema 8/01_Unitat8_Sensors_reactius_i_cadena_de_condicionament.html", "term_ca": "3Les dues aproximacions al condicionament", "topic": 8}
+{"kind": "section", "section_h2": "4La cadena de condicionament lineal", "source_path": "Tema 8/01_Unitat8_Sensors_reactius_i_cadena_de_condicionament.html", "term_ca": "4La cadena de condicionament lineal", "topic": 8}
+{"kind": "section", "section_h2": "5Models canònics del sensor", "source_path": "Tema 8/01_Unitat8_Sensors_reactius_i_cadena_de_condicionament.html", "term_ca": "5Models canònics del sensor", "topic": 8}
+{"kind": "section", "section_h2": "6Dos condicionadors integrats", "source_path": "Tema 8/01_Unitat8_Sensors_reactius_i_cadena_de_condicionament.html", "term_ca": "6Dos condicionadors integrats", "topic": 8}
+{"kind": "section", "section_h2": "1Divisors de tensió", "source_path": "Tema 8/02_Unitat8_Conversio_impedancia_tensio.html", "term_ca": "1Divisors de tensió", "topic": 8}
+{"kind": "section", "section_h2": "2La impedància de sortida del divisor passiu", "source_path": "Tema 8/02_Unitat8_Conversio_impedancia_tensio.html", "term_ca": "2La impedància de sortida del divisor passiu", "topic": 8}
+{"kind": "section", "section_h2": "3Amplificador inversor capacitiu", "source_path": "Tema 8/02_Unitat8_Conversio_impedancia_tensio.html", "term_ca": "3Amplificador inversor capacitiu", "topic": 8}
+{"kind": "section", "section_h2": "4Ponts d'alterna", "source_path": "Tema 8/02_Unitat8_Conversio_impedancia_tensio.html", "term_ca": "4Ponts d'alterna", "topic": 8}
+{"kind": "section", "section_h2": "5Pseudoponts d'alterna", "source_path": "Tema 8/02_Unitat8_Conversio_impedancia_tensio.html", "term_ca": "5Pseudoponts d'alterna", "topic": 8}
+{"kind": "section", "section_h2": "1La banda que ocupa el senyal", "source_path": "Tema 8/03_Unitat8_Amplificadors_d_alterna.html", "term_ca": "1La banda que ocupa el senyal", "topic": 8}
+{"kind": "section", "section_h2": "2Centrat i amplada de banda", "source_path": "Tema 8/03_Unitat8_Amplificadors_d_alterna.html", "term_ca": "2Centrat i amplada de banda", "topic": 8}
+{"kind": "section", "section_h2": "3Amplificador d'alterna no inversor", "source_path": "Tema 8/03_Unitat8_Amplificadors_d_alterna.html", "term_ca": "3Amplificador d'alterna no inversor", "topic": 8}
+{"kind": "section", "section_h2": "4Amplificador d'instrumentació d'alterna", "source_path": "Tema 8/03_Unitat8_Amplificadors_d_alterna.html", "term_ca": "4Amplificador d'instrumentació d'alterna", "topic": 8}
+{"kind": "section", "section_h2": "5Limitacions de l'amplificador operacional", "source_path": "Tema 8/03_Unitat8_Amplificadors_d_alterna.html", "term_ca": "5Limitacions de l'amplificador operacional", "topic": 8}
+{"kind": "subsection", "section_h2": "5Limitacions de l'amplificador operacional", "source_path": "Tema 8/03_Unitat8_Amplificadors_d_alterna.html", "term_ca": "Producte guany × amplada de banda", "topic": 8}
+{"kind": "subsection", "section_h2": "5Limitacions de l'amplificador operacional", "source_path": "Tema 8/03_Unitat8_Amplificadors_d_alterna.html", "term_ca": "Slew rate", "topic": 8}
+{"kind": "subsection", "section_h2": "5Limitacions de l'amplificador operacional", "source_path": "Tema 8/03_Unitat8_Amplificadors_d_alterna.html", "term_ca": "Impedància d'entrada i capacitats paràsites", "topic": 8}
+{"kind": "subsection", "section_h2": "5Limitacions de l'amplificador operacional", "source_path": "Tema 8/03_Unitat8_Amplificadors_d_alterna.html", "term_ca": "CMRR i PSRR a la freqüència de treball", "topic": 8}
+{"kind": "section", "section_h2": "1Modulació AM i modulació DSB", "source_path": "Tema 8/04_Unitat8_04_Metodes_no_coherents.html", "term_ca": "1Modulació AM i modulació DSB", "topic": 8}
+{"kind": "section", "section_h2": "2Convertidors de valor eficaç", "source_path": "Tema 8/04_Unitat8_04_Metodes_no_coherents.html", "term_ca": "2Convertidors de valor eficaç", "topic": 8}
+{"kind": "section", "section_h2": "3Multiplicadors analògics", "source_path": "Tema 8/04_Unitat8_04_Metodes_no_coherents.html", "term_ca": "3Multiplicadors analògics", "topic": 8}
+{"kind": "section", "section_h2": "4Detectors de pic o d'envolupant", "source_path": "Tema 8/04_Unitat8_04_Metodes_no_coherents.html", "term_ca": "4Detectors de pic o d'envolupant", "topic": 8}
+{"kind": "section", "section_h2": "1Principi i avantatges", "source_path": "Tema 8/05_Unitat8_Deteccio_coherent.html", "term_ca": "1Principi i avantatges", "topic": 8}
+{"kind": "section", "section_h2": "2Detecció homodina", "source_path": "Tema 8/05_Unitat8_Deteccio_coherent.html", "term_ca": "2Detecció homodina", "topic": 8}
+{"kind": "subsection", "section_h2": "2Detecció homodina", "source_path": "Tema 8/05_Unitat8_Deteccio_coherent.html", "term_ca": "Tria de la freqüència de tall", "topic": 8}
+{"kind": "section", "section_h2": "3Rectificació síncrona", "source_path": "Tema 8/05_Unitat8_Deteccio_coherent.html", "term_ca": "3Rectificació síncrona", "topic": 8}
+{"kind": "section", "section_h2": "4Mostreig síncron i sub-mostreig", "source_path": "Tema 8/05_Unitat8_Deteccio_coherent.html", "term_ca": "4Mostreig síncron i sub-mostreig", "topic": 8}
+{"kind": "section", "section_h2": "1Codificar el mesurand en la freqüència", "source_path": "Tema 8/06_Unitat8_Oscil_ladors_de_frequencia_variable.html", "term_ca": "1Codificar el mesurand en la freqüència", "topic": 8}
+{"kind": "section", "section_h2": "2Oscil·ladors de relaxació", "source_path": "Tema 8/06_Unitat8_Oscil_ladors_de_frequencia_variable.html", "term_ca": "2Oscil·ladors de relaxació", "topic": 8}
+{"kind": "section", "section_h2": "3Conversió freqüència–tensió", "source_path": "Tema 8/06_Unitat8_Oscil_ladors_de_frequencia_variable.html", "term_ca": "3Conversió freqüència–tensió", "topic": 8}
+{"kind": "section", "section_h2": "4Comptatge digital de flancs", "source_path": "Tema 8/06_Unitat8_Oscil_ladors_de_frequencia_variable.html", "term_ca": "4Comptatge digital de flancs", "topic": 8}
+{"kind": "section", "section_h2": "1Sensor generador i sensor modulador", "source_path": "Tema 9/01_Unitat9_Sensors_generadors_i_efectes_termoelectrics.html", "term_ca": "1Sensor generador i sensor modulador", "topic": 9}
+{"kind": "section", "section_h2": "2Conseqüències sobre el condicionament", "source_path": "Tema 9/01_Unitat9_Sensors_generadors_i_efectes_termoelectrics.html", "term_ca": "2Conseqüències sobre el condicionament", "topic": 9}
+{"kind": "section", "section_h2": "3L'efecte Seebeck", "source_path": "Tema 9/01_Unitat9_Sensors_generadors_i_efectes_termoelectrics.html", "term_ca": "3L'efecte Seebeck", "topic": 9}
+{"kind": "section", "section_h2": "4Efectes Peltier i Thomson", "source_path": "Tema 9/01_Unitat9_Sensors_generadors_i_efectes_termoelectrics.html", "term_ca": "4Efectes Peltier i Thomson", "topic": 9}
+{"kind": "section", "section_h2": "1Principi de funcionament", "source_path": "Tema 9/02_Unitat_El_termoparell_tipus_i_conversio.html", "term_ca": "1Principi de funcionament", "topic": 9}
+{"kind": "section", "section_h2": "2Tipus normalitzats", "source_path": "Tema 9/02_Unitat_El_termoparell_tipus_i_conversio.html", "term_ca": "2Tipus normalitzats", "topic": 9}
+{"kind": "section", "section_h2": "3Conversió tensió–temperatura", "source_path": "Tema 9/02_Unitat_El_termoparell_tipus_i_conversio.html", "term_ca": "3Conversió tensió–temperatura", "topic": 9}
+{"kind": "section", "section_h2": "1Lleis termoelèctriques", "source_path": "Tema 9/03_Unitat9_Lleis_unio_freda_i_prestacions.html", "term_ca": "1Lleis termoelèctriques", "topic": 9}
+{"kind": "section", "section_h2": "2Compensació de la unió freda", "source_path": "Tema 9/03_Unitat9_Lleis_unio_freda_i_prestacions.html", "term_ca": "2Compensació de la unió freda", "topic": 9}
+{"kind": "section", "section_h2": "3Prestacions i limitacions", "source_path": "Tema 9/03_Unitat9_Lleis_unio_freda_i_prestacions.html", "term_ca": "3Prestacions i limitacions", "topic": 9}
+{"kind": "section", "section_h2": "1L'efecte piezoelèctric", "source_path": "Tema 9/04_Unitat9_Sensors_piezoelectrics.html", "term_ca": "1L'efecte piezoelèctric", "topic": 9}
+{"kind": "section", "section_h2": "2Coeficients piezoelèctrics de càrrega", "source_path": "Tema 9/04_Unitat9_Sensors_piezoelectrics.html", "term_ca": "2Coeficients piezoelèctrics de càrrega", "topic": 9}
+{"kind": "section", "section_h2": "3Fabricació i compensació tèrmica", "source_path": "Tema 9/04_Unitat9_Sensors_piezoelectrics.html", "term_ca": "3Fabricació i compensació tèrmica", "topic": 9}
+{"kind": "section", "section_h2": "4Materials", "source_path": "Tema 9/04_Unitat9_Sensors_piezoelectrics.html", "term_ca": "4Materials", "topic": 9}
+{"kind": "section", "section_h2": "5Model elèctric", "source_path": "Tema 9/04_Unitat9_Sensors_piezoelectrics.html", "term_ca": "5Model elèctric", "topic": 9}
+{"kind": "section", "section_h2": "6Resposta freqüencial", "source_path": "Tema 9/04_Unitat9_Sensors_piezoelectrics.html", "term_ca": "6Resposta freqüencial", "topic": 9}
+{"kind": "section", "section_h2": "7Aplicacions", "source_path": "Tema 9/04_Unitat9_Sensors_piezoelectrics.html", "term_ca": "7Aplicacions", "topic": 9}
+{"kind": "section", "section_h2": "1Polarització espontània i efecte piroelèctric", "source_path": "Tema 9/05_Unitat9_Sensors_piroelectrics.html", "term_ca": "1Polarització espontània i efecte piroelèctric", "topic": 9}
+{"kind": "section", "section_h2": "2Estructura del sensor", "source_path": "Tema 9/05_Unitat9_Sensors_piroelectrics.html", "term_ca": "2Estructura del sensor", "topic": 9}
+{"kind": "section", "section_h2": "3Coeficients piroelèctrics", "source_path": "Tema 9/05_Unitat9_Sensors_piroelectrics.html", "term_ca": "3Coeficients piroelèctrics", "topic": 9}
+{"kind": "section", "section_h2": "4Resposta dinàmica", "source_path": "Tema 9/05_Unitat9_Sensors_piroelectrics.html", "term_ca": "4Resposta dinàmica", "topic": 9}
+{"kind": "section", "section_h2": "5Detecció d'infraroig i detectors PIR", "source_path": "Tema 9/05_Unitat9_Sensors_piroelectrics.html", "term_ca": "5Detecció d'infraroig i detectors PIR", "topic": 9}
+{"kind": "section", "section_h2": "1Posició dins de les famílies de sensors de temperatura", "source_path": "Tema 9/06_Unitat9_Sensors_de_temperatura_d_unio_semiconductora.html", "term_ca": "1Posició dins de les famílies de sensors de temperatura", "topic": 9}
+{"kind": "section", "section_h2": "2La unió polaritzada a corrent constant", "source_path": "Tema 9/06_Unitat9_Sensors_de_temperatura_d_unio_semiconductora.html", "term_ca": "2La unió polaritzada a corrent constant", "topic": 9}
+{"kind": "section", "section_h2": "3Limitacions i calibratge", "source_path": "Tema 9/06_Unitat9_Sensors_de_temperatura_d_unio_semiconductora.html", "term_ca": "3Limitacions i calibratge", "topic": 9}
+{"kind": "section", "section_h2": "4Sensors PTAT amb sortida en corrent", "source_path": "Tema 9/06_Unitat9_Sensors_de_temperatura_d_unio_semiconductora.html", "term_ca": "4Sensors PTAT amb sortida en corrent", "topic": 9}
+{"kind": "section", "section_h2": "5Prestacions", "source_path": "Tema 9/06_Unitat9_Sensors_de_temperatura_d_unio_semiconductora.html", "term_ca": "5Prestacions", "topic": 9}

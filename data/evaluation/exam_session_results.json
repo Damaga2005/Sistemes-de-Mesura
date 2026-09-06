@@ -1,0 +1,1147 @@
+{
+ "cases": [
+  {
+   "case_id": "E01",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-51591d69b347",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "session_id": "exs-4d103891cbba",
+      "status": "CREATED"
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E02",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-51591d69b347",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "session_id": "exs-4d103891cbba",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "status": "READY"
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E03",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-51591d69b347",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "session_id": "exs-4d103891cbba",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "start",
+     "summary": {
+      "expires_at": "2026-09-05T10:10:00+00:00",
+      "session_id": "exs-4d103891cbba",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "IN_PROGRESS"
+     }
+    },
+    {
+     "ok": true,
+     "op": "check_expiry",
+     "summary": {
+      "expired": false
+     }
+    },
+    {
+     "ok": true,
+     "op": "check_expiry",
+     "summary": {
+      "expired": true
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E04",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-51591d69b347",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "session_id": "exs-4d103891cbba",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "start",
+     "summary": {
+      "expires_at": "2026-09-05T10:10:00+00:00",
+      "session_id": "exs-4d103891cbba",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "IN_PROGRESS"
+     }
+    },
+    {
+     "ok": true,
+     "op": "get",
+     "summary": {
+      "session_id": "exs-4d103891cbba"
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E05",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-51591d69b347",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "session_id": "exs-4d103891cbba",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "start",
+     "summary": {
+      "expires_at": "2026-09-05T10:10:00+00:00",
+      "session_id": "exs-4d103891cbba",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "IN_PROGRESS"
+     }
+    },
+    {
+     "ok": true,
+     "op": "save",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "version": 1
+     }
+    },
+    {
+     "ok": true,
+     "op": "answers",
+     "summary": {}
+    }
+   ]
+  },
+  {
+   "case_id": "E06",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-51591d69b347",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "session_id": "exs-4d103891cbba",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "start",
+     "summary": {
+      "expires_at": "2026-09-05T10:10:00+00:00",
+      "session_id": "exs-4d103891cbba",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "IN_PROGRESS"
+     }
+    },
+    {
+     "ok": true,
+     "op": "save",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "version": 1
+     }
+    },
+    {
+     "ok": true,
+     "op": "save",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "version": 2
+     }
+    },
+    {
+     "ok": true,
+     "op": "answers",
+     "summary": {}
+    },
+    {
+     "ok": true,
+     "op": "answer_log_count",
+     "summary": {
+      "log_rows": 2
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E07",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-51591d69b347",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "session_id": "exs-4d103891cbba",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "start",
+     "summary": {
+      "expires_at": "2026-09-05T10:10:00+00:00",
+      "session_id": "exs-4d103891cbba",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "IN_PROGRESS"
+     }
+    },
+    {
+     "ok": true,
+     "op": "save",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "version": 1
+     }
+    },
+    {
+     "ok": true,
+     "op": "answers",
+     "summary": {}
+    },
+    {
+     "ok": true,
+     "op": "attempts_zero",
+     "summary": {
+      "attempts": 0,
+      "corrections": 0,
+      "mastery_events": 0
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E08",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-086b638a240b",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-086b638a240b",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-086b638a240b",
+      "session_id": "exs-47de91329b4d",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-47de91329b4d",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "start",
+     "summary": {
+      "expires_at": "2026-09-05T10:01:00+00:00",
+      "session_id": "exs-47de91329b4d",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "IN_PROGRESS"
+     }
+    },
+    {
+     "ok": true,
+     "op": "save",
+     "summary": {
+      "session_id": "exs-47de91329b4d",
+      "version": 1
+     }
+    },
+    {
+     "expected_error": "no se admite respuesta en estado EXPIRED",
+     "op": "save"
+    },
+    {
+     "ok": true,
+     "op": "status",
+     "summary": {
+      "expires_at": "2026-09-05T10:01:00+00:00",
+      "session_id": "exs-47de91329b4d",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "EXPIRED",
+      "submitted_at": ""
+     }
+    },
+    {
+     "expected_error": "pregunta solo disponible en IN_PROGRESS (estado EXPIRED)",
+     "op": "get"
+    },
+    {
+     "expected_error": "transicion invalida: EXPIRED -> SUBMITTED",
+     "op": "submit"
+    },
+    {
+     "expected_error": "transicion invalida: EXPIRED -> IN_PROGRESS",
+     "op": "start"
+    }
+   ]
+  },
+  {
+   "case_id": "E09",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-51591d69b347",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-51591d69b347",
+      "session_id": "exs-4d103891cbba",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "start",
+     "summary": {
+      "expires_at": "2026-09-05T10:10:00+00:00",
+      "session_id": "exs-4d103891cbba",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "IN_PROGRESS"
+     }
+    },
+    {
+     "ok": true,
+     "op": "save",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "version": 1
+     }
+    },
+    {
+     "ok": true,
+     "op": "save",
+     "summary": {
+      "session_id": "exs-4d103891cbba",
+      "version": 1
+     }
+    },
+    {
+     "ok": true,
+     "op": "submit",
+     "summary": {
+      "answers_frozen": 2,
+      "session_id": "exs-4d103891cbba",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-09-05T10:04:00+00:00"
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E10",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-cd0bda9bd7ee",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-cd0bda9bd7ee",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-cd0bda9bd7ee",
+      "session_id": "exs-a8e9c20e7b01",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-a8e9c20e7b01",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "start",
+     "summary": {
+      "expires_at": "2026-09-05T10:10:00+00:00",
+      "session_id": "exs-a8e9c20e7b01",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "IN_PROGRESS"
+     }
+    },
+    {
+     "ok": true,
+     "op": "save",
+     "summary": {
+      "session_id": "exs-a8e9c20e7b01",
+      "version": 1
+     }
+    },
+    {
+     "ok": true,
+     "op": "submit",
+     "summary": {
+      "answers_frozen": 1,
+      "session_id": "exs-a8e9c20e7b01",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-09-05T10:04:00+00:00"
+     }
+    },
+    {
+     "ok": true,
+     "op": "submit",
+     "summary": {
+      "answers_frozen": 1,
+      "session_id": "exs-a8e9c20e7b01",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-09-05T10:04:00+00:00"
+     }
+    },
+    {
+     "expected_error": "no se admite respuesta en estado SUBMITTED",
+     "op": "save"
+    },
+    {
+     "ok": true,
+     "op": "answers",
+     "summary": {}
+    },
+    {
+     "ok": true,
+     "op": "attempts_zero",
+     "summary": {
+      "attempts": 0,
+      "corrections": 0,
+      "mastery_events": 0
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E11",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-cb5d5dfc279a",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-cb5d5dfc279a",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-cb5d5dfc279a",
+      "session_id": "exs-96c4b5c19bab",
+      "status": "CREATED"
+     }
+    },
+    {
+     "expected_error": "transicion invalida: CREATED -> SUBMITTED",
+     "op": "submit"
+    },
+    {
+     "ok": true,
+     "op": "cancel",
+     "summary": {
+      "session_id": "exs-96c4b5c19bab",
+      "status": "CANCELLED"
+     }
+    },
+    {
+     "expected_error": "no se admite respuesta en estado CANCELLED",
+     "op": "save"
+    },
+    {
+     "expected_error": "transicion invalida: CANCELLED -> CANCELLED",
+     "op": "cancel"
+    },
+    {
+     "expected_error": "transicion invalida: CANCELLED -> IN_PROGRESS",
+     "op": "start"
+    }
+   ]
+  },
+  {
+   "case_id": "E12",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-e11a7fb7bc45",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-e11a7fb7bc45",
+      "status": "READY"
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E13",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-301a7fd141f9",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-301a7fd141f9",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-301a7fd141f9",
+      "session_id": "exs-6288977933fb",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-6288977933fb",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "tamper",
+     "summary": {
+      "tampered": "q-93f3e2c4c7fd"
+     }
+    },
+    {
+     "expected_error": "SNAPSHOT_INVALID al iniciar",
+     "op": "start"
+    },
+    {
+     "ok": true,
+     "op": "status",
+     "summary": {
+      "expires_at": "",
+      "session_id": "exs-6288977933fb",
+      "started_at": "",
+      "status": "READY",
+      "submitted_at": ""
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E14",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-f04917c203bd",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-f04917c203bd",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-f04917c203bd",
+      "session_id": "exs-7bb4de3bbd03",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-7bb4de3bbd03",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "start",
+     "summary": {
+      "expires_at": "",
+      "session_id": "exs-7bb4de3bbd03",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "IN_PROGRESS"
+     }
+    },
+    {
+     "expected_error": "sesion de otro estudiante",
+     "op": "get"
+    },
+    {
+     "expected_error": "sesion de otro estudiante",
+     "op": "save"
+    },
+    {
+     "expected_error": "sesion de otro estudiante",
+     "op": "submit"
+    },
+    {
+     "ok": true,
+     "op": "list_sessions",
+     "summary": {}
+    },
+    {
+     "ok": true,
+     "op": "list_sessions",
+     "summary": {}
+    }
+   ]
+  },
+  {
+   "case_id": "E15",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-c36ca3cf57d6",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-c36ca3cf57d6",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-c36ca3cf57d6",
+      "session_id": "exs-d79b81cb3868",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-d79b81cb3868",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "start",
+     "summary": {
+      "expires_at": "",
+      "session_id": "exs-d79b81cb3868",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "IN_PROGRESS"
+     }
+    },
+    {
+     "ok": true,
+     "op": "get",
+     "summary": {
+      "session_id": "exs-d79b81cb3868"
+     }
+    },
+    {
+     "ok": true,
+     "op": "get",
+     "summary": {
+      "session_id": "exs-d79b81cb3868"
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E16",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-1f574fb9959d",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-1f574fb9959d",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-1f574fb9959d",
+      "session_id": "exs-d5e4935dece7",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-d5e4935dece7",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "start",
+     "summary": {
+      "expires_at": "",
+      "session_id": "exs-d5e4935dece7",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "IN_PROGRESS"
+     }
+    },
+    {
+     "ok": true,
+     "op": "get",
+     "summary": {
+      "session_id": "exs-d5e4935dece7"
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E17",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-90a3ef3ca010",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-90a3ef3ca010",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "create",
+     "summary": {
+      "exam_id": "exm-90a3ef3ca010",
+      "session_id": "exs-d9754264d38a",
+      "status": "CREATED"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_session",
+     "summary": {
+      "session_id": "exs-d9754264d38a",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "start",
+     "summary": {
+      "expires_at": "2026-09-05T10:05:00+00:00",
+      "session_id": "exs-d9754264d38a",
+      "started_at": "2026-09-05T10:00:00+00:00",
+      "status": "IN_PROGRESS"
+     }
+    },
+    {
+     "ok": true,
+     "op": "save",
+     "summary": {
+      "session_id": "exs-d9754264d38a",
+      "version": 1
+     }
+    },
+    {
+     "ok": true,
+     "op": "submit",
+     "summary": {
+      "answers_frozen": 1,
+      "session_id": "exs-d9754264d38a",
+      "status": "SUBMITTED",
+      "submitted_at": "2026-09-05T10:04:00+00:00"
+     }
+    }
+   ]
+  },
+  {
+   "case_id": "E18",
+   "fails": [],
+   "result": {
+    "exam_id": "exm-51591d69b347",
+    "instances": [
+     {
+      "points": 1.0,
+      "position": 0,
+      "question_id": "q-01982e7de509",
+      "required": true
+     },
+     {
+      "points": 1.0,
+      "position": 1,
+      "question_id": "q-93f3e2c4c7fd",
+      "required": true
+     },
+     {
+      "points": 1.0,
+      "position": 2,
+      "question_id": "q-3e905ed36862",
+      "required": true
+     }
+    ]
+   }
+  },
+  {
+   "case_id": "E19",
+   "fails": [],
+   "result": [
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-7aa2ce968953",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "ok": true,
+     "op": "prepare_exam",
+     "summary": {
+      "exam_id": "exm-7aa2ce968953",
+      "status": "READY"
+     }
+    },
+    {
+     "ok": true,
+     "op": "store",
+     "summary": {
+      "created": true,
+      "exam_id": "exm-fc3db090f4bd",
+      "status": "DRAFT"
+     }
+    },
+    {
+     "expected_error": "EXAM NOT READY: formula inexistente 'eq-99-0001'",
+     "op": "prepare_exam"
+    }
+   ]
+  },
+  {
+   "case_id": "E20",
+   "fails": [],
+   "result": {
+    "checked": [
+     "knowledge.sqlite",
+     "eval.sqlite",
+     "chunks.jsonl",
+     "source_manifest.json",
+     "questions.sqlite"
+    ],
+    "matches": true
+   }
+  }
+ ],
+ "spec": "exam-spec-v1"
+}

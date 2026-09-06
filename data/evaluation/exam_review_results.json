@@ -1,0 +1,308 @@
+{
+ "cases": [
+  {
+   "case_id": "R01",
+   "fails": []
+  },
+  {
+   "case_id": "R02",
+   "fails": []
+  },
+  {
+   "case_id": "R03",
+   "fails": []
+  },
+  {
+   "case_id": "R04",
+   "fails": []
+  },
+  {
+   "case_id": "R05",
+   "fails": [],
+   "repeat_equal": true
+  },
+  {
+   "case_id": "R06",
+   "fails": []
+  },
+  {
+   "case_id": "R07",
+   "fails": []
+  },
+  {
+   "case_id": "R08",
+   "fails": []
+  },
+  {
+   "case_id": "R09",
+   "fails": []
+  },
+  {
+   "case_id": "R10",
+   "fails": []
+  },
+  {
+   "case_id": "R11",
+   "fails": []
+  },
+  {
+   "case_id": "R12",
+   "fails": []
+  },
+  {
+   "case_id": "R13",
+   "fails": []
+  },
+  {
+   "case_id": "R14",
+   "fails": []
+  },
+  {
+   "case_id": "R15",
+   "fails": []
+  },
+  {
+   "case_id": "R16",
+   "fails": []
+  },
+  {
+   "case_id": "R17",
+   "fails": []
+  },
+  {
+   "case_id": "R18",
+   "fails": []
+  },
+  {
+   "case_id": "R19",
+   "fails": [],
+   "result": [
+    [
+     "blind",
+     "reveal_correct_answer"
+    ],
+    [
+     "blind",
+     "reveal_solution"
+    ],
+    [
+     "blind",
+     "reveal_formula"
+    ],
+    [
+     "unknown_version",
+     "REVIEW_POLICY_NOT_FOUND: 'review-policy-v99'"
+    ],
+    [
+     "fixture",
+     "unit-root"
+    ]
+   ]
+  },
+  {
+   "case_id": "R20",
+   "fails": []
+  },
+  {
+   "case_id": "R21",
+   "fails": [],
+   "result": [
+    [
+     "blind",
+     "reveal_correct_answer"
+    ],
+    [
+     "blind",
+     "reveal_solution"
+    ],
+    [
+     "blind",
+     "reveal_formula"
+    ],
+    [
+     "unknown_version",
+     "REVIEW_POLICY_NOT_FOUND: 'review-policy-v99'"
+    ],
+    [
+     "fixture",
+     "formula-root"
+    ]
+   ]
+  },
+  {
+   "case_id": "R22",
+   "fails": []
+  },
+  {
+   "case_id": "R23",
+   "fails": []
+  },
+  {
+   "case_id": "R24",
+   "fails": []
+  },
+  {
+   "case_id": "R25",
+   "fails": []
+  },
+  {
+   "case_id": "R26",
+   "fails": []
+  },
+  {
+   "case_id": "R27",
+   "fails": []
+  },
+  {
+   "case_id": "R28",
+   "fails": []
+  },
+  {
+   "case_id": "R29",
+   "digests": {
+    "d1": {
+     "events": 5,
+     "states": {
+      "formula:eq-02-0034": [
+       0.5,
+       1,
+       1
+      ],
+      "section:T02:3Estimació del mesurand i dispersions": [
+       1.0,
+       1,
+       1
+      ],
+      "section:T02:4Incertesa típica, incertesa expandida i factor de cobertura": [
+       0.5,
+       1,
+       1
+      ],
+      "topic:T02": [
+       0.7619,
+       2,
+       2
+      ]
+     }
+    }
+   },
+   "fails": []
+  },
+  {
+   "case_id": "R30",
+   "fails": []
+  },
+  {
+   "case_id": "R31",
+   "fails": []
+  },
+  {
+   "case_id": "R32",
+   "fails": []
+  },
+  {
+   "case_id": "R33",
+   "fails": []
+  },
+  {
+   "case_id": "R34",
+   "fails": [],
+   "repeat_equal": true
+  },
+  {
+   "case_id": "R35",
+   "fails": []
+  },
+  {
+   "case_id": "R36",
+   "fails": [],
+   "render_pair": {
+    "ca": "Incorrecta: revisa l'error principal.",
+    "es": "Incorrecta: revisa el error principal."
+   },
+   "result": [
+    [
+     "blind",
+     "reveal_correct_answer"
+    ],
+    [
+     "blind",
+     "reveal_solution"
+    ],
+    [
+     "blind",
+     "reveal_formula"
+    ],
+    [
+     "unknown_version",
+     "REVIEW_POLICY_NOT_FOUND: 'review-policy-v99'"
+    ],
+    [
+     "render_pair",
+     true
+    ]
+   ]
+  },
+  {
+   "case_id": "R37",
+   "fails": [],
+   "result": [
+    [
+     "blind",
+     "reveal_correct_answer"
+    ],
+    [
+     "blind",
+     "reveal_solution"
+    ],
+    [
+     "blind",
+     "reveal_formula"
+    ],
+    [
+     "unknown_version",
+     "REVIEW_POLICY_NOT_FOUND: 'review-policy-v99'"
+    ],
+    [
+     "fixture",
+     "needs-review"
+    ]
+   ]
+  },
+  {
+   "case_id": "R38",
+   "fails": [],
+   "result": [
+    [
+     "blind",
+     "reveal_correct_answer"
+    ],
+    [
+     "blind",
+     "reveal_solution"
+    ],
+    [
+     "blind",
+     "reveal_formula"
+    ],
+    [
+     "unknown_version",
+     "REVIEW_POLICY_NOT_FOUND: 'review-policy-v99'"
+    ],
+    [
+     "bands",
+     true
+    ],
+    [
+     "taxonomy",
+     true
+    ],
+    [
+     "hints",
+     true
+    ]
+   ]
+  }
+ ],
+ "spec": "review-policy-v1"
+}

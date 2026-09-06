@@ -1,0 +1,8 @@
+{"detail": "C", "expected": "CONFIRMED", "id": "D01", "kind": "known-variable", "payload": {"formula_id": "eq-07-0178", "symbol": "C"}}
+{"detail": "unknown", "expected": "UNKNOWN", "id": "D02", "kind": "unknown-variable", "payload": {"formula_id": "eq-07-0178", "symbol": "wQQQ"}}
+{"detail": "unknown", "expected": "UNKNOWN", "id": "D03", "kind": "unknown-formula-variable", "payload": {"formula_id": "eq-99-0001", "symbol": "x"}}
+{"detail": "ohm", "expected": "CONFIRMED", "id": "D04", "kind": "known-unit", "payload": {"quantity": "Resistència"}}
+{"detail": "none", "expected": "UNKNOWN", "id": "D05", "kind": "unknown-unit", "payload": {"quantity": "Xyzzyql"}}
+{"detail": "ohm", "expected": "REJECT", "id": "D06", "kind": "wrong-unit", "payload": {"claimed": "V", "quantity": "Resistència"}}
+{"detail": "ohm", "expected": "ACCEPT", "id": "D07", "kind": "equivalent-unit", "payload": {"claimed": "Ω", "quantity": "Resistència"}}
+{"detail": "4Incertesa típica, incertesa expandida i factor de cobertura", "expected": "HAS_CONTEXT", "id": "D08", "kind": "correct-context", "payload": {"formula_id": "eq-02-0034"}}

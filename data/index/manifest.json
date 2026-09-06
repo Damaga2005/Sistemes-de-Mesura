@@ -1,0 +1,18 @@
+{
+ "index_version": "index-2.0",
+ "retrieval_version": "retrieval-2.0",
+ "kb_chunks": 1903,
+ "lexical": {
+  "engine": "sqlite-fts5-unicode61",
+  "content_hash": "b0e1271ba9244b70ac2807940b5ccd594e7a1b717500abe3f4cad394859b3335"
+ },
+ "semantic": {
+  "model": "tfidf-local-1.0",
+  "dimension": 11356,
+  "terms": 11356,
+  "content_hash": "b0e1271ba9244b70ac2807940b5ccd594e7a1b717500abe3f4cad394859b3335"
+ },
+ "content_hash": "9796577eac03e6b1256d00e97f2cf0f18f34315d52ef809a33cc1a56d71463bf",
+ "created_utc": "2026-09-03T21:17:25+00:00",
+ "kb_pipeline": "fase1-1.0"
+}

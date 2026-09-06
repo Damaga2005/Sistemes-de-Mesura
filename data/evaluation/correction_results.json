@@ -1,0 +1,176 @@
+{
+ "summary": {
+  "n": 24,
+  "passed": 24
+ },
+ "items": [
+  {
+   "id": "C01",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 7.5
+  },
+  {
+   "id": "C02",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 3.75
+  },
+  {
+   "id": "C03",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 6.0
+  },
+  {
+   "id": "C04",
+   "pass": true,
+   "note": "INCORRECT",
+   "status": "INCORRECT",
+   "score": 0.0
+  },
+  {
+   "id": "C05",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 6.0
+  },
+  {
+   "id": "C06",
+   "pass": true,
+   "note": "CORRECT",
+   "status": "CORRECT",
+   "score": 8.5
+  },
+  {
+   "id": "C07",
+   "pass": true,
+   "note": "INCORRECT",
+   "status": "INCORRECT",
+   "score": 0.0
+  },
+  {
+   "id": "C08",
+   "pass": true,
+   "note": "NO_ANSWER",
+   "status": "NO_ANSWER",
+   "score": 0.0
+  },
+  {
+   "id": "C09",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 7.0
+  },
+  {
+   "id": "C10",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 6.0
+  },
+  {
+   "id": "C11",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 5.0
+  },
+  {
+   "id": "C12",
+   "pass": true,
+   "note": "CORRECT",
+   "status": "CORRECT",
+   "score": 7.19
+  },
+  {
+   "id": "C13",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 3.75
+  },
+  {
+   "id": "C14",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 7.5
+  },
+  {
+   "id": "C15",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 3.75
+  },
+  {
+   "id": "C16",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 6.0
+  },
+  {
+   "id": "C17",
+   "pass": true,
+   "note": "INCORRECT",
+   "status": "INCORRECT",
+   "score": 0.0
+  },
+  {
+   "id": "C18",
+   "pass": true,
+   "note": "CORRECT",
+   "status": "CORRECT",
+   "score": 8.5
+  },
+  {
+   "id": "C19",
+   "pass": true,
+   "note": "INCORRECT",
+   "status": "INCORRECT",
+   "score": 0.0
+  },
+  {
+   "id": "C20",
+   "pass": true,
+   "note": "CORRECT",
+   "status": "CORRECT",
+   "score": 7.19
+  },
+  {
+   "id": "C21",
+   "pass": true,
+   "note": "CORRECT",
+   "status": "CORRECT",
+   "score": 7.19
+  },
+  {
+   "id": "C22",
+   "pass": true,
+   "note": "NO_ANSWER",
+   "status": "NO_ANSWER",
+   "score": 0.0
+  },
+  {
+   "id": "C23",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 1.96
+  },
+  {
+   "id": "C24",
+   "pass": true,
+   "note": "PARTIALLY_CORRECT",
+   "status": "PARTIALLY_CORRECT",
+   "score": 7.0
+  }
+ ]
+}

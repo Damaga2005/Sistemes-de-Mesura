@@ -1,0 +1,102 @@
+{
+ "total_formulas": 2896,
+ "eligible_formulas": 2862,
+ "blocked_formulas": 34,
+ "coverage": 0.9883,
+ "block_reasons": {
+  "degenerate_expression": 9,
+  "no_section_context": 25
+ },
+ "blocked_sample": [
+  {
+   "formula_id": "eq-01-0002",
+   "reason": "degenerate_expression"
+  },
+  {
+   "formula_id": "eq-01-0005",
+   "reason": "degenerate_expression"
+  },
+  {
+   "formula_id": "eq-01-0006",
+   "reason": "degenerate_expression"
+  },
+  {
+   "formula_id": "eq-01-0022",
+   "reason": "degenerate_expression"
+  },
+  {
+   "formula_id": "eq-01-0033",
+   "reason": "degenerate_expression"
+  },
+  {
+   "formula_id": "eq-01-0035",
+   "reason": "degenerate_expression"
+  },
+  {
+   "formula_id": "eq-01-0038",
+   "reason": "degenerate_expression"
+  },
+  {
+   "formula_id": "eq-10-0002",
+   "reason": "degenerate_expression"
+  },
+  {
+   "formula_id": "eq-10-0316",
+   "reason": "no_section_context"
+  },
+  {
+   "formula_id": "eq-10-0317",
+   "reason": "no_section_context"
+  },
+  {
+   "formula_id": "eq-02-0003",
+   "reason": "no_section_context"
+  },
+  {
+   "formula_id": "eq-02-0004",
+   "reason": "no_section_context"
+  },
+  {
+   "formula_id": "eq-02-0005",
+   "reason": "no_section_context"
+  },
+  {
+   "formula_id": "eq-02-0122",
+   "reason": "no_section_context"
+  },
+  {
+   "formula_id": "eq-02-0124",
+   "reason": "no_section_context"
+  },
+  {
+   "formula_id": "eq-02-0125",
+   "reason": "no_section_context"
+  },
+  {
+   "formula_id": "eq-02-0164",
+   "reason": "no_section_context"
+  },
+  {
+   "formula_id": "eq-02-0165",
+   "reason": "no_section_context"
+  },
+  {
+   "formula_id": "eq-02-0204",
+   "reason": "no_section_context"
+  },
+  {
+   "formula_id": "eq-02-0206",
+   "reason": "no_section_context"
+  }
+ ],
+ "metadata_completeness": {
+  "variables": 205,
+  "variables_pct": 0.0708,
+  "units": 0,
+  "units_pct": 0.0,
+  "conditions": 0,
+  "conditions_pct": 0.0,
+  "context_section": 2818,
+  "context_pct": 0.9731
+ }
+}

@@ -1,0 +1,1512 @@
+{
+ "cases": [
+  {
+   "case_id": "G01",
+   "fails": [],
+   "result": {
+    "answered_count": 2,
+    "blank_count": 0,
+    "correct_count": 2,
+    "earned_points": "1.700",
+    "exam_id": "exm-fdb1693721dc",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 0,
+    "percentage": "85.00",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 2,
+    "questions": [
+     {
+      "attempt_id": "attex-3db57619bde5",
+      "blank": false,
+      "correction_id": "corr-5356f5e27747",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 0,
+      "question_id": "q-3e905ed36862",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     },
+     {
+      "attempt_id": "attex-efb1bf154f07",
+      "blank": false,
+      "correction_id": "corr-42cf21948e06",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 1,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-0dbdfd8d74c9",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "2.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G02",
+   "fails": [],
+   "result": {
+    "answered_count": 2,
+    "blank_count": 0,
+    "correct_count": 0,
+    "earned_points": "0.000",
+    "exam_id": "exm-fdb049a48c71",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 2,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 0,
+    "percentage": "0.00",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 2,
+    "questions": [
+     {
+      "attempt_id": "attex-3a37070c1eb6",
+      "blank": false,
+      "correction_id": "corr-a2f582231e66",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.000",
+      "position": 0,
+      "question_id": "q-3e905ed36862",
+      "question_version": "4.0",
+      "status": "INCORRECT"
+     },
+     {
+      "attempt_id": "attex-ed8b6fa592c5",
+      "blank": false,
+      "correction_id": "corr-1953fe3ac706",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.000",
+      "position": 1,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "INCORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-9be8c1e72dd0",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "2.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G03",
+   "fails": [],
+   "result": {
+    "answered_count": 2,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "1.450",
+    "exam_id": "exm-b768c46a5461",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 1,
+    "percentage": "72.50",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 2,
+    "questions": [
+     {
+      "attempt_id": "attex-141fdbb9c7e0",
+      "blank": false,
+      "correction_id": "corr-ca17fb732a17",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.600",
+      "position": 0,
+      "question_id": "q-01982e7de509",
+      "question_version": "4.0",
+      "status": "PARTIALLY_CORRECT"
+     },
+     {
+      "attempt_id": "attex-68ae5bad3431",
+      "blank": false,
+      "correction_id": "corr-5a51d14e6f49",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 1,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-bc38fd68760e",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "2.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G04",
+   "fails": [],
+   "result": {
+    "answered_count": 1,
+    "blank_count": 1,
+    "correct_count": 1,
+    "earned_points": "0.850",
+    "exam_id": "exm-0fe4f01c0994",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 1,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 0,
+    "percentage": "42.50",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 2,
+    "questions": [
+     {
+      "attempt_id": "attex-9d2b0a82328e",
+      "blank": false,
+      "correction_id": "corr-7de76f0155fa",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 0,
+      "question_id": "q-3e905ed36862",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     },
+     {
+      "attempt_id": "attex-8b7bf9e15fac",
+      "blank": true,
+      "correction_id": "corr-a9795794e481",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.000",
+      "position": 1,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "NO_ANSWER"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-a0d6ad4b349a",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "2.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G05",
+   "fails": [],
+   "result": {
+    "answered_count": 2,
+    "blank_count": 0,
+    "correct_count": 0,
+    "earned_points": "0.975",
+    "exam_id": "exm-9a731a83f33b",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 2,
+    "percentage": "48.75",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 2,
+    "questions": [
+     {
+      "attempt_id": "attex-d9264154707e",
+      "blank": false,
+      "correction_id": "corr-91e5e9beaf13",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.600",
+      "position": 0,
+      "question_id": "q-01982e7de509",
+      "question_version": "4.0",
+      "status": "PARTIALLY_CORRECT"
+     },
+     {
+      "attempt_id": "attex-c1fa3a054b8c",
+      "blank": false,
+      "correction_id": "corr-2a1351795039",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.375",
+      "position": 1,
+      "question_id": "q-997b6f630d74",
+      "question_version": "4.0",
+      "status": "PARTIALLY_CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-5b94509abedf",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "2.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G06",
+   "fails": [],
+   "result": {
+    "answered_count": 1,
+    "blank_count": 0,
+    "correct_count": 0,
+    "earned_points": "0.750",
+    "exam_id": "exm-e8cfdf46a326",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 1,
+    "percentage": "75.00",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 1,
+    "questions": [
+     {
+      "attempt_id": "attex-14fdad1d5b6b",
+      "blank": false,
+      "correction_id": "corr-98abfd4bbc19",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.750",
+      "position": 0,
+      "question_id": "q-997b6f630d74",
+      "question_version": "4.0",
+      "status": "PARTIALLY_CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-43a5bbadf4a9",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "1.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G07",
+   "fails": [],
+   "result": {
+    "answered_count": 1,
+    "blank_count": 0,
+    "correct_count": 0,
+    "earned_points": "0.600",
+    "exam_id": "exm-8e8dbfb1e60a",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 1,
+    "percentage": "60.00",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 1,
+    "questions": [
+     {
+      "attempt_id": "attex-e50aefe63dc1",
+      "blank": false,
+      "correction_id": "corr-881cc99d825a",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.600",
+      "position": 0,
+      "question_id": "q-01982e7de509",
+      "question_version": "4.0",
+      "status": "PARTIALLY_CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-79b982e25259",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "1.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G08",
+   "fails": [],
+   "result": {
+    "answered_count": 1,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "0.719",
+    "exam_id": "exm-b68b0d9ed5a6",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 0,
+    "percentage": "71.90",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 1,
+    "questions": [
+     {
+      "attempt_id": "attex-951eca13aef4",
+      "blank": false,
+      "correction_id": "corr-200cc9d8e978",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.719",
+      "position": 0,
+      "question_id": "q-a613ff1593ac",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-c0d91d1efa9f",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "1.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G09",
+   "fails": [],
+   "result": {
+    "answered_count": 1,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "0.850",
+    "exam_id": "exm-46dc32b056dc",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 0,
+    "percentage": "85.00",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 1,
+    "questions": [
+     {
+      "attempt_id": "attex-f2befcb2a5fa",
+      "blank": false,
+      "correction_id": "corr-ce15b505dfd0",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 0,
+      "question_id": "q-9a39da9beaf1",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-26fa296ee6ef",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "1.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G10",
+   "fails": [],
+   "result": {
+    "answered_count": 1,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "0.850",
+    "exam_id": "exm-34c0783c865b",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 0,
+    "percentage": "85.00",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 1,
+    "questions": [
+     {
+      "attempt_id": "attex-698830c359f4",
+      "blank": false,
+      "correction_id": "corr-1d92a7c8ce26",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 0,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-6d4599bcb65a",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "1.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G11",
+   "fails": [],
+   "result": {
+    "answered_count": 1,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "0.719",
+    "exam_id": "exm-51fb74af8fe6",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 0,
+    "percentage": "71.90",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 1,
+    "questions": [
+     {
+      "attempt_id": "attex-8a72efe225bc",
+      "blank": false,
+      "correction_id": "corr-e2cd1fc8263d",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.719",
+      "position": 0,
+      "question_id": "q-d40cae5ed91f",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-5169bbe1fade",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "1.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G12",
+   "fails": [],
+   "result": {
+    "answered_count": 1,
+    "blank_count": 0,
+    "correct_count": 0,
+    "earned_points": "0.389",
+    "exam_id": "exm-6d4867b75530",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 1,
+    "percentage": "38.90",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 1,
+    "questions": [
+     {
+      "attempt_id": "attex-a00944a7f4f6",
+      "blank": false,
+      "correction_id": "corr-2c383f9bbcc5",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.389",
+      "position": 0,
+      "question_id": "q-0652f360f69f",
+      "question_version": "4.0",
+      "status": "PARTIALLY_CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-f3a090dc3bf3",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "1.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G13",
+   "fails": [],
+   "result": {
+    "answered_count": 1,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "0.850",
+    "exam_id": "exm-458795929f24",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "EXPIRED",
+    "partial_count": 0,
+    "percentage": "85.00",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 1,
+    "questions": [
+     {
+      "attempt_id": "attex-105d8de59e27",
+      "blank": false,
+      "correction_id": "corr-463b92a73199",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 0,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-e83ab590bce3",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "1.000"
+   },
+   "submitted": {
+    "rejected": "transicion invalida: EXPIRED -> SUBMITTED"
+   }
+  },
+  {
+   "case_id": "G14",
+   "fails": [],
+   "result": {
+    "rejected": "blueprint invalido: question_count debe ser >= 1"
+   }
+  },
+  {
+   "case_id": "G15",
+   "counts": {
+    "attempts": 2,
+    "corrections": 2,
+    "mastery_events": 5
+   },
+   "fails": [],
+   "result": {
+    "answered_count": 2,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "1.450",
+    "exam_id": "exm-96f445798690",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 1,
+    "percentage": "72.50",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 2,
+    "questions": [
+     {
+      "attempt_id": "attex-7e4ce4cf6ca2",
+      "blank": false,
+      "correction_id": "corr-54d739478fda",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.600",
+      "position": 0,
+      "question_id": "q-01982e7de509",
+      "question_version": "4.0",
+      "status": "PARTIALLY_CORRECT"
+     },
+     {
+      "attempt_id": "attex-6ffff35aa783",
+      "blank": false,
+      "correction_id": "corr-b73b2fbe4064",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 1,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-44e7360849cb",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "2.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G16",
+   "counts": {
+    "attempts": 2,
+    "corrections": 2,
+    "mastery_events": 5
+   },
+   "fails": [],
+   "result": {
+    "answered_count": 2,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "1.450",
+    "exam_id": "exm-eb9e308673be",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 1,
+    "percentage": "72.50",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 2,
+    "questions": [
+     {
+      "attempt_id": "attex-c0aa8af66776",
+      "blank": false,
+      "correction_id": "corr-2c31ed8c5770",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.600",
+      "position": 0,
+      "question_id": "q-01982e7de509",
+      "question_version": "4.0",
+      "status": "PARTIALLY_CORRECT"
+     },
+     {
+      "attempt_id": "attex-3be830ad254e",
+      "blank": false,
+      "correction_id": "corr-7f0c1703afdf",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 1,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-5a409a7c7200",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "2.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G17",
+   "counts": {
+    "attempts": 2,
+    "corrections": 2,
+    "mastery_events": 5
+   },
+   "fails": [],
+   "result": {
+    "answered_count": 2,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "0.850",
+    "exam_id": "exm-69edc1e8526e",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 1,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 0,
+    "percentage": "42.50",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 2,
+    "questions": [
+     {
+      "attempt_id": "attex-7577ff59fab4",
+      "blank": false,
+      "correction_id": "corr-8aa7cef46453",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.000",
+      "position": 0,
+      "question_id": "q-01982e7de509",
+      "question_version": "4.0",
+      "status": "INCORRECT"
+     },
+     {
+      "attempt_id": "attex-ad8efa255896",
+      "blank": false,
+      "correction_id": "corr-eb7bc2f2da97",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 1,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-4b6f2bf5fc9c",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "2.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G18",
+   "fails": [],
+   "mirror_equal": true,
+   "result": {
+    "answered_count": 2,
+    "blank_count": 0,
+    "correct_count": 2,
+    "earned_points": "1.700",
+    "exam_id": "exm-eb86f0ecd29a",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 0,
+    "percentage": "85.00",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 2,
+    "questions": [
+     {
+      "attempt_id": "attex-c6fb235f6bad",
+      "blank": false,
+      "correction_id": "corr-79f461973ae5",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 0,
+      "question_id": "q-3e905ed36862",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     },
+     {
+      "attempt_id": "attex-485727ca82b9",
+      "blank": false,
+      "correction_id": "corr-dbb580a8eab0",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 1,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-32125a2d8df8",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "2.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G19",
+   "fails": [],
+   "result": [
+    [
+     "thou",
+     [
+      0.05,
+      0.1
+     ],
+     1
+    ],
+    [
+     "thou",
+     [
+      0.15,
+      0.1
+     ],
+     2
+    ],
+    [
+     "thou",
+     [
+      8.5,
+      1.0
+     ],
+     850
+    ],
+    [
+     "thou",
+     [
+      6.0,
+      1.0
+     ],
+     600
+    ],
+    [
+     "thou",
+     [
+      7.19,
+      1.0
+     ],
+     719
+    ],
+    [
+     "thou",
+     [
+      0.0,
+      2.5
+     ],
+     0
+    ],
+    [
+     "avail_thou",
+     [
+      1.0
+     ],
+     1000
+    ],
+    [
+     "avail_thou",
+     [
+      2.5
+     ],
+     2500
+    ],
+    [
+     "pct_hundredths",
+     [
+      1,
+      20000
+     ],
+     1
+    ],
+    [
+     "pct_hundredths",
+     [
+      3,
+      20000
+     ],
+     2
+    ],
+    [
+     "pct_hundredths",
+     [
+      1450,
+      2000
+     ],
+     7250
+    ],
+    [
+     "pct_hundredths",
+     [
+      1450,
+      3000
+     ],
+     4833
+    ],
+    [
+     "pct_hundredths",
+     [
+      0,
+      1000
+     ],
+     0
+    ],
+    [
+     "pct_hundredths",
+     [
+      5,
+      0
+     ],
+     0
+    ]
+   ]
+  },
+  {
+   "case_id": "G20",
+   "fails": [],
+   "isolation_ok": true,
+   "result": {
+    "answered_count": 1,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "0.850",
+    "exam_id": "exm-6b354d55d3b8",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 0,
+    "percentage": "85.00",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 1,
+    "questions": [
+     {
+      "attempt_id": "attex-a92743e52c82",
+      "blank": false,
+      "correction_id": "corr-ed866795922f",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 0,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-2c5ca3212ee0",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "1.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G21",
+   "fails": [],
+   "result": {
+    "answered_count": 1,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "0.850",
+    "exam_id": "exm-eaa08ed01562",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 0,
+    "percentage": "85.00",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 1,
+    "questions": [
+     {
+      "attempt_id": "attex-2d4db4ff6016",
+      "blank": false,
+      "correction_id": "corr-ab9b5d4b85b7",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 0,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-109c5fd6509c",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "1.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G22",
+   "fails": [],
+   "result": {
+    "answered_count": 2,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "1.450",
+    "exam_id": "exm-e1da68ba59a9",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 1,
+    "percentage": "72.50",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 2,
+    "questions": [
+     {
+      "attempt_id": "attex-6f7616008684",
+      "blank": false,
+      "correction_id": "corr-524f2cb04353",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.600",
+      "position": 0,
+      "question_id": "q-01982e7de509",
+      "question_version": "4.0",
+      "status": "PARTIALLY_CORRECT"
+     },
+     {
+      "attempt_id": "attex-8a10b3eebe76",
+      "blank": false,
+      "correction_id": "corr-236bb32e1e6e",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 1,
+      "question_id": "q-9a39da9beaf1",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-b2429d71c0ea",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "2.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G23",
+   "fails": [],
+   "provenance_attempts": [
+    "attex-38982c802da3",
+    "attex-7e4b4a7d4077"
+   ],
+   "result": {
+    "answered_count": 2,
+    "blank_count": 0,
+    "correct_count": 1,
+    "earned_points": "1.450",
+    "exam_id": "exm-cd2630de073e",
+    "exam_kind": "MOCK_EXAM",
+    "graded_at": "2026-09-05T10:05:00+00:00",
+    "incorrect_count": 0,
+    "optional_earned": "0.000",
+    "optional_points": "0.000",
+    "origin_status": "SUBMITTED",
+    "partial_count": 1,
+    "percentage": "72.50",
+    "policy_versions": {
+     "exam_spec": "exam-spec-v1",
+     "examiner": "examiner-4.0",
+     "grader": "grader-5.0",
+     "knowledge": "fase1-1.0",
+     "manifest_sha": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984",
+     "mastery": "mastery-policy@v1",
+     "reasoning": "reasoning-3.0",
+     "retrieval": "retrieval-2.0",
+     "rubric": "rubric-5.0",
+     "scoring": "exam-spec-v1"
+    },
+    "question_count": 2,
+    "questions": [
+     {
+      "attempt_id": "attex-7e4b4a7d4077",
+      "blank": false,
+      "correction_id": "corr-ab64e99e579d",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.600",
+      "position": 0,
+      "question_id": "q-01982e7de509",
+      "question_version": "4.0",
+      "status": "PARTIALLY_CORRECT"
+     },
+     {
+      "attempt_id": "attex-38982c802da3",
+      "blank": false,
+      "correction_id": "corr-8026abf40160",
+      "graded_at": "2026-09-05T10:05:00+00:00",
+      "points_available": "1.000",
+      "points_earned": "0.850",
+      "position": 1,
+      "question_id": "q-93f3e2c4c7fd",
+      "question_version": "4.0",
+      "status": "CORRECT"
+     }
+    ],
+    "review_count": 0,
+    "scoring": {},
+    "scoring_policy_id": "exam-spec",
+    "scoring_policy_version": "exam-spec-v1",
+    "session_id": "exs-423c34b70160",
+    "status": "COMPLETE",
+    "student_id": "alu-1",
+    "total_points": "2.000"
+   },
+   "submitted": {
+    "status": "SUBMITTED",
+    "submitted_at": "2026-09-05T10:04:00+00:00"
+   }
+  },
+  {
+   "case_id": "G24",
+   "fails": [],
+   "result": {
+    "checked": [
+     "knowledge.sqlite",
+     "eval.sqlite",
+     "chunks.jsonl",
+     "source_manifest.json"
+    ],
+    "gen_stable": true,
+    "matches": true
+   }
+  }
+ ],
+ "spec": "exam-spec-v1"
+}

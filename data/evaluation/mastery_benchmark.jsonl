@@ -1,0 +1,12 @@
+{"expected_confidence": 0.5, "expected_score": 1.0, "expected_status": "MASTERED", "id": "M01", "signals": [1, 1, 1, 1], "split": "dev"}
+{"expected_confidence": 0.375, "expected_score": 0.0, "expected_status": "AT_RISK", "id": "M02", "signals": [0, 0, 0], "split": "dev"}
+{"expected_confidence": 0.4688, "expected_score": 0.4783, "expected_status": "DEVELOPING", "id": "M03", "signals": [1, 0, 1, 0], "split": "dev"}
+{"expected_confidence": 0.125, "expected_score": 1.0, "expected_status": "EMERGING", "id": "M04", "signals": [1], "split": "dev"}
+{"expected_confidence": 1.0, "expected_score": 1.0, "expected_status": "MASTERED", "id": "M05", "signals": [1, 1, 1, 1, 1, 1, 1, 1], "split": "dev"}
+{"expected_confidence": 0.625, "expected_score": 0.0, "expected_status": "AT_RISK", "id": "M06", "signals": [0, 0, 0, 0, 0], "split": "dev"}
+{"expected_confidence": 0.6, "expected_score": 0.8, "expected_status": "PROFICIENT", "id": "M07", "signals": [1, 1, 0, 1, 1], "split": "dev"}
+{"expected_confidence": 0.4766, "expected_score": 0.7826, "expected_status": "PROFICIENT", "id": "M08", "signals": [0, 1, 1, 1], "split": "dev"}
+{"expected_confidence": 0.7031, "expected_score": 0.44, "expected_status": "AT_RISK", "id": "M09", "signals": [1, 1, 1, 0, 0, 0], "split": "test"}
+{"expected_confidence": 0.7083, "expected_score": 0.72, "expected_status": "PROFICIENT", "id": "M10", "signals": [0, 0, 1, 1, 1, 1], "split": "test"}
+{"expected_confidence": 0.25, "expected_score": 1.0, "expected_status": "DEVELOPING", "id": "M11", "signals": [1, 1], "split": "test"}
+{"expected_confidence": 0.2344, "expected_score": 0.5238, "expected_status": "DEVELOPING", "id": "M12", "signals": [0, 1], "split": "test"}

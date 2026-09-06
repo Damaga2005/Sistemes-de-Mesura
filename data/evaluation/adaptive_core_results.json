@@ -1,0 +1,572 @@
+{
+ "cases": [
+  {
+   "case_id": "AC01",
+   "fails": [],
+   "result": []
+  },
+  {
+   "case_id": "AC02",
+   "fails": [],
+   "result": [
+    {
+     "confidence": 0.25,
+     "error_signals": [
+      "FORMULA_ERROR"
+     ],
+     "evidence_level": "LOW",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "mastery": 0.0,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 40.0,
+     "reasons": [
+      "mastery:0.00",
+      "evidencia:LOW(n=1)",
+      "confianza_baja:0.25",
+      "raiz:FORMULA_ERROR",
+      "fallo_reciente:0d"
+     ],
+     "recency_signal": 0.5,
+     "recommended_action": "PRACTICE",
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC03",
+   "fails": [],
+   "result": [
+    {
+     "confidence": 0.3,
+     "error_signals": [
+      "FORMULA_ERRORx3"
+     ],
+     "evidence_level": "MODERATE",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "mastery": 0.2,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 53.0,
+     "reasons": [
+      "mastery:0.20",
+      "evidencia:MODERATE(n=3)",
+      "confianza_baja:0.30",
+      "raiz_repetida:FORMULA_ERROR",
+      "fallo_reciente:0d"
+     ],
+     "recency_signal": 0.5,
+     "recommended_action": "PRACTICE",
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC04",
+   "fails": [],
+   "result": [
+    {
+     "confidence": 0.4,
+     "error_signals": [],
+     "evidence_level": "MODERATE",
+     "knowledge_unit_id": "concept:incertesa",
+     "mastery": 0.25,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 38.25,
+     "reasons": [
+      "mastery:0.25",
+      "evidencia:MODERATE(n=3)",
+      "confianza_baja:0.40"
+     ],
+     "recency_signal": 0.6,
+     "recommended_action": "PRACTICE",
+     "unit_kind": "concept"
+    }
+   ]
+  },
+  {
+   "case_id": "AC05",
+   "fails": [],
+   "result": [
+    {
+     "confidence": 0.5,
+     "error_signals": [
+      "UNIT_ERROR"
+     ],
+     "evidence_level": "HIGH",
+     "knowledge_unit_id": "formula:eq-02-0003",
+     "mastery": 0.55,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 41.5,
+     "reasons": [
+      "mastery:0.55",
+      "evidencia:HIGH(n=4)",
+      "raiz:UNIT_ERROR",
+      "fallo_reciente:0d"
+     ],
+     "recency_signal": 0.5,
+     "recommended_action": "REINFORCE",
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC06",
+   "fails": [],
+   "result": [
+    {
+     "confidence": 0.7,
+     "error_signals": [],
+     "evidence_level": "HIGH",
+     "knowledge_unit_id": "formula:eq-02-0004",
+     "mastery": 0.85,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 11.5,
+     "reasons": [
+      "mastery:0.85",
+      "evidencia:HIGH(n=5)"
+     ],
+     "recency_signal": 0.2,
+     "recommended_action": "CHALLENGE",
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC07",
+   "fails": [],
+   "result": [
+    {
+     "confidence": 0.9,
+     "error_signals": [],
+     "evidence_level": "HIGH",
+     "knowledge_unit_id": "topic:T02",
+     "mastery": 0.95,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 22.5,
+     "reasons": [
+      "mastery:0.95",
+      "evidencia:HIGH(n=6)",
+      "sin_practicar_desde:31d"
+     ],
+     "recency_signal": 1.0,
+     "recommended_action": "MAINTAIN",
+     "unit_kind": "topic"
+    }
+   ]
+  },
+  {
+   "case_id": "AC08",
+   "fails": [],
+   "result": [
+    {
+     "confidence": 0.5,
+     "error_signals": [],
+     "evidence_level": "MODERATE",
+     "knowledge_unit_id": "formula:eq-02-0005",
+     "mastery": 0.5,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 21.5,
+     "reasons": [
+      "mastery:0.50",
+      "evidencia:MODERATE(n=2)"
+     ],
+     "recency_signal": 0.2,
+     "recommended_action": "REINFORCE",
+     "unit_kind": "formula"
+    },
+    {
+     "confidence": 0.5,
+     "error_signals": [],
+     "evidence_level": "MODERATE",
+     "knowledge_unit_id": "formula:eq-02-0006",
+     "mastery": 0.5,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 21.5,
+     "reasons": [
+      "mastery:0.50",
+      "evidencia:MODERATE(n=2)"
+     ],
+     "recency_signal": 0.2,
+     "recommended_action": "REINFORCE",
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC09",
+   "fails": [],
+   "result": [
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "priority": 48.0,
+     "reasons": [
+      "mastery:0.20",
+      "evidencia:MODERATE(n=3)",
+      "confianza_baja:0.30",
+      "sin_recencia",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.00,conf=0.30,n=0))",
+      "ancestro_en_contexto:topic:T02"
+     ],
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0034"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC10",
+   "fails": [],
+   "result": [
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "priority": 44.5,
+     "reasons": [
+      "mastery:0.30",
+      "evidencia:MODERATE(n=2)",
+      "confianza_baja:0.30",
+      "sin_recencia",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.00,conf=0.30,n=0))",
+      "ancestro_en_contexto:topic:T02"
+     ],
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0034"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    },
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0001",
+     "priority": 35.0,
+     "reasons": [
+      "exploracion_unseen",
+      "nunca_practicado",
+      "confianza_baja:0.00",
+      "sin_recencia",
+      "dificultad:EASY(baja_evidencia(n=0))"
+     ],
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0001"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC11",
+   "fails": [],
+   "result": [
+    {
+     "confidence": 0.5,
+     "error_signals": [],
+     "evidence_level": "MODERATE",
+     "knowledge_unit_id": "formula:eq-02-0005",
+     "mastery": 0.5,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 27.5,
+     "reasons": [
+      "mastery:0.50",
+      "evidencia:MODERATE(n=2)",
+      "fallo_reciente:0d"
+     ],
+     "recency_signal": 0.5,
+     "recommended_action": "REINFORCE",
+     "unit_kind": "formula"
+    },
+    {
+     "confidence": 0.5,
+     "error_signals": [],
+     "evidence_level": "MODERATE",
+     "knowledge_unit_id": "formula:eq-02-0006",
+     "mastery": 0.5,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 21.5,
+     "reasons": [
+      "mastery:0.50",
+      "evidencia:MODERATE(n=2)"
+     ],
+     "recency_signal": 0.2,
+     "recommended_action": "REINFORCE",
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC12",
+   "fails": [],
+   "result": [
+    {
+     "confidence": 0.6,
+     "error_signals": [],
+     "evidence_level": "HIGH",
+     "knowledge_unit_id": "formula:eq-02-0007",
+     "mastery": 0.6,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 40.0,
+     "reasons": [
+      "mastery:0.60",
+      "evidencia:HIGH(n=4)",
+      "sin_practicar_desde:61d"
+     ],
+     "recency_signal": 1.0,
+     "recommended_action": "REINFORCE",
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC13",
+   "fails": [],
+   "result": [
+    {
+     "confidence": 0.5,
+     "error_signals": [
+      "UNIT_ERROR"
+     ],
+     "evidence_level": "HIGH",
+     "knowledge_unit_id": "formula:eq-02-0003",
+     "mastery": 0.55,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 41.5,
+     "reasons": [
+      "mastery:0.55",
+      "evidencia:HIGH(n=4)",
+      "raiz:UNIT_ERROR",
+      "fallo_reciente:0d"
+     ],
+     "recency_signal": 0.5,
+     "recommended_action": "REINFORCE",
+     "unit_kind": "formula"
+    },
+    {
+     "confidence": 0.25,
+     "error_signals": [
+      "FORMULA_ERROR"
+     ],
+     "evidence_level": "LOW",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "mastery": 0.0,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 40.0,
+     "reasons": [
+      "mastery:0.00",
+      "evidencia:LOW(n=1)",
+      "confianza_baja:0.25",
+      "raiz:FORMULA_ERROR",
+      "fallo_reciente:0d"
+     ],
+     "recency_signal": 0.5,
+     "recommended_action": "PRACTICE",
+     "unit_kind": "formula"
+    },
+    {
+     "confidence": 0.7,
+     "error_signals": [],
+     "evidence_level": "HIGH",
+     "knowledge_unit_id": "formula:eq-02-0004",
+     "mastery": 0.85,
+     "policy_id": "priority-policy",
+     "policy_version": "v1",
+     "priority_score": 11.5,
+     "reasons": [
+      "mastery:0.85",
+      "evidencia:HIGH(n=5)"
+     ],
+     "recency_signal": 0.2,
+     "recommended_action": "CHALLENGE",
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC14",
+   "fails": [],
+   "result": [
+    {
+     "action": "REINFORCE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "priority": 56.5,
+     "reasons": [
+      "mastery:0.10",
+      "evidencia:MODERATE(n=3)",
+      "confianza_baja:0.20",
+      "raiz_repetida:FORMULA_ERROR",
+      "fallo_reciente:0d",
+      "dificultad:EASY(at_risk_consolida)"
+     ],
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0034"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC15",
+   "fails": [],
+   "result": {
+    "difficulty": "HARD",
+    "policy_id": "difficulty-policy",
+    "policy_version": "v1",
+    "reasons": [
+     "progresion_conservadora(+1)"
+    ]
+   }
+  },
+  {
+   "case_id": "AC16",
+   "fails": [],
+   "result": {
+    "difficulty": "HARD",
+    "policy_id": "difficulty-policy",
+    "policy_version": "v1",
+    "reasons": [
+     "tope_conservador_sin_historial_HARD",
+     "progresion_conservadora(+0)"
+    ]
+   }
+  },
+  {
+   "case_id": "AC17",
+   "fails": [],
+   "result": {
+    "difficulty": "EASY",
+    "policy_id": "difficulty-policy",
+    "policy_version": "v1",
+    "reasons": [
+     "baja_evidencia(n=1)"
+    ]
+   }
+  },
+  {
+   "case_id": "AC18",
+   "fails": [],
+   "result": [
+    {
+     "action": "REINFORCE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0003",
+     "priority": 36.5,
+     "reasons": [
+      "mastery:0.50",
+      "evidencia:MODERATE(n=3)",
+      "raiz_repetida:CALCULATION_ERROR",
+      "fallo_reciente:0d",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.33,conf=0.50,n=3))"
+     ],
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0003"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC19",
+   "fails": [],
+   "result": [
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "priority": 48.0,
+     "reasons": [
+      "mastery:0.20",
+      "evidencia:MODERATE(n=3)",
+      "confianza_baja:0.30",
+      "sin_recencia",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.00,conf=0.30,n=0))"
+     ],
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0034"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  },
+  {
+   "case_id": "AC20",
+   "fails": [],
+   "result": [
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0034",
+     "priority": 44.5,
+     "reasons": [
+      "mastery:0.30",
+      "evidencia:MODERATE(n=2)",
+      "confianza_baja:0.30",
+      "sin_recencia",
+      "dificultad:EASY(sin_evidencia_para_subir(rate=0.00,conf=0.30,n=0))",
+      "ancestro_en_contexto:topic:T02"
+     ],
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0034"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    },
+    {
+     "action": "PRACTICE",
+     "difficulty": "EASY",
+     "knowledge_unit_id": "formula:eq-02-0001",
+     "priority": 35.0,
+     "reasons": [
+      "exploracion_unseen",
+      "nunca_practicado",
+      "confianza_baja:0.00",
+      "sin_recencia",
+      "dificultad:EASY(baja_evidencia(n=0))"
+     ],
+     "target_concepts": [],
+     "target_formulas": [
+      "eq-02-0001"
+     ],
+     "target_section": null,
+     "target_topic": 2,
+     "unit_kind": "formula"
+    }
+   ]
+  }
+ ],
+ "policy": "priority-policy@v1+difficulty-policy@v1"
+}

@@ -1,0 +1,443 @@
+{
+ "summary": {
+  "provider": "extractive-fallback",
+  "n": 72,
+  "passed": 70,
+  "elapsed_s": 16.2
+ },
+ "items": [
+  {
+   "id": "RC01",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RC02",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RC03",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RC04",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RC05",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RC06",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RC07",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RC08",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RC09",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RC10",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RF01",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RF02",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RF03",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RF04",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RF05",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RF06",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RF07",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RF08",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RF09",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RF10",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RV01",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RV02",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RV03",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RV04",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RV05",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RU01",
+   "pass": false,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RU02",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RU03",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RU04",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RU05",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RP01",
+   "pass": false,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RP02",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RP03",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RP04",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RP05",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RP06",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RP07",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RP08",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RX01",
+   "pass": true,
+   "status": "CALC-DETERMINISTA",
+   "provider": "calculator"
+  },
+  {
+   "id": "RX02",
+   "pass": true,
+   "status": "CALC-DETERMINISTA",
+   "provider": "calculator"
+  },
+  {
+   "id": "RX03",
+   "pass": true,
+   "status": "CALC-DETERMINISTA",
+   "provider": "calculator"
+  },
+  {
+   "id": "RX04",
+   "pass": true,
+   "status": "CALC-DETERMINISTA",
+   "provider": "calculator"
+  },
+  {
+   "id": "RX05",
+   "pass": true,
+   "status": "CALC-DETERMINISTA",
+   "provider": "calculator"
+  },
+  {
+   "id": "RX06",
+   "pass": true,
+   "status": "CALC-DETERMINISTA",
+   "provider": "calculator"
+  },
+  {
+   "id": "RX07",
+   "pass": true,
+   "status": "CALC-DETERMINISTA",
+   "provider": "calculator"
+  },
+  {
+   "id": "RX08",
+   "pass": true,
+   "status": "CALC-DETERMINISTA",
+   "provider": "calculator"
+  },
+  {
+   "id": "RX09",
+   "pass": true,
+   "status": "CALC-DETERMINISTA",
+   "provider": "calculator"
+  },
+  {
+   "id": "RX10",
+   "pass": true,
+   "status": "CALC-DETERMINISTA",
+   "provider": "calculator"
+  },
+  {
+   "id": "RA01",
+   "pass": true,
+   "status": "ABSTAIN",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RA02",
+   "pass": true,
+   "status": "ABSTAIN",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RA03",
+   "pass": true,
+   "status": "ABSTAIN",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RA04",
+   "pass": true,
+   "status": "ABSTAIN",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RA05",
+   "pass": true,
+   "status": "ABSTAIN",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RA06",
+   "pass": true,
+   "status": "ABSTAIN",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RA07",
+   "pass": true,
+   "status": "ABSTAIN",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RA08",
+   "pass": true,
+   "status": "ABSTAIN",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RA09",
+   "pass": true,
+   "status": "ABSTAIN",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RA10",
+   "pass": true,
+   "status": "ABSTAIN",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RD01",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RD02",
+   "pass": true,
+   "note": "no formula externa aceptada",
+   "status": "ABSTAIN",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RD03",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RD04",
+   "pass": true,
+   "status": "ABSTAIN",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RD05",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RD06",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RD07",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RD08",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RD09",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RD10",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RM01",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RM02",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RM03",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  },
+  {
+   "id": "RM04",
+   "pass": true,
+   "status": "VERIFIED",
+   "provider": "extractive-fallback"
+  }
+ ]
+}
