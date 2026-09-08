@@ -1,7 +1,11 @@
 # F12 — Fundaciones para producción (design)
 
 Fecha: 2026-09-08
-Estado: aprobado, pendiente de plan de implementación.
+Estado: **SUPERSEDED** por `2026-09-08-local-operations-design.md`.
+Motivo: el objetivo se fijó en "local, un solo usuario"; los perfiles, el
+aislamiento entre estudiantes y el test de dos perfiles quedan descartados.
+Lo que sobrevive (`.env`, migraciones, backup/restore, CSRF, identidad
+única `SM_STUDENT`) se consolidó en la spec que sustituye a esta.
 
 ## 1. Objetivo y criterio de salida
 
