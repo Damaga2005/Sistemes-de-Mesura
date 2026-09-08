@@ -50,9 +50,14 @@ def migrate(con: sqlite3.Connection, db_name: str) -> int:
         if num <= current:
             continue
         sql = path.read_text(encoding="utf-8")
-        with con:                                  # transaccion
-            con.executescript(sql)
-            con.execute("PRAGMA user_version = %d" % num)
+        # cada migracion en su propia transaccion: el bump de user_version
+        # confirma junto con las sentencias del script y revierte con ellas.
+        try:
+            con.executescript(
+                "BEGIN;\n" + sql + "\nPRAGMA user_version = %d;\nCOMMIT;" % num)
+        except Exception:
+            con.rollback()
+            raise
         current = num
     if current < target:                           # marcador sin script (001)
         con.execute("PRAGMA user_version = %d" % target)

@@ -46,3 +46,21 @@ def test_out_of_order_or_duplicate_script_is_caught(tmp_path, monkeypatch):
     con = sqlite3.connect(tmp_path / "s.sqlite")
     with pytest.raises(RuntimeError, match="gap|secuencia"):
         migrate.migrate(con, "student")
+
+
+def test_failed_script_rolls_back_atomically(tmp_path, monkeypatch):
+    d = tmp_path / "student"
+    d.mkdir()
+    (d / "001_baseline.sql").write_text("-- baseline\n", encoding="utf-8")
+    (d / "002_bad.sql").write_text(
+        "CREATE TABLE atomic_probe (x);\nTHIS IS NOT VALID SQL;\n", encoding="utf-8")
+    monkeypatch.setattr(migrate, "MIGRATIONS_DIR", tmp_path)
+    monkeypatch.setitem(migrate.TARGETS, "student", 2)
+    con = sqlite3.connect(tmp_path / "s.sqlite")
+    with pytest.raises(sqlite3.OperationalError):
+        migrate.migrate(con, "student")
+    # el fallo en la 2a sentencia revierte la 1a y deja user_version intacto
+    assert _v(con) == 1
+    tables = [r[0] for r in con.execute(
+        "SELECT name FROM sqlite_master WHERE type='table'")]
+    assert "atomic_probe" not in tables
