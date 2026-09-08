@@ -1,0 +1,405 @@
+{
+ "cases": [
+  {
+   "case_id": "L01",
+   "fails": []
+  },
+  {
+   "case_id": "L02",
+   "fails": []
+  },
+  {
+   "case_id": "L03",
+   "fails": []
+  },
+  {
+   "case_id": "L04",
+   "fails": []
+  },
+  {
+   "case_id": "L05",
+   "fails": []
+  },
+  {
+   "case_id": "L06",
+   "fails": []
+  },
+  {
+   "case_id": "L07",
+   "fails": []
+  },
+  {
+   "case_id": "L08",
+   "fails": []
+  },
+  {
+   "case_id": "L09",
+   "fails": []
+  },
+  {
+   "case_id": "L10",
+   "fails": []
+  },
+  {
+   "case_id": "L11",
+   "fails": []
+  },
+  {
+   "case_id": "L12",
+   "fails": []
+  },
+  {
+   "case_id": "L13",
+   "fails": []
+  },
+  {
+   "case_id": "L14",
+   "fails": []
+  },
+  {
+   "case_id": "L15",
+   "fails": []
+  },
+  {
+   "case_id": "Q01",
+   "fails": []
+  },
+  {
+   "case_id": "Q02",
+   "fails": []
+  },
+  {
+   "case_id": "Q03",
+   "fails": []
+  },
+  {
+   "case_id": "Q04",
+   "fails": []
+  },
+  {
+   "case_id": "Q05",
+   "fails": []
+  },
+  {
+   "case_id": "Q06",
+   "fails": []
+  },
+  {
+   "case_id": "Q07",
+   "fails": []
+  },
+  {
+   "case_id": "Q08",
+   "fails": []
+  },
+  {
+   "case_id": "Q09",
+   "fails": []
+  },
+  {
+   "case_id": "Q10",
+   "fails": []
+  },
+  {
+   "case_id": "Q11",
+   "fails": []
+  },
+  {
+   "case_id": "Q12",
+   "fails": []
+  },
+  {
+   "case_id": "Q13",
+   "fails": []
+  },
+  {
+   "case_id": "Q14",
+   "fails": []
+  },
+  {
+   "case_id": "Q15",
+   "fails": []
+  },
+  {
+   "case_id": "P01",
+   "fails": []
+  },
+  {
+   "case_id": "P02",
+   "fails": []
+  },
+  {
+   "case_id": "P03",
+   "fails": []
+  },
+  {
+   "case_id": "P04",
+   "fails": []
+  },
+  {
+   "case_id": "P05",
+   "fails": []
+  },
+  {
+   "case_id": "P06",
+   "fails": []
+  },
+  {
+   "case_id": "P07",
+   "fails": []
+  },
+  {
+   "case_id": "P08",
+   "fails": []
+  },
+  {
+   "case_id": "P09",
+   "fails": []
+  },
+  {
+   "case_id": "P10",
+   "fails": []
+  },
+  {
+   "case_id": "T01",
+   "fails": []
+  },
+  {
+   "case_id": "T02",
+   "fails": []
+  },
+  {
+   "case_id": "T03",
+   "fails": []
+  },
+  {
+   "case_id": "T04",
+   "fails": []
+  },
+  {
+   "case_id": "T05",
+   "fails": []
+  },
+  {
+   "case_id": "T06",
+   "fails": []
+  },
+  {
+   "case_id": "T07",
+   "fails": []
+  },
+  {
+   "case_id": "T08",
+   "fails": []
+  },
+  {
+   "case_id": "T09",
+   "fails": []
+  },
+  {
+   "case_id": "T10",
+   "fails": []
+  },
+  {
+   "case_id": "S01",
+   "fails": []
+  },
+  {
+   "case_id": "S02",
+   "fails": []
+  },
+  {
+   "case_id": "S03",
+   "fails": []
+  },
+  {
+   "case_id": "S04",
+   "fails": []
+  },
+  {
+   "case_id": "S05",
+   "fails": []
+  },
+  {
+   "case_id": "S06",
+   "fails": []
+  },
+  {
+   "case_id": "S07",
+   "fails": []
+  },
+  {
+   "case_id": "S08",
+   "fails": []
+  },
+  {
+   "case_id": "S09",
+   "fails": []
+  },
+  {
+   "case_id": "S10",
+   "fails": []
+  },
+  {
+   "case_id": "G01",
+   "fails": []
+  },
+  {
+   "case_id": "G02",
+   "fails": []
+  },
+  {
+   "case_id": "G03",
+   "fails": []
+  },
+  {
+   "case_id": "G04",
+   "fails": []
+  },
+  {
+   "case_id": "G05",
+   "fails": []
+  },
+  {
+   "case_id": "G06",
+   "fails": []
+  },
+  {
+   "case_id": "G07",
+   "fails": []
+  },
+  {
+   "case_id": "G08",
+   "fails": []
+  },
+  {
+   "case_id": "G09",
+   "fails": []
+  },
+  {
+   "case_id": "G10",
+   "fails": []
+  },
+  {
+   "case_id": "R01",
+   "fails": []
+  },
+  {
+   "case_id": "R02",
+   "fails": []
+  },
+  {
+   "case_id": "R03",
+   "fails": []
+  },
+  {
+   "case_id": "R04",
+   "fails": []
+  },
+  {
+   "case_id": "R05",
+   "fails": []
+  },
+  {
+   "case_id": "R06",
+   "fails": []
+  },
+  {
+   "case_id": "R07",
+   "fails": []
+  },
+  {
+   "case_id": "R08",
+   "fails": []
+  },
+  {
+   "case_id": "R09",
+   "fails": []
+  },
+  {
+   "case_id": "R10",
+   "fails": []
+  },
+  {
+   "case_id": "X01",
+   "fails": []
+  },
+  {
+   "case_id": "X02",
+   "fails": []
+  },
+  {
+   "case_id": "X03",
+   "fails": []
+  },
+  {
+   "case_id": "X04",
+   "fails": []
+  },
+  {
+   "case_id": "X05",
+   "fails": []
+  },
+  {
+   "case_id": "X06",
+   "fails": []
+  },
+  {
+   "case_id": "X07",
+   "fails": []
+  },
+  {
+   "case_id": "X08",
+   "fails": []
+  },
+  {
+   "case_id": "X09",
+   "fails": []
+  },
+  {
+   "case_id": "X10",
+   "fails": []
+  },
+  {
+   "case_id": "B01",
+   "fails": []
+  },
+  {
+   "case_id": "B02",
+   "fails": []
+  },
+  {
+   "case_id": "B03",
+   "fails": []
+  },
+  {
+   "case_id": "B04",
+   "fails": []
+  },
+  {
+   "case_id": "B05",
+   "fails": []
+  },
+  {
+   "case_id": "C01",
+   "fails": []
+  },
+  {
+   "case_id": "C02",
+   "fails": []
+  },
+  {
+   "case_id": "C03",
+   "fails": []
+  },
+  {
+   "case_id": "C04",
+   "fails": []
+  },
+  {
+   "case_id": "C05",
+   "fails": []
+  }
+ ],
+ "spec": "exam-ux-1.0"
+}

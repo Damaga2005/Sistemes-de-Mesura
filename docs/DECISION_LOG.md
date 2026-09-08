@@ -229,3 +229,41 @@ Hallazgos transversales de la auditoría B1–B19 (previos al veredicto):
 | D138 | Concurrencia P2 con evidencia empírica | Threads: 8/8, 1+5 replayed, doble todo consistente | Subir a P1 sin llamantes (ruido) | Supuesto documentado |
 | D139 | Re-baselines F9 (5 artefactos + GENDB + student) aceptados | Causas identificadas una a una, contenido verificado | Congelar (falso) | Trazabilidad total |
 | D140 | OPERATIONALLY READY (20 gates) | P0/P1 cero + evidencia simultánea | CONDITIONAL (innecesario) | Fin de fase |
+
+## Fase 10 Bloque B2 (diseño application layer)
+
+| # | Decisión | Motivo | Alternativas | Consecuencia |
+|---|---|---|---|---|
+| D141 | Sin clase base de workflow; convención `(ctx,…)` + `AppError` | Base común añade complejidad sin valor | Jerarquía start/step/complete | Workflows explícitos |
+| D142 | `ApplicationSession` efímera, sin tabla | Estado durable ya en F5/F7 | Persistir sesión (duplicación) | Serializa el caller |
+| D143 | `attempt_id` derivado `app-<session>-<n>` en Practice | Idempotencia sin colisiones con F5/F7 | Reutilizar attex (mezcla dominios) | Trazabilidad por prefijo |
+| D144 | Fachada Exam 1:1 sobre F7, sin lógica | Cualquier desviación rompería máquina/scoring | Envolver con atajos | F7 intacto |
+| D145 | Mapeo de errores explícito, resto propaga | `except Exception` como flujo oculta P0 | Normalizar todo | Fail-loud |
+
+## Fase 10 Bloque B4 (NO-GO por P1 verificado)
+
+| # | Decisión | Motivo | Alternativas | Consecuencia |
+|---|---|---|---|---|
+| D146 | B4 NO-GO: `IndexError` en `generate(NUMERICAL)` sin fórmula (F4) | Ruta certificada concepto+REINFORCE+raíz→NUMERICAL vacío; F6 `step` también expone traceback; viola contrato de rechazo | Degradar a P2 para forzar GO (prohibido) / parchear F4 aquí (viola STOP) | STOP; fix de 3 líneas + test en bloque específico futuro |
+| D147 | B4 GO tras FIX: guarda `_gen_numerical` + benchmark 54/54 x2 + regresion 712 | FIX verificado (rechazo limpio + `rejected` en loop); workflows exam/review testeados; benchmark scriptado verde dos pasadas; 0 P0/P1; GENDB/KB/eval intactas (hash verificado) | Reabrir debate TF-8.5/COMPLETE (conducta F certificada, fuera de alcance) | B4 cerrado; ver `docs/PHASE_10_WORKFLOWS.md` |
+| D148 | B5 GO: integracion verificada sin tocar codigo certificado | Preaudit P0/P1 cero; benchmark 76/76 x2 (incl. 2 subprocesos reales + proveedor roto + REAL_EXAM ciego); 15 tests nuevos; regresion 727; formula 2896/2896; GENDB/KB/eval intactas | Endurecer F4 (prohibido por regla especial P2) / B6 automatico (prohibido: STOP) | B5 cerrado; ver `docs/PHASE_10_B5.md` |
+| D149 | P0 grade concurrente (F7): el perdedor borra filas COMMITTED del ganador | Repro 4/4 (2 y 4 hilos) + CC02 rojo x2; mecanismo en `_cleanup_partial` incondicional; GRADED+0 filas irrecuperable con SUCCESS devuelto | Degradar a P1/P2 (niega state-corruption) / parchear F7 aqui (viola STOP) | NO-GO; fix en bloque F7 + re-gates |
+| D150 | F10 NOT CERTIFIED (condicional, solo bloquea P0-1) | Todo F10 en verde: 150 tests, 119/120 x2, 2896/2896, 10/10 IDOR, blind 2 rutas, aislamiento 7/7 | Certificar con P0 abierto (prohibido) | Ver docs/PHASE_10_CERTIFICATION.md; F11 bloqueado; STOP |
+| D151 | F7 P0-1 CLOSED: claim serializado + cleanup propio en grading | BEGIN IMMEDIATE + adopcion de ganador + INSERT OR IGNORE + cleanup con guarda; 10 tests (hilos y procesos); 120/120 x2; 738 regression; resto intacto | Lock Python (no sobrevive a procesos) / borrar cleanup (rompe GRADING_INCOMPLETE) | Ver docs/PHASE_7_P0_1_FIX.md; siguiente: F10-B6 RE-GATE; STOP |
+| D152 | F10 CERTIFIED tras re-gate (P0-1 F7 cerrado y verificado) | 120/120 x2, 738+156 en verde, 2896/2896, 7/7 aislamiento, P0/P1 cero; 2 live excluidos por politica de entorno | Certificar con P0 abierto (ya no existe) | F11 UNBLOCKED; STOP |
+| D153 | F11-B0 GO: preauditoria UI/UX sin implementacion | 0 ficheros HTML/CSS/JS/frameworks: solo 3 CLIs + app/application certificada; journeys/IA/gaps B/C/D separados; F0-F10 intactos (150 tests + hashes) | Implementar UI en B0 (prohibido) | NEXT F11-B1 Design System/App Shell; STOP |
+| D154 | F11-B1 GO: Design System + App Shell desde cero | HTML estatico + CSS/JS vanilla, 0 deps; 26 primitivas, dark completo, shell responsive a11y; 17 tests; 52 KB; F0-F10 intactas | Framework/Flask (peso injustificado) | NEXT F11-B2; STOP |
+| D155 | F11-B2 GO: Study/Tutor/Practice funcionales | Bridge stdlib (13 endpoints) + renderer LaTeX whitelist + 4 paginas/3 JS; threads por-hilo tras hallar retriever compartido; 48 tests web; 786 regression; F0-F10 intactas | Flask/deps pesadas (injustificadas) | NEXT F11-B3; STOP |
+| D156 | F11-B3 GO: Adaptive/Mastery UX | 5 endpoints learn + pagina Learning + loop F6 integro (item round-trip); 59 tests web; 797 regression; F0-F10 intactas | Mostrar priority_score/thresholds (duplicaria dominio) | NEXT F11-B4; STOP |
+| D157 | F11-B4 UI consume proyecciones persistentes de F10/F7 | La metadata en memoria por hilo rompía refresh/reentrada y el probing de preguntas divergía del snapshot | Mantener meta efímera / inferir conteo desde errores | Snapshot y metadata seguras; sin lógica de dominio en JS |
+| D158 | F11-B4 NO-GO tras benchmark determinista 91/100 x2 | Persisten fallos contractuales de MULTI_STEP, grading/review/blind y un código de error; además 2 live tests tienen 401 | Parchear F7/F10 desde UX (prohibido) | STOP; resolver contratos previos y re-gatear |
+| D159 | F11-B4-FIX GO condicionado a regresión completa | La fuga REAL_EXAM era de presentation adapter; los demás fallos eran expectativas stale o abstención contractual de F4/F7 | Modificar scoring/generación (fuera de alcance) | Whitelist HTTP, benchmark 100/100 x2, sin cambios de dominio |
+| D160 | F11-B5 History es una proyección read-only de sesiones/resultados F7 | F7 ya persiste fechas, estados y resultados; una tabla nueva duplicaría el dominio y rompería idempotencia | Persistir eventos de UI / ampliar SQLite desde web | DTO de historial en F10, ownership delegado a F7 |
+| D161 | Results HTTP usa whitelist y Review/History tienen entradas directas | El navegador necesita navegación reentrable, pero no debe recibir IDs de corrección ni campos internos | Pasar payloads completos / estado JS compartido | Refresh seguro, semántica de errores preservada |
+| D162 | B6 conserva 125 casos del benchmark | La distribución explícita del prompt suma 125 aunque el objetivo textual diga 120 | Eliminar cinco casos para forzar 120/120 | `125/125 ×2`; P2 documental trazable |
+| D163 | F11 Product Experience CERTIFIED | Todos los checks de integración pasan; los únicos fallos son Gemini 401 externos | Certificar ignorando evidencia / reabrir F0–F10 | STOP; siguiente trabajo fuera de F11 |
+| D164 | Fix B6: eliminar `catch` desparejado de Practice | `node --check` demostraba que `practice.js` no podía cargar; el test estático previo no cubría sintaxis | Ignorar porque pytest Python estaba verde | Practice vuelve a cargar; regresión Node añadida |
+| D165 | F13 empieza con Documents read-only y contrato Calendar vacío | La KB ya contiene documentos reales; no existe una fuente académica de horarios y fabricar eventos violaría la política de abstención | Crear datos ficticios / introducir persistencia de calendario antes de resolver identidad | Vertical útil y honesto; importador + eventos quedan para el siguiente bloque |
+| D166 | CalendarSource acepta solo JSON `version: 1` con trazabilidad obligatoria | Un calendario sin `source_path`/`source_hash` no es auditable; ordenar por inicio+id fija el resultado | Aceptar payload libre / ordenar en frontend | Importación local determinista; eventos inválidos fallan con `VALIDATION_ERROR` |
+| D167 | Documents conserva `doc_id` hasta la pantalla de seccions | El catálogo podía abrir solo el tema y perder la intención del usuario | Inferir el documento en frontend / cargar todo el tema | Navegación reentrable documento → secció → contingut |
+| D168 | Packaging inicial con setuptools y CLI stdlib | El proyecto no necesita dependencias runtime nuevas; un único entry point cubre desarrollo y distribución local | Framework de despliegue / contenedor prematuro | `pyproject.toml` portable; instalador y despliegue quedan para F14 posterior |

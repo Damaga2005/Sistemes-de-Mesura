@@ -107,7 +107,8 @@ class ExamGradingService:
                 corr = out["correction"]
                 self._store_question_result(
                     session_id, pos, sess["exam_id"], inst, ans, aid, corr, t)
-            result = self._aggregate_and_store(session_id, t, origin)
+            result = self._aggregate_and_store(session_id, t, origin,
+                                               student_id)
         except Exception as e:  # noqa: BLE001
             self._cleanup_partial(session_id)
             if isinstance(e, ExamError):
@@ -119,9 +120,22 @@ class ExamGradingService:
 
     def _cleanup_partial(self, session_id: str) -> None:
         """Borra filas de resultado parciales (la evidencia F5 real
-        persiste: es correccion valida, deduplicada al reintentar)."""
+        persiste: es correccion valida, deduplicada al reintentar).
+
+        P0-1: NUNCA borra estado COMMITTED de otra ejecucion. Si ya
+        existe resultado commiteado (o la sesion esta GRADED), el
+        estado pertenece al ganador y se conserva intacto.
+        """
         con = self.exam.exams.connect()
         try:
+            win = con.execute("SELECT 1 FROM exam_results WHERE "
+                              "session_id=?", (session_id,)).fetchone()
+            if win:
+                return
+            st = con.execute("SELECT status FROM exam_sessions WHERE "
+                             "session_id=?", (session_id,)).fetchone()
+            if st and st[0] == "GRADED":
+                return
             con.execute("DELETE FROM exam_question_results WHERE "
                         "session_id=?", (session_id,))
             con.execute("DELETE FROM exam_results WHERE session_id=?",
@@ -131,18 +145,16 @@ class ExamGradingService:
             con.close()
 
     def _store_question_result(self, session_id: str, pos: int, exam_id: str,
-                               inst: dict, answer: str, attempt_id: str,
-                               corr: dict, graded_at: str) -> None:
+                                 inst: dict, answer: str, attempt_id: str,
+                                 corr: dict, graded_at: str) -> None:
+        # P0-1: INSERT atomico (sin check-then-insert): duplicados
+        # concurrentes benignos, entradas deterministas identicas.
         con = self.exam.exams.connect()
         try:
-            exists = con.execute("SELECT 1 FROM exam_question_results WHERE "
-                                 "session_id=? AND position=?",
-                                 (session_id, pos)).fetchone()
-            if exists:
-                return
             earned = thou(inst["points"], corr["score"])
             con.execute(
-                "INSERT INTO exam_question_results(session_id,position,"
+                "INSERT OR IGNORE INTO exam_question_results(session_id,"
+                "position,"
                 "exam_id,question_id,question_version,fingerprint,"
                 "points_avail_thou,points_earned_thou,correction_id,"
                 "attempt_id,correction_status,blank,graded_at,versions_json)"
@@ -163,9 +175,19 @@ class ExamGradingService:
             con.close()
 
     def _aggregate_and_store(self, session_id: str, graded_at: str,
-                             origin: str) -> dict:
+                               origin: str, student_id: str) -> dict:
         con = self.exam.exams.connect()
         try:
+            # P0-1: claim serializado. El primero en commitear gana; el
+            # resto adopta su resultado (equivalente) en vez de competir
+            # y limpiar. Sobrevive a procesos separados (lock SQLite).
+            con.execute("BEGIN IMMEDIATE")
+            win = con.execute("SELECT 1 FROM exam_results WHERE "
+                              "session_id=?", (session_id,)).fetchone()
+            if win:
+                result = self._read_result(con, session_id, student_id)
+                con.commit()
+                return result
             sess = self.exam._load_session(con, session_id)
             qrows = con.execute(
                 "SELECT position, question_id, points_avail_thou,"

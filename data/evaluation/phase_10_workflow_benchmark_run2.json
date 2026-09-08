@@ -1,0 +1,221 @@
+{
+ "cases": [
+  {
+   "case_id": "T01",
+   "fails": []
+  },
+  {
+   "case_id": "T02",
+   "fails": []
+  },
+  {
+   "case_id": "T03",
+   "fails": []
+  },
+  {
+   "case_id": "T04",
+   "fails": []
+  },
+  {
+   "case_id": "T05",
+   "fails": []
+  },
+  {
+   "case_id": "T06",
+   "fails": []
+  },
+  {
+   "case_id": "T07",
+   "fails": []
+  },
+  {
+   "case_id": "T08",
+   "fails": []
+  },
+  {
+   "case_id": "P01",
+   "fails": []
+  },
+  {
+   "case_id": "P02",
+   "fails": []
+  },
+  {
+   "case_id": "P03",
+   "fails": []
+  },
+  {
+   "case_id": "P04",
+   "fails": []
+  },
+  {
+   "case_id": "P05",
+   "fails": []
+  },
+  {
+   "case_id": "P06",
+   "fails": []
+  },
+  {
+   "case_id": "P07",
+   "fails": []
+  },
+  {
+   "case_id": "P08",
+   "fails": []
+  },
+  {
+   "case_id": "P09",
+   "fails": []
+  },
+  {
+   "case_id": "P10",
+   "fails": []
+  },
+  {
+   "case_id": "A01",
+   "fails": []
+  },
+  {
+   "case_id": "A02",
+   "fails": []
+  },
+  {
+   "case_id": "A03",
+   "fails": []
+  },
+  {
+   "case_id": "A04",
+   "fails": []
+  },
+  {
+   "case_id": "A05",
+   "fails": []
+  },
+  {
+   "case_id": "A06",
+   "fails": []
+  },
+  {
+   "case_id": "A07",
+   "fails": []
+  },
+  {
+   "case_id": "A08",
+   "fails": []
+  },
+  {
+   "case_id": "E01",
+   "fails": []
+  },
+  {
+   "case_id": "E02",
+   "fails": []
+  },
+  {
+   "case_id": "E03",
+   "fails": []
+  },
+  {
+   "case_id": "E04",
+   "fails": []
+  },
+  {
+   "case_id": "E05",
+   "fails": []
+  },
+  {
+   "case_id": "E06",
+   "fails": []
+  },
+  {
+   "case_id": "R01",
+   "fails": []
+  },
+  {
+   "case_id": "R02",
+   "fails": []
+  },
+  {
+   "case_id": "R03",
+   "fails": []
+  },
+  {
+   "case_id": "R04",
+   "fails": []
+  },
+  {
+   "case_id": "R05",
+   "fails": []
+  },
+  {
+   "case_id": "R06",
+   "fails": []
+  },
+  {
+   "case_id": "X01",
+   "fails": []
+  },
+  {
+   "case_id": "X02",
+   "fails": []
+  },
+  {
+   "case_id": "X03",
+   "fails": []
+  },
+  {
+   "case_id": "X04",
+   "fails": []
+  },
+  {
+   "case_id": "X05",
+   "fails": []
+  },
+  {
+   "case_id": "S01",
+   "fails": []
+  },
+  {
+   "case_id": "S02",
+   "fails": []
+  },
+  {
+   "case_id": "S03",
+   "fails": []
+  },
+  {
+   "case_id": "S04",
+   "fails": []
+  },
+  {
+   "case_id": "I01",
+   "fails": []
+  },
+  {
+   "case_id": "I02",
+   "fails": []
+  },
+  {
+   "case_id": "I03",
+   "fails": []
+  },
+  {
+   "case_id": "V01",
+   "fails": []
+  },
+  {
+   "case_id": "V02",
+   "fails": []
+  },
+  {
+   "case_id": "V03",
+   "fails": []
+  },
+  {
+   "case_id": "D01",
+   "fails": []
+  }
+ ],
+ "spec": "app-1.0"
+}

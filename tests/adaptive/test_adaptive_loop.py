@@ -318,3 +318,87 @@ def test_gendb_has_no_benchmark_rows():
     finally:
         con.close()
     assert n == 0
+
+
+def test_numerical_without_formula_rejected_in_loop(tmp_path):
+    """P1 F10-B4 extremo a extremo: concepto + REINFORCE + raiz
+    UNIT_ERROR -> NUMERICAL sin formula -> rechazo contractual en
+    generate() y en AdaptiveLoop.step (sin IndexError, sin LLM,
+    sin pregunta persistida)."""
+    import json as _json
+    import sqlite3
+    from app.examiner.service import ExaminerEngine
+    from app.retrieval.service import RetrievalService
+    svc = _svc(tmp_path)
+    sid, uid = "num-nofid", "concept:magnitud"
+    con = sqlite3.connect("file:%s?mode=ro" % GENDB, uri=True)
+    try:
+        seed_qid = con.execute("SELECT question_id FROM questions WHERE "
+                               "topic=2 LIMIT 1").fetchone()[0]
+    finally:
+        con.close()
+    con = svc.store.connect()
+    try:
+        con.execute("INSERT OR IGNORE INTO students(student_id, created_at)"
+                    " VALUES(?,?)", (sid, "2026-01-01T00:00:00+00:00"))
+        con.execute("INSERT INTO attempts(attempt_id,student_id,question_id,"
+                    "question_version,exam_id,answer,created_at)"
+                    " VALUES(?,?,?,?,?,?,?)",
+                    ("att-num-1", sid, seed_qid, "4.0", "", "x",
+                     "2026-06-01T09:00:00+00:00"))
+        con.execute(
+            "INSERT INTO mastery_states(mastery_id,student_id,"
+            "knowledge_unit_id,unit_kind,score,confidence,attempt_count,"
+            "correct_count,incorrect_count,last_attempt,last_correct,"
+            "error_counts_json,status,policy_version)"
+            " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            ("ms-num-concept", sid, uid, "concept", 0.55, 0.5, 4, 2, 2,
+             "2026-06-01T09:00:00+00:00", "",
+             _json.dumps({"UNIT_ERROR": 2}), "DEVELOPING",
+             "mastery-policy-v1"))
+        for i, ts in enumerate(("2026-06-01T09:00:00+00:00",
+                                "2026-06-01T10:00:00+00:00")):
+            con.execute(
+                "INSERT INTO mastery_events(event_id,student_id,question_id,"
+                "attempt_id,correction_id,knowledge_unit_id,unit_kind,"
+                "old_score,new_score,old_confidence,new_confidence,reason,"
+                "evidence_json,policy_version,created_at)"
+                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                ("ev-num-%d" % i, sid, seed_qid, "att-num-1",
+                 "corr-num-1", uid, "concept", 0.5, 0.55, 0.5, 0.5,
+                 "seed",
+                 _json.dumps({"signal": 0.0,
+                              "root_errors": ["UNIT_ERROR"]}),
+                 "mastery-policy-v1", ts))
+        con.commit()
+    finally:
+        con.close()
+    calc = PriorityCalculator(svc)
+    prios = calc.calculate(sid, limit=10, now="2026-06-01T12:00:00+00:00")
+    top = [p for p in prios if p.knowledge_unit_id == uid]
+    assert top and top[0].recommended_action == "REINFORCE"
+    assert any(r.startswith("raiz:") or r.startswith("raiz_repetida:")
+               for r in top[0].reasons)
+    sel = LearningPathSelector(svc)
+    path = sel.select(sid, limit=3, now="2026-06-01T12:00:00+00:00")
+    assert path and path[0].knowledge_unit_id == uid
+    spec = sel.to_spec(path[0], seed=7)
+    assert spec.type == "NUMERICAL" and spec.formula_ids == ()
+    eng = ExaminerEngine(
+        RetrievalService(KB, str(ROOT / "data" / "index")), KB,
+        str(tmp_path / "q-loop.sqlite"))
+    assert eng.store.count() == 0
+    q, log = eng.generate(topic=spec.topic, section=spec.section,
+                          question_type="NUMERICAL",
+                          difficulty=spec.difficulty, seed=7)
+    assert q is None
+    assert log.get("rejected") == "NO_EVIDENCE_OR_GENERATION_FAILED"
+    assert eng.store.count() == 0
+    loop = AdaptiveLoop(svc)
+    out = loop.step(sid, eng, limit=3, seed=7,
+                    now="2026-06-01T12:00:00+00:00")
+    assert out["question"] is None
+    assert out["generate_log"].get("rejected") == \
+        "NO_EVIDENCE_OR_GENERATION_FAILED"
+    assert isinstance(out["recommendations"], list) and out["recommendations"]
+    assert eng.store.count() == 0

@@ -295,6 +295,40 @@ class ExamSessionService:
                 "quality": json.loads(spec["quality_json"]),
                 "versions": json.loads(spec["versions_json"])}
 
+    def read_exam(self, exam_id: str) -> dict:
+        """Read-only, safe projection used by application/presentation.
+
+        The blueprint and question bodies remain private.  The projection
+        contains only the metadata needed to render an exam overview and its
+        immutable snapshot.
+        """
+        con = self.exams.connect()
+        try:
+            spec = self._load_spec(con, exam_id)
+            instances = con.execute(
+                "SELECT position, question_id, question_version, fingerprint,"
+                " points, required FROM exam_questions WHERE exam_id=? "
+                "ORDER BY position", (exam_id,)).fetchall()
+            return {
+                "exam_id": exam_id,
+                "title": spec["title"],
+                "version": spec["version"],
+                "kind": spec["kind"],
+                "status": spec["status"],
+                "duration_seconds": spec["duration_seconds"],
+                "question_count": spec["question_count"],
+                "topics": json.loads(spec["topics_json"]),
+                "quality": json.loads(spec["quality_json"]),
+                "versions": json.loads(spec["versions_json"]),
+                "instances": [
+                    {"position": row[0], "question_id": row[1],
+                     "question_version": row[2], "fingerprint": row[3],
+                     "points": row[4], "required": bool(row[5])}
+                    for row in instances],
+            }
+        finally:
+            con.close()
+
     # ---------- sesiones ----------
     def create_session(self, exam_id: str, student_id: str) -> dict:
         con = self.exams.connect()

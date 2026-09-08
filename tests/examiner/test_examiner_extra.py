@@ -244,3 +244,14 @@ def test_versions_present(engine):
     assert q is not None
     assert q.generator_version == "examiner-4.0" and q.version == "4.0"
     assert q.seed == 42 and q.fingerprint and q.question_id.startswith("q-")
+
+
+def test_numerical_without_formula_rejected_contractually(engine):
+    """P1 F10-B4: NUMERICAL sin formula_ids debe rechazarse con motivo,
+    nunca IndexError. Sin LLM, sin escritura de pregunta invalida."""
+    store = QuestionStore(STORE)
+    before = store.count()
+    q, log = engine.generate(topic=2, question_type="NUMERICAL", seed=7)
+    assert q is None
+    assert log.get("rejected") == "NO_EVIDENCE_OR_GENERATION_FAILED"
+    assert store.count() == before

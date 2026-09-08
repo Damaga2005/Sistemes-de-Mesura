@@ -1,0 +1,77 @@
+/* Base (B1.6): reset mínim, tipografia, focus, reduced motion. */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-family: var(--font-family);
+  font-size: 100%;
+  line-height: var(--lh-normal);
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+  -webkit-text-size-adjust: 100%;
+}
+
+h1, .h1 { font-size: var(--fs-h1); line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight); font-weight: var(--fw-semibold);
+  margin: 0 0 var(--sp-sm); }
+h2, .h2 { font-size: var(--fs-h2); line-height: var(--lh-tight);
+  font-weight: var(--fw-semibold); margin: var(--sp-lg) 0 var(--sp-sm); }
+h3, .h3 { font-size: var(--fs-h3); font-weight: var(--fw-semibold);
+  margin: var(--sp-md) 0 var(--sp-sm); }
+p { margin: 0 0 var(--sp-md); }
+small, .caption { font-size: var(--fs-caption);
+  color: var(--text-secondary); }
+
+a { color: var(--accent); }
+a:hover { color: var(--accent-hover); }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.skip-link {
+  position: absolute; left: var(--sp-md); top: -100%;
+  background: var(--accent); color: var(--on-accent);
+  padding: var(--sp-sm) var(--sp-md); border-radius: var(--radius-sm);
+  z-index: 100; transition: top var(--duration-fast) var(--ease-standard);
+}
+.skip-link:focus { top: var(--sp-md); color: var(--on-accent); }
+
+img, svg { max-width: 100%; }
+table { border-collapse: collapse; width: 100%; }
+.table-wrap { overflow-x: auto; }
+
+/* Fórmules (B1.19): sub/sup reals, scroll horitzontal controlat. */
+.formula {
+  font-family: var(--font-mono);
+  overflow-x: auto;
+  padding: var(--sp-sm) var(--sp-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+}
+.formula sub { font-size: 0.75em; }
+.formula sup { font-size: 0.75em; }
+.fr { display: inline-flex; flex-direction: column;
+  vertical-align: middle; text-align: center; margin: 0 0.15em; }
+.fr .num { border-bottom: 1px solid currentcolor; padding: 0 0.3em; }
+.fr .den { padding: 0 0.3em; }
+.rt > span { border-top: 1px solid currentcolor; padding: 0 0.15em; }
+
+code, .mono { font-family: var(--font-mono); font-size: 0.9em; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -163,6 +163,8 @@ class ExaminerEngine:
         return q, {r["chunk_id"]: r["text"] for r in pack.results}
 
     def _gen_numerical(self, bp, seed):
+        if not bp.formula_ids:
+            return None, {}
         rec = EV.formula_record(self.kb_path, bp.formula_ids[0])
         gen = SG.gen_numerical(rec, seed)
         if not gen:

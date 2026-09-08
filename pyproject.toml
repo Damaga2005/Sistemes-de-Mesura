@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sistemes-de-mesura"
+version = "0.13.0"
+description = "Tutor verificable i entorn d'estudi per a Sistemes de Mesura"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+sistemes-web = "web.server:main"
+
+[tool.setuptools.packages.find]
+include = ["app*", "web*"]
+
+[tool.setuptools.package-data]
+web = ["*.html", "static/css/*.css", "static/js/*.js"]
