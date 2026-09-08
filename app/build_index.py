@@ -23,7 +23,7 @@ from app import paths as sm_paths  # noqa: E402
 
 WORKSPACE = sm_paths.package_dir()
 KB = WORKSPACE / "data" / "processed" / "knowledge.sqlite"
-INDEX_DIR = sm_paths.index_dir()
+INDEX_DIR = WORKSPACE / "data" / "index"
 
 
 def main() -> None:
