@@ -1,0 +1,3 @@
+-- 001 baseline: el esquema vive en el store (CREATE TABLE IF NOT EXISTS,
+-- idempotente). Esta migracion no ejecuta DDL; solo marca user_version = 1.
+-- Anade el proximo cambio de esquema como 002_<descripcion>.sql.

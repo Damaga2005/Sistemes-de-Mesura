@@ -65,6 +65,8 @@ class StudentStore:
         con = sqlite3.connect(self.path)
         try:
             con.executescript("PRAGMA foreign_keys=ON;" + SCHEMA)
+            from app.migrate import migrate as _migrate
+            _migrate(con, "student")
             con.commit()
         finally:
             con.close()

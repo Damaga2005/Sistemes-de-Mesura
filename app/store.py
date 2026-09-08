@@ -82,6 +82,8 @@ def write_knowledge(
     con = sqlite3.connect(path)
     try:
         con.executescript(KNOWLEDGE_SCHEMA)
+        from app.migrate import migrate as _migrate
+        _migrate(con, "knowledge")
         con.execute("INSERT INTO meta(key,value) VALUES('pipeline_version',?)", (PIPELINE_VERSION,))
         con.execute("INSERT INTO meta(key,value) VALUES('course',?)", (COURSE,))
         for r in manifest_rows:

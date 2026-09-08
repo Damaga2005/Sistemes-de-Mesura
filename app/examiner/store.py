@@ -44,6 +44,8 @@ class QuestionStore:
         con = sqlite3.connect(self.path)
         try:
             con.executescript(SCHEMA)
+            from app.migrate import migrate as _migrate
+            _migrate(con, "questions")
             con.commit()
             self._migrate(con)
             con.commit()

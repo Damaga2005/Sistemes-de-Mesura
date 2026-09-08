@@ -85,6 +85,8 @@ class ExamStore:
         con = sqlite3.connect(self.path)
         try:
             con.executescript(EXAM_SCHEMA)
+            from app.migrate import migrate as _migrate
+            _migrate(con, "exam_sessions")
             con.commit()
         finally:
             con.close()
