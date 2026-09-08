@@ -58,22 +58,25 @@ def _timestamp() -> str:
     return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
 
-def make_backup(out_dir: Path | None = None) -> Path:
-    root = Path(out_dir) if out_dir else _paths.backup_dir()
+def _mkdir_counter(root: Path, base: str) -> Path:
+    """Crea root/base, o root/base-1, base-2... si ya existe. Devuelve el dir."""
+    # ponytail: same-second callers collide on the base name; disambiguate with a
+    # counter suffix. Sub-second timestamps if millisecond sort order is needed.
     root.mkdir(parents=True, exist_ok=True)
-    ts = _timestamp()
-    snap = root / ts
-    # ponytail: two make_backup() calls in the same second collide on the
-    # timestamp dir; disambiguate with a counter suffix. Sub-second timestamps
-    # if this ever needs to be sortable to the millisecond.
+    cand = root / base
     n = 1
     while True:
         try:
-            snap.mkdir(exist_ok=False)
-            break
+            cand.mkdir(exist_ok=False)
+            return cand
         except FileExistsError:
-            snap = root / ("%s-%d" % (ts, n))
+            cand = root / ("%s-%d" % (base, n))
             n += 1
+
+
+def make_backup(out_dir: Path | None = None) -> Path:
+    root = Path(out_dir) if out_dir else _paths.backup_dir()
+    snap = _mkdir_counter(root, _timestamp())
     files = []
     for name in WRITABLE_DBS:
         src = _paths.data_dir() / name
@@ -95,6 +98,11 @@ def list_backups() -> list[dict]:
         return []
     out = []
     for d in sorted(root.iterdir(), reverse=True):
+        # snapshots pre-restore son copias de seguridad internas, no puntos de
+        # restauracion seleccionables: su dir lleva sufijo pero el manifest
+        # guarda el timestamp sin sufijo, asi que restore(timestamp) fallaria.
+        if "-pre-restore" in d.name:
+            continue
         m = d / "manifest.json"
         if d.is_dir() and m.is_file():
             data = json.loads(m.read_text(encoding="utf-8"))
@@ -116,7 +124,12 @@ def restore(timestamp: str) -> Path:
             raise RuntimeError(
                 "%s en el snapshot tiene user_version newer que %d" % (name, target))
     pre = make_backup(_paths.backup_dir())
-    pre = pre.rename(pre.with_name(pre.name + "-pre-restore"))
+    dest = pre.with_name(pre.name + "-pre-restore")
+    n = 1
+    while dest.exists():
+        dest = pre.with_name("%s-pre-restore-%d" % (pre.name, n))
+        n += 1
+    pre = pre.rename(dest)
     for name in WRITABLE_DBS:
         f = snap / name
         if f.is_file():

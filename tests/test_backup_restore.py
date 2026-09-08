@@ -56,3 +56,22 @@ def test_restore_refuses_newer_user_version(sm_home, monkeypatch):
     con.close()
     with pytest.raises(RuntimeError, match="newer|user_version"):
         backup.restore(snap.name)
+
+
+def test_list_backups_excludes_pre_restore(sm_home):
+    snap = backup.make_backup()
+    backup.restore(snap.name)
+    listed = backup.list_backups()
+    assert not any("-pre-restore" in e["path"] for e in listed)
+    assert not any("-pre-restore" in e["timestamp"] for e in listed)
+    # every listed row must be restorable by its timestamp
+    for e in listed:
+        backup.restore(e["timestamp"])
+
+
+def test_two_restores_in_quick_succession(sm_home):
+    snap = backup.make_backup()
+    p1 = backup.restore(snap.name)
+    p2 = backup.restore(snap.name)  # same second -> must not raise FileExistsError
+    assert p1 != p2
+    assert p1.is_dir() and p2.is_dir()
