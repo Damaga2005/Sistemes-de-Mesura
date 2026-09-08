@@ -361,11 +361,14 @@ def test_idempotency_manifest_hash():
 
 def test_idempotency_rebuild_stable():
     import json as _j
-    from app.build_index import INDEX_DIR, KB as _KB
+    from app.build_index import KB as _KB
     from app.retrieval.lexical import LexicalIndex
     from app.retrieval.semantic import TfidfIndex
     from app.retrieval.normalize_query import STOPWORDS
     import sqlite3 as _s
+    # F14: INDEX_DIR de build_index ahora apunta al destino escribible
+    # (app.paths.index_dir); el indice canonico versionado sigue en data/index.
+    INDEX_DIR = ROOT / "data" / "index"
     before = _j.loads((INDEX_DIR / "manifest.json").read_text(encoding="utf-8"))["content_hash"]
     con = _s.connect("file:%s?mode=ro" % _KB, uri=True)
     try:

@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import html
 import json
+import os
 import secrets
 import shutil
 import sqlite3
@@ -57,10 +58,12 @@ from app.reasoning.engine import ReasoningEngine  # noqa: E402
 from app.retrieval.service import RetrievalService  # noqa: E402
 from app.student.service import StudentService  # noqa: E402
 
-KB = str(ROOT / "data" / "processed" / "knowledge.sqlite")
-INDEX = str(ROOT / "data" / "index")
-GENDB = str(ROOT / "data" / "generated" / "questions.sqlite")
-DEMO_STUDENT = "demo"
+from app import paths as sm_paths  # noqa: E402
+
+KB = str(sm_paths.package_dir() / "data" / "processed" / "knowledge.sqlite")
+INDEX = str(sm_paths.index_dir()) if sm_paths.index_dir().exists() \
+    else str(sm_paths.package_dir() / "data" / "index")
+GENDB = str(sm_paths.package_dir() / "data" / "generated" / "questions.sqlite")
 
 STATUS = {"USER_ERROR": 400, "VALIDATION_ERROR": 400, "NOT_FOUND": 404,
           "STATE_ERROR": 409, "KNOWLEDGE_ERROR": 422,
@@ -200,9 +203,10 @@ def _command(s, i):
 class Bridge:
     def __init__(self, kb=KB, index=INDEX, gen_src=GENDB,
                  workdir: str = "", sessions: dict | None = None,
-                 lock=None, calendar_path=None) -> None:
+                 lock=None, calendar_path=None, student: str = "") -> None:
         import tempfile
         import threading
+        self.student = student or os.environ.get("SM_STUDENT", "me")
         self.kb, self.index = kb, index
         self.work = Path(workdir) if workdir else Path(
             tempfile.mkdtemp(prefix="sm-web-"))
@@ -259,7 +263,7 @@ class Bridge:
                     (t,)).fetchone()[0]
                 try:
                     m = self.app.students.get_topic_mastery(
-                        DEMO_STUDENT, int(t))
+                        self.student, int(t))
                     mastery = {"score": m.get("score"),
                                "attempts": m.get("attempt_count")}
                 except Exception:  # noqa: BLE001 - sense historial
@@ -360,7 +364,7 @@ class Bridge:
         mu = None
         try:
             mu = self.app.students.get_mastery(
-                DEMO_STUDENT, d.get("knowledge_unit_id", ""))
+                self.student, d.get("knowledge_unit_id", ""))
         except Exception:  # noqa: BLE001 - sense historial
             mu = None
         reasons = []
@@ -410,7 +414,7 @@ class Bridge:
 
     def learn_priorities(self, limit=5, lang="ca"):
         items = self.app.adaptive.recommend(
-            DEMO_STUDENT, limit=limit, seed=7)
+            self.student, limit=limit, seed=7)
         return [self.project_rec(i, lang) for i in items]
 
     def learn_locate(self, unit):
@@ -465,7 +469,7 @@ class Bridge:
             con.close()
 
     def learn_progress(self):
-        units = self.app.students.get_weak_units(DEMO_STUDENT,
+        units = self.app.students.get_weak_units(self.student,
                                                  limit=1000)
         attempts = sum(u.get("attempt_count", 0) for u in units)
         correct_n = 0
@@ -473,7 +477,7 @@ class Bridge:
         for u in units:
             try:
                 h = self.app.students.get_unit_history(
-                    DEMO_STUDENT, u["knowledge_unit_id"])
+                    self.student, u["knowledge_unit_id"])
             except Exception:  # noqa: BLE001
                 continue
             st = h.get("state") or {}
@@ -481,7 +485,7 @@ class Bridge:
             if st.get("last_attempt", "") > last:
                 last = st.get("last_attempt", "")
         recent = self.app.students.get_recent_attempts(
-            DEMO_STUDENT, limit=5)
+            self.student, limit=5)
         return {"attempts": attempts, "correct": correct_n,
                 "units": len(units), "last_activity": last,
                 "recent": recent}
@@ -520,12 +524,12 @@ class Bridge:
         with self._lock:
             if tok not in self.sessions:
                 tok = secrets.token_hex(12)
-                self.sessions[tok] = {"student": DEMO_STUDENT,
+                self.sessions[tok] = {"student": self.student,
                                       "practice": None}
         return tok
 
     def _ctx(self, workflow, lang="ca"):
-        return self.app.create_context(DEMO_STUDENT, workflow, lang)
+        return self.app.create_context(self.student, workflow, lang)
 
     # ----- exam (F10 -> F7, xsid explícit, el navegador no guarda) -----
     # Configuració només amb opcions suportades pel contracte real.
@@ -576,7 +580,7 @@ class Bridge:
         exf = self.flows["exam"]
         result = exf.state(
             self._ctx("EXAM", lang),
-            self.app.create_session(DEMO_STUDENT, "EXAM",
+            self.app.create_session(self.student, "EXAM",
                                     nonce=secrets.token_hex(6)), xsid)
         data = result["data"]
         sess = data["session"]
@@ -702,7 +706,7 @@ class Bridge:
                 recs = self.flows["adaptive"].recommend(
                     self._ctx("ADAPTIVE_PRACTICE", lang),
                     self.app.create_session(
-                        DEMO_STUDENT, "ADAPTIVE_PRACTICE", nonce="web"),
+                        self.student, "ADAPTIVE_PRACTICE", nonce="web"),
                     limit=1, seed=7)["data"]["recommendations"]
                 return 200, {"recommendation": recs[0] if recs
                              else None}, set_cookie
@@ -711,7 +715,7 @@ class Bridge:
                 for t in range(1, 11):
                     try:
                         m = self.app.students.get_topic_mastery(
-                            DEMO_STUDENT, t)
+                            self.student, t)
                         out[str(t)] = {"score": m.get("score"),
                                        "attempts": m.get(
                                            "attempt_count")}
@@ -733,7 +737,7 @@ class Bridge:
                 if not unit:
                     raise AppError("VALIDATION_ERROR", "unit buida")
                 h = self.app.students.get_unit_history(
-                    DEMO_STUDENT, unit)
+                    self.student, unit)
                 if h.get("state") is None:
                     return 200, {"unit": unit, "state": None,
                                  "events": [], "locate": None}, \
@@ -761,11 +765,11 @@ class Bridge:
                 r = self.flows["adaptive"].generate(
                     self._ctx("ADAPTIVE_PRACTICE", lang),
                     self.app.create_session(
-                        DEMO_STUDENT, "ADAPTIVE_PRACTICE",
+                        self.student, "ADAPTIVE_PRACTICE",
                         nonce=secrets.token_hex(6)),
                     item, seed=int(body.get("seed", 7)))
                 sess = self.app.create_session(
-                    DEMO_STUDENT, "PRACTICE",
+                    self.student, "PRACTICE",
                     nonce=secrets.token_hex(6))
                 sess.touch({"kind": "question",
                             "id": r["data"]["question"]["question_id"]})
@@ -780,7 +784,7 @@ class Bridge:
                 return 200, r["data"], set_cookie
             if method == "POST" and path == "/api/practice/start":
                 sess = self.app.create_session(
-                    DEMO_STUDENT, "PRACTICE",
+                    self.student, "PRACTICE",
                     nonce=secrets.token_hex(6))
                 kw = {"topic": int(body.get("topic", 1))}
                 for k in ("question_type", "section", "formula_id",
@@ -838,7 +842,7 @@ class Bridge:
                 exf = self.flows["exam"]
                 c = self._ctx("EXAM", lang)
                 sess = self.app.create_session(
-                    DEMO_STUDENT, "EXAM", nonce=secrets.token_hex(6))
+                    self.student, "EXAM", nonce=secrets.token_hex(6))
                 spec = self._exam_spec(body)
                 r = exf.configure(c, sess, spec)
                 xsid = r["data"]["exam_session"]["session_id"]
@@ -852,7 +856,7 @@ class Bridge:
                 exf = self.flows["exam"]
                 c = self._ctx("EXAM", lang)
                 sess = self.app.create_session(
-                    DEMO_STUDENT, "EXAM", nonce=secrets.token_hex(6))
+                    self.student, "EXAM", nonce=secrets.token_hex(6))
                 r = exf.start(c, sess, str(body.get("exam_session_id")),
                               now=str(body.get("now", "")))
                 return 200, {"started": r["data"]["started"],
@@ -866,7 +870,7 @@ class Bridge:
                 exf = self.flows["exam"]
                 c = self._ctx("EXAM", lang)
                 sess = self.app.create_session(
-                    DEMO_STUDENT, "EXAM", nonce=secrets.token_hex(6))
+                    self.student, "EXAM", nonce=secrets.token_hex(6))
                 r = exf.get_question(
                     c, sess, str(query.get("exam_session_id", "")),
                     int(query.get("position", 0)),
@@ -877,7 +881,7 @@ class Bridge:
                 exf = self.flows["exam"]
                 c = self._ctx("EXAM", lang)
                 sess = self.app.create_session(
-                    DEMO_STUDENT, "EXAM", nonce=secrets.token_hex(6))
+                    self.student, "EXAM", nonce=secrets.token_hex(6))
                 pos = body.get("position")
                 if not isinstance(pos, int) or pos < 0:
                     raise AppError("VALIDATION_ERROR",
@@ -891,7 +895,7 @@ class Bridge:
                 exf = self.flows["exam"]
                 c = self._ctx("EXAM", lang)
                 sess = self.app.create_session(
-                    DEMO_STUDENT, "EXAM", nonce=secrets.token_hex(6))
+                    self.student, "EXAM", nonce=secrets.token_hex(6))
                 r = exf.submit(c, sess,
                                str(body.get("exam_session_id", "")),
                                now=str(body.get("now", "")))
@@ -903,7 +907,7 @@ class Bridge:
                 exf = self.flows["exam"]
                 c = self._ctx("EXAM", lang)
                 sess = self.app.create_session(
-                    DEMO_STUDENT, "EXAM", nonce=secrets.token_hex(6))
+                    self.student, "EXAM", nonce=secrets.token_hex(6))
                 r = exf.grade(c, sess,
                               str(body.get("exam_session_id", "")),
                               now=str(body.get("now", "")))
@@ -912,7 +916,7 @@ class Bridge:
                 rf = self.flows["review"]
                 c = self._ctx("REVIEW", lang)
                 sess = self.app.create_session(
-                    DEMO_STUDENT, "REVIEW", nonce=secrets.token_hex(6))
+                    self.student, "REVIEW", nonce=secrets.token_hex(6))
                 r = rf.get_result(
                     c, sess, str(query.get("exam_session_id", "")))
                 return 200, self._project_result(r["data"]), set_cookie
@@ -920,7 +924,7 @@ class Bridge:
                 rf = self.flows["review"]
                 c = self._ctx("REVIEW", lang)
                 sess = self.app.create_session(
-                    DEMO_STUDENT, "REVIEW", nonce=secrets.token_hex(6))
+                    self.student, "REVIEW", nonce=secrets.token_hex(6))
                 r = rf.get_review(
                     c, sess, str(query.get("exam_session_id", "")))
                 return 200, self._project_review(r["data"]), set_cookie
@@ -928,7 +932,7 @@ class Bridge:
                 rf = self.flows["review"]
                 c = self._ctx("REVIEW", lang)
                 sess = self.app.create_session(
-                    DEMO_STUDENT, "REVIEW", nonce=secrets.token_hex(6))
+                    self.student, "REVIEW", nonce=secrets.token_hex(6))
                 r = rf.get_question_review(
                     c, sess, str(query.get("exam_session_id", "")),
                     int(query.get("position", 0)))
@@ -948,20 +952,20 @@ class Bridge:
                 rf = self.flows["review"]
                 c = self._ctx("REVIEW", lang)
                 sess = self.app.create_session(
-                    DEMO_STUDENT, "REVIEW", nonce=secrets.token_hex(6))
+                    self.student, "REVIEW", nonce=secrets.token_hex(6))
                 r = rf.get_mastery_view(
                     c, sess, str(query.get("exam_session_id", "")))
                 return 200, r["data"], set_cookie
             if method == "GET" and path == "/api/exam/mine":
                 r = self.flows["exam"].list_mine(
                     self._ctx("EXAM", lang),
-                    self.app.create_session(DEMO_STUDENT, "EXAM",
+                    self.app.create_session(self.student, "EXAM",
                                             nonce=secrets.token_hex(6)))
                 return 200, r["data"], set_cookie
             if method == "GET" and path == "/api/exam/history":
                 r = self.flows["exam"].history(
                     self._ctx("EXAM", lang),
-                    self.app.create_session(DEMO_STUDENT, "EXAM",
+                    self.app.create_session(self.student, "EXAM",
                                             nonce=secrets.token_hex(6)))
                 return 200, r["data"], set_cookie
             raise AppError("NOT_FOUND", "ruta inexistent")
@@ -1077,8 +1081,10 @@ class Handler(BaseHTTPRequestHandler):
 
 def main(argv=None) -> int:
     import argparse
-    import os
     import tempfile
+    from app.env import load_env
+    load_env(os.environ.get("SM_ENV_FILE"))            # ./.env si no s'indica
+    load_env(sm_paths.config_dir() / ".env")            # cerca de reserva
     ap = argparse.ArgumentParser(description="Servidor presentació B2")
     ap.add_argument("--host", default=os.environ.get("SM_HOST", "127.0.0.1"))
     ap.add_argument("--port", type=int,

@@ -40,3 +40,9 @@ def test_portable_packaging_scripts_are_present_and_safe():
     assert "GEMINI_API_KEY" not in package
     assert "web.server" in run
     assert "Remove-Item -Recurse -Force $root" not in package
+
+
+def test_server_module_imports_without_hardcoded_temp_paths():
+    text = (ROOT / "web" / "server.py").read_text(encoding="utf-8")
+    assert "AppData\\\\Local\\\\Temp" not in text
+    assert "app import paths" in text

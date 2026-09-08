@@ -33,3 +33,15 @@ CA_STOPWORDS = frozenset(
     "tots totes aquest aquesta aquests aquestes això son és están esta entre sobre "
     "se es no si també però perquè quan on qual quina".lower().split()
 )
+
+# --- F14: rutas efectivas (delegan en app.paths; los DEFAULT_* se conservan
+#     como fallback para imports antiguos y ejecucion desde el checkout). ---
+from app import paths as _paths  # noqa: E402
+
+
+def processed_dir():
+    return _paths.package_dir() / DEFAULT_PROCESSED_DIR
+
+
+def eval_dir():
+    return _paths.package_dir() / DEFAULT_EVAL_DIR

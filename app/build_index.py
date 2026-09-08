@@ -19,12 +19,15 @@ from app.retrieval.lexical import LexicalIndex  # noqa: E402
 from app.retrieval.normalize_query import STOPWORDS  # noqa: E402
 from app.retrieval.semantic import TfidfIndex  # noqa: E402
 
-WORKSPACE = Path(__file__).resolve().parent.parent
+from app import paths as sm_paths  # noqa: E402
+
+WORKSPACE = sm_paths.package_dir()
 KB = WORKSPACE / "data" / "processed" / "knowledge.sqlite"
-INDEX_DIR = WORKSPACE / "data" / "index"
+INDEX_DIR = sm_paths.index_dir()
 
 
 def main() -> None:
+    INDEX_DIR.mkdir(parents=True, exist_ok=True)
     con = sqlite3.connect("file:%s?mode=ro" % KB, uri=True)
     try:
         rows = con.execute(
