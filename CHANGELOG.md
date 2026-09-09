@@ -35,4 +35,5 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/).
 ### Notes
 - Alcance: uso local mono-usuario. Sin autenticacion, sin despliegue multiusuario.
 - Requiere Python 3.11+ en la maquina destino; no incluye runtime de Python ni instalador MSI.
-- Cierre documental v1.0.0 verificado el 2026-09-09 (suite completa en verde x2, `sistemes check` OK, packaging + instalacion limpia end-to-end). Sin tag ni release publicados todavia.
+- Cierre v1.0.0 verificado el 2026-09-09: suite en verde (local 889 x2; CI Linux 884 + 6 skips), `sistemes check` OK en local y en CI, packaging + instalacion limpia end-to-end, CI de GitHub Actions en verde.
+- Portabilidad Linux/CI: `.gitattributes` fija a CRLF el EOL de checkout de los ficheros hasheados por los manifiestos; `test_home_defaults_..._on_windows` se salta en POSIX (+ companion XDG); CI corre en Python 3.14 (base64 de 3.12 rompia un fixture).

@@ -1,10 +1,11 @@
 # Estado del proyecto — Sistemes de Mesura
 
-> Documento vivo. Refleja el estado real a fecha **2026-09-09**: árbol de
-> trabajo sobre `bc4692f` (`origin/main`) más el cierre v1.0.0 sin commitear
-> (Test 2 de F0, determinismo de mastery, poda de `__pycache__` en el
-> packaging; ver DECISION_LOG D179–D180 y §5). Sustituye a cualquier lectura
-> de roadmap anterior que asuma multiusuario.
+> Documento vivo. Refleja el estado real de `main` a fecha **2026-09-09**,
+> tras el cierre y la governance de release v1.0.0 (commits `1de3cb4` →
+> `0a52e7d`): Test 2 de F0, determinismo de mastery, poda de `__pycache__`
+> en el packaging, `.gitattributes` para EOL reproducible, y CI mínima en
+> GitHub Actions (verde). Ver DECISION_LOG D179–D182 y §5. Sustituye a
+> cualquier lectura de roadmap anterior que asuma multiusuario.
 
 ## 1. Qué es este producto (y qué no es)
 
@@ -107,10 +108,9 @@ de F0–F11 y no se modifican.
 3. **`questions.sqlite` fuera de la cobertura SHA-256 del manifiesto** (`UNHASHED_ARTIFACTS`) porque los tests lo ensucian. Es una copia de trabajo generada; su cobertura actual es de esquema + tablas, no criptográfica. Para un release habría que separar limpiamente artefacto canónico inmutable ↔ copia de trabajo mutable.
 4. **`/api/health` `checks.student_db` está hardcodeado a `True`** — no consulta la BD del estudiante.
 5. **`srv.timeout` / logs — minores diferidos** de la revisión: `srv.timeout` se resolvió como `Handler.timeout`; `logsetup.configure()` puede escribir logs vacíos en `%LOCALAPPDATA%` para algún test de CLI sin `SM_HOME`.
-6. **Branch protection / firma de commits / tag de release** — CI mínima
-   añadida en `.github/workflows/ci.yml` (D182); el resto de la governance
-   (protección de `main`, firma, tag/release) se cierra en la fase de
-   release governance.
+6. **Firma de commits** — los commits no van firmados con GPG/SSH. CI
+   (`.github/workflows/ci.yml`, D182) verde en cada push/PR; protección de
+   `main` y tag/release `v1.0.0` cerrados en la fase de release governance.
 7. **Gemini: observabilidad y config menores** — la respuesta HTTP del tutor
    no expone `fallback_reason` (`_project` lo recorta); `SM_PROVIDER` no está
    en `.env.example`. Ninguna afecta al funcionamiento; ambas documentadas en
@@ -125,13 +125,19 @@ de F0–F11 y no se modifican.
 ## 5. Estado de pruebas
 
 ```
-python -m pytest tests/ -q      (dos pasadas consecutivas, auditoría de cierre 2026-09-09)
-889 passed, 0 failed, 0 skipped     (605 s)
-889 passed, 0 failed, 0 skipped     (772 s)
+# Local (Windows, Python 3.14, con GEMINI_API_KEY) — dos pasadas consecutivas
+python -m pytest tests/ -q   ->  889 passed, 0 failed, 0 skipped   (605 s / 772 s)
+
+# CI (GitHub Actions, ubuntu-latest, Python 3.14, sin GEMINI_API_KEY)
+python -m pytest tests/ -q   ->  884 passed, 6 skipped, 0 failed
+python -m app.cli check      ->  check OK
 ```
 
-**Verde total x2.** Dos defectos, ambos preexistentes y ajenos a la
-integración Gemini, resueltos en la auditoría de cierre:
+Los 6 skips en CI: 4 `@NEEDS_KEY` de Gemini (sin clave → ruta extractiva) +
+`test_home_defaults_..._on_windows` (skip en POSIX, con companion `..._xdg_on_posix`).
+
+**Verde total.** Dos defectos, ambos preexistentes y ajenos a la
+integración Gemini, resueltos en el cierre:
 
 - **`tests/test_phase0.py` Test 2** (`test_2_source_integrity_matches_manifest`,
   antes `..._originals_not_vendored_...`): el contrato cambió con el merge
