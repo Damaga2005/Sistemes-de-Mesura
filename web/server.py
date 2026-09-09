@@ -61,7 +61,10 @@ from app.student.service import StudentService  # noqa: E402
 from app import paths as sm_paths  # noqa: E402
 
 KB = str(sm_paths.package_dir() / "data" / "processed" / "knowledge.sqlite")
-INDEX = str(sm_paths.index_dir()) if sm_paths.index_dir().exists() \
+# Un directori `index/` buit (el crea `sistemes init`) NO es un index: cal
+# el centinela real que escriu app.build_index (lexical/fts.sqlite).
+INDEX = str(sm_paths.index_dir()) \
+    if (sm_paths.index_dir() / "lexical" / "fts.sqlite").is_file() \
     else str(sm_paths.package_dir() / "data" / "index")
 GENDB = str(sm_paths.package_dir() / "data" / "generated" / "questions.sqlite")
 
