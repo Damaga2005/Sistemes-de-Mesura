@@ -207,17 +207,17 @@ class Bridge:
     def __init__(self, kb=KB, index=INDEX, gen_src=GENDB,
                  workdir: str = "", sessions: dict | None = None,
                  lock=None, calendar_path=None, student: str = "") -> None:
-        import tempfile
         import threading
         self.student = student or os.environ.get("SM_STUDENT", "me")
         self.kb, self.index = kb, index
-        self.work = Path(workdir) if workdir else Path(
-            tempfile.mkdtemp(prefix="sm-web-"))
+        # estado escribible persistente bajo data_dir(); sin workdir NO se usa
+        # un tempdir: perderia el progreso del alumno en cada reinicio.
+        self.work = Path(workdir) if workdir else sm_paths.data_dir()
         self.work.mkdir(parents=True, exist_ok=True)
-        qdb = str(self.work / "q.sqlite")
+        qdb = str(self.work / "questions.sqlite")
         if not Path(qdb).exists():
             shutil.copyfile(gen_src, qdb)
-        sdb = str(self.work / "s.sqlite")
+        sdb = str(self.work / "student.sqlite")
         retr = RetrievalService(kb, index)
         reng = ReasoningEngine(retr, kb, provider=ExtractiveProvider())
         eng = ExaminerEngine(retr, kb, qdb)
@@ -1134,7 +1134,6 @@ class Handler(BaseHTTPRequestHandler):
 
 def main(argv=None) -> int:
     import argparse
-    import tempfile
     from app.env import load_env
     load_env(os.environ.get("SM_ENV_FILE"))            # ./.env si no s'indica
     load_env(sm_paths.config_dir() / ".env")            # cerca de reserva
@@ -1149,13 +1148,17 @@ def main(argv=None) -> int:
                     default=os.environ.get("COURSE_CALENDAR_PATH", ""),
                     help="font JSON versionada de calendari (opcional)")
     args = ap.parse_args(argv)
-    data = args.data_dir or tempfile.mkdtemp(prefix="sm-web-")
+    sm_paths.data_dir().mkdir(parents=True, exist_ok=True)
+    data = args.data_dir or str(sm_paths.data_dir())
     import threading
     Handler.config = {"kw": {}, "sessions": {}, "lock": threading.Lock()}
     Handler.config["kw"] = {"workdir": data,
                              "calendar_path": args.calendar or None}
+    # el timeout del handler SI se aplica al socket aceptado
+    # (StreamRequestHandler.setup -> connection.settimeout); srv.timeout solo
+    # lo lee handle_request(), no serve_forever().
+    Handler.timeout = int(os.environ.get("SM_REQUEST_TIMEOUT") or 30)
     srv = ThreadingHTTPServer((args.host, args.port), Handler)
-    srv.timeout = int(os.environ.get("SM_REQUEST_TIMEOUT", "30"))
     print("Sistemes de Mesura a http://%s:%d (dades: %s)"
           % (args.host, args.port, data))
     try:

@@ -11,16 +11,20 @@ from pathlib import Path
 from app import migrate as _migrate
 from app import paths as _paths
 
-WRITABLE_DBS = ("student.sqlite", "questions.sqlite", "exam_sessions.sqlite")
+# exam_sessions no es un fichero propio: ExamSessionService escribe sus tablas
+# dentro de student.sqlite (D88), asi que copiar student.sqlite ya lo captura.
+WRITABLE_DBS = ("student.sqlite", "questions.sqlite")
 _DB_MIGRATE_NAME = {
     "student.sqlite": "student",
     "questions.sqlite": "questions",
-    "exam_sessions.sqlite": "exam_sessions",
 }
 
 
 def _app_version() -> str:
-    txt = (_paths.package_dir() / "pyproject.toml").read_text(encoding="utf-8")
+    try:
+        txt = (_paths.package_dir() / "pyproject.toml").read_text(encoding="utf-8")
+    except OSError:
+        return "0.0.0"
     for line in txt.splitlines():
         if line.strip().startswith("version"):
             return line.split("=", 1)[1].strip().strip('"')
