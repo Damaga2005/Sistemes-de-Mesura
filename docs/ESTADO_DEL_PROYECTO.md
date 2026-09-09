@@ -1,7 +1,7 @@
 # Estado del proyecto — Sistemes de Mesura
 
 > Documento vivo. Refleja el estado real de `main` a fecha **2026-09-09**
-> (`848acca`). Sustituye a cualquier lectura de roadmap anterior que
+> (`a3e5d5e`). Sustituye a cualquier lectura de roadmap anterior que
 > asuma multiusuario.
 
 ## 1. Qué es este producto (y qué no es)
@@ -41,6 +41,7 @@ multiusuario, load testing.
 | **F11** | Experiencia de producto / UI | 🟢 Product Certified |
 | **F12 (original)** | Auth + multiusuario + aislamiento | 🔴 **NO implementada — SUPERSEDED** |
 | **F12 (operación local)** | `.env`, paths, `SM_STUDENT`, migraciones, backup, CSRF, health, límites, logs, CLI, integridad | 🟢 **Implementada** |
+| **Integración Gemini** | Tutor con `GeminiProvider` real (selección `auto\|gemini\|extractive`) + fallback extractivo ante fallo del proveedor | 🟢 **Implementada y validada end-to-end** (`a3e5d5e`) |
 | **F13** | Vertical Documents + contrato Calendar | 🟡 **Parcial** (ver §4) |
 | **F14** | Packaging local `1.0.0` | 🟡 **Avanzada, no certificada** (sin prueba end-to-end en máquina limpia) |
 | **F15** | Despliegue (staging → producción, proxy, HTTPS) | 🔴 No iniciada (fuera de alcance por decisión) |
@@ -56,7 +57,9 @@ de F0–F11 y no se modifican.
 | Área | Detalle |
 |---|---|
 | Knowledge base | `data/processed/knowledge.sqlite`, sello `user_version = 1`. **2896/2896 fórmulas**, 1903 chunks, 71 documentos. |
-| Retrieval / Reasoning / Examiner / Correction / Mastery / Adaptive / Exam / Review | Módulos F0–F11, suites en verde (salvo 2 tests live de Gemini, §5). |
+| Retrieval / Reasoning / Examiner / Correction / Mastery / Adaptive / Exam / Review | Módulos F0–F11, suites en verde (ver §5). |
+| Proveedor de razonamiento | `select_provider(auto\|gemini\|extractive)`. `GeminiProvider` REST stdlib (`gemini-3.5-flash-lite`, env `GEMINI_MODEL`), clave sólo de entorno, nunca en logs/repo. `auto` sin `GEMINI_API_KEY` → `ExtractiveProvider` determinista (verificado por construcción). El tutor web usa esta selección vía `sistemes serve --provider …` / env `SM_PROVIDER` (defecto `auto`) → `Bridge` → `ReasoningEngine`. `versions.provider = {provider, model}` en la respuesta de `/api/tutor/ask`. **Validado end-to-end contra la instancia viva: llamada real a Gemini, `status: VERIFIED`, sin fallback** (`a3e5d5e`). |
+| Fallback del razonador | `RuntimeError` del proveedor LLM en `_reason()` (red, 5xx/4xx incl. 401, clave inválida, respuesta vacía) → degradación a extractivo verificado, HTTP 200, `versions.provider.provider = "extractive-fallback"` + `fallback_reason`, aviso `llm_provider_error_fallback`. Ya no hay `GENERATION_ERROR`/502 con evidencia en mano. Bugs de programación (`TypeError`…) **no se capturan** y propagan. |
 | Application layer | `app/application/` — fachada F10 sobre los servicios de dominio. |
 | Web UI | 14 páginas (study, practice, exam, exams, review, results, history, learning, documents, calendar, topic, content…). Renderer LaTeX con lista blanca. |
 | Configuración | `app/env.py` (`.env`, precedencia del entorno real, fichero ausente tolerado) + `app/paths.py` (`SM_HOME` + 5 directorios con override). |
@@ -79,6 +82,8 @@ de F0–F11 y no se modifican.
 | Documents (F13) | Catálogo real read-only: `GET /api/documents` (filtro por tema, título, tipo, nº de secciones, `COURSE_SOURCE`). Pantalla funcional, ya no placeholder. |
 | Calendar (F13) | `GET /api/calendar` con contrato; sin fuente académica → `[]` (no inventa eventos). `app/calendar.py` acepta JSON `version: 1` con trazabilidad. |
 | F14 packaging | Entregado y probado por partes; **falta** una ejecución real `package → máquina limpia → install → check → serve`. `scripts/*.ps1` validados por lectura + `tests/test_packaging.py`, no ejecutados end-to-end. |
+| Metadatos de proveedor en HTTP | `TutorWorkflow._project` reduce `versions.provider` a `{provider, model}`: la respuesta del tutor **no expone `fallback_reason`** (sí queda en logs y en el objeto del engine). El frontend (`study.js`) ni siquiera lee `versions`. |
+| `SM_PROVIDER` | Variable nueva **no documentada en `.env.example`** (las reglas prohíben añadir variables nuevas ahí). Documentada en `docs/LLM_PROVIDER.md`. |
 
 ### 🔴 No implementado
 
@@ -102,20 +107,33 @@ de F0–F11 y no se modifican.
 5. **`srv.timeout` / logs — minores diferidos** de la revisión: `srv.timeout` se resolvió como `Handler.timeout`; `logsetup.configure()` puede escribir logs vacíos en `%LOCALAPPDATA%` para algún test de CLI sin `SM_HOME`.
 6. **F14 no verificada en máquina limpia** end-to-end (ver §3).
 7. **Sin CI / sin branch protection / commits sin firmar / sin tag de release.**
+8. **Gemini: observabilidad y config menores** — la respuesta HTTP del tutor
+   no expone `fallback_reason` (`_project` lo recorta); `SM_PROVIDER` no está
+   en `.env.example`. Ninguna afecta al funcionamiento; ambas documentadas en
+   §3 🟡 y en `docs/LLM_PROVIDER.md`.
+9. **Sin cuotas / billing para Gemini** — cada petición del tutor con
+   `--provider gemini` (o `auto` con clave) es una llamada de pago sin límite
+   ni contador. Aceptable para uso local individual; a vigilar.
 
 ## 5. Estado de pruebas
 
 ```
 python -m pytest tests/ -q
-2 failed, 872 passed        (874 tests recolectados)
+1 failed, 888 passed        (~889 tests; +16 de la integración Gemini)
 ```
 
-Los **2 fallos son preexistentes y ajenos** a todo el trabajo de
-operación local: `tests/reasoning/test_provider.py::test_live_theory_answer_verified`
-y `::test_live_calculation_verified`, ambos `HTTPError 401` por
-`GEMINI_API_KEY` no válida en el entorno. Confirmados en el commit base.
-No hay verde total mientras esa clave no esté configurada (o se marquen
-esos tests como skip por falta de credencial).
+El **único fallo es preexistente y ajeno** a este trabajo:
+`tests/test_phase0.py::test_2_originals_not_vendored_and_hashes_recorded`.
+Afirma que `Tema */` no está en el repo, pero desde el merge `a790afa`
+(unificación teoría+app) sí lo está a propósito. Falla igual en árbol
+limpio (`git stash` → FAILED en 0.18 s). Test obsoleto, pendiente de
+ajustar o borrar.
+
+Los 2 tests live de Gemini que antes fallaban con `HTTPError 401`
+(`test_live_theory_answer_verified`, `test_live_calculation_verified`)
+**ahora pasan**: el 401 ya no propaga, degrada a extractivo verificado que
+satisface sus asserts. Con una `GEMINI_API_KEY` válida en el entorno
+ejercitan el camino Gemini real; sin ella, el extractivo.
 
 ## 6. Repositorio
 
@@ -125,7 +143,8 @@ esos tests como skip por falta de credencial).
   `data/` derivados, `docs/`, `tests/`, packaging).
 - El material `Tema N/` es **fuente inmutable**: solo lectura, los
   derivados van a `data/processed/` con trazabilidad por hash.
-- Sin ramas adicionales. Historia lineal.
+- Sin ramas adicionales. Historia lineal. Último commit relevante:
+  `a3e5d5e` (integración Gemini en el tutor), sobre `187610e` (docs).
 
 ## 7. Si el objetivo vuelve a ser multiusuario
 
