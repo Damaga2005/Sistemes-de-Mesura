@@ -1,13 +1,27 @@
+import os
 from pathlib import Path
+
+import pytest
 
 import app.paths as paths
 
 
+@pytest.mark.skipif(os.name != "nt",
+                    reason="ruta con flavour Windows; pathlib no instancia "
+                           "WindowsPath en POSIX aunque se parchee os.name")
 def test_home_defaults_under_localappdata_on_windows(monkeypatch):
     monkeypatch.delenv("SM_HOME", raising=False)
     monkeypatch.setenv("LOCALAPPDATA", r"C:\Users\me\AppData\Local")
     monkeypatch.setattr(paths.os, "name", "nt", raising=False)
     assert paths.home() == Path(r"C:\Users\me\AppData\Local\SistemesDeMesura")
+
+
+@pytest.mark.skipif(os.name == "nt",
+                    reason="rama POSIX de home(); en Windows aplica la de arriba")
+def test_home_defaults_under_xdg_on_posix(monkeypatch):
+    monkeypatch.delenv("SM_HOME", raising=False)
+    monkeypatch.setenv("XDG_DATA_HOME", "/tmp/xdg")
+    assert paths.home() == Path("/tmp/xdg/sistemes-de-mesura")
 
 
 def test_home_env_override_wins(monkeypatch, tmp_path):

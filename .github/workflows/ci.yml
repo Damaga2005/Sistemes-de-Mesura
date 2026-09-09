@@ -20,7 +20,9 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          # Interprete con el que se validó la suite (requires-python >=3.11,<3.15).
+          # 3.12 cambia la semántica de base64.b64decode y rompe un fixture de test.
+          python-version: "3.14"
 
       - name: Install project and pytest
         run: |
