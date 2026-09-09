@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrenament V/F · Unitat 4: Soroll</title>
+<style>
+:root{--tinta:#1b2430;--suau:#3d4a5c;--accent:#1d4e89;--accent2:#e8eff7;--vora:#d5dce4;
+ --ok:#0f6e4f;--okf:#e9f5f0;--no:#a03030;--nof:#fbeceb;--fons:#f4f6f9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fons);color:var(--tinta);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;background:#fff;box-shadow:0 1px 40px rgba(20,30,45,.07);padding-bottom:56px;min-height:100vh}
+header{background:linear-gradient(135deg,#1d4e89,#2f6db0);color:#fff;padding:34px 44px 28px}
+.crumb{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:13px;color:#cfe0f2;margin:0 0 8px}
+header h1{margin:.1em 0 .3em;font-size:28px}
+header p{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:15px;color:#eaf2fb;margin:0;max-width:62ch}
+main{padding:0 44px}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--vora);
+ padding:14px 44px;margin:0 -44px 18px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;
+ font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px}
+.bar .stat{color:var(--suau)} .bar .stat b{color:var(--accent);font-size:16px}
+.prog{flex:1 1 160px;height:8px;background:var(--accent2);border-radius:5px;overflow:hidden;min-width:120px}
+.prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+button{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px;cursor:pointer;
+ border-radius:8px;border:1px solid var(--vora);background:#fff;color:var(--tinta);padding:7px 14px;transition:.15s}
+button:hover{border-color:var(--accent);color:var(--accent)}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+button.primary:hover{background:#17406f;color:#fff}
+select{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px;padding:6px 8px;
+ border-radius:8px;border:1px solid var(--vora);background:#fff;color:var(--tinta)}
+.q{border:1px solid var(--vora);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fff}
+.q.ok{border-color:#bfe3d4;background:var(--okf)} .q.no{border-color:#eec9c6;background:var(--nof)}
+.qhead{display:flex;gap:12px;align-items:baseline}
+.qn{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-weight:700;color:var(--accent);font-size:14px;flex:0 0 auto}
+.qtext{font-size:17px;margin:0}
+.qbloc{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:12px;color:var(--suau);
+ margin:6px 0 0 34px;text-transform:uppercase;letter-spacing:.04em}
+.acts{display:flex;gap:10px;margin:12px 0 0 34px}
+.acts button{min-width:74px;font-weight:600}
+.acts button.v:hover{border-color:var(--ok);color:var(--ok)}
+.acts button.f:hover{border-color:var(--no);color:var(--no)}
+.acts button.sel-v{background:var(--ok);color:#fff;border-color:var(--ok)}
+.acts button.sel-f{background:var(--no);color:#fff;border-color:var(--no)}
+.acts button[disabled]{opacity:.55;cursor:default}
+.fb{margin:12px 0 0 34px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14.5px;
+ padding:10px 13px;border-radius:8px;display:none}
+.fb.show{display:block}
+.fb .verdict{font-weight:700;display:block;margin-bottom:3px}
+.q.ok .fb{background:#fff;border:1px solid #bfe3d4} .q.ok .verdict{color:var(--ok)}
+.q.no .fb{background:#fff;border:1px solid #eec9c6} .q.no .verdict{color:var(--no)}
+.done{background:var(--accent2);border:1px solid #c6d9ef;border-radius:12px;padding:20px 22px;margin:20px 0;
+ font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;display:none}
+.done.show{display:block}
+.done h3{margin:0 0 .3em;color:var(--accent);font-size:19px}
+.score{font-size:30px;font-weight:700;color:var(--accent)}
+footer{padding:22px 44px 0;color:var(--suau);font-size:13px;
+ font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;border-top:1px solid var(--vora);margin:26px 44px 0;
+ margin-left:0;margin-right:0;padding-left:44px}
+@media(max-width:620px){header,main,.bar,footer{padding-left:20px;padding-right:20px}
+ .bar{margin-left:-20px;margin-right:-20px} .qbloc,.acts,.fb{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<p class="crumb"><b>Sistemes de Mesura</b> (230920) · ETSETB–UPC</p>
+<h1>Entrenament V/F · Unitat 4: Soroll</h1>
+<p>Marqueu si cada afirmació és vertadera o falsa. Rebreu la correcció immediata amb una justificació breu. Aquest entrenament no es lliura ni es puntua.</p>
+</header>
+<main>
+<div class="bar">
+  <span class="stat">Encerts: <b id="ok">0</b> / <span id="ans">0</span></span>
+  <div class="prog"><i id="pg"></i></div>
+  <select id="filtre" title="Filtra per bloc"><option value="-1">Tots els blocs</option></select>
+  <button id="ordre">Ordre aleatori</button>
+  <button class="primary" id="reset">Reinicia</button>
+</div>
+<div id="llista"></div>
+<div class="done" id="done">
+  <h3>Entrenament completat</h3>
+  <p class="score" id="final"></p>
+  <p id="consell"></p>
+  <button class="primary" id="retry">Torna-ho a provar</button>
+</div>
+</main>
+<footer>
+Sistemes de Mesura (230920) · ETSETB–UPC · Unitat 4: Soroll en Sistemes de Mesura<br>
+Material d'autoestudi. Les respostes no s'envien enlloc: tot el càlcul es fa al vostre navegador.
+</footer>
+</div>
+<script>
+const DATA = {"blocs": ["1. Soroll, incertesa i caracterització estadística", "2. Soroll tèrmic i models de resistència", "3. Amplada de banda equivalent de soroll", "4. Soroll shot i soroll 1/f", "5. Dispositius actius, amplificadors i disseny de baix soroll"], "items": [{"n": 1, "bloc": 0, "text": "El soroll és un component aleatori superposat al senyal que, si és additiu i no correlacionat, contribueix a la incertesa amb el seu valor eficaç.", "resp": "V", "just": "El valor eficaç (RMS) del soroll additiu i no correlacionat és directament la incertesa típica associada (document 1)."}, {"n": 2, "bloc": 0, "text": "Un calibratge prou acurat elimina el soroll d'un sistema de mesura.", "resp": "F", "just": "El calibratge corregeix els errors sistemàtics; el soroll és aleatori i no s'elimina calibrant."}, {"n": 3, "bloc": 0, "text": "El soroll intrínsec d'un sistema de mesura prové exclusivament de fonts externes, com la xarxa elèctrica o equips propers.", "resp": "F", "just": "Això és el soroll extrínsec. L'intrínsec es genera dins del sistema (resistències, semiconductors, contactes)."}, {"n": 4, "bloc": 0, "text": "Augmentar el guany d'un amplificador millora sempre la relació senyal-soroll, encara que s'amplifiqui també el soroll d'entrada.", "resp": "F", "just": "El guany amplifica per igual senyal i soroll d'entrada; no millora per si sol la SNR."}, {"n": 5, "bloc": 0, "text": "Per a soroll blanc, el valor eficaç integrat creix amb l'arrel quadrada de l'amplada de banda.", "resp": "V", "just": "En integrar una densitat constant sobre B, el valor eficaç resulta proporcional a √B."}, {"n": 6, "bloc": 0, "text": "Un procés estocàstic estacionari té una mitjana que varia periòdicament amb el temps.", "resp": "F", "just": "Estacionari vol dir que les propietats estadístiques (mitjana, variància, espectre) no canvien amb el temps."}, {"n": 7, "bloc": 0, "text": "La hipòtesi d'ergodicitat permet estimar la variància del soroll a partir d'una única realització prou llarga.", "resp": "V", "just": "L'ergodicitat substitueix la mitjana sobre moltes realitzacions per una mitjana temporal sobre una de sola."}, {"n": 8, "bloc": 0, "text": "Per a un soroll de mitjana nul·la, la desviació estàndard coincideix amb el valor eficaç (RMS).", "resp": "V", "just": "Totes dues es defineixen com l'arrel quadrada de la mitjana del quadrat del senyal."}, {"n": 9, "bloc": 0, "text": "En una distribució normal, aproximadament el 95&nbsp;% de les mostres cauen dins de l'interval ±2σ.", "resp": "V", "just": "Els percentatges gaussians de referència són 68&nbsp;% (±σ), 95&nbsp;% (±2σ) i 99,7&nbsp;% (±3σ)."}, {"n": 10, "bloc": 0, "text": "Un procés blanc ideal té un espectre de potència nul a totes les freqüències excepte a freqüència zero.", "resp": "F", "just": "El procés blanc té espectre de potència constant (pla) a totes les freqüències, no nul."}, {"n": 11, "bloc": 1, "text": "El soroll tèrmic (Johnson-Nyquist) s'origina en l'agitació tèrmica dels portadors de càrrega als materials conductors.", "resp": "V", "just": "Les fluctuacions microscòpiques de tensió i corrent per agitació tèrmica generen el soroll als terminals de la resistència."}, {"n": 12, "bloc": 1, "text": "Qualsevol resistència real a temperatura superior al zero absolut genera soroll tèrmic, encara que no hi circuli corrent continu.", "resp": "V", "just": "El soroll tèrmic només depèn de la temperatura; apareix fins i tot amb la resistència desconnectada."}, {"n": 13, "bloc": 1, "text": "El soroll tèrmic d'una resistència només apareix quan hi circula un corrent continu.", "resp": "F", "just": "És independent del corrent; només depèn de la temperatura, la resistència i la banda."}, {"n": 14, "bloc": 1, "text": "La tensió eficaç de soroll tèrmic d'una resistència augmenta amb l'arrel quadrada de la resistència.", "resp": "V", "just": "De Vt=√(4kTBR), la tensió creix amb √R (i el corrent In=√(4kTB/R) decreix amb √R)."}, {"n": 15, "bloc": 1, "text": "La tensió eficaç de soroll tèrmic d'una resistència és proporcional a R, no a l'arrel quadrada de R.", "resp": "F", "just": "És proporcional a √R: Vt=√(4kTBR)."}, {"n": 16, "bloc": 1, "text": "El corrent eficaç de soroll tèrmic d'una resistència disminueix quan augmenta el valor de la resistència.", "resp": "V", "just": "In=√(4kTB/R): una resistència gran genera més tensió però menys corrent de soroll."}, {"n": 17, "bloc": 1, "text": "La potència de soroll disponible d'una resistència adaptada és proporcional al quadrat del valor de la resistència.", "resp": "F", "just": "És independent de R i val 4kTB (conseqüència del teorema de màxima transferència de potència)."}, {"n": 18, "bloc": 1, "text": "En el model de Thévenin del soroll tèrmic, la font de soroll es posa en paral·lel amb la resistència.", "resp": "F", "just": "En Thévenin la font de tensió va en sèrie; és en Norton on la font de corrent va en paral·lel."}, {"n": 19, "bloc": 1, "text": "Els condensadors i inductors ideals no generen soroll tèrmic propi perquè no dissipen energia.", "resp": "V", "just": "Només la part real (dissipativa) de la impedància, 4kT·R(f), contribueix al soroll tèrmic."}, {"n": 20, "bloc": 1, "text": "Les resistències de carbó són preferibles a les de pel·lícula metàl·lica en circuits de baix soroll.", "resp": "F", "just": "És a l'inrevés: la pel·lícula metàl·lica té molt menys soroll en excés i s'acosta al límit tèrmic teòric."}, {"n": 21, "bloc": 2, "text": "L'amplada de banda equivalent de soroll substitueix la resposta freqüencial real per un filtre rectangular ideal que deixa passar la mateixa potència de soroll.", "resp": "V", "just": "És la definició del concepte: un rectangle d'alçada A₀² amb la mateixa àrea sota |A(f)|²."}, {"n": 22, "bloc": 2, "text": "La definició formal de l'amplada de banda equivalent integra el mòdul al quadrat de la resposta freqüencial.", "resp": "V", "just": "Beq = (1/A₀²)·∫|A(f)|² df; la potència de soroll a la sortida és proporcional a |A(f)|²."}, {"n": 23, "bloc": 2, "text": "En un sistema real, l'amplada de banda equivalent de soroll coincideix exactament amb la freqüència de tall a −3&nbsp;dB.", "resp": "F", "just": "En sistemes reals Beq és més gran que f−3dB per la contribució de la banda de transició."}, {"n": 24, "bloc": 2, "text": "Un filtre passabaixes de primer ordre té una amplada de banda equivalent igual a (π/2)·f−3dB ≈ 1,57·f−3dB.", "resp": "V", "just": "La integral de 1/(1+x²) dona π/2; el filtre deixa passar un 57&nbsp;% més de potència que un rectangular ideal."}, {"n": 25, "bloc": 2, "text": "Un filtre passabaixes de primer ordre deixa passar menys soroll que un filtre rectangular ideal amb la mateixa freqüència de tall a −3&nbsp;dB.", "resp": "F", "just": "En deixa passar més (un 57&nbsp;% més) per la cua que decreix lentament a −20&nbsp;dB/dècada."}, {"n": 26, "bloc": 2, "text": "Per a un filtre Butterworth passabaixes de segon ordre, l'amplada de banda equivalent és aproximadament 1,11·f−3dB.", "resp": "V", "just": "La caiguda més ràpida (−40&nbsp;dB/dècada) redueix Beq respecte al primer ordre."}, {"n": 27, "bloc": 2, "text": "A mesura que augmenta l'ordre del filtre Butterworth, la relació entre amplada de banda equivalent i f−3dB tendeix a la unitat.", "resp": "V", "just": "Com més abrupta és la transició, més s'aproxima la resposta a la del filtre ideal."}, {"n": 28, "bloc": 2, "text": "Un filtre passabaixes de primer ordre cau a −40&nbsp;dB/dècada immediatament després de la freqüència de tall.", "resp": "F", "just": "Un filtre de primer ordre cau a −20&nbsp;dB/dècada; el de segon ordre a −40&nbsp;dB/dècada."}, {"n": 29, "bloc": 2, "text": "En un sistema passabanda amb la freqüència inferior molt menor que la superior, l'amplada de banda equivalent queda dominada pel límit superior.", "resp": "V", "just": "S'aproxima per la del passabaixes de freqüència de tall igual a la superior."}, {"n": 30, "bloc": 2, "text": "Per a un sistema passabanda ideal, l'amplada de banda equivalent és la suma de les dues freqüències de tall.", "resp": "F", "just": "És la diferència entre la freqüència superior i la inferior de pas, no la suma."}, {"n": 31, "bloc": 3, "text": "El soroll shot apareix quan un corrent continu travessa una barrera de potencial, com en una unió PN.", "resp": "V", "just": "Està associat al pas discret de càrrega (estadística de Poisson) a través de la barrera."}, {"n": 32, "bloc": 3, "text": "El soroll shot apareix amb la mateixa intensitat encara que no circuli corrent continu per la unió.", "resp": "F", "just": "Sense corrent continu apreciable, el soroll shot associat a la unió és negligible."}, {"n": 33, "bloc": 3, "text": "La densitat espectral de potència del corrent de soroll shot és Si = 2·q·Idc, proporcional al corrent continu.", "resp": "V", "just": "És un soroll blanc amb densitat proporcional al corrent continu que travessa la unió."}, {"n": 34, "bloc": 3, "text": "El soroll shot es modela habitualment com una font de corrent de soroll en paral·lel amb la unió que el genera.", "resp": "V", "just": "El corrent continu es modela amb la branca ideal i el soroll shot com una font de corrent en paral·lel."}, {"n": 35, "bloc": 3, "text": "Un fotodíode il·luminat no pot presentar soroll shot perquè el corrent és d'origen òptic.", "resp": "F", "just": "El corrent fotoinduït és un corrent continu que travessa una unió i, per tant, presenta soroll shot."}, {"n": 36, "bloc": 3, "text": "El soroll 1/f té una densitat espectral que decreix aproximadament amb la inversa de la freqüència.", "resp": "V", "just": "Es modela com Sv(f)=K/f^α amb α proper a 1; per això no és blanc."}, {"n": 37, "bloc": 3, "text": "El soroll 1/f és un soroll blanc perquè la seva densitat espectral és constant amb la freqüència.", "resp": "F", "just": "La seva densitat depèn de la freqüència (∝1/f); per definició, doncs, no és blanc."}, {"n": 38, "bloc": 3, "text": "El soroll 1/f domina generalment a baixes freqüències.", "resp": "V", "just": "En créixer cap a baixes freqüències, és especialment rellevant en mesures lentes."}, {"n": 39, "bloc": 3, "text": "Per a un model 1/f de densitat K/f, la variància integrada entre fmin i fmax és K·ln(fmax/fmin).", "resp": "V", "just": "La integral de K/f dona una dependència logarítmica del quocient de freqüències."}, {"n": 40, "bloc": 3, "text": "El soroll 1/f es pot integrar des de freqüència zero sense cap problema físic ni matemàtic.", "resp": "F", "just": "Divergeix logarítmicament quan fmin→0; a la pràctica fmin el fixa el temps d'observació o un filtre passaaltes."}, {"n": 41, "bloc": 4, "text": "El soroll d'un dispositiu actiu es modela amb fonts equivalents referides a l'entrada: una de tensió i, típicament, dues de corrent.", "resp": "V", "just": "El dispositiu es tracta com un quadripol ideal sense soroll amb les fonts referides a l'entrada."}, {"n": 42, "bloc": 4, "text": "La densitat espectral de tensió de soroll d'un amplificador operacional s'expressa habitualment en A/√Hz.", "resp": "F", "just": "La densitat de tensió s'expressa en V/√Hz (sovint nV/√Hz); l'A/√Hz és per a la densitat de corrent."}, {"n": 43, "bloc": 4, "text": "Les fonts de soroll independents es combinen per suma quadràtica: l'arrel de la suma dels quadrats dels valors eficaços.", "resp": "V", "just": "Per a fonts independents de mitjana nul·la, la variància total és la suma de variàncies."}, {"n": 44, "bloc": 4, "text": "Dues fonts de soroll independents es combinen sumant aritmèticament els seus valors eficaços.", "resp": "F", "just": "Es combinen per suma quadràtica (pitagòrica), no aritmètica."}, {"n": 45, "bloc": 4, "text": "Amb impedàncies de font molt elevades, el soroll de corrent d'entrada d'un amplificador és sempre irrellevant.", "resp": "F", "just": "Amb impedàncies de font altes, el soroll de corrent (convertit en tensió) pot esdevenir la contribució dominant."}, {"n": 46, "bloc": 4, "text": "En un amplificador inversor, la tensió de soroll de l'operacional es propaga a la sortida multiplicada pel guany de soroll (1+R2/R1).", "resp": "V", "just": "El guany de soroll (1+R2/R1) no coincideix amb el valor absolut del guany de senyal inversor (R2/R1)."}, {"n": 47, "bloc": 4, "text": "En un amplificador inversor, la resistència de retroalimentació no genera soroll tèrmic perquè està connectada al node de sortida.", "resp": "F", "just": "Sí que genera soroll tèrmic, que contribueix directament a la sortida."}, {"n": 48, "bloc": 4, "text": "Afegir un condensador de retroalimentació en un amplificador inversor pot reduir l'amplada de banda i, per tant, el soroll blanc integrat.", "resp": "V", "just": "En limitar la banda es redueix el soroll blanc integrat, que creix amb √Beq."}, {"n": 49, "bloc": 4, "text": "La primera etapa d'una cadena de mesura és poc important per al soroll si les etapes posteriors tenen molt de guany.", "resp": "F", "just": "És crítica: el seu soroll queda referit directament a l'entrada, mentre que el de les posteriors es divideix pel guany previ."}, {"n": 50, "bloc": 4, "text": "El refredament criogènic és la primera estratègia que s'ha d'aplicar en qualsevol sistema de mesura de baix cost.", "resp": "F", "just": "Es reserva per a casos molt exigents; primer s'optimitzen resistències, banda, dispositius i arquitectura a temperatura ambient."}]};
+let ordre = DATA.items.map((_,i)=>i), aleatori=false, filtre=-1;
+let estat = {};
+
+const $ = s=>document.querySelector(s);
+const llista = $('#llista');
+
+DATA.blocs.forEach((b,i)=>{
+  const o=document.createElement('option'); o.value=i; o.textContent=b; $('#filtre').appendChild(o);
+});
+
+function visibles(){
+  return ordre.filter(i=> filtre<0 || DATA.items[i].bloc===filtre);
+}
+
+function render(){
+  llista.innerHTML='';
+  visibles().forEach(i=>{
+    const it=DATA.items[i], st=estat[i];
+    const d=document.createElement('div');
+    d.className='q'+(st? (st.ok?' ok':' no') : '');
+    d.innerHTML=
+      '<div class="qhead"><span class="qn">'+it.n+'</span><p class="qtext">'+it.text+'</p></div>'+
+      '<div class="qbloc">'+DATA.blocs[it.bloc]+'</div>'+
+      '<div class="acts">'+
+        '<button class="v'+(st&&st.tria==='V'?' sel-v':'')+'" data-i="'+i+'" data-r="V"'+(st?' disabled':'')+'>Vertader</button>'+
+        '<button class="f'+(st&&st.tria==='F'?' sel-f':'')+'" data-i="'+i+'" data-r="F"'+(st?' disabled':'')+'>Fals</button>'+
+      '</div>'+
+      '<div class="fb'+(st?' show':'')+'">'+
+        (st? '<span class="verdict">'+(st.ok?'Correcte':'Incorrecte — la resposta és '+it.resp)+'</span>'+it.just : '')+
+      '</div>';
+    llista.appendChild(d);
+  });
+  actualitza();
+}
+
+llista.addEventListener('click', e=>{
+  const b=e.target.closest('button[data-r]'); if(!b) return;
+  const i=+b.dataset.i; if(estat[i]) return;
+  const tria=b.dataset.r;
+  estat[i]={tria, ok: tria===DATA.items[i].resp};
+  render();
+});
+
+function actualitza(){
+  const vis=visibles();
+  const fets=vis.filter(i=>estat[i]).length;
+  const encerts=vis.filter(i=>estat[i]&&estat[i].ok).length;
+  $('#ok').textContent=encerts; $('#ans').textContent=fets;
+  $('#pg').style.width=(vis.length? fets/vis.length*100:0)+'%';
+  const done=$('#done');
+  if(vis.length && fets===vis.length){
+    const pct=Math.round(encerts/vis.length*100);
+    $('#final').textContent=encerts+' / '+vis.length+'  ('+pct+'%)';
+    $('#consell').textContent = pct>=90 ? 'Domini sòlid dels continguts de la unitat.'
+      : pct>=70 ? 'Bon nivell. Reviseu els ítems errats i el passatge dels documents que els sustenta.'
+      : 'Convé rellegir els documents de la unitat abans de tornar a intentar-ho.';
+    done.classList.add('show');
+  } else done.classList.remove('show');
+}
+
+$('#filtre').addEventListener('change',e=>{filtre=+e.target.value; render(); window.scrollTo({top:0,behavior:'smooth'});});
+$('#ordre').addEventListener('click',()=>{
+  aleatori=!aleatori;
+  $('#ordre').textContent = aleatori? 'Ordre original':'Ordre aleatori';
+  ordre = DATA.items.map((_,i)=>i);
+  if(aleatori) for(let i=ordre.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[ordre[i],ordre[j]]=[ordre[j],ordre[i]];}
+  render(); window.scrollTo({top:0,behavior:'smooth'});
+});
+function reinicia(){estat={}; render(); window.scrollTo({top:0,behavior:'smooth'});}
+$('#reset').addEventListener('click',reinicia);
+$('#retry').addEventListener('click',reinicia);
+
+render();
+</script>
+</body>
+</html>

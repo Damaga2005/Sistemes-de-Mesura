@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fonaments dels sensors reactius</title>
+<style>
+:root{
+  --acc:#0b6fb8; --acc2:#0a5a8a; --ink:#1b2733; --mut:#5a6b7a;
+  --line:#d7e0e8; --bg:#ffffff; --soft:#f4f8fb; --box:#eef5fa;
+  --warn:#8a5a00; --warnbg:#fff6e6;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:17px; line-height:1.62;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 22px 72px}
+header.hero{
+  border-bottom:2px solid var(--acc); padding:26px 0 16px; margin-bottom:8px;
+}
+.breadcrumb{font-size:13.5px; color:var(--mut); letter-spacing:.02em; margin-bottom:8px}
+.breadcrumb b{color:var(--acc2)}
+header.hero h1{
+  font-size:27px; line-height:1.22; margin:2px 0 6px; color:var(--ink); font-weight:700;
+}
+p.lead{color:var(--mut); font-size:15px; margin:6px 0 0}
+h2{font-size:21px; margin:34px 0 10px; padding-top:6px; color:var(--acc2); font-weight:650; line-height:1.25}
+h2 .num{
+  display:inline-block; min-width:1.7em; color:var(--acc); font-weight:700;
+}
+h3{font-size:17.5px; margin:22px 0 6px; color:var(--ink); font-weight:650}
+p{margin:11px 0}
+ul,ol{margin:11px 0 11px 0; padding-left:1.3em}
+li{margin:5px 0}
+a{color:var(--acc)}
+strong{font-weight:650}
+.box{border:1px solid var(--line); border-radius:9px; padding:14px 18px; margin:18px 0; background:var(--soft)}
+.box h3{margin-top:0}
+.objectius{background:var(--box); border-color:#cfe3f1}
+.objectius .cap{font-weight:700; color:var(--acc2); font-size:14px; letter-spacing:.03em; text-transform:uppercase; margin-bottom:4px}
+.resum{background:#eef7f0; border-color:#cfe6d5}
+.resum .cap{font-weight:700; color:#2f7d4f; font-size:14px; letter-spacing:.03em; text-transform:uppercase; margin-bottom:4px}
+.nota{background:var(--warnbg); border-color:#f0dfb0}
+.nota .cap{font-weight:700; color:var(--warn); font-size:13.5px; letter-spacing:.02em; text-transform:uppercase; margin-bottom:4px}
+figure{margin:20px 0; text-align:center}
+figure img{max-width:100%; height:auto; border:1px solid var(--line); border-radius:6px; background:#fff; padding:6px}
+figcaption{font-size:14px; color:var(--mut); margin-top:7px; font-style:italic}
+figcaption b{font-style:normal; color:var(--ink)}
+.eqblock{display:block; text-align:center; margin:16px 0; overflow-x:auto}
+.eqblock .eqwrap{display:inline-flex; align-items:center; gap:16px}
+.eqn{color:var(--mut); font-size:14px}
+.eqsvg{display:inline-block}
+span.eqblock .eqsvg{max-width:100%}
+.nowrap{white-space:nowrap}
+table.data{border-collapse:collapse; width:100%; margin:16px 0; font-size:15px}
+table.data th,table.data td{border:1px solid var(--line); padding:7px 10px; text-align:center}
+table.data th{background:var(--box); color:var(--acc2); font-weight:650}
+table.data td.l{text-align:left}
+table.data caption{caption-side:top; font-size:14px; color:var(--mut); font-style:italic; margin-bottom:6px}
+pre.code{
+  background:#0f1b26; color:#e8eef4; border-radius:8px; padding:14px 16px; overflow-x:auto;
+  font-family:"Cascadia Code",Consolas,"Courier New",monospace; font-size:13.5px; line-height:1.5; margin:16px 0;
+}
+pre.code .cm{color:#7fb0c8}
+.exemple{border:1px solid #cfe3f1; border-left:4px solid var(--acc); border-radius:9px; padding:14px 18px 16px; margin:20px 0; background:#f8fbfd}
+.exemple .cap{font-weight:700; color:var(--acc2); font-size:14px; letter-spacing:.03em; text-transform:uppercase; margin-bottom:6px}
+.exemple .enunciat{font-style:italic; color:#3a4a58; margin-bottom:6px}
+.exemple ol.steps{margin:12px 0 0; padding-left:1.25em}
+.exemple ol.steps>li{margin:0 0 12px}
+.exemple ol.steps>li:last-child{margin-bottom:0}
+.steps>li>.what{font-weight:600; color:var(--acc2)}
+footer{margin-top:44px; border-top:1px solid var(--line); padding-top:14px; color:var(--mut); font-size:14px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px}
+footer a{text-decoration:none}
+@media (max-width:520px){ body{font-size:16px} header.hero h1{font-size:23px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="breadcrumb">Sistemes de Mesura &middot; <b>Unitat 7 — Sensors reactius i electromagnètics</b> &middot; Document 1 de 6</div>
+  <h1>Fonaments dels sensors reactius</h1>
+  <p class="lead">Dedicació estimada: 8 minuts</p>
+</header>
+
+
+<div class="box objectius">
+  <div class="cap">Objectius d'aprenentatge</div>
+  <ul>
+    <li>Delimitar què és un sensor reactiu i per quines raons físiques es prefereix a un sensor resistiu.</li>
+    <li>Justificar per què un sensor reactiu no pot mesurar-se en contínua.</li>
+    <li>Situar la freqüència de treball <span class="nowrap"><svg data-eq="\(f_0\)" class="eqsvg eqi" style="height:1.160em;vertical-align:-0.348em;" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 15.33 17.397187" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-08T17:23:42.893514</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="e1_figure_1">
+  <g id="e1_patch_1">
+   <path d="M 0 17.397187 
+L 15.33 17.397187 
+L 15.33 -0 
+L 0 -0 
+L 0 17.397187 
+z
+" style="fill: none; opacity: 0"/>
+  </g>
+  <g id="e1_text_1">
+   <!-- $f_0$ -->
+   <g style="fill: #1b2733" transform="translate(1.44 12.837656) scale(0.15 -0.15)">
+    <defs>
+     <path id="e1_DejaVuSans-Oblique-66" d="M 3059 4863 
+L 2969 4384 
+L 2419 4384 
+Q 2106 4384 1964 4261 
+Q 1822 4138 1753 3809 
+L 1691 3500 
+L 2638 3500 
+L 2553 3053 
+L 1606 3053 
+L 1013 0 
+L 434 0 
+L 1031 3053 
+L 481 3053 
+L 563 3500 
+L 1113 3500 
+L 1159 3744 
+Q 1278 4363 1576 4613 
+Q 1875 4863 2516 4863 
+L 3059 4863 
+z
+" transform="scale(0.015625)"/>
+     <path id="e1_DejaVuSans-30" d="M 2034 4250 
+Q 1547 4250 1301 3770 
+Q 1056 3291 1056 2328 
+Q 1056 1369 1301 889 
+Q 1547 409 2034 409 
+Q 2525 409 2770 889 
+Q 3016 1369 3016 2328 
+Q 3016 3291 2770 3770 
+Q 2525 4250 2034 4250 
+z
+M 2034 4750 
+Q 2819 4750 3233 4129 
+Q 3647 3509 3647 2328 
+Q 3647 1150 3233 529 
+Q 2819 -91 2034 -91 
+Q 1250 -91 836 529 
+Q 422 1150 422 2328 
+Q 422 3509 836 4129 
+Q 1250 4750 2034 4750 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#e1_DejaVuSans-Oblique-66" transform="translate(0 0.015625)"/>
+    <use xlink:href="#e1_DejaVuSans-30" transform="translate(35.205078 -16.390625) scale(0.7)"/>
+   </g>
+  </g>
+ </g>
+</svg>
+</span> com a paràmetre de disseny i enumerar què la condiciona.</li>
+    <li>Classificar els sensors del tema com a moduladors i distingir-los dels generadors.</li>
+    <li>Identificar els quatre mecanismes de transducció que es tracten en aquesta unitat.</li>
+  </ul>
+</div>
+
+<p>A la unitat 5 s'han estudiat els sensors resistius, la família més coneguda històricament. Aquesta unitat tracta les altres dues del mateix grup —els <strong>sensors capacitius</strong> i els <strong>sensors inductius</strong>, que en conjunt reben el nom de <strong>sensors reactius</strong>— i, a més, dos grups basats en efectes electromagnètics que no encaixen en cap de les dues: els sensors d'<strong>efecte Hall</strong>, que donen una tensió transversal proporcional al camp magnètic que travessa una làmina conductora, i els sensors <strong>magnetostrictius</strong>, que exploten l'acoblament entre magnetització i deformació mecànica d'alguns materials ferromagnètics.</p>
+
+<h2><span class="num">1</span>Què és un sensor reactiu</h2>
+
+<p>Un sensor és <strong>reactiu</strong> quan el seu element sensor és un condensador o una bobina, és a dir, un element de naturalesa <strong>reactiva i no dissipativa</strong>: emmagatzema energia en un camp —elèctric en el condensador, magnètic en la bobina— en lloc de convertir-la en calor. El mesurand actua modificant la capacitat, l'autoinductància o la inductància mútua de l'element, i el sistema de mesura llegeix aquesta variació d'impedància.</p>
+
+<p>Tots els sensors d'aquesta unitat, inclosos els d'efecte Hall i els magnetostrictius, són <strong>sensors moduladors</strong>: el mesurand modifica alguna propietat del sensor però no aporta l'energia del senyal de sortida, que prové d'una <strong>excitació externa</strong>.</p>
+
+<p>La distinció importa perquè alguns d'aquests sensors lliuren una tensió al terminal de sortida i podrien confondre's amb generadors. És el cas de la <strong>LVDT</strong>, un transformador de nucli mòbil que dona una tensió proporcional al desplaçament: sense excitació al seu bobinatge primari, però, no hi ha cap senyal. Els sensors que generen l'energia del senyal a partir del mesurand es tracten a la unitat 9.</p>
+
+<h2><span class="num">2</span>Per què reactius i no resistius</h2>
+
+<p>La decisió de fer servir un condensador o una bobina com a element transductor, en lloc d'una resistència, respon a quatre avantatges físics concrets.</p>
+
+<table class="data">
+  <tr><th style="width:26%">Avantatge</th><th>Origen físic</th></tr>
+  <tr><td class="l"><b>Mesura sense contacte</b></td><td class="l">Un condensador no necessita contacte físic: n'hi ha prou amb variar la separació entre plaques o la superfície de solapament. Una bobina detecta la proximitat d'un metall a través del camp magnètic. S'eliminen el desgast, la fricció i el soroll elèctric del contacte lliscant d'un potenciòmetre.</td></tr>
+  <tr><td class="l"><b>Tolerància a la brutícia</b></td><td class="l">La pols, l'oli i altres substàncies sense resposta davant de camps magnètics no pertorben la mesura inductiva, cosa que fa aquests sensors especialment apreciats en entorns industrials agressius.</td></tr>
+  <tr><td class="l"><b>Absència de soroll tèrmic</b></td><td class="l">Un element reactiu ideal no dissipa energia i per tant no genera soroll de Johnson-Nyquist. Qualsevol resistència a temperatura superior al zero absolut sí que en genera. D'aquí una resolució potencial superior, rellevant en metrologia i instrumentació científica.</td></tr>
+  <tr><td class="l"><b>Absència d'autoescalfament</b></td><td class="l">Sense dissipació no hi ha escalfament propi, que és un dels errors sistemàtics principals dels sensors resistius.</td></tr>
+</table>
+
+<p>Aquests avantatges valen per a l'element <strong>ideal</strong>. El sensor real incorpora resistències, capacitats i inductàncies paràsites que reintrodueixen, atenuats, tant el soroll com la dissipació.</p>
+
+<h2><span class="num">3</span>El cost: cal treballar en alterna</h2>
+
+<p>El preu d'utilitzar elements reactius és que la seva impedància <strong>depèn de la freqüència del senyal d'excitació</strong>. En contínua, la impedància d'un condensador ideal és infinita i la d'una inductància ideal és nul·la: en tots dos casos, el valor de la impedància no conté cap informació sobre el mesurand. Cal, doncs, <strong>excitar el sensor amb un senyal sinusoïdal</strong> a una freqüència determinada, que s'anomena <strong>freqüència de treball</strong> <span class="nowrap"><svg data-eq="\(f_0\)" class="eqsvg eqi" style="height:1.160em;vertical-align:-0.348em;" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 15.33 17.397187" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-08T17:23:42.896977</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="e2_figure_1">
+  <g id="e2_patch_1">
+   <path d="M 0 17.397187 
+L 15.33 17.397187 
+L 15.33 -0 
+L 0 -0 
+L 0 17.397187 
+z
+" style="fill: none; opacity: 0"/>
+  </g>
+  <g id="e2_text_1">
+   <!-- $f_0$ -->
+   <g style="fill: #1b2733" transform="translate(1.44 12.837656) scale(0.15 -0.15)">
+    <defs>
+     <path id="e2_DejaVuSans-Oblique-66" d="M 3059 4863 
+L 2969 4384 
+L 2419 4384 
+Q 2106 4384 1964 4261 
+Q 1822 4138 1753 3809 
+L 1691 3500 
+L 2638 3500 
+L 2553 3053 
+L 1606 3053 
+L 1013 0 
+L 434 0 
+L 1031 3053 
+L 481 3053 
+L 563 3500 
+L 1113 3500 
+L 1159 3744 
+Q 1278 4363 1576 4613 
+Q 1875 4863 2516 4863 
+L 3059 4863 
+z
+" transform="scale(0.015625)"/>
+     <path id="e2_DejaVuSans-30" d="M 2034 4250 
+Q 1547 4250 1301 3770 
+Q 1056 3291 1056 2328 
+Q 1056 1369 1301 889 
+Q 1547 409 2034 409 
+Q 2525 409 2770 889 
+Q 3016 1369 3016 2328 
+Q 3016 3291 2770 3770 
+Q 2525 4250 2034 4250 
+z
+M 2034 4750 
+Q 2819 4750 3233 4129 
+Q 3647 3509 3647 2328 
+Q 3647 1150 3233 529 
+Q 2819 -91 2034 -91 
+Q 1250 -91 836 529 
+Q 422 1150 422 2328 
+Q 422 3509 836 4129 
+Q 1250 4750 2034 4750 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#e2_DejaVuSans-Oblique-66" transform="translate(0 0.015625)"/>
+    <use xlink:href="#e2_DejaVuSans-30" transform="translate(35.205078 -16.390625) scale(0.7)"/>
+   </g>
+  </g>
+ </g>
+</svg>
+</span>.</p>
+
+<p>En els elements reals el límit és el mateix per una altra via. Una bobina real presenta en contínua la resistència òhmica del seu bobinatge, i és aquesta —no la inductància— la que domina la impedància a freqüència molt baixa; cal pujar en freqüència perquè la reactància inductiva <span class="nowrap"><svg data-eq="\(\omega L\)" class="eqsvg eqi" style="height:1.160em;vertical-align:-0.348em;" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 23.88 17.397187" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-08T17:23:42.900089</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="e3_figure_1">
+  <g id="e3_patch_1">
+   <path d="M 0 17.397187 
+L 23.88 17.397187 
+L 23.88 -0 
+L 0 -0 
+L 0 17.397187 
+z
+" style="fill: none; opacity: 0"/>
+  </g>
+  <g id="e3_text_1">
+   <!-- $\omega L$ -->
+   <g style="fill: #1b2733" transform="translate(1.44 12.837656) scale(0.15 -0.15)">
+    <defs>
+     <path id="e3_DejaVuSans-Oblique-3c9" d="M 1369 -91 
+Q 72 -91 434 1766 
+Q 575 2500 1256 3500 
+L 1875 3500 
+Q 1231 2500 1088 1750 
+Q 819 397 1519 397 
+Q 2166 397 2478 2078 
+L 3009 2078 
+Q 2669 388 3316 397 
+Q 4013 403 4275 1750 
+Q 4419 2500 4169 3500 
+L 4788 3500 
+Q 5075 2500 4934 1766 
+Q 4578 -94 3278 -91 
+Q 2428 -88 2503 844 
+Q 2194 -91 1369 -91 
+z
+" transform="scale(0.015625)"/>
+     <path id="e3_DejaVuSans-Oblique-4c" d="M 1075 4666 
+L 1709 4666 
+L 909 525 
+L 3181 525 
+L 3078 0 
+L 172 0 
+L 1075 4666 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#e3_DejaVuSans-Oblique-3c9" transform="translate(0 0.09375)"/>
+    <use xlink:href="#e3_DejaVuSans-Oblique-4c" transform="translate(83.740234 0.09375)"/>
+   </g>
+  </g>
+ </g>
+</svg>
+</span> sigui rellevant davant d'aquesta resistència. Un condensador real presenta en contínua la resistència de fuita del seu dielèctric, que tampoc no depèn del mesurand.</p>
+
+<div class="box nota">
+  <div class="cap">Convenció</div>
+  <p>Al llarg de la unitat, <span class="nowrap"><svg data-eq="\(f\)" class="eqsvg eqi" style="height:1.160em;vertical-align:-0.348em;" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 8.28 17.397187" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-08T17:23:42.903701</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="e4_figure_1">
+  <g id="e4_patch_1">
+   <path d="M 0 17.397187 
+L 8.28 17.397187 
+L 8.28 -0 
+L 0 -0 
+L 0 17.397187 
+z
+" style="fill: none; opacity: 0"/>
+  </g>
+  <g id="e4_text_1">
+   <!-- $f$ -->
+   <g style="fill: #1b2733" transform="translate(1.44 12.837656) scale(0.15 -0.15)">
+    <defs>
+     <path id="e4_DejaVuSans-Oblique-66" d="M 3059 4863 
+L 2969 4384 
+L 2419 4384 
+Q 2106 4384 1964 4261 
+Q 1822 4138 1753 3809 
+L 1691 3500 
+L 2638 3500 
+L 2553 3053 
+L 1606 3053 
+L 1013 0 
+L 434 0 
+L 1031 3053 
+L 481 3053 
+L 563 3500 
+L 1113 3500 
+L 1159 3744 
+Q 1278 4363 1576 4613 
+Q 1875 4863 2516 4863 
+L 3059 4863 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#e4_DejaVuSans-Oblique-66" transform="translate(0 0.015625)"/>
+   </g>
+  </g>
+ </g>
+</svg>
+</span> designa una freqüència genèrica i <span class="nowrap"><svg data-eq="\(f_0\)" class="eqsvg eqi" style="height:1.160em;vertical-align:-0.348em;" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 15.33 17.397187" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-08T17:23:42.907305</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="e5_figure_1">
+  <g id="e5_patch_1">
+   <path d="M 0 17.397187 
+L 15.33 17.397187 
+L 15.33 -0 
+L 0 -0 
+L 0 17.397187 
+z
+" style="fill: none; opacity: 0"/>
+  </g>
+  <g id="e5_text_1">
+   <!-- $f_0$ -->
+   <g style="fill: #1b2733" transform="translate(1.44 12.837656) scale(0.15 -0.15)">
+    <defs>
+     <path id="e5_DejaVuSans-Oblique-66" d="M 3059 4863 
+L 2969 4384 
+L 2419 4384 
+Q 2106 4384 1964 4261 
+Q 1822 4138 1753 3809 
+L 1691 3500 
+L 2638 3500 
+L 2553 3053 
+L 1606 3053 
+L 1013 0 
+L 434 0 
+L 1031 3053 
+L 481 3053 
+L 563 3500 
+L 1113 3500 
+L 1159 3744 
+Q 1278 4363 1576 4613 
+Q 1875 4863 2516 4863 
+L 3059 4863 
+z
+" transform="scale(0.015625)"/>
+     <path id="e5_DejaVuSans-30" d="M 2034 4250 
+Q 1547 4250 1301 3770 
+Q 1056 3291 1056 2328 
+Q 1056 1369 1301 889 
+Q 1547 409 2034 409 
+Q 2525 409 2770 889 
+Q 3016 1369 3016 2328 
+Q 3016 3291 2770 3770 
+Q 2525 4250 2034 4250 
+z
+M 2034 4750 
+Q 2819 4750 3233 4129 
+Q 3647 3509 3647 2328 
+Q 3647 1150 3233 529 
+Q 2819 -91 2034 -91 
+Q 1250 -91 836 529 
+Q 422 1150 422 2328 
+Q 422 3509 836 4129 
+Q 1250 4750 2034 4750 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#e5_DejaVuSans-Oblique-66" transform="translate(0 0.015625)"/>
+    <use xlink:href="#e5_DejaVuSans-30" transform="translate(35.205078 -16.390625) scale(0.7)"/>
+   </g>
+  </g>
+ </g>
+</svg>
+</span> la freqüència de treball escollida per al sistema de mesura. La freqüència angular és <span class="nowrap"><svg data-eq="\(\omega = 2\pi f\)" class="eqsvg eqi" style="height:1.160em;vertical-align:-0.348em;" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 57.78 17.397187" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-08T17:23:42.910722</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="e6_figure_1">
+  <g id="e6_patch_1">
+   <path d="M 0 17.397187 
+L 57.78 17.397187 
+L 57.78 -0 
+L 0 -0 
+L 0 17.397187 
+z
+" style="fill: none; opacity: 0"/>
+  </g>
+  <g id="e6_text_1">
+   <!-- $\omega = 2\pi f$ -->
+   <g style="fill: #1b2733" transform="translate(1.44 12.837656) scale(0.15 -0.15)">
+    <defs>
+     <path id="e6_DejaVuSans-Oblique-3c9" d="M 1369 -91 
+Q 72 -91 434 1766 
+Q 575 2500 1256 3500 
+L 1875 3500 
+Q 1231 2500 1088 1750 
+Q 819 397 1519 397 
+Q 2166 397 2478 2078 
+L 3009 2078 
+Q 2669 388 3316 397 
+Q 4013 403 4275 1750 
+Q 4419 2500 4169 3500 
+L 4788 3500 
+Q 5075 2500 4934 1766 
+Q 4578 -94 3278 -91 
+Q 2428 -88 2503 844 
+Q 2194 -91 1369 -91 
+z
+" transform="scale(0.015625)"/>
+     <path id="e6_DejaVuSans-3d" d="M 678 2906 
+L 4684 2906 
+L 4684 2381 
+L 678 2381 
+L 678 2906 
+z
+M 678 1631 
+L 4684 1631 
+L 4684 1100 
+L 678 1100 
+L 678 1631 
+z
+" transform="scale(0.015625)"/>
+     <path id="e6_DejaVuSans-32" d="M 1228 531 
+L 3431 531 
+L 3431 0 
+L 469 0 
+L 469 531 
+Q 828 903 1448 1529 
+Q 2069 2156 2228 2338 
+Q 2531 2678 2651 2914 
+Q 2772 3150 2772 3378 
+Q 2772 3750 2511 3984 
+Q 2250 4219 1831 4219 
+Q 1534 4219 1204 4116 
+Q 875 4013 500 3803 
+L 500 4441 
+Q 881 4594 1212 4672 
+Q 1544 4750 1819 4750 
+Q 2544 4750 2975 4387 
+Q 3406 4025 3406 3419 
+Q 3406 3131 3298 2873 
+Q 3191 2616 2906 2266 
+Q 2828 2175 2409 1742 
+Q 1991 1309 1228 531 
+z
+" transform="scale(0.015625)"/>
+     <path id="e6_DejaVuSans-Oblique-3c0" d="M 584 3500 
+L 3938 3500 
+L 3825 2925 
+L 3384 2925 
+L 2966 775 
+Q 2922 550 2981 450 
+Q 3038 353 3209 353 
+Q 3256 353 3325 363 
+Q 3397 369 3419 372 
+L 3338 -44 
+Q 3222 -84 3103 -103 
+Q 2981 -122 2866 -122 
+Q 2491 -122 2388 81 
+Q 2284 288 2391 838 
+L 2797 2925 
+L 1506 2925 
+L 938 0 
+L 350 0 
+L 919 2925 
+L 472 2925 
+L 584 3500 
+z
+" transform="scale(0.015625)"/>
+     <path id="e6_DejaVuSans-Oblique-66" d="M 3059 4863 
+L 2969 4384 
+L 2419 4384 
+Q 2106 4384 1964 4261 
+Q 1822 4138 1753 3809 
+L 1691 3500 
+L 2638 3500 
+L 2553 3053 
+L 1606 3053 
+L 1013 0 
+L 434 0 
+L 1031 3053 
+L 481 3053 
+L 563 3500 
+L 1113 3500 
+L 1159 3744 
+Q 1278 4363 1576 4613 
+Q 1875 4863 2516 4863 
+L 3059 4863 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#e6_DejaVuSans-Oblique-3c9" transform="translate(0 0.015625)"/>
+    <use xlink:href="#e6_DejaVuSans-3d" transform="translate(103.222656 0.015625)"/>
+    <use xlink:href="#e6_DejaVuSans-32" transform="translate(206.494141 0.015625)"/>
+    <use xlink:href="#e6_DejaVuSans-Oblique-3c0" transform="translate(270.117188 0.015625)"/>
+    <use xlink:href="#e6_DejaVuSans-Oblique-66" transform="translate(330.322266 0.015625)"/>
+   </g>
+  </g>
+ </g>
+</svg>
+</span>.</p>
+</div>
+
+<h2><span class="num">4</span>La freqüència de treball com a paràmetre de disseny</h2>
+
+<p>L'elecció de <span class="nowrap"><svg data-eq="\(f_0\)" class="eqsvg eqi" style="height:1.160em;vertical-align:-0.348em;" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 15.33 17.397187" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-08T17:23:42.914196</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="e7_figure_1">
+  <g id="e7_patch_1">
+   <path d="M 0 17.397187 
+L 15.33 17.397187 
+L 15.33 -0 
+L 0 -0 
+L 0 17.397187 
+z
+" style="fill: none; opacity: 0"/>
+  </g>
+  <g id="e7_text_1">
+   <!-- $f_0$ -->
+   <g style="fill: #1b2733" transform="translate(1.44 12.837656) scale(0.15 -0.15)">
+    <defs>
+     <path id="e7_DejaVuSans-Oblique-66" d="M 3059 4863 
+L 2969 4384 
+L 2419 4384 
+Q 2106 4384 1964 4261 
+Q 1822 4138 1753 3809 
+L 1691 3500 
+L 2638 3500 
+L 2553 3053 
+L 1606 3053 
+L 1013 0 
+L 434 0 
+L 1031 3053 
+L 481 3053 
+L 563 3500 
+L 1113 3500 
+L 1159 3744 
+Q 1278 4363 1576 4613 
+Q 1875 4863 2516 4863 
+L 3059 4863 
+z
+" transform="scale(0.015625)"/>
+     <path id="e7_DejaVuSans-30" d="M 2034 4250 
+Q 1547 4250 1301 3770 
+Q 1056 3291 1056 2328 
+Q 1056 1369 1301 889 
+Q 1547 409 2034 409 
+Q 2525 409 2770 889 
+Q 3016 1369 3016 2328 
+Q 3016 3291 2770 3770 
+Q 2525 4250 2034 4250 
+z
+M 2034 4750 
+Q 2819 4750 3233 4129 
+Q 3647 3509 3647 2328 
+Q 3647 1150 3233 529 
+Q 2819 -91 2034 -91 
+Q 1250 -91 836 529 
+Q 422 1150 422 2328 
+Q 422 3509 836 4129 
+Q 1250 4750 2034 4750 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#e7_DejaVuSans-Oblique-66" transform="translate(0 0.015625)"/>
+    <use xlink:href="#e7_DejaVuSans-30" transform="translate(35.205078 -16.390625) scale(0.7)"/>
+   </g>
+  </g>
+ </g>
+</svg>
+</span> és un dels paràmetres de disseny més rellevants del sistema de mesura, i no es pot decidir mirant només el sensor:</p>
+
+<ul>
+  <li>Si es tria <strong>massa baixa</strong>, la impedància del condensador és molt elevada i el sistema esdevé vulnerable a interferències captades per acoblament capacitiu.</li>
+  <li>Si es tria <strong>massa alta</strong>, apareixen pèrdues en el nucli ferromagnètic d'una bobina, pèrdues dielèctriques i efectes de capacitats paràsites que degraden la mesura.</li>
+</ul>
+
+<p>El valor òptim depèn simultàniament del tipus de sensor, del material del nucli o del dielèctric, del mesurand, de les condicions de l'entorn i del <strong>circuit de condicionament</strong>, perquè la freqüència determina alhora la impedància que aquest circuit veu i el pes dels efectes paràsits. El dimensionament complet del condicionador en alterna es tracta a la unitat 8.</p>
+
+<h2><span class="num">5</span>Els quatre mecanismes de transducció de la unitat</h2>
+
+<table class="data">
+  <tr><th style="width:22%">Família</th><th>Mecanisme</th></tr>
+  <tr><td class="l"><b>Capacitius</b></td><td class="l">Entre dos conductors separats per un dielèctric s'emmagatzema energia en el camp elèctric. La capacitat depèn de la geometria dels conductors i de la permitivitat del dielèctric; qualsevol magnitud que modifiqui la forma del sensor o la naturalesa del dielèctric és detectable.</td></tr>
+  <tr><td class="l"><b>Inductius</b></td><td class="l">Inducció electromagnètica. La inductància d'una bobina es veu modificada per la presència o el moviment de materials conductors o ferromagnètics propers que interaccionen amb el camp que ella mateixa genera. Cas particular: els <b>corrents de Foucault</b>, induïts en un conductor massís per un camp magnètic variable.</td></tr>
+  <tr><td class="l"><b>Efecte Hall</b></td><td class="l">Portadors de càrrega en moviment que travessen un material prim en presència d'un camp magnètic perpendicular experimenten una força de Lorentz que els desvia i genera una diferència de tensió transversal, proporcional al camp i al corrent.</td></tr>
+  <tr><td class="l"><b>Magnetostrictius</b></td><td class="l">Acoblament bidireccional entre l'estat magnètic i la deformació mecànica d'alguns materials ferromagnètics: el material es deforma en presència d'un camp, i una deformació mecànica en modifica la magnetització.</td></tr>
+</table>
+
+<p>Els sensors reactius es divideixen, a més, segons quantes bobines o elèctrodes hi intervenen. Els <strong>sensors d'un sol element</strong> mesuren la variació de la pròpia autoinductància o capacitat; els <strong>sensors basats en transformadors variables</strong> —LVDT, resolver, synchro, inductosyn— mesuren la variació de la <strong>inductància mútua</strong> entre bobines separades.</p>
+
+<h2><span class="num">6</span>On es troben aquests sensors</h2>
+
+<p>Els acceleròmetres dels telèfons mòbils són majoritàriament dispositius MEMS de principi <strong>capacitiu</strong>, i la pantalla tàctil del mateix telèfon és una matriu de sensors capacitius que detecten la pertorbació del camp elèctric produïda per la proximitat del dit, que és conductor. En l'àmbit industrial, els sensors <strong>inductius</strong> de proximitat, presents a gairebé qualsevol línia d'automatització robòtica, detecten sense contacte si una peça metàl·lica ha arribat a una posició determinada, i les LVDT mesuren en aeronàutica el desplaçament de les superfícies de control amb precisió de micròmetres. Els sensors d'<strong>efecte Hall</strong> són a cada motor elèctric de commutació electrònica, als comptadors d'energia i a les portes dels frigorífics, i els <strong>magnetostrictius</strong> mesuren el nivell de líquids en dipòsits industrials amb resolució de dècimes de mil·límetre, fins i tot a temperatura i pressió extremes.</p>
+
+<div class="box resum">
+  <div class="cap">Síntesi</div>
+  <p>Un sensor reactiu té com a element sensor un condensador o una bobina, que emmagatzemen energia en un camp elèctric o magnètic en lloc de dissipar-la. D'aquí surten la mesura sense contacte, la tolerància a entorns bruts i l'absència de soroll tèrmic i d'autoescalfament de l'element ideal. El preu és que la impedància depèn de la freqüència: en contínua, la d'un condensador ideal és infinita i la d'una bobina ideal nul·la, de manera que cal excitar el sensor en alterna a una freqüència de treball <span class="nowrap"><svg data-eq="\(f_0\)" class="eqsvg eqi" style="height:1.160em;vertical-align:-0.348em;" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 15.33 17.397187" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-08T17:23:42.917200</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="e8_figure_1">
+  <g id="e8_patch_1">
+   <path d="M 0 17.397187 
+L 15.33 17.397187 
+L 15.33 -0 
+L 0 -0 
+L 0 17.397187 
+z
+" style="fill: none; opacity: 0"/>
+  </g>
+  <g id="e8_text_1">
+   <!-- $f_0$ -->
+   <g style="fill: #1b2733" transform="translate(1.44 12.837656) scale(0.15 -0.15)">
+    <defs>
+     <path id="e8_DejaVuSans-Oblique-66" d="M 3059 4863 
+L 2969 4384 
+L 2419 4384 
+Q 2106 4384 1964 4261 
+Q 1822 4138 1753 3809 
+L 1691 3500 
+L 2638 3500 
+L 2553 3053 
+L 1606 3053 
+L 1013 0 
+L 434 0 
+L 1031 3053 
+L 481 3053 
+L 563 3500 
+L 1113 3500 
+L 1159 3744 
+Q 1278 4363 1576 4613 
+Q 1875 4863 2516 4863 
+L 3059 4863 
+z
+" transform="scale(0.015625)"/>
+     <path id="e8_DejaVuSans-30" d="M 2034 4250 
+Q 1547 4250 1301 3770 
+Q 1056 3291 1056 2328 
+Q 1056 1369 1301 889 
+Q 1547 409 2034 409 
+Q 2525 409 2770 889 
+Q 3016 1369 3016 2328 
+Q 3016 3291 2770 3770 
+Q 2525 4250 2034 4250 
+z
+M 2034 4750 
+Q 2819 4750 3233 4129 
+Q 3647 3509 3647 2328 
+Q 3647 1150 3233 529 
+Q 2819 -91 2034 -91 
+Q 1250 -91 836 529 
+Q 422 1150 422 2328 
+Q 422 3509 836 4129 
+Q 1250 4750 2034 4750 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#e8_DejaVuSans-Oblique-66" transform="translate(0 0.015625)"/>
+    <use xlink:href="#e8_DejaVuSans-30" transform="translate(35.205078 -16.390625) scale(0.7)"/>
+   </g>
+  </g>
+ </g>
+</svg>
+</span> que depèn del sensor, del material, de l'entorn i del condicionador. Tots els sensors de la unitat són moduladors: el mesurand modula un senyal d'excitació extern i no n'aporta l'energia. Els mecanismes són quatre: variació de capacitat, variació d'autoinductància o d'inductància mútua, efecte Hall i magnetostricció.</p>
+</div>
+
+
+<footer>
+  <span></span><a href="Unitat7_02_El_sensor_capacitiu_model_i_geometries.html">2. El sensor capacitiu: model, geometries i linealitat &rarr;</a>
+</footer>
+</div>
+
+<script>
+/* Figures embedded as base64; resolved on load to keep the body editable in plain text. */
+var IMGDATA = {};
+document.querySelectorAll('img[data-fig]').forEach(function(im){
+  var k=im.getAttribute('data-fig');
+  if(IMGDATA[k]) im.src=IMGDATA[k];
+});
+</script>
+</body>
+</html>

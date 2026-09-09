@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrenament V/F · Unitat 3: Interferències</title>
+<style>
+:root{--tinta:#1b2430;--suau:#3d4a5c;--accent:#1d4e89;--accent2:#e8eff7;--vora:#d5dce4;
+ --ok:#0f6e4f;--okf:#e9f5f0;--no:#a03030;--nof:#fbeceb;--fons:#f4f6f9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fons);color:var(--tinta);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;background:#fff;box-shadow:0 1px 40px rgba(20,30,45,.07);padding-bottom:56px;min-height:100vh}
+header{background:linear-gradient(135deg,#1d4e89,#2f6db0);color:#fff;padding:34px 44px 28px}
+.crumb{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:13px;color:#cfe0f2;margin:0 0 8px}
+header h1{margin:.1em 0 .3em;font-size:28px}
+header p{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:15px;color:#eaf2fb;margin:0;max-width:62ch}
+main{padding:0 44px}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--vora);
+ padding:14px 44px;margin:0 -44px 18px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;
+ font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px}
+.bar .stat{color:var(--suau)} .bar .stat b{color:var(--accent);font-size:16px}
+.prog{flex:1 1 160px;height:8px;background:var(--accent2);border-radius:5px;overflow:hidden;min-width:120px}
+.prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+button{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px;cursor:pointer;
+ border-radius:8px;border:1px solid var(--vora);background:#fff;color:var(--tinta);padding:7px 14px;transition:.15s}
+button:hover{border-color:var(--accent);color:var(--accent)}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+button.primary:hover{background:#17406f;color:#fff}
+select{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px;padding:6px 8px;
+ border-radius:8px;border:1px solid var(--vora);background:#fff;color:var(--tinta)}
+.q{border:1px solid var(--vora);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fff}
+.q.ok{border-color:#bfe3d4;background:var(--okf)} .q.no{border-color:#eec9c6;background:var(--nof)}
+.qhead{display:flex;gap:12px;align-items:baseline}
+.qn{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-weight:700;color:var(--accent);font-size:14px;flex:0 0 auto}
+.qtext{font-size:17px;margin:0}
+.qbloc{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:12px;color:var(--suau);
+ margin:6px 0 0 34px;text-transform:uppercase;letter-spacing:.04em}
+.acts{display:flex;gap:10px;margin:12px 0 0 34px}
+.acts button{min-width:74px;font-weight:600}
+.acts button.v:hover{border-color:var(--ok);color:var(--ok)}
+.acts button.f:hover{border-color:var(--no);color:var(--no)}
+.acts button.sel-v{background:var(--ok);color:#fff;border-color:var(--ok)}
+.acts button.sel-f{background:var(--no);color:#fff;border-color:var(--no)}
+.acts button[disabled]{opacity:.55;cursor:default}
+.fb{margin:12px 0 0 34px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14.5px;
+ padding:10px 13px;border-radius:8px;display:none}
+.fb.show{display:block}
+.fb .verdict{font-weight:700;display:block;margin-bottom:3px}
+.q.ok .fb{background:#fff;border:1px solid #bfe3d4} .q.ok .verdict{color:var(--ok)}
+.q.no .fb{background:#fff;border:1px solid #eec9c6} .q.no .verdict{color:var(--no)}
+.done{background:var(--accent2);border:1px solid #c6d9ef;border-radius:12px;padding:20px 22px;margin:20px 0;
+ font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;display:none}
+.done.show{display:block}
+.done h3{margin:0 0 .3em;color:var(--accent);font-size:19px}
+.score{font-size:30px;font-weight:700;color:var(--accent)}
+footer{padding:22px 44px 0;color:var(--suau);font-size:13px;
+ font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;border-top:1px solid var(--vora);margin:26px 44px 0;
+ margin-left:0;margin-right:0;padding-left:44px}
+@media(max-width:620px){header,main,.bar,footer{padding-left:20px;padding-right:20px}
+ .bar{margin-left:-20px;margin-right:-20px} .qbloc,.acts,.fb{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<p class="crumb"><b>Sistemes de Mesura</b> (230920) · ETSETB–UPC</p>
+<h1>Entrenament V/F · Unitat 3: Interferències</h1>
+<p>Marqueu si cada afirmació és vertadera o falsa. Rebreu la correcció immediata amb una justificació breu. Aquest entrenament no es lliura ni es puntua.</p>
+</header>
+<main>
+<div class="bar">
+  <span class="stat">Encerts: <b id="ok">0</b> / <span id="ans">0</span></span>
+  <div class="prog"><i id="pg"></i></div>
+  <select id="filtre" title="Filtra per bloc"><option value="-1">Tots els blocs</option></select>
+  <button id="ordre">Ordre aleatori</button>
+  <button class="primary" id="reset">Reinicia</button>
+</div>
+<div id="llista"></div>
+<div class="done" id="done">
+  <h3>Entrenament completat</h3>
+  <p class="score" id="final"></p>
+  <p id="consell"></p>
+  <button class="primary" id="retry">Torna-ho a provar</button>
+</div>
+</main>
+<footer>
+Sistemes de Mesura (230920) · ETSETB–UPC · Unitat 3: Interferències en Sistemes de Mesura<br>
+Material d'autoestudi. Les respostes no s'envien enlloc: tot el càlcul es fa al vostre navegador.
+</footer>
+</div>
+<script>
+const DATA = {"blocs": ["1. Soroll, interferència i classificació", "2. Compatibilitat electromagnètica, canal i camp", "3. Mode diferencial, mode comú i CMRR", "4. Interferències conduïdes i acoblament capacitiu", "5. Blindatge, sondes, acoblament inductiu i efecte sobre la mesura"], "items": [{"n": 1, "bloc": 0, "text": "El soroll blanc presenta, idealment, una densitat espectral de potència pràcticament constant amb la freqüència.", "resp": "V", "just": "El soroll blanc ocupa tota l'amplada de banda de mesura amb densitat espectral pràcticament constant (document 1, secció 1)."}, {"n": 2, "bloc": 0, "text": "Una interferència periòdica ocupa una amplada de banda més gran que la del soroll blanc.", "resp": "F", "just": "És a l'inrevés: la interferència té espectre estret (fonamental i harmònics) i el soroll blanc ocupa tota la banda."}, {"n": 3, "bloc": 0, "text": "Una interferència periòdica es pot descriure per una freqüència fonamental i els seus harmònics.", "resp": "V", "just": "És una de les característiques distintives de la interferència periòdica: espectre concentrat en múltiples enters de la fonamental."}, {"n": 4, "bloc": 0, "text": "L'objectiu de la mitigació d'interferències consisteix habitualment a augmentar l'acoblament entre la font interferent i el receptor.", "resp": "F", "just": "L'objectiu és el contrari: bloquejar o atenuar el canal de transmissió entre font i receptor."}, {"n": 5, "bloc": 0, "text": "Promitjar 100 lectures independents redueix la desviació típica del promig en un factor 10.", "resp": "V", "just": "En promitjar N lectures independents, la desviació típica del promig es divideix per l'arrel de N; amb N = 100, el factor és 10."}, {"n": 6, "bloc": 0, "text": "El soroll d'un sistema de mesura té origen típicament extern i d'origen humà.", "resp": "F", "just": "Això descriu la interferència. El soroll s'origina generalment dins del sistema de mesura o ja ve superposat al transductor."}, {"n": 7, "bloc": 0, "text": "Una descàrrega electrostàtica pot provocar una degradació latent que es manifesti setmanes o mesos després.", "resp": "V", "just": "Malgrat durar microsegons, les ESD poden causar ruptura de dielèctrics, danys d'unió PN i degradació latent diferida."}, {"n": 8, "bloc": 0, "text": "Les tempestes solars constitueixen una font artificial intencionada d'interferència.", "resp": "F", "just": "Són una interferència natural d'origen extraterrestre; les intencionades són artificials (transmissors de comunicació)."}, {"n": 9, "bloc": 0, "text": "Les eines elèctriques amb arcs generen espectres de banda ampla que s'estenen de centenars de Hz a centenars de MHz.", "resp": "V", "just": "El seu caràcter impulsiu distribueix l'energia en una banda molt gran, cosa que les fa especialment perilloses."}, {"n": 10, "bloc": 0, "text": "Les interferències només es poden classificar segons l'origen de la font.", "resp": "F", "just": "Es classifiquen per origen de la font, per mode d'acoblament i per canal de transmissió."}, {"n": 11, "bloc": 1, "text": "Tot problema d'interferència electromagnètica es pot estructurar en font, canal i receptor.", "resp": "V", "just": "Són els tres elements inseparables de l'anàlisi; la mitigació més eficaç sol actuar sobre el canal."}, {"n": 12, "bloc": 1, "text": "La Directiva 2014/30/UE exigeix que els equips comercialitzats compleixin els estàndards de la sèrie IEC 61000.", "resp": "V", "just": "És el marc normatiu d'EMC a la Unió Europea (anteriorment 89/336/CEE)."}, {"n": 13, "bloc": 1, "text": "Complir la normativa EMC garanteix que no hi haurà problemes d'interferència a la pràctica.", "resp": "F", "just": "Les proves no cobreixen totes les configuracions; diversos equips conformes poden sumar interferències, i l'envelliment n'augmenta l'emissió."}, {"n": 14, "bloc": 1, "text": "Les proves d'emissió mesuren la capacitat de l'equip per tolerar les interferències presents en el seu entorn.", "resp": "F", "just": "Això són les proves d'immunitat. Les d'emissió mesuren la interferència que l'equip genera en funcionament normal."}, {"n": 15, "bloc": 1, "text": "La sèrie IEC 61000 tracta únicament la resistència mecànica de les carcasses dels equips.", "resp": "F", "just": "Es subdivideix en parts sobre generalitats, entorn electromagnètic, límits d'emissió, immunitat, instal·lacions i normes genèriques."}, {"n": 16, "bloc": 1, "text": "L'estratègia de mitigació generalment més eficaç consisteix a actuar sobre el canal de transmissió.", "resp": "V", "just": "Es pot actuar sobre qualsevol dels tres elements, però modificar el canal (blindatge, coaxial, filtratge, connexions) sol ser el més efectiu."}, {"n": 17, "bloc": 1, "text": "A 1 MHz, la longitud d'ona electromagnètica és aproximadament de 300 m.", "resp": "V", "just": "Amb λ = c/f: 3·10⁸ / 10⁶ = 300 m."}, {"n": 18, "bloc": 1, "text": "A 50 Hz, la longitud d'ona electromagnètica és inferior a un metre.", "resp": "F", "just": "A 50 Hz la longitud d'ona és d'uns 6.000 km."}, {"n": 19, "bloc": 1, "text": "La frontera entre camp proper i camp llunyà se situa aproximadament a una distància λ/2π.", "resp": "V", "just": "Equival a uns 0,16·λ; els sistemes de mesura típics estan gairebé sempre en camp proper a baixa freqüència."}, {"n": 20, "bloc": 1, "text": "En camp proper, els camps elèctric i magnètic estan lligats per la impedància característica de 377 Ω.", "resp": "F", "just": "Aquesta relació és pròpia del camp llunyà. En camp proper E i H són independents, cosa que permet separar l'anàlisi capacitiva de la inductiva."}, {"n": 21, "bloc": 2, "text": "La tensió de mode comú es pot expressar com Vc = (VA + VB)/2.", "resp": "V", "just": "És la definició de mode comú respecte al node de referència del sistema de mesura."}, {"n": 22, "bloc": 2, "text": "Un CMRR de 80 dB equival a un factor de rebuig lineal igual a 80.", "resp": "F", "just": "El factor lineal és 10^(80/20) = 10⁴, no 80."}, {"n": 23, "bloc": 2, "text": "Amb una tensió de mode comú d'1 V i un CMRR de 80 dB, la pertorbació diferencial equivalent és de 0,1 mV.", "resp": "V", "just": "1 V dividit pel factor lineal 10⁴ dóna 0,1 mV."}, {"n": 24, "bloc": 2, "text": "Un convertidor analògic-digital integrador pot rebutjar una interferència periòdica si el temps d'integració conté un nombre enter de períodes.", "resp": "V", "just": "El guany és proporcional a sin(πfT)/(πfT), que s'anul·la quan fT és enter; per això integrar 20 ms rebutja els 50 Hz."}, {"n": 25, "bloc": 2, "text": "El CMRR d'un amplificador real es manté constant a totes les freqüències.", "resp": "F", "just": "Disminueix típicament amb la freqüència: 100 dB en contínua poden quedar en 60 dB a 1 kHz i 40 dB a 10 kHz."}, {"n": 26, "bloc": 2, "text": "Un desequilibri entre les impedàncies de mode comú dels dos camins d'entrada converteix part del mode comú en mode diferencial.", "resp": "V", "just": "Per això la simetria de les impedàncies determina en gran mesura el CMRR efectiu a freqüències altes."}, {"n": 27, "bloc": 2, "text": "Els equips de classe I tenen les parts metàl·liques accessibles connectades al conductor de protecció de terra.", "resp": "V", "just": "Requereixen cable de tres conductors i les seves fonts commutades injecten corrents de fuita de 0,5 a 2 mA eficaços."}, {"n": 28, "bloc": 2, "text": "Els equips de classe II garanteixen la protecció connectant la carcassa al conductor de terra en lloc d'emprar doble aïllament.", "resp": "F", "just": "La classe II es basa precisament en el doble aïllament; són equips flotants amb massa independent de la terra de la instal·lació."}, {"n": 29, "bloc": 2, "text": "Els equips de classe III s'alimenten amb tensió de seguretat molt baixa i no generen corrents de fuita significatius.", "resp": "V", "just": "Típicament ≤ 50 V en alterna, sovint amb bateries."}, {"n": 30, "bloc": 2, "text": "Quan la font i el sistema de mesura estan tots dos posats a terra, el CMRR resultant del circuit és molt elevat, superior a 100 dB.", "resp": "F", "just": "En aquest cas el CMRR val 1 + Zcp/Zb, amb Zcp i Zb comparables: un factor proper a 2, molt lluny dels 100 dB."}, {"n": 31, "bloc": 3, "text": "Quan la font és flotant i el mesurador està posat a terra, el CMRR val ZA/Zb i pot assolir valors molt elevats.", "resp": "V", "just": "Amb Zb = 0,1 Ω i ZA = 10 MΩ a 50 Hz s'obtenen 160 dB, és a dir, vuit ordres de magnitud d'atenuació."}, {"n": 32, "bloc": 3, "text": "Desconnectar de la instal·lació els equips que no s'utilitzen incrementa el corrent de fuita acumulat.", "resp": "F", "just": "El redueix. Els equips de classe I injecten fuita fins i tot en standby, perquè la font commutada continua activa."}, {"n": 33, "bloc": 3, "text": "Augmentar la impedància del conductor de retorn Zb és una forma directa de reduir la interferència conduïda externa.", "resp": "F", "just": "Cal minimitzar les impedàncies dels camins de retorn: engruixir o escurçar el cable, no augmentar-ne la impedància."}, {"n": 34, "bloc": 3, "text": "Un varistor MOV s'utilitza principalment per augmentar el guany diferencial de l'amplificador d'entrada.", "resp": "F", "just": "És un supressor de transitoris: desvia ràpidament les sobretensions a terra i limita la tensió que arriba als circuits."}, {"n": 35, "bloc": 3, "text": "Un transformador d'aïllament amb pantalla redueix la capacitat paràsita d'acoblament entre primari i secundari.", "resp": "V", "just": "Passa dels 100 pF – 10 nF d'un transformador convencional a valors de 5–10 pF amb blindatge doble."}, {"n": 36, "bloc": 3, "text": "El corrent acoblat capacitivament compleix iC = C · dV/dt.", "resp": "V", "just": "És el corrent de desplaçament a través de la capacitat paràsita."}, {"n": 37, "bloc": 3, "text": "L'acoblament capacitiu requereix un corrent elevat a la font interferent, encara que la seva tensió sigui constant.", "resp": "F", "just": "Depèn de la variació de tensió (dV/dt); una tensió constant, per gran que sigui, no acobla res."}, {"n": 38, "bloc": 3, "text": "La impedància d'una capacitat es pot expressar com ZC = j·2·π·f·C.", "resp": "F", "just": "És la inversa: ZC = 1/(j·2·π·f·C), de manera que disminueix en pujar la freqüència."}, {"n": 39, "bloc": 3, "text": "A freqüències altes, la impedància de l'acoblament capacitiu tendeix a disminuir.", "resp": "V", "just": "Com que ZC = 1/(j2πfC), l'acoblament s'agreuja amb la freqüència."}, {"n": 40, "bloc": 3, "text": "Un receptor d'alta impedància desenvolupa una tensió interferent menor per a un mateix corrent acoblat capacitivament.", "resp": "F", "just": "En desenvolupa una de més gran (V = i·Z); per això els circuits d'alta impedància són especialment susceptibles."}, {"n": 41, "bloc": 4, "text": "L'eficàcia d'un blindatge depèn de manera determinant de la seva connexió a una referència de potencial adequada.", "resp": "V", "just": "Per a interferències de la instal·lació cal connectar-lo a terra; per a interferències internes, a la massa de la font interferent."}, {"n": 42, "bloc": 4, "text": "Les obertures practicades en una carcassa metàl·lica augmenten l'efectivitat del blindatge.", "resp": "F", "just": "La redueixen: trenquen la continuïtat elèctrica de la gàbia de Faraday, igual que els conductors que n'han de sortir."}, {"n": 43, "bloc": 4, "text": "La condició de compensació d'una sonda atenuadora és Rp · Cp = Rosc · (Ccable + Cosc).", "resp": "V", "just": "Si es compleix, la funció de transferència esdevé d'ordre zero, constant amb la freqüència."}, {"n": 44, "bloc": 4, "text": "Quan una sonda està correctament compensada, la transferència entre la punta i l'entrada de l'oscil·loscopi esdevé un passa-baixes de primer ordre fortament dependent de la freqüència.", "resp": "F", "just": "És justament el contrari: la compensació elimina la dependència freqüencial i deixa un guany pla igual a 1/A."}, {"n": 45, "bloc": 4, "text": "La tensió induïda per acoblament inductiu es pot modelar com Vi = −Lm · dI1/dt.", "resp": "V", "just": "Deriva de la llei de Faraday, amb Lm la inductància mútua entre els dos circuits."}, {"n": 46, "bloc": 4, "text": "Perquè es produeixi una interferència inductiva n'hi ha prou amb una tensió elevada a la font, encara que no hi circuli corrent.", "resp": "F", "just": "Cal un corrent variable: el mecanisme és el camp magnètic, que depèn de dI/dt, no de la tensió."}, {"n": 47, "bloc": 4, "text": "El mu-metal s'utilitza en blindatge magnètic perquè presenta una permeabilitat relativa especialment baixa.", "resp": "F", "just": "S'utilitza precisament perquè la té molt alta (fins a desenes de milers), cosa que redirigeix les línies de camp."}, {"n": 48, "bloc": 4, "text": "Mostrejar una sinusoide en instants de fase aleatòria produeix una distribució de probabilitat en forma de U.", "resp": "V", "just": "La densitat és mínima al centre i divergeix als extrems ±A, perquè la sinusoide és més lenta prop de les crestes."}, {"n": 49, "bloc": 4, "text": "Per a un senyal de valor mitjà nul, la desviació estàndard coincideix amb el valor eficaç.", "resp": "V", "just": "Per això la incertesa típica associada a una interferència s'estima amb el seu valor rms."}, {"n": 50, "bloc": 4, "text": "Promitjar una lectura durant qualsevol durada elimina exactament les interferències periòdiques presents.", "resp": "F", "just": "Només s'anul·len si el temps d'integració conté un nombre enter de períodes (T = N/f)."}]};
+let ordre = DATA.items.map((_,i)=>i), aleatori=false, filtre=-1;
+let estat = {};
+
+const $ = s=>document.querySelector(s);
+const llista = $('#llista');
+
+DATA.blocs.forEach((b,i)=>{
+  const o=document.createElement('option'); o.value=i; o.textContent=b; $('#filtre').appendChild(o);
+});
+
+function visibles(){
+  return ordre.filter(i=> filtre<0 || DATA.items[i].bloc===filtre);
+}
+
+function render(){
+  llista.innerHTML='';
+  visibles().forEach(i=>{
+    const it=DATA.items[i], st=estat[i];
+    const d=document.createElement('div');
+    d.className='q'+(st? (st.ok?' ok':' no') : '');
+    d.innerHTML=
+      '<div class="qhead"><span class="qn">'+it.n+'</span><p class="qtext">'+it.text+'</p></div>'+
+      '<div class="qbloc">'+DATA.blocs[it.bloc]+'</div>'+
+      '<div class="acts">'+
+        '<button class="v'+(st&&st.tria==='V'?' sel-v':'')+'" data-i="'+i+'" data-r="V"'+(st?' disabled':'')+'>Vertader</button>'+
+        '<button class="f'+(st&&st.tria==='F'?' sel-f':'')+'" data-i="'+i+'" data-r="F"'+(st?' disabled':'')+'>Fals</button>'+
+      '</div>'+
+      '<div class="fb'+(st?' show':'')+'">'+
+        (st? '<span class="verdict">'+(st.ok?'Correcte':'Incorrecte — la resposta és '+it.resp)+'</span>'+it.just : '')+
+      '</div>';
+    llista.appendChild(d);
+  });
+  actualitza();
+}
+
+llista.addEventListener('click', e=>{
+  const b=e.target.closest('button[data-r]'); if(!b) return;
+  const i=+b.dataset.i; if(estat[i]) return;
+  const tria=b.dataset.r;
+  estat[i]={tria, ok: tria===DATA.items[i].resp};
+  render();
+});
+
+function actualitza(){
+  const vis=visibles();
+  const fets=vis.filter(i=>estat[i]).length;
+  const encerts=vis.filter(i=>estat[i]&&estat[i].ok).length;
+  $('#ok').textContent=encerts; $('#ans').textContent=fets;
+  $('#pg').style.width=(vis.length? fets/vis.length*100:0)+'%';
+  const done=$('#done');
+  if(vis.length && fets===vis.length){
+    const pct=Math.round(encerts/vis.length*100);
+    $('#final').textContent=encerts+' / '+vis.length+'  ('+pct+'%)';
+    $('#consell').textContent = pct>=90 ? 'Domini sòlid dels continguts de la unitat.'
+      : pct>=70 ? 'Bon nivell. Reviseu els ítems errats i el passatge dels documents que els sustenta.'
+      : 'Convé rellegir els documents de la unitat abans de tornar a intentar-ho.';
+    done.classList.add('show');
+  } else done.classList.remove('show');
+}
+
+$('#filtre').addEventListener('change',e=>{filtre=+e.target.value; render(); window.scrollTo({top:0,behavior:'smooth'});});
+$('#ordre').addEventListener('click',()=>{
+  aleatori=!aleatori;
+  $('#ordre').textContent = aleatori? 'Ordre original':'Ordre aleatori';
+  ordre = DATA.items.map((_,i)=>i);
+  if(aleatori) for(let i=ordre.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[ordre[i],ordre[j]]=[ordre[j],ordre[i]];}
+  render(); window.scrollTo({top:0,behavior:'smooth'});
+});
+function reinicia(){estat={}; render(); window.scrollTo({top:0,behavior:'smooth'});}
+$('#reset').addEventListener('click',reinicia);
+$('#retry').addEventListener('click',reinicia);
+
+render();
+</script>
+</body>
+</html>

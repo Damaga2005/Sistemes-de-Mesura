@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrenament V/F · Unitat 10: Condicionament singular de senyals</title>
+<style>
+:root{--acc:#0b6fb8;--acc2:#0a5a8a;--ink:#1b2733;--mut:#5a6b7a;--line:#d7e0e8;--soft:#f4f8fb;
+ --ok:#0f6e4f;--okf:#eaf5f0;--no:#a03030;--nof:#fbeceb;--bl:#8a5a00;--blf:#fff6e6}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);
+ font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 72px}
+header{border-bottom:2px solid var(--acc);padding:26px 0 16px;margin-bottom:8px}
+.crumb{font-size:13.5px;color:var(--mut);letter-spacing:.02em;margin-bottom:8px}
+.crumb b{color:var(--acc2)}
+h1{font-size:27px;line-height:1.22;margin:2px 0 6px;font-weight:700}
+p.lead{color:var(--mut);font-size:15px;margin:6px 0 0}
+h2{font-size:21px;margin:30px 0 10px;color:var(--acc2);font-weight:650}
+.modes{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 6px}
+.mode{flex:1 1 300px;border:1px solid var(--line);border-radius:11px;padding:16px 18px;background:#fff;
+ text-align:left;cursor:pointer;transition:box-shadow .15s,border-color .15s,transform .05s;font:inherit;color:inherit}
+.mode:hover{border-color:var(--acc);box-shadow:0 3px 14px rgba(11,111,184,.10);transform:translateY(-1px)}
+.mode b{display:block;color:var(--acc2);font-size:17.5px;margin-bottom:4px}
+.mode span{color:var(--mut);font-size:14.5px;line-height:1.5;display:block}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);
+ padding:12px 22px;margin:0 -22px 18px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:14.5px}
+.bar .stat{color:var(--mut)}
+.bar .stat b{color:var(--acc2);font-size:16px}
+.crono{font-variant-numeric:tabular-nums;font-weight:700;color:var(--acc2);font-size:17px}
+.crono.poc{color:var(--no)}
+.prog{flex:1 1 140px;height:8px;background:var(--soft);border-radius:5px;overflow:hidden;min-width:110px}
+.prog i{display:block;height:100%;width:0;background:var(--acc);transition:width .25s}
+button{font:inherit;font-size:14.5px;cursor:pointer;border-radius:8px;border:1px solid var(--line);
+ background:#fff;color:var(--ink);padding:7px 14px;transition:.15s}
+button:hover{border-color:var(--acc);color:var(--acc)}
+button.primary{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:600}
+button.primary:hover{background:var(--acc2);color:#fff}
+.q{border:1px solid var(--line);border-radius:11px;padding:14px 16px;margin:12px 0;background:#fff}
+.q.ok{border-color:#bfe3d4;background:var(--okf)}
+.q.no{border-color:#eec9c6;background:var(--nof)}
+.q.bl{border-color:#f0dfb0;background:var(--blf)}
+.qhead{display:flex;gap:12px;align-items:baseline}
+.qn{font-weight:700;color:var(--acc);font-size:14px;flex:0 0 auto;min-width:2.2em}
+.qtext{margin:0;font-size:17px}
+.acts{display:flex;gap:10px;margin:12px 0 0 calc(2.2em + 12px);flex-wrap:wrap}
+.acts button{min-width:78px;font-weight:600}
+.acts button.v:hover{border-color:var(--ok);color:var(--ok)}
+.acts button.f:hover{border-color:var(--no);color:var(--no)}
+.acts button.s-v{background:var(--ok);color:#fff;border-color:var(--ok)}
+.acts button.s-f{background:var(--no);color:#fff;border-color:var(--no)}
+.acts button.s-x{background:var(--bl);color:#fff;border-color:var(--bl)}
+.fb{margin:12px 0 0 calc(2.2em + 12px);font-size:15px;color:var(--mut);display:none}
+.fb.on{display:block}
+.fb .veredicte{font-weight:700}
+.fb .veredicte.ok{color:var(--ok)}
+.fb .veredicte.no{color:var(--no)}
+.fb .veredicte.bl{color:var(--bl)}
+.fb a{color:var(--acc)}
+.sep{margin:26px 0 10px;font-weight:650;color:var(--acc2);font-size:15px;
+ border-bottom:1px solid var(--line);padding-bottom:5px}
+.res{border:1px solid var(--line);border-radius:11px;padding:18px 20px;margin:18px 0;background:var(--soft)}
+.res h3{margin:0 0 8px;color:var(--acc2);font-size:19px}
+.nota{font-size:30px;font-weight:700;color:var(--acc2);font-variant-numeric:tabular-nums}
+table.data{border-collapse:collapse;width:100%;margin:14px 0 4px;font-size:15px}
+table.data th,table.data td{border:1px solid var(--line);padding:7px 10px;text-align:center}
+table.data th{background:#eef5fa;color:var(--acc2);font-weight:650}
+table.data td.l{text-align:left}
+.sem{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:7px;vertical-align:middle}
+.sem.g{background:#2f7d4f}.sem.t{background:#c9922a}.sem.r{background:#a03030}
+.hide{display:none}
+footer{margin-top:44px;border-top:1px solid var(--line);padding-top:14px;color:var(--mut);font-size:14px}
+@media (max-width:520px){body{font-size:16px}h1{font-size:23px}.acts{margin-left:0}.fb{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="crumb">Sistemes de Mesura (230920) · ETSETB-UPC · <b>Unitat 10 — Condicionament singular de senyals</b></div>
+  <h1>Entrenament V/F</h1>
+  <p class="lead">50 afirmacions repartides entre els cinc documents de la unitat. Tot el càlcul es fa al vostre navegador: les respostes no s'envien enlloc.</p>
+</header>
+
+<div id="portada">
+  <div class="modes">
+    <button class="mode" id="m-sim">
+      <b>Simulacre cronometrat</b>
+      <span>Les 50 afirmacions en ordre aleatori, amb cronòmetre i correcció al final. El temps es calcula a 30 s per afirmació, el ritme del qüestionari real.</span>
+    </button>
+    <button class="mode" id="m-lliure">
+      <b>Entrenament lliure</b>
+      <span>Les 50 afirmacions en l'ordre dels documents, sense rellotge i amb resposta immediata després de cada tria.</span>
+    </button>
+  </div>
+  <p class="lead">Les dues modalitats tenen tres respostes possibles: <b>Vertader</b>, <b>Fals</b> i <b>No ho sé</b>. Feu servir «No ho sé» quan realment no ho sabeu: al qüestionari real, endevinar penalitza.</p>
+</div>
+
+<div id="joc" class="hide">
+  <div class="bar">
+    <span class="stat">Respostes: <b id="nresp">0</b> / 50</span>
+    <span class="stat" id="statok">Encerts: <b id="nok">0</b></span>
+    <span class="crono" id="crono"></span>
+    <div class="prog"><i id="pg"></i></div>
+    <button class="primary" id="corregir">Corregir</button>
+    <button id="sortir">Sortir</button>
+  </div>
+  <div id="llista"></div>
+  <div style="margin-top:20px"><button class="primary" id="corregir2">Corregir</button></div>
+</div>
+
+<div id="resultat" class="hide"></div>
+
+<footer>
+Sistemes de Mesura · Grau en Enginyeria Electrònica de Telecomunicació · ETSETB-UPC. Prof. Miguel Ángel García González.
+</footer>
+</div>
+
+<script>
+var DOCS = {"01": {"f": "Unitat10_01_Condicionament_singular_i_limits_de_loperacional.html", "t": "Condicionament singular: sensors, l'operacional real i les seves derives"}, "02": {"f": "Unitat10_02_Amplificadors_de_baixes_derives.html", "t": "Amplificadors de baixes derives: compensació de la polarització i ajust d'offset"}, "03": {"f": "Unitat10_03_Chopper_i_autozero.html", "t": "Amplificadors chopper i amplificadors amb autozero"}, "04": {"f": "Unitat10_04_Electrometrics_i_transimpedancia.html", "t": "Amplificadors electromètrics i de transimpedància"}, "05": {"f": "Unitat10_05_Amplificadors_de_carrega.html", "t": "Amplificadors de càrrega"}};
+var ITEMS = [{"n": 1, "d": "01", "a": "V", "q": "Els sensors singulars requereixen electrònica específica perquè el seu senyal, la seva impedància o la seva càrrega generada imposen restriccions severes al condicionament.", "j": "És la definició de sensor singular: la singularitat és una propietat elèctrica de la seva sortida."}, {"n": 4, "d": "02", "a": "F", "q": "Quan el senyal útil arriba fins a la contínua, un filtre passaalt és la solució natural per eliminar les derives sense alterar la mesura.", "j": "Les derives d'offset ocupen exactament la mateixa banda que el senyal útil, que arriba fins a la contínua."}, {"n": 5, "d": "01", "a": "V", "q": "Els termoparells i alguns ponts de galgues són exemples de sensors que poden generar tensions diferencials molt petites.", "j": "Són els dos exemples del bloc de tensions molt petites: termoparells i ponts de galgues piezorresistives."}, {"n": 8, "d": "01", "a": "F", "q": "La impedància d'entrada de l'amplificador resulta irrellevant quan la sortida del sensor és capacitiva.", "j": "Amb sortida capacitiva, la càrrega de l'entrada altera també la resposta freqüencial del conjunt."}, {"n": 11, "d": "01", "a": "V", "q": "El soroll 1/f és especialment crític en mesures lentes perquè concentra més potència a freqüències baixes.", "j": "El soroll 1/f té densitat espectral inversament proporcional a la freqüència i domina a freqüències baixes."}, {"n": 15, "d": "02", "a": "V", "q": "La compensació de corrents de polarització amb una resistència auxiliar té més sentit en amplificadors bipolars que en amplificadors FET o CMOS.", "j": "En bipolars, la relació I_OS/I_B val entre 0,1 i 0,25; en FET i CMOS és de l'ordre de la unitat."}, {"n": 18, "d": "01", "a": "F", "q": "La tensió d'offset només modifica el guany de l'amplificador, però no introdueix cap error de zero.", "j": "La tensió d'offset apareix a la sortida multiplicada pel guany de soroll, com un error de zero."}, {"n": 19, "d": "01", "a": "V", "q": "En aplicacions de baix nivell, el soroll integrat sobre la banda útil s'ha de comparar amb la resolució de mesura requerida.", "j": "El que compta és la integral de la densitat espectral sobre la banda passant, comparada amb la resolució."}, {"n": 22, "d": "02", "a": "F", "q": "Un amplificador de baixes derives es defineix principalment pel seu slew rate elevat.", "j": "L'especificació el defineix per offset, deriva, corrents de polarització, soroll i envelliment."}, {"n": 24, "d": "01", "a": "F", "q": "Els amplificadors CMOS convencionals ofereixen sempre el menor soroll de tensió a baixa freqüència.", "j": "La taula de tecnologies dona soroll 1/f alt i soroll de tensió de 20 a 100 nV/√Hz als CMOS convencionals."}, {"n": 25, "d": "03", "a": "V", "q": "Els amplificadors chopper i autozero són útils quan la correcció estàtica de l'offset resulta insuficient.", "j": "És el punt de partida dels amplificadors chopper i autozero: correcció dinàmica dels propis errors."}, {"n": 27, "d": "02", "a": "V", "q": "Un termoparell obliga a considerar la contínua perquè la temperatura pot variar molt lentament.", "j": "Les dinàmiques tèrmiques concentren la potència espectral entre la contínua i fraccions d'hertz."}, {"n": 31, "d": "01", "a": "V", "q": "El producte entre corrent de polarització i resistència equivalent del circuit permet estimar una contribució d'error de contínua.", "j": "És l'estimació directa a partir de l'equació (10.1)."}, {"n": 34, "d": "02", "a": "F", "q": "La resistència auxiliar de compensació és una tècnica recomanable de manera indiscriminada en qualsevol tecnologia d'entrada.", "j": "La substitució compensa quan I_OS és força menor que I_B, i la resistència aporta soroll tèrmic propi."}, {"n": 35, "d": "02", "a": "V", "q": "L'ajust intern d'offset mitjançant pins de trimming pot anul·lar l'offset en una temperatura concreta.", "j": "L'ajust anul·la la tensió d'offset amb una precisió típica de centenars de nanovolts a la temperatura del calibratge."}, {"n": 41, "d": "02", "a": "V", "q": "El marge d'ajust de la xarxa de compensació ha de cobrir la dispersió esperada de Vos.", "j": "És l'equació (10.10): el marge ha de cobrir el pitjor offset especificat més un marge del 20 % al 50 %."}, {"n": 44, "d": "02", "a": "F", "q": "En un amplificador inversor, l'offset queda multiplicat exactament pel guany de senyal inversor i mai pel guany de soroll.", "j": "El guany de senyal de la topologia inversora és −R_2/R_1, i el que afecta l'offset és el guany de soroll."}, {"n": 46, "d": "02", "a": "F", "q": "Els guanys alts redueixen l'efecte de l'offset sobre el rang dinàmic de sortida.", "j": "L'offset queda multiplicat pel guany de soroll, que creix amb el guany en llaç tancat."}, {"n": 48, "d": "03", "a": "F", "q": "En un amplificador chopper, el senyal útil roman sempre en contínua durant totes les etapes internes.", "j": "A la sortida d'A1 el senyal útil és a f_ch, i els errors de l'etapa hi són en banda base."}, {"n": 49, "d": "03", "a": "V", "q": "La desmodulació síncrona d'un chopper retorna el senyal útil a banda base.", "j": "El desmodulador síncron opera amb la mateixa fase que el modulador i retorna el senyal a contínua."}, {"n": 55, "d": "03", "a": "V", "q": "La freqüència de commutació limita la banda útil possible d'un amplificador chopper.", "j": "La banda útil queda limitada a una fracció de f_ch: amb f_ch = 10 kHz, típicament per sota d'1 kHz."}, {"n": 58, "d": "03", "a": "F", "q": "La modulació chopper incrementa deliberadament el soroll 1/f dins la banda útil.", "j": "La modulació allunya el senyal útil de la zona on el soroll 1/f és màxim."}, {"n": 61, "d": "03", "a": "V", "q": "En un autozero, els condensadors de correcció permeten conservar la informació d'offset entre fases de commutació.", "j": "Dos condensadors emmagatzemen V_c1 i V_c2 entre les fases d'autozero i d'amplificació."}, {"n": 64, "d": "03", "a": "F", "q": "L'offset efectiu d'un autozero creix amb el factor de correcció intern B.", "j": "L'equació (10.21) divideix la suma dels offsets interns pel factor B."}, {"n": 68, "d": "03", "a": "F", "q": "La selecció d'un amplificador de precisió es pot fer mirant només el guany en llaç obert de contínua.", "j": "La selecció encadena sis criteris: offset, deriva, corrent de polarització, soroll, alimentació i cost."}, {"n": 71, "d": "03", "a": "V", "q": "Els amplificadors autozero acostumen a ser una opció adequada per a termoparells quan es requereix alta estabilitat de zero.", "j": "Per a termoparells amb resolucions millors que 0,1 °C en marges tèrmics amplis, l'autozero és la primera opció."}, {"n": 73, "d": "04", "a": "V", "q": "Els sensors d'alta impedància es poden analitzar amb models de Thevenin o de Norton segons la topologia de condicionament.", "j": "Tot sensor lineal admet les dues representacions, i la tria és de conveniència topològica."}, {"n": 80, "d": "04", "a": "F", "q": "Un amplificador electromètric típic força el terminal sensible a massa virtual com un TIA.", "j": "És el TIA qui imposa massa virtual; l'electromètric presenta una impedància d'entrada enorme."}, {"n": 84, "d": "04", "a": "F", "q": "El divisor entre impedància del sensor i impedància d'entrada manté sempre una resposta freqüencial plana.", "j": "Si Z_s i Z_in tenen dependències freqüencials diferents, la resposta del sistema deixa de ser plana."}, {"n": 89, "d": "04", "a": "V", "q": "En el TIA ideal, el node inversor es manté a massa virtual i el sensor veu una impedància d'entrada efectiva molt petita.", "j": "El curtcircuit virtual manté el node inversor a massa i el sensor hi veu impedància nul·la."}, {"n": 92, "d": "04", "a": "F", "q": "La sortida ideal d'un TIA resistiu depèn directament de la capacitat interna del sensor encara que el node sigui virtualment a massa.", "j": "El TIA anul·la l'efecte de Z_s sobre el guany de senyal, també quan Z_s és capacitiva."}, {"n": 97, "d": "04", "a": "V", "q": "Una capacitat en paral·lel amb la resistència de realimentació pot estabilitzar el TIA i limitar la seva banda.", "j": "És la funció de C_f: estabilitza el circuit i limita la banda útil."}, {"n": 100, "d": "04", "a": "F", "q": "En un TIA, el corrent de polarització queda cancel·lat automàticament pel curtcircuit virtual.", "j": "L'equació (10.25) conté el terme I_B−·R: amb I_B = 1 pA i R = 1 GΩ, 1 mV a la sortida."}, {"n": 105, "d": "04", "a": "V", "q": "El guany de soroll d'un TIA pot créixer amb la freqüència quan la impedància del sensor és capacitiva.", "j": "El guany de soroll és 1 + R/Z_s(f), que creix amb la freqüència quan Z_s és capacitiva."}, {"n": 110, "d": "04", "a": "F", "q": "Per a sensors resistius d'alta impedància, el TIA és sempre superior perquè elimina qualsevol soroll de resistència.", "j": "El TIA hi afegeix el soroll tèrmic de la resistència de realimentació."}, {"n": 115, "d": "04", "a": "V", "q": "En una xarxa en T, la resistència equivalent depèn de la relació entre les resistències que formen el divisor intern.", "j": "És l'equació (10.31): R_eq = R_3 + R_1(1 + R_3/R_2)."}, {"n": 118, "d": "04", "a": "F", "q": "La xarxa en T elimina l'efecte de Vos independentment del valor de les resistències.", "j": "L'equació (10.33) multiplica V_os pel factor 1 + R_3/R_2, molt més gran que 1 per disseny."}, {"n": 125, "d": "04", "a": "V", "q": "Una guarda activa al voltant del node sensible redueix corrents de fuita perquè manté l'entorn al mateix potencial que el node.", "j": "La diferència de tensió respecte del node sensible és pràcticament nul·la i el corrent parasitari, molt petit."}, {"n": 128, "d": "04", "a": "F", "q": "La neteja de la PCB és un aspecte cosmètic sense incidència en mesures electromètriques.", "j": "Els residus de flux formen camins conductors mesurables a l'escala del picoampere i del femtoampere."}, {"n": 136, "d": "05", "a": "F", "q": "El model de càrrega d'un sensor piezoelèctric prescindeix sempre de la capacitat interna del sensor.", "j": "C_s és la capacitat intrínseca associada a la geometria de les cares metal·litzades i al dielèctric."}, {"n": 139, "d": "05", "a": "V", "q": "L'amplificador de càrrega ideal dona una sortida proporcional a la càrrega del sensor i inversament proporcional al condensador de realimentació.", "j": "És l'equació (10.36): V_out = −Q/C_f."}, {"n": 144, "d": "05", "a": "F", "q": "La càrrega és la derivada temporal del corrent generat pel sensor.", "j": "El corrent és la derivada temporal de la càrrega, i no a l'inrevés."}, {"n": 151, "d": "05", "a": "V", "q": "Perquè el circuit es comporti com un amplificador de càrrega dins la banda útil, Rf ha de presentar una impedància molt gran respecte a Cf a la freqüència mínima d'interès.", "j": "És l'equació (10.37): R_f ≫ 1/(2π·f_min·C_f)."}, {"n": 158, "d": "05", "a": "F", "q": "El corrent de polarització té poca importància en un amplificador de càrrega perquè només circula per capacitats ideals.", "j": "El terme I_B−·R_f de l'equació (10.38) dona 10 V d'offset amb I_B− = 10 nA i R_f = 1 GΩ."}, {"n": 165, "d": "05", "a": "V", "q": "L'efecte triboelèctric pot generar càrregues paràsites en cables sotmesos a flexió o vibració.", "j": "És la definició de l'efecte triboelèctric: frec entre dielèctric i conductors en flexionar el cable."}, {"n": 170, "d": "05", "a": "F", "q": "En un amplificador de càrrega, augmentar Cf incrementa sempre la tensió de sortida per a una mateixa càrrega.", "j": "El factor de proporcionalitat de l'equació (10.36) és −1/C_f."}, {"n": 174, "d": "01", "a": "F", "q": "En sensors singulars, la topologia dibuixada és sempre més important que les prestacions reals dels components.", "j": "El que fa singulars aquests circuits és l'elecció acurada dels components i el disseny físic."}, {"n": 175, "d": "01", "a": "V", "q": "La classificació entre baix nivell de tensió i alta impedància ajuda a escollir l'estratègia de condicionament.", "j": "És la classificació en dos blocs: nivell de senyal o impedància de sortida."}, {"n": 194, "d": "01", "a": "F", "q": "En aplicacions lentes, el paràmetre dominant és sempre la velocitat de pujada de la sortida.", "j": "Amb senyals de molt baix nivell i baixa freqüència dominen les limitacions estàtiques i el soroll."}, {"n": 197, "d": "02", "a": "V", "q": "Els errors de contínua poden consumir rang dinàmic de sortida i provocar saturació en circuits de guany elevat.", "j": "Amb guanys alts l'efecte de V_os pot consumir rang dinàmic o portar l'amplificador a la saturació."}];
+var SEGONS = 1500;
+
+var mode = null, ordre = [], resp = {}, t0 = 0, tick = null, restant = 0, acabat = false;
+
+function $(id){ return document.getElementById(id); }
+function esc(s){ var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function mmss(s){
+  if(s < 0) s = 0;
+  var m = Math.floor(s/60), r = Math.floor(s%60);
+  return m + ':' + (r < 10 ? '0' : '') + r;
+}
+
+function barreja(a){
+  for(var i = a.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function pinta(){
+  var cont = $('llista');
+  cont.innerHTML = '';
+  var docActual = null;
+  ordre.forEach(function(idx, pos){
+    var it = ITEMS[idx];
+    if(mode === 'lliure' && it.d !== docActual){
+      docActual = it.d;
+      var s = document.createElement('div');
+      s.className = 'sep';
+      s.textContent = 'Document ' + parseInt(it.d, 10) + ' — ' + DOCS[it.d].t;
+      cont.appendChild(s);
+    }
+    var d = document.createElement('div');
+    d.className = 'q';
+    d.id = 'q' + idx;
+    d.innerHTML =
+      '<div class="qhead"><span class="qn">' + (pos + 1) + '</span>' +
+      '<p class="qtext">' + esc(it.q) + '</p></div>' +
+      '<div class="acts">' +
+        '<button class="v" data-i="' + idx + '" data-r="V">Vertader</button>' +
+        '<button class="f" data-i="' + idx + '" data-r="F">Fals</button>' +
+        '<button class="x" data-i="' + idx + '" data-r="X">No ho sé</button>' +
+      '</div>' +
+      '<div class="fb" id="fb' + idx + '"></div>';
+    cont.appendChild(d);
+  });
+  cont.addEventListener('click', function(ev){
+    var b = ev.target.closest('button[data-r]');
+    if(!b || acabat) return;
+    tria(parseInt(b.dataset.i, 10), b.dataset.r);
+  });
+}
+
+function tria(idx, r){
+  resp[idx] = r;
+  var caixa = $('q' + idx);
+  caixa.querySelectorAll('.acts button').forEach(function(b){
+    b.classList.remove('s-v', 's-f', 's-x');
+    if(b.dataset.r === r) b.classList.add('s-' + r.toLowerCase());
+  });
+  if(mode === 'lliure') mostraFeedback(idx);
+  estat();
+}
+
+function mostraFeedback(idx){
+  var it = ITEMS[idx], r = resp[idx];
+  var caixa = $('q' + idx), fb = $('fb' + idx);
+  caixa.classList.remove('ok', 'no', 'bl');
+  var cls = (r === 'X') ? 'bl' : (r === it.a ? 'ok' : 'no');
+  caixa.classList.add(cls);
+  var etiqueta = (r === 'X') ? 'En blanc' : (r === it.a ? 'Correcte' : 'Incorrecte');
+  fb.innerHTML =
+    '<span class="veredicte ' + cls + '">' + etiqueta + ' · Solució: ' +
+    (it.a === 'V' ? 'Vertader' : 'Fals') + '.</span> ' + esc(it.j) +
+    ' <a href="' + DOCS[it.d].f + '">Document ' + parseInt(it.d, 10) + ' — ' + esc(DOCS[it.d].t) + '</a>';
+  fb.classList.add('on');
+}
+
+function estat(){
+  var n = Object.keys(resp).length;
+  $('nresp').textContent = n;
+  $('pg').style.width = (100 * n / ITEMS.length) + '%';
+  if(mode === 'lliure'){
+    var ok = 0;
+    for(var k in resp) if(resp[k] === ITEMS[k].a) ok++;
+    $('nok').textContent = ok;
+  }
+}
+
+function comptador(){
+  restant = SEGONS - Math.round((Date.now() - t0) / 1000);
+  $('crono').textContent = mmss(restant);
+  $('crono').classList.toggle('poc', restant <= 60);
+  if(restant <= 0) corregir();
+}
+
+function comenca(m){
+  mode = m; resp = {}; acabat = false;
+  ordre = ITEMS.map(function(_, i){ return i; });
+  if(m === 'sim') barreja(ordre);
+  else ordre.sort(function(a, b){
+    return ITEMS[a].d === ITEMS[b].d ? ITEMS[a].n - ITEMS[b].n : (ITEMS[a].d < ITEMS[b].d ? -1 : 1);
+  });
+  $('portada').classList.add('hide');
+  $('resultat').classList.add('hide');
+  $('joc').classList.remove('hide');
+  $('statok').style.display = (m === 'lliure') ? '' : 'none';
+  pinta();
+  estat();
+  if(m === 'sim'){
+    t0 = Date.now();
+    $('crono').style.display = '';
+    comptador();
+    tick = setInterval(comptador, 1000);
+  } else {
+    $('crono').style.display = 'none';
+  }
+  window.scrollTo(0, 0);
+}
+
+function corregir(){
+  if(acabat) return;
+  acabat = true;
+  if(tick){ clearInterval(tick); tick = null; }
+  var emprat = (mode === 'sim') ? Math.min(SEGONS, Math.round((Date.now() - t0) / 1000)) : null;
+  var encerts = 0, errades = 0, blancs = 0;
+  var perDoc = {};
+  ordre.forEach(function(idx){
+    var it = ITEMS[idx], r = resp[idx];
+    perDoc[it.d] = perDoc[it.d] || {n: 0, ok: 0};
+    perDoc[it.d].n++;
+    if(r === undefined || r === 'X'){ blancs++; }
+    else if(r === it.a){ encerts++; perDoc[it.d].ok++; }
+    else { errades++; }
+    if(r === undefined) resp[idx] = 'X';
+    mostraFeedback(idx);
+  });
+  var nota = 10 * (encerts - errades) / ITEMS.length;
+  if(nota < 0) nota = 0;
+
+  var files = Object.keys(DOCS).sort().map(function(d){
+    var p = perDoc[d];
+    if(!p) return '';
+    var pc = 100 * p.ok / p.n;
+    var sem = pc >= 80 ? 'g' : (pc >= 60 ? 't' : 'r');
+    return '<tr><td class="l"><span class="sem ' + sem + '"></span>' +
+           parseInt(d, 10) + ' — ' + esc(DOCS[d].t) + '</td><td>' + p.ok + ' / ' + p.n +
+           '</td><td>' + pc.toFixed(0) + ' %</td></tr>';
+  }).join('');
+
+  $('resultat').innerHTML =
+    '<div class="res"><h3>Resultat</h3>' +
+    '<p class="nota">' + nota.toFixed(1) + ' / 10</p>' +
+    '<p>Encerts: <b>' + encerts + '</b> · Errades: <b>' + errades + '</b> · En blanc: <b>' + blancs +
+    '</b> · Total: <b>' + ITEMS.length + '</b>' +
+    (emprat !== null ? ' · Temps emprat: <b>' + mmss(emprat) + '</b> de ' + mmss(SEGONS) : '') + '</p>' +
+    '<p>La nota es calcula com al qüestionari real: cada errada resta un encert, i les respostes en blanc ni sumen ni resten.</p>' +
+    '<table class="data"><tr><th>Document</th><th>Encerts</th><th>%</th></tr>' + files + '</table>' +
+    '<p style="margin-top:14px"><button class="primary" id="tornar">Tornar a l\'inici</button></p>' +
+    '</div>' +
+    '<h2>Revisió</h2>';
+  $('resultat').classList.remove('hide');
+  $('resultat').parentNode.insertBefore($('resultat'), $('joc'));
+  $('tornar').addEventListener('click', function(){
+    $('resultat').classList.add('hide');
+    $('joc').classList.add('hide');
+    $('portada').classList.remove('hide');
+    window.scrollTo(0, 0);
+  });
+  $('crono').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+$('m-sim').addEventListener('click', function(){ comenca('sim'); });
+$('m-lliure').addEventListener('click', function(){ comenca('lliure'); });
+$('corregir').addEventListener('click', corregir);
+$('corregir2').addEventListener('click', corregir);
+$('sortir').addEventListener('click', function(){
+  if(tick){ clearInterval(tick); tick = null; }
+  $('joc').classList.add('hide');
+  $('resultat').classList.add('hide');
+  $('portada').classList.remove('hide');
+  window.scrollTo(0, 0);
+});
+</script>
+</body>
+</html>
