@@ -43,9 +43,24 @@ def test_1_completeness_all_topics_and_files():
 
 
 # Test 2 — Source integrity
-def test_2_originals_not_vendored_and_hashes_recorded():
-    assert not list((ROOT).glob("Tema *")), "los originales no se copian al workspace"
+# Contrato original (Fase 0): los originales del curso vivían en un clon TEMP
+# externo y NO se copiaban al repo; este test exigía `not ROOT.glob("Tema *")`.
+# Contrato actual (desde el merge a790afa, 2026-09-09, "unifica la teoría del
+# curso y la aplicación tutora en un solo repo"): `Tema 1/`…`Tema 10/` son la
+# fuente canónica, inmutable y de solo lectura DENTRO del repo — así lo declaran
+# AGENTS.md (§Source of truth), README.md (§Contenido) y
+# docs/ESTADO_DEL_PROYECTO.md (§6). Ver DECISION_LOG D179.
+# La garantía de integridad se refuerza, no se relaja: cada fuente registrada en
+# el manifest debe existir en disco y su sha256 debe coincidir. Este test ahora
+# detecta borrado, ausencia o cualquier mutación byte a byte de las fuentes.
+def test_2_source_integrity_matches_manifest():
+    tema_dirs = {p.name for p in ROOT.glob("Tema *") if p.is_dir()}
+    assert tema_dirs == {"Tema %d" % n for n in range(1, 11)}, sorted(tema_dirs)
     for r in ROWS:
+        src = ROOT / r["path"]
+        assert src.is_file(), "fuente ausente: %s" % r["path"]
+        assert sha256_bytes(src.read_bytes()) == r["sha256"], \
+            "sha256 divergente (fuente mutada): %s" % r["path"]
         assert re.fullmatch(r"[0-9a-f]{64}", r["sha256"]), r["path"]
     assert len({r["sha256"] for r in ROWS}) == len(ROWS)
 

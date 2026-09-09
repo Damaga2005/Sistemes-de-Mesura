@@ -31,6 +31,13 @@ try {
         throw "falta data\ARTIFACT-MANIFEST.json en el stage"
     }
 
+    # Bytecode compilado (cache local, .pyc/.pyo solo viven en __pycache__ por
+    # PEP 3147): se poda DESPUES de generar el manifest, que al importar `app`
+    # regenera __pycache__ en el stage. No debe viajar en el paquete portable.
+    Get-ChildItem -Path $stage -Recurse -Force -Directory |
+        Where-Object { $_.Name -eq "__pycache__" } |
+        Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+
     $manifest = Get-ChildItem -LiteralPath $stage -File -Recurse |
         ForEach-Object {
             [ordered]@{

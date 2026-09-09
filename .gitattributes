@@ -1,0 +1,8 @@
+# Reproducibilidad del checkout entre plataformas (Windows y CI Linux).
+# El material del curso (Tema 1/ .. Tema 10/) se hasheo en data/source_manifest.json
+# en su forma autorizada, con finales de linea CRLF. Fijar el EOL de checkout
+# garantiza que test_2_source_integrity_matches_manifest y cualquier verificacion
+# de integridad de fuente coincidan en todas las plataformas. Los blobs se
+# almacenan con LF; los PDF son binarios y no se tocan.
+"Tema */*.html" text eol=crlf
+"Tema */*.pdf"  binary

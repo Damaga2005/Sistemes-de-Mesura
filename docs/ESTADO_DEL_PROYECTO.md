@@ -1,8 +1,10 @@
 # Estado del proyecto — Sistemes de Mesura
 
-> Documento vivo. Refleja el estado real de `main` a fecha **2026-09-09**
-> (`a3e5d5e`). Sustituye a cualquier lectura de roadmap anterior que
-> asuma multiusuario.
+> Documento vivo. Refleja el estado real a fecha **2026-09-09**: árbol de
+> trabajo sobre `bc4692f` (`origin/main`) más el cierre v1.0.0 sin commitear
+> (Test 2 de F0, determinismo de mastery, poda de `__pycache__` en el
+> packaging; ver DECISION_LOG D179–D180 y §5). Sustituye a cualquier lectura
+> de roadmap anterior que asuma multiusuario.
 
 ## 1. Qué es este producto (y qué no es)
 
@@ -43,7 +45,7 @@ multiusuario, load testing.
 | **F12 (operación local)** | `.env`, paths, `SM_STUDENT`, migraciones, backup, CSRF, health, límites, logs, CLI, integridad | 🟢 **Implementada** |
 | **Integración Gemini** | Tutor con `GeminiProvider` real (selección `auto\|gemini\|extractive`) + fallback extractivo ante fallo del proveedor | 🟢 **Implementada y validada end-to-end** (`a3e5d5e`) |
 | **F13** | Vertical Documents + contrato Calendar | 🟡 **Parcial** (ver §4) |
-| **F14** | Packaging local `1.0.0` | 🟡 **Avanzada, no certificada** (sin prueba end-to-end en máquina limpia) |
+| **F14** | Packaging local `1.0.0` | 🟢 **Verificada end-to-end** (2026-09-09): `package.ps1` → carpeta nueva → `install.ps1` → `init`/`check`/`serve` → `/api/health` `ok` → smoke tutor/practice + persistencia tras reinicio. Ver `docs/PHASE_14_PACKAGING.md`. Sin instalador MSI (fuera de alcance). |
 | **F15** | Despliegue (staging → producción, proxy, HTTPS) | 🔴 No iniciada (fuera de alcance por decisión) |
 | **F16** | Certificación operativa (smoke post-deploy, load test, dependency audit, release) | 🔴 No iniciada |
 
@@ -57,7 +59,7 @@ de F0–F11 y no se modifican.
 | Área | Detalle |
 |---|---|
 | Knowledge base | `data/processed/knowledge.sqlite`, sello `user_version = 1`. **2896/2896 fórmulas**, 1903 chunks, 71 documentos. |
-| Retrieval / Reasoning / Examiner / Correction / Mastery / Adaptive / Exam / Review | Módulos F0–F11, suites en verde (ver §5). |
+| Retrieval / Reasoning / Examiner / Correction / Mastery / Adaptive / Exam / Review | Módulos F0–F11, suite completa en verde x2 (889/889, ver §5). Mastery: determinismo del score reforzado (timestamps de microsegundos, D180). |
 | Proveedor de razonamiento | `select_provider(auto\|gemini\|extractive)`. `GeminiProvider` REST stdlib (`gemini-3.5-flash-lite`, env `GEMINI_MODEL`), clave sólo de entorno, nunca en logs/repo. `auto` sin `GEMINI_API_KEY` → `ExtractiveProvider` determinista (verificado por construcción). El tutor web usa esta selección vía `sistemes serve --provider …` / env `SM_PROVIDER` (defecto `auto`) → `Bridge` → `ReasoningEngine`. `versions.provider = {provider, model}` en la respuesta de `/api/tutor/ask`. **Validado end-to-end contra la instancia viva: llamada real a Gemini, `status: VERIFIED`, sin fallback** (`a3e5d5e`). |
 | Fallback del razonador | `RuntimeError` del proveedor LLM en `_reason()` (red, 5xx/4xx incl. 401, clave inválida, respuesta vacía) → degradación a extractivo verificado, HTTP 200, `versions.provider.provider = "extractive-fallback"` + `fallback_reason`, aviso `llm_provider_error_fallback`. Ya no hay `GENERATION_ERROR`/502 con evidencia en mano. Bugs de programación (`TypeError`…) **no se capturan** y propagan. |
 | Application layer | `app/application/` — fachada F10 sobre los servicios de dominio. |
@@ -105,35 +107,50 @@ de F0–F11 y no se modifican.
 3. **`questions.sqlite` fuera de la cobertura SHA-256 del manifiesto** (`UNHASHED_ARTIFACTS`) porque los tests lo ensucian. Es una copia de trabajo generada; su cobertura actual es de esquema + tablas, no criptográfica. Para un release habría que separar limpiamente artefacto canónico inmutable ↔ copia de trabajo mutable.
 4. **`/api/health` `checks.student_db` está hardcodeado a `True`** — no consulta la BD del estudiante.
 5. **`srv.timeout` / logs — minores diferidos** de la revisión: `srv.timeout` se resolvió como `Handler.timeout`; `logsetup.configure()` puede escribir logs vacíos en `%LOCALAPPDATA%` para algún test de CLI sin `SM_HOME`.
-6. **F14 no verificada en máquina limpia** end-to-end (ver §3).
-7. **Sin CI / sin branch protection / commits sin firmar / sin tag de release.**
-8. **Gemini: observabilidad y config menores** — la respuesta HTTP del tutor
+6. **Branch protection / firma de commits / tag de release** — CI mínima
+   añadida en `.github/workflows/ci.yml` (D182); el resto de la governance
+   (protección de `main`, firma, tag/release) se cierra en la fase de
+   release governance.
+7. **Gemini: observabilidad y config menores** — la respuesta HTTP del tutor
    no expone `fallback_reason` (`_project` lo recorta); `SM_PROVIDER` no está
    en `.env.example`. Ninguna afecta al funcionamiento; ambas documentadas en
    §3 🟡 y en `docs/LLM_PROVIDER.md`.
-9. **Sin cuotas / billing para Gemini** — cada petición del tutor con
+8. **Sin cuotas / billing para Gemini** — cada petición del tutor con
    `--provider gemini` (o `auto` con clave) es una llamada de pago sin límite
    ni contador. Aceptable para uso local individual; a vigilar.
+9. **Packaging: el zip portable se descomprime "plano"** (`Compress-Archive`
+   de `$stage/*`, sin carpeta contenedora). `install.ps1` funciona igual
+   porque localiza la raíz relativa a `scripts/`. Cosmético.
 
 ## 5. Estado de pruebas
 
 ```
-python -m pytest tests/ -q
-1 failed, 888 passed        (~889 tests; +16 de la integración Gemini)
+python -m pytest tests/ -q      (dos pasadas consecutivas, auditoría de cierre 2026-09-09)
+889 passed, 0 failed, 0 skipped     (605 s)
+889 passed, 0 failed, 0 skipped     (772 s)
 ```
 
-El **único fallo es preexistente y ajeno** a este trabajo:
-`tests/test_phase0.py::test_2_originals_not_vendored_and_hashes_recorded`.
-Afirma que `Tema */` no está en el repo, pero desde el merge `a790afa`
-(unificación teoría+app) sí lo está a propósito. Falla igual en árbol
-limpio (`git stash` → FAILED en 0.18 s). Test obsoleto, pendiente de
-ajustar o borrar.
+**Verde total x2.** Dos defectos, ambos preexistentes y ajenos a la
+integración Gemini, resueltos en la auditoría de cierre:
 
-Los 2 tests live de Gemini que antes fallaban con `HTTPError 401`
-(`test_live_theory_answer_verified`, `test_live_calculation_verified`)
-**ahora pasan**: el 401 ya no propaga, degrada a extractivo verificado que
-satisface sus asserts. Con una `GEMINI_API_KEY` válida en el entorno
-ejercitan el camino Gemini real; sin ella, el extractivo.
+- **`tests/test_phase0.py` Test 2** (`test_2_source_integrity_matches_manifest`,
+  antes `..._originals_not_vendored_...`): el contrato cambió con el merge
+  `a790afa` — `Tema */` es fuente canónica in-repo. El test viejo lo
+  contradecía y fallaba en árbol limpio. Sustituido por una comprobación
+  **más estricta**: cada una de las 91 fuentes existe y su sha256 coincide
+  con `data/source_manifest.json` (detecta borrado / mutación). DECISION_LOG
+  D179.
+- **`test_21_mastery_deterministic`** fallaba ~2/15 aislado y 1/1 bajo carga:
+  `mastery._now()` usaba resolución de segundo; varios `submit()` del mismo
+  segundo colisionaban y el desempate por hash de `event_id` barajaba el
+  orden de las señales recency-weighted → score no determinista. Corregido a
+  `timespec="microseconds"` (DECISION_LOG D180). Verificado 0/30 tras el fix.
+
+Los tests live de Gemini (`@NEEDS_KEY`) se ejecutan en este entorno (hay
+`GEMINI_API_KEY`) y pasan; en este shell la clave da 401, así que lo hacen
+por la ruta de fallback extractivo verificado. La validación con **Gemini
+real** se hizo por separado contra el servidor local en marcha (§3, provider
+de razonamiento).
 
 ## 6. Repositorio
 

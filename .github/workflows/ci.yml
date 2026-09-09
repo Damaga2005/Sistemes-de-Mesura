@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: tests + integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install project and pytest
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+
+      - name: Run test suite
+        # No GEMINI_API_KEY in CI: los tests @NEEDS_KEY se saltan y el tutor
+        # usa el proveedor extractivo determinista. Sin billing, sin secretos.
+        run: python -m pytest tests/ -q
+
+      - name: Artifact integrity check
+        run: python -m app.cli check

@@ -14,7 +14,13 @@ from .models import MasteryEvent, MasteryState
 
 
 def _now() -> str:
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+    # Microsegundos, no segundos: el score es recency-weighted (policy.update_score
+    # pondera w_i = 1 + 0.1*i) y las senales se releen ORDER BY created_at,event_id.
+    # Con resolucion de segundo, varios submit dentro del mismo segundo colisionan
+    # y el desempate por event_id (hash) baraja el orden -> score no determinista
+    # (rompe "Determinismo total" y test_21_mastery_deterministic). Microsegundos
+    # preservan el orden de insercion para llamadas secuenciales.
+    return datetime.now(timezone.utc).isoformat(timespec="microseconds")
 
 
 def unit_id(kind: str, ref: str) -> str:
