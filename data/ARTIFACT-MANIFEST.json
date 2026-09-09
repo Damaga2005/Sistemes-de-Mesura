@@ -6,7 +6,7 @@
     "data/index/manifest.json": "74f3e78f04271473b4ec2972dfd5d9fc1ee84ba2c107d5e64d6064b2be4586dd",
     "data/index/semantic/postings.json": "1e835d961e81a6741a8ee8efb98ca608fb855a7d10185fd681e347b18c9d079b",
     "data/index/semantic/vocab.json": "0b5eac3b8aa89fc759662ed5845df623fb5c1cdcdae144d00e1e416f3320a3da",
-    "data/processed/knowledge.sqlite": "15a6d3fdef805f3659f35b8b5a09d3cff6b2d0cfe96701dd8a1a3478ebf1d965",
+    "data/processed/knowledge.sqlite": "3d7814e740e241810cb0f520678070c64726e22d76fe7fd188a760f61cacae37",
     "data/source_manifest.json": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984"
   },
   "generated_for_version": "0.13.0"
