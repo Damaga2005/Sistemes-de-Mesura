@@ -400,12 +400,15 @@ def render_phase1_report(report: dict, out: Path) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser(description="Ingesta Fase 1 (solo lectura de fuentes)")
     ap.add_argument("--source", default=config.DEFAULT_SOURCE_DIR)
+    ap.add_argument("--out", default=None,
+                    help="raiz de salida (contiene processed/ y evaluation/)")
     ap.add_argument("--processed", default=None)
     ap.add_argument("--eval", default=None)
     args = ap.parse_args()
     workspace = Path(__file__).resolve().parent.parent
-    processed = Path(args.processed) if args.processed else workspace / config.DEFAULT_PROCESSED_DIR
-    eval_dir = Path(args.eval) if args.eval else workspace / config.DEFAULT_EVAL_DIR
+    out = Path(args.out) if args.out else workspace / "data"
+    processed = Path(args.processed) if args.processed else out / "processed"
+    eval_dir = Path(args.eval) if args.eval else out / "evaluation"
     report = run(Path(args.source), processed, eval_dir, workspace)
     render_phase1_report(report, workspace / "docs" / "PHASE_1_REPORT.md")
     print("docs=%d chunks=%d formulas=%d visuals=%d eval=%d val_errors=%s fidelity=%s warnings=%d" % (

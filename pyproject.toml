@@ -10,6 +10,7 @@ requires-python = ">=3.11"
 dependencies = []
 
 [project.scripts]
+sistemes = "app.cli:main"
 sistemes-web = "web.server:main"
 
 [tool.setuptools.packages.find]
