@@ -69,7 +69,7 @@ def _cmd_serve(args) -> int:
         for pb in problems:
             print("  - " + pb, file=sys.stderr)
         return 1
-    from web.server import main as web_main
+    from web import server as _web
     argv = []
     if args.host:
         argv += ["--host", args.host]
@@ -79,7 +79,8 @@ def _cmd_serve(args) -> int:
         argv += ["--data-dir", args.data_dir]
     if args.calendar:
         argv += ["--calendar", args.calendar]
-    return web_main(argv)
+    rc = _web.main(argv)
+    return rc if isinstance(rc, int) else 0
 
 
 def _cmd_ingest(args) -> int:
