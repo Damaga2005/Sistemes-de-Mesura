@@ -1066,9 +1066,20 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(400, {"ok": False,
                                         "code": "VALIDATION_ERROR",
                                         "message": "JSON invàlid"}, "")
-        status, payload, cookie = self.thread_bridge().route(
-            self.command, url.path, query, body,
-            self.headers.get("Cookie", ""))
+        import time
+        from app import logsetup
+        t0 = time.perf_counter()
+        try:
+            status, payload, cookie = self.thread_bridge().route(
+                self.command, url.path, query, body,
+                self.headers.get("Cookie", ""))
+        except Exception:
+            logsetup.exception("route fallo: %s %s" % (self.command, url.path))
+            status, payload, cookie = 500, {"ok": False,
+                                            "code": "INTERNAL_ERROR",
+                                            "message": "error intern"}, ""
+        logsetup.request(self.command, url.path, status,
+                         (time.perf_counter() - t0) * 1000)
         self._send(status, payload, cookie)
 
     def do_GET(self):
@@ -1088,6 +1099,8 @@ def main(argv=None) -> int:
     from app.env import load_env
     load_env(os.environ.get("SM_ENV_FILE"))            # ./.env si no s'indica
     load_env(sm_paths.config_dir() / ".env")            # cerca de reserva
+    from app import logsetup
+    logsetup.configure()
     ap = argparse.ArgumentParser(description="Servidor presentació B2")
     ap.add_argument("--host", default=os.environ.get("SM_HOST", "127.0.0.1"))
     ap.add_argument("--port", type=int,

@@ -154,6 +154,8 @@ def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     load_env()
     load_env(_paths.config_dir() / ".env")
+    from app import logsetup
+    logsetup.configure()
     ap = _build_parser()
     args = ap.parse_args(argv)
     if args.version:
@@ -162,7 +164,11 @@ def main(argv: list[str] | None = None) -> int:
     if not args.cmd:
         ap.print_help()
         return 2
-    return _DISPATCH[args.cmd](args)
+    try:
+        return _DISPATCH[args.cmd](args)
+    except Exception:                              # noqa: BLE001
+        logsetup.exception("subcomando fallo: %s" % args.cmd)
+        raise
 
 
 if __name__ == "__main__":
