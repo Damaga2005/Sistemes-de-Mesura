@@ -1,11 +1,15 @@
 # AGENTS.md — Reglas persistentes del proyecto
 
+## Producto
+- **Local, un solo usuario, una sola máquina.** Sin autenticación, sin multiusuario, sin aislamiento entre estudiantes. La identidad (`SM_STUDENT`) es configuración, no un sujeto autenticado. El F12 original (auth + multiusuario) está `SUPERSEDED`; ver `docs/ESTADO_DEL_PROYECTO.md`.
+- Sin WSGI/ASGI, reverse proxy, HTTPS gestionado ni despliegue. `ThreadingHTTPServer` stdlib ligado a `127.0.0.1`.
+
 ## Idioma
 - Fuente en catalán (`lang="ca"`): **conservar literal**, no traducir el material fuente.
 - Documentación del proyecto en español. Términos académicos citados en catalán original.
 
 ## Source of truth
-- Originales (`Damaga2005/Sistemes-de-Mesura`, clon TEMP de solo lectura): **inmutables**. Solo lectura; derivados en `data/processed/`, nunca junto al original.
+- Material del curso en `Tema 1/` … `Tema 10/` (HTML + PDF, catalán): **inmutable**. Solo lectura; derivados en `data/processed/` / `data/index/`, nunca junto al original. (Antes vivía en un clon TEMP externo; desde el merge `a790afa` está en este mismo repo.)
 - Cada derivado cita `source_path + sección + source_hash` (trazabilidad obligatoria).
 - Contenido generado por LLM **jamás** entra al knowledge base (`knowledge/` ≠ `generated/` ≠ `student/` ≠ `evaluation/`).
 - Sin internet silencioso: `COURSE_SOURCE` vs `EXTERNAL_SOURCE` etiquetados.
