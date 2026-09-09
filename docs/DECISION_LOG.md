@@ -267,3 +267,18 @@ Hallazgos transversales de la auditoría B1–B19 (previos al veredicto):
 | D166 | CalendarSource acepta solo JSON `version: 1` con trazabilidad obligatoria | Un calendario sin `source_path`/`source_hash` no es auditable; ordenar por inicio+id fija el resultado | Aceptar payload libre / ordenar en frontend | Importación local determinista; eventos inválidos fallan con `VALIDATION_ERROR` |
 | D167 | Documents conserva `doc_id` hasta la pantalla de seccions | El catálogo podía abrir solo el tema y perder la intención del usuario | Inferir el documento en frontend / cargar todo el tema | Navegación reentrable documento → secció → contingut |
 | D168 | Packaging inicial con setuptools y CLI stdlib | El proyecto no necesita dependencias runtime nuevas; un único entry point cubre desarrollo y distribución local | Framework de despliegue / contenedor prematuro | `pyproject.toml` portable; instalador y despliegue quedan para F14 posterior |
+
+## Operación local (F14 ampliada)
+
+| # | Decisión | Motivo | Alternativas descartadas |
+|---|---|---|---|
+| D169 | Mono-usuario local: `SM_STUDENT` desde `.env`, sin perfiles/auth/aislamiento | El objetivo es una persona en una máquina | Perfiles honor-system (F12 original) / cuentas con contraseña / aislamiento por directorio |
+| D170 | `ThreadingHTTPServer` stdlib se mantiene; sin WSGI/ASGI, reverse proxy ni HTTPS gestionado | YAGNI para localhost mono-usuario; charter de cero dependencias | gunicorn/uvicorn/waitress + nginx |
+| D171 | Migraciones forward-only con `user_version`; sin down-migrations | Rollback = restore desde backup; las down-migrations son código muerto casi siempre | Herramienta de migración con dependencia externa |
+| D172 | Artefactos `data/` en el zip portable, no en el wheel | Un wheel con decenas de MB de SQLite es un antipatrón; el zip ya los lleva | `package-data` en el wheel |
+| D173 | La CLI delega; no reimplementa `serve`/`ingest` | Menor superficie; `web.server.main` y `app.ingest.main` ya están probados | Reescribir la lógica en `app/cli.py` |
+| D174 | `ingest` es comando de mantenedor (exige `--source`/`--out`) | La fuente vive fuera del paquete y los artefactos empaquetados son inmutables | `ingest` para usuario final (escribiría en `site-packages`) |
+| D175 | CSRF se mantiene pese a ser mono-usuario; expiración y persistencia de sesión se descartan | Cualquier página del navegador puede hacer `POST` a `localhost:PORT`; la expiración no aporta con un solo usuario local | Quitar CSRF (deja la web local abierta a CSRF) / sesión persistente con expiración (sin valor aquí) |
+| D176 | Versión oficial `1.0.0`, punto único en `pyproject.toml` | F0–F13 certificadas; `package.ps1` duplicaba `0.13.0` | Mantener `0.x` / versión en fichero aparte |
+| D177 | Un solo formato de configuración: `.env`, con lookup extra en el config dir | Coherencia; `tomllib` añadiría un segundo formato | `config.toml` |
+| D178 | `serve` corre `check --fast` al arrancar y aborta si falla | Un KB corrupto da respuestas silenciosamente malas; mejor fallo ruidoso | Arrancar siempre y confiar en `check` manual |

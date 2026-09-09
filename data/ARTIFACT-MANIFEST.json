@@ -9,5 +9,5 @@
     "data/processed/knowledge.sqlite": "3d7814e740e241810cb0f520678070c64726e22d76fe7fd188a760f61cacae37",
     "data/source_manifest.json": "e28a1a9a94c4d4a4df78150dfafc506b8a77ab21d6fab9f90dc5a8a76379f984"
   },
-  "generated_for_version": "0.13.0"
+  "generated_for_version": "1.0.0"
 }

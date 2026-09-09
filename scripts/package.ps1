@@ -8,13 +8,14 @@ $output = [IO.Path]::GetFullPath($OutputDir)
 $temp = Join-Path ([IO.Path]::GetTempPath()) (
     "sistemes-package-" + [guid]::NewGuid().ToString("N"))
 $stage = Join-Path $temp "sistemes-de-mesura"
-$version = "0.13.0"
+$pyproject = Get-Content -LiteralPath (Join-Path $repo "pyproject.toml") -Raw
+$version = [regex]::Match($pyproject, 'version\s*=\s*"([^"]+)"').Groups[1].Value
 $artifact = Join-Path $output ("sistemes-de-mesura-" + $version + "-portable.zip")
 
 New-Item -ItemType Directory -Path $stage -Force | Out-Null
 try {
     foreach ($item in @("app", "data", "docs", "web", "pyproject.toml",
-                        ".env.example", "AGENTS.md")) {
+                        ".env.example", "AGENTS.md", "CHANGELOG.md")) {
         Copy-Item -LiteralPath (Join-Path $repo $item) -Destination $stage `
             -Recurse -Force
     }
@@ -22,6 +23,13 @@ try {
         Out-Null
     Copy-Item -LiteralPath (Join-Path $repo "scripts\run-web.ps1") `
         -Destination (Join-Path $stage "scripts\run-web.ps1") -Force
+    Copy-Item -LiteralPath (Join-Path $repo "scripts\install.ps1") `
+        -Destination (Join-Path $stage "scripts\install.ps1") -Force
+    & python -c "import sys; sys.path.insert(0, r'$stage'); from app.artifacts import write_manifest; print(write_manifest())"
+    $manifestPath = Join-Path $stage "data\ARTIFACT-MANIFEST.json"
+    if (-not (Test-Path -LiteralPath $manifestPath)) {
+        throw "falta data\ARTIFACT-MANIFEST.json en el stage"
+    }
 
     $manifest = Get-ChildItem -LiteralPath $stage -File -Recurse |
         ForEach-Object {
