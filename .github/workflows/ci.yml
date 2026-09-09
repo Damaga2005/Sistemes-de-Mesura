@@ -34,5 +34,11 @@ jobs:
         # usa el proveedor extractivo determinista. Sin billing, sin secretos.
         run: python -m pytest tests/ -q
 
+      - name: Initialise runtime dirs
+        # `check` (no --fast) verifica que existan los directorios de SM_HOME;
+        # en un runner limpio hay que crearlos primero, igual que en la
+        # instalación real (init && check && serve).
+        run: python -m app.cli init
+
       - name: Artifact integrity check
         run: python -m app.cli check

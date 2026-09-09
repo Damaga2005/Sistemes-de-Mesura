@@ -1,8 +1,14 @@
 # Reproducibilidad del checkout entre plataformas (Windows y CI Linux).
-# El material del curso (Tema 1/ .. Tema 10/) se hasheo en data/source_manifest.json
-# en su forma autorizada, con finales de linea CRLF. Fijar el EOL de checkout
-# garantiza que test_2_source_integrity_matches_manifest y cualquier verificacion
-# de integridad de fuente coincidan en todas las plataformas. Los blobs se
-# almacenan con LF; los PDF son binarios y no se tocan.
-"Tema */*.html" text eol=crlf
-"Tema */*.pdf"  binary
+#
+# El material del curso (Tema 1/ .. Tema 10/) y los manifiestos de artefactos
+# se hashearon (data/source_manifest.json, data/ARTIFACT-MANIFEST.json) sobre
+# un arbol de trabajo Windows con finales de linea CRLF. Fijar el EOL de
+# checkout garantiza que esos hashes coincidan en todas las plataformas:
+# test_2_source_integrity_matches_manifest y `sistemes check`.
+# Los blobs se almacenan con LF; solo cambia el smudge de checkout. Los .sqlite
+# y .pdf son binarios y no se tocan.
+"Tema */*.html"             text eol=crlf
+"Tema */*.pdf"              binary
+data/source_manifest.json   text eol=crlf
+data/index/manifest.json    text eol=crlf
+data/index/semantic/*.json  text eol=crlf
