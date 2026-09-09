@@ -20,6 +20,12 @@ PACKAGED_ARTIFACTS: tuple[str, ...] = (
     "data/source_manifest.json",
 )
 
+# Artefactos empaquetados que NO se cubren por sha256: la suite de tests escribe
+# en questions.sqlite (contaminacion preexistente) y el servidor solo lo usa como
+# semilla que copia a data_dir(), asi que la identidad byte a byte no aporta.
+# Su integridad la cubre _EXPECTED_TABLES (esquema) en `check`.
+UNHASHED_ARTIFACTS: frozenset[str] = frozenset({"data/generated/questions.sqlite"})
+
 # label -> (db relpath, count query, expected). Numeros congelados en
 # docs/PHASE_8_FINAL_CERTIFICATION.md (formulas 2896) y verificados contra
 # los artefactos vivos en el momento de implementar la Task 6.
@@ -78,6 +84,8 @@ def _app_version() -> str:
 def write_manifest() -> Path:
     files: dict[str, str] = {}
     for art in PACKAGED_ARTIFACTS:
+        if art in UNHASHED_ARTIFACTS:
+            continue
         for rel in _iter_files(art):
             files[rel] = _sha256(_paths.package_dir() / rel)
     out = _paths.package_dir() / "data" / MANIFEST_NAME

@@ -1,7 +1,6 @@
 {
   "files": {
     "data/evaluation/eval.sqlite": "d3b09c462dd506eef439f130317c6f7d96e5b87dbd281a34eecc5fb714af54ce",
-    "data/generated/questions.sqlite": "d0988f84b07684488a8d4441fdafb7ec31b9af2e15ac102475b9c1e4a94bcd24",
     "data/index/lexical/fts.sqlite": "5e76772c58dd49edbfa8e444031378febd9d63ea81706177133be697315395f5",
     "data/index/manifest.json": "74f3e78f04271473b4ec2972dfd5d9fc1ee84ba2c107d5e64d6064b2be4586dd",
     "data/index/semantic/postings.json": "1e835d961e81a6741a8ee8efb98ca608fb855a7d10185fd681e347b18c9d079b",
