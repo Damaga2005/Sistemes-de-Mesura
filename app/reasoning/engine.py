@@ -146,12 +146,19 @@ class ReasoningEngine:
         pdict = pack_to_dict(pack)
         messages = build_prompt(query, pdict, lang, self.system_prompt)
         last_error, resp, info = None, None, {}
+        provider_failed = False
         for _ in range(2):
             t = time.perf_counter()
             try:
                 resp = self.provider.generate(messages, temperature=0.0)
             except RuntimeError as e:
-                raise RuntimeError(str(e))
+                # Fallo normal del proveedor LLM (red, 5xx, clave, respuesta
+                # vacia): degradacion controlada al extractivo, no HTTP 502.
+                # Un bug de programacion (TypeError, KeyError...) NO es RuntimeError
+                # y sigue propagando: no se oculta.
+                last_error = str(e)
+                provider_failed = True
+                break
             lat["llm_ms"] = round((time.perf_counter() - t) * 1000, 1)
             info = {"provider": resp.provider, "model": resp.model, "usage": resp.usage}
             try:
@@ -168,7 +175,8 @@ class ReasoningEngine:
             parsed = parse_structured(fallback.text)
         except ValueError:
             raise RuntimeError("reasoning_unavailable: salida no estructurada (%s)" % last_error)
-        parsed.setdefault("uncertainties", []).append("llm_malformed_fallback")
+        parsed.setdefault("uncertainties", []).append(
+            "llm_provider_error_fallback" if provider_failed else "llm_malformed_fallback")
         lat["llm_fallback"] = True
         return parsed, {"provider": "extractive-fallback", "model": "extractive-v1",
                         "fallback_reason": last_error}

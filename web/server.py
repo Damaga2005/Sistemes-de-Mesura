@@ -53,7 +53,7 @@ from app.exam.review import (BAND_HUMAN, ERROR_HUMAN,  # noqa: E402
 from app.exam.service import ExamSessionService  # noqa: E402
 from app.examiner.service import ExaminerEngine  # noqa: E402
 from app.examiner.store import QuestionStore  # noqa: E402
-from app.llm.extractive import ExtractiveProvider  # noqa: E402
+from app.llm.gemini import select_provider  # noqa: E402
 from app.reasoning.engine import ReasoningEngine  # noqa: E402
 from app.retrieval.service import RetrievalService  # noqa: E402
 from app.student.service import StudentService  # noqa: E402
@@ -206,7 +206,8 @@ def _command(s, i):
 class Bridge:
     def __init__(self, kb=KB, index=INDEX, gen_src=GENDB,
                  workdir: str = "", sessions: dict | None = None,
-                 lock=None, calendar_path=None, student: str = "") -> None:
+                 lock=None, calendar_path=None, student: str = "",
+                 provider: str = "") -> None:
         import threading
         self.student = student or os.environ.get("SM_STUDENT", "me")
         self.kb, self.index = kb, index
@@ -219,7 +220,10 @@ class Bridge:
             shutil.copyfile(gen_src, qdb)
         sdb = str(self.work / "student.sqlite")
         retr = RetrievalService(kb, index)
-        reng = ReasoningEngine(retr, kb, provider=ExtractiveProvider())
+        # Seleccion unica (auto|gemini|extractive) via la abstraccion del
+        # proyecto. auto sin GEMINI_API_KEY -> extractivo (compat CI).
+        pref = provider or os.environ.get("SM_PROVIDER") or "auto"
+        reng = ReasoningEngine(retr, kb, provider=select_provider(pref))
         eng = ExaminerEngine(retr, kb, qdb)
         QuestionStore(qdb)
         stu = StudentService(kb, qdb, sdb)
@@ -1147,13 +1151,17 @@ def main(argv=None) -> int:
     ap.add_argument("--calendar",
                     default=os.environ.get("COURSE_CALENDAR_PATH", ""),
                     help="font JSON versionada de calendari (opcional)")
+    ap.add_argument("--provider", default=os.environ.get("SM_PROVIDER", "auto"),
+                    choices=["auto", "gemini", "extractive"],
+                    help="proveedor de razonamiento (auto: Gemini si hi ha clau)")
     args = ap.parse_args(argv)
     sm_paths.data_dir().mkdir(parents=True, exist_ok=True)
     data = args.data_dir or str(sm_paths.data_dir())
     import threading
     Handler.config = {"kw": {}, "sessions": {}, "lock": threading.Lock()}
     Handler.config["kw"] = {"workdir": data,
-                             "calendar_path": args.calendar or None}
+                             "calendar_path": args.calendar or None,
+                             "provider": args.provider}
     # el timeout del handler SI se aplica al socket aceptado
     # (StreamRequestHandler.setup -> connection.settimeout); srv.timeout solo
     # lo lee handle_request(), no serve_forever().

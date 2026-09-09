@@ -67,6 +67,84 @@ def test_prompt_versionado_existe():
     assert "JSON" in txt
 
 
+# ---- Fase 0: fallback ante fallo del proveedor LLM en _reason() ----
+
+class _FakeLLM:
+    provider_name = "fake-llm"
+    model_name = "fake-1"
+
+    def __init__(self, text: str) -> None:
+        self._text = text
+
+    def generate(self, messages, *, temperature=0.0, max_tokens=1500):
+        from app.llm.interface import LLMResponse
+        return LLMResponse(text=self._text, provider=self.provider_name,
+                           model=self.model_name)
+
+
+class _BoomLLM:
+    provider_name = "boom"
+    model_name = "boom-1"
+
+    def generate(self, *a, **k):
+        raise RuntimeError("reasoning_unavailable: HTTPError 503: transitorio")
+
+
+class _BugLLM:
+    provider_name = "bug"
+    model_name = "bug-1"
+
+    def generate(self, *a, **k):
+        raise TypeError("bug real en el codigo, no fallo de proveedor")
+
+
+_Q = "què és la incertesa expandida?"
+
+
+def test_gemini_success_provider_is_used():
+    svc = RetrievalService(str(KB), str(INDEX))
+    pack = svc.retrieve_evidence(_Q, top_k=10)
+    good = ExtractiveProvider().answer_from_pack(_Q, pack).text
+    eng = ReasoningEngine(svc, str(KB), provider=_FakeLLM(good))
+    ans = eng.answer(_Q)
+    assert not ans.abstain
+    assert ans.versions["provider"]["provider"] == "fake-llm"
+
+
+def test_gemini_runtime_error_falls_back_to_extractive():
+    svc = RetrievalService(str(KB), str(INDEX))
+    eng = ReasoningEngine(svc, str(KB), provider=_BoomLLM())
+    ans = eng.answer(_Q)
+    assert not ans.abstain
+    prov = ans.versions["provider"]
+    assert prov["provider"] == "extractive-fallback"
+    assert "503" in prov["fallback_reason"]
+
+
+def test_provider_error_no_credential_leak(monkeypatch):
+    monkeypatch.setenv("GEMINI_API_KEY", "SECRET-should-never-appear")
+    svc = RetrievalService(str(KB), str(INDEX))
+    eng = ReasoningEngine(svc, str(KB), provider=_BoomLLM())
+    ans = eng.answer(_Q)
+    import json as _json
+    assert "SECRET-should-never-appear" not in _json.dumps(ans.to_dict())
+
+
+def test_programming_error_not_swallowed():
+    svc = RetrievalService(str(KB), str(INDEX))
+    eng = ReasoningEngine(svc, str(KB), provider=_BugLLM())
+    with pytest.raises(TypeError):
+        eng.answer(_Q)
+
+
+def test_extractive_direct_unchanged():
+    svc = RetrievalService(str(KB), str(INDEX))
+    eng = ReasoningEngine(svc, str(KB), provider=ExtractiveProvider())
+    ans = eng.answer(_Q)
+    assert not ans.abstain
+    assert ans.versions["provider"]["provider"] == "extractive-fallback"
+
+
 @NEEDS_KEY
 def test_live_theory_answer_verified():
     svc = RetrievalService(str(KB), str(INDEX))

@@ -33,6 +33,8 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("--port", type=int)
     p.add_argument("--data-dir")
     p.add_argument("--calendar")
+    p.add_argument("--provider", choices=["auto", "gemini", "extractive"],
+                   help="proveedor de razonamiento (defecto: auto / SM_PROVIDER)")
 
     p = sub.add_parser("ingest", help="[mantenedor] regenera artefactos")
     p.add_argument("--source", required=True)
@@ -82,6 +84,8 @@ def _cmd_serve(args) -> int:
         argv += ["--data-dir", args.data_dir]
     if args.calendar:
         argv += ["--calendar", args.calendar]
+    if args.provider:
+        argv += ["--provider", args.provider]
     rc = _web.main(argv)
     return rc if isinstance(rc, int) else 0
 

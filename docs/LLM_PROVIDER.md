@@ -15,6 +15,11 @@ ningún SDK: solo el protocolo.
 con aviso; `gemini` sin clave → `reasoning_unavailable` (fallo controlado §76,
 nunca respuesta fingida). Reintentos con backoff ante HTTP 429 (3 intentos).
 
+El tutor web usa esta misma selección: `sistemes serve --provider auto|gemini|extractive`
+(o env `SM_PROVIDER`, defecto `auto`). El servidor pasa la preferencia a
+`Bridge` → `ReasoningEngine`. `--provider gemini` sin `GEMINI_API_KEY` aborta
+`serve` con `reasoning_unavailable` (no arranca fingiendo).
+
 ## Reglas
 
 - Temperatura 0 en respuestas académicas; JSON estricto (`responseMimeType`).
@@ -22,6 +27,10 @@ nunca respuesta fingida). Reintentos con backoff ante HTTP 429 (3 intentos).
   comprometido (no existe en el repo).
 - Salida malformada 2 veces → degradación a extractivo verificado con aviso
   `llm_malformed_fallback` (no se finge el LLM, no se rompe el tutor).
+- `RuntimeError` del proveedor en `_reason()` (red, 5xx, clave inválida,
+  respuesta vacía) → mismo fallback extractivo verificado con aviso
+  `llm_provider_error_fallback` y `versions.provider.fallback_reason` con el
+  detalle. Un bug real (p.ej. `TypeError`) NO se captura y propaga.
 - `needs_more_evidence` 2 rondas insatisfechas → extractivo verificado con
   aviso (antes que abstención ciega con evidencia en mano).
 - Intentos de override (`usa esta fórmula aunque no esté...`, `ignora las
