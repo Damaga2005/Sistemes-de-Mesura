@@ -669,14 +669,43 @@ class Bridge:
         return out
 
     # ----- router pur (testeable sense xarxa) -----
-    def route(self, method, path, query=None, body=None, cookie=""):
+    def route(self, method, path, query=None, body=None, cookie="",
+              headers=None):
         query = query or {}
         body = body or {}
         lang = body.get("language", query.get("language", "ca"))
         if lang not in ("ca", "es"):
             lang = "ca"
         tok = self._token(cookie)
-        set_cookie = "sm_session=%s; Path=/; SameSite=Lax; HttpOnly" % tok
+        with self._lock:
+            csrf = self.sessions[tok].setdefault("csrf",
+                                                 secrets.token_hex(24))
+        secure = "; Secure" if os.environ.get("SM_TLS") == "1" else ""
+        set_cookie = "\n".join([
+            "sm_session=%s; Path=/; SameSite=Strict; HttpOnly%s" % (
+                tok, secure),
+            "sm_csrf=%s; Path=/; SameSite=Strict%s" % (csrf, secure)])
+
+        if method == "GET" and path == "/api/health":
+            checks = {"kb": Path(self.kb).is_file(),
+                      "index": Path(self.index).exists(),
+                      "student_db": True}
+            ok = all(checks.values())
+            from app.cli import _version
+            return (200 if ok else 503), {
+                "status": "ok" if ok else "degraded",
+                "version": _version(), "checks": checks}, set_cookie
+        if method == "GET" and path == "/api/session":
+            return 200, {"csrf": csrf, "student": self.student}, set_cookie
+
+        # CSRF double-submit: només s'aplica quan hi ha capçaleres reals
+        # (Handler sempre en passa; les crides directes de test que no
+        # exerceixen CSRF passen headers=None i queden exemptes).
+        if headers is not None and method == "POST" \
+                and path.startswith("/api/"):
+            if (headers or {}).get("X-CSRF-Token") != csrf:
+                return 403, {"ok": False, "code": "CSRF",
+                             "message": "CSRF"}, set_cookie
         try:
             if method == "GET" and path == "/api/study/topics":
                 return 200, {"topics": self.kb_topics()}, set_cookie
@@ -1029,7 +1058,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", ctype)
         self.send_header("Content-Length", str(len(raw)))
         if cookie:
-            self.send_header("Set-Cookie", cookie)
+            for line in cookie.split("\n"):
+                self.send_header("Set-Cookie", line)
         self.end_headers()
         self.wfile.write(raw)
 
@@ -1050,10 +1080,15 @@ class Handler(BaseHTTPRequestHandler):
                  urllib.parse.parse_qs(url.query).items()}
         body = {}
         if self.command == "POST":
+            limit = int(os.environ.get("SM_MAX_BODY_BYTES", "1048576"))
             try:
                 n = int(self.headers.get("Content-Length", 0))
             except ValueError:
                 n = 0
+            if n > limit:
+                return self._send(413, {"ok": False,
+                                        "code": "PAYLOAD_TOO_LARGE",
+                                        "message": "cos massa gran"}, "")
             raw = self.rfile.read(n) if n > 0 else b""
             if raw:
                 try:
@@ -1072,7 +1107,7 @@ class Handler(BaseHTTPRequestHandler):
         try:
             status, payload, cookie = self.thread_bridge().route(
                 self.command, url.path, query, body,
-                self.headers.get("Cookie", ""))
+                self.headers.get("Cookie", ""), headers=dict(self.headers))
         except Exception:
             logsetup.exception("route fallo: %s %s" % (self.command, url.path))
             status, payload, cookie = 500, {"ok": False,
@@ -1116,6 +1151,7 @@ def main(argv=None) -> int:
     Handler.config["kw"] = {"workdir": data,
                              "calendar_path": args.calendar or None}
     srv = ThreadingHTTPServer((args.host, args.port), Handler)
+    srv.timeout = int(os.environ.get("SM_REQUEST_TIMEOUT", "30"))
     print("Sistemes de Mesura a http://%s:%d (dades: %s)"
           % (args.host, args.port, data))
     try:

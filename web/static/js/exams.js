@@ -15,7 +15,7 @@
   }
 
   function api(path, opts) {
-    return window.fetch(path, opts).then(function (r) {
+    return window.smFetch(path, opts).then(function (r) {
       return r.json().then(function (data) {
         return { status: r.status, data: data };
       });
