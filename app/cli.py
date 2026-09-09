@@ -10,7 +10,10 @@ from app.env import load_env
 
 
 def _version() -> str:
-    txt = (_paths.package_dir() / "pyproject.toml").read_text(encoding="utf-8")
+    try:
+        txt = (_paths.package_dir() / "pyproject.toml").read_text(encoding="utf-8")
+    except OSError:
+        return "0.0.0"
     for line in txt.splitlines():
         if line.strip().startswith("version"):
             return line.split("=", 1)[1].strip().strip('"')

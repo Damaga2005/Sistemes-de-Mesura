@@ -15,7 +15,7 @@ if (-not (Test-Path $venv)) { & python -m venv $venv }
 $py = Join-Path $venv "Scripts\python.exe"
 & $py -m pip install --no-input --upgrade pip
 if ($Dev) { & $py -m pip install --no-input -e "$root[dev]" }
-else { & $py -m pip install --no-input $root }
+else { & $py -m pip install --no-input -e $root }
 
 $sistemes = Join-Path $venv "Scripts\sistemes.exe"
 Write-Output ("CLI: " + $sistemes)
