@@ -703,7 +703,11 @@ class Bridge:
         # exerceixen CSRF passen headers=None i queden exemptes).
         if headers is not None and method == "POST" \
                 and path.startswith("/api/"):
-            if (headers or {}).get("X-CSRF-Token") != csrf:
+            # Els noms de capçalera no distingeixen majúscules (RFC 7230);
+            # `dict(email.message.Message)` sí, i fetch() envia
+            # `x-csrf-token` en minúscules. Normalitzem abans de comparar.
+            _hdr = {str(k).lower(): v for k, v in (headers or {}).items()}
+            if _hdr.get("x-csrf-token") != csrf:
                 return 403, {"ok": False, "code": "CSRF",
                              "message": "CSRF"}, set_cookie
         try:
