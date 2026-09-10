@@ -8,6 +8,9 @@
   var POS = 0;
   var TIMER = null;
 
+  var smUI = window.smUI || null;
+  var t = (window.smI18n && window.smI18n.t) || function (k) { return k; };
+
   function el(tag, cls, text) {
     var e = document.createElement(tag);
     if (cls) e.className = cls;
@@ -40,21 +43,21 @@
 
   function stopTimer() {
     if (TIMER) { window.clearInterval(TIMER); TIMER = null; }
-    var t = document.getElementById("exam-timer");
-    if (t) t.textContent = "";
+    var elt = document.getElementById("exam-timer");
+    if (elt) elt.textContent = "";
   }
 
   function startTimer(expiresAt) {
     stopTimer();
-    var t = document.getElementById("exam-timer");
-    if (!t || !expiresAt) return;
+    var elt = document.getElementById("exam-timer");
+    if (!elt || !expiresAt) return;
     var end = Date.parse(expiresAt);
     if (isNaN(end)) return;
     function tick() {
       var left = end - Date.now();
-      t.textContent = left <= 0
-        ? "Temps esgotat (el servidor decideix)"
-        : "Temps: " + fmtClock(left);
+      elt.textContent = left <= 0
+        ? t("exam.timeUp")
+        : t("exam.time") + ": " + fmtClock(left);
       if (left <= 0) {
         stopTimer();
         load(true);
@@ -74,6 +77,15 @@
     api("/api/exam/state?exam_session_id=" + encodeURIComponent(XS))
       .then(function (res) {
         if (res.status !== 200) {
+          stopTimer();
+          if (smUI && smUI.setState) {
+            smUI.setState(box, "error", {
+              code: res.status,
+              message: (res.data && res.data.message) || undefined,
+              retry: function () { load(); }
+            });
+            return;
+          }
           box.innerHTML = "";
           var al = el("div", "alert alert--danger");
           al.setAttribute("role", "alert");
@@ -81,16 +93,19 @@
           al.appendChild(el("p", null,
             (res.data && res.data.message) || ""));
           box.appendChild(al);
-          stopTimer();
           return;
         }
         STATE = res.data;
         render();
       }).catch(function () {
-        if (!silent) {
-          box.innerHTML = "";
-          box.appendChild(el("p", null, "Error de xarxa."));
+        if (silent) return;
+        stopTimer();
+        if (smUI && smUI.setState) {
+          smUI.setState(box, "error", { retry: function () { load(); } });
+          return;
         }
+        box.innerHTML = "";
+        box.appendChild(el("p", null, "Error de xarxa."));
       });
   }
 
@@ -104,15 +119,14 @@
       var count = STATE.question_count === undefined ? "?" :
         STATE.question_count;
       sub.textContent = (STATE.exam_kind || "?") + " · " + STATE.status +
-        " · " + count + " preguntes";
+        " · " + count + " " + t("exam.questions");
     }
     var st = STATE.status;
     if (st === "IN_PROGRESS") return renderPlayer(box);
     stopTimer();
     if (st === "READY") {
-      box.appendChild(el("p", null,
-        "Examen preparat i immutable. Prem per començar."));
-      var b = el("button", "button", "Començar examen");
+      box.appendChild(el("p", null, t("exam.readyBody")));
+      var b = el("button", "button", t("exam.startExam"));
       b.type = "button";
       b.addEventListener("click", function () {
         b.disabled = true;
@@ -133,8 +147,8 @@
     ic.setAttribute("aria-hidden", "true");
     closed.appendChild(ic);
     closed.appendChild(el("h2", null,
-      st === "EXPIRED" ? "Temps esgotat" : "Examen tancat"));
-    closed.appendChild(el("p", null, "Estat: " + st));
+      st === "EXPIRED" ? t("exam.expired") : t("exam.closedTitle")));
+    closed.appendChild(el("p", null, t("exam.statusLabel") + ": " + st));
     box.appendChild(closed);
   }
 
@@ -148,7 +162,7 @@
     box.appendChild(prog);
     var nav = el("div", null, "");
     nav.setAttribute("role", "navigation");
-    nav.setAttribute("aria-label", "Preguntes");
+    nav.setAttribute("aria-label", t("exam.questionsLabel"));
     box.appendChild(nav);
     var qbox = el("div", null, "");
     box.appendChild(qbox);
@@ -156,7 +170,7 @@
     var answered = Object.keys(ans).filter(function (key) {
       return ans[key] && String(ans[key].answer || "").trim() !== "";
     }).length;
-    prog.textContent = "Respostes: " + answered + " de " + COUNT;
+    prog.textContent = t("exam.answered") + ": " + answered + " de " + COUNT;
     for (var i = 0; i < COUNT; i++) {
         (function (p) {
           var b = el("button",
@@ -167,7 +181,8 @@
           b.style.minWidth = "3rem";
           if (p === POS) b.setAttribute("aria-current", "true");
           b.setAttribute("aria-label",
-            "Pregunta " + (p + 1) + (ans[String(p)] ? ", resposta" : ""));
+            "Pregunta " + (p + 1) +
+            (ans[String(p)] ? ", " + t("exam.answeredShort") : ""));
           b.addEventListener("click", function () {
             POS = p;
             render();
@@ -186,7 +201,7 @@
 
   function loadQuestion(qbox) {
     qbox.innerHTML = "";
-    var live = el("p", null, "Carregant pregunta…");
+    var live = el("p", null, t("common.loading"));
     live.setAttribute("role", "status");
     qbox.appendChild(live);
     api("/api/exam/question?exam_session_id=" + encodeURIComponent(XS) +
@@ -202,7 +217,7 @@
         "Pregunta " + (POS + 1) + " · " + (q.type || "")));
       card.appendChild(el("p", null, q.prompt || ""));
       if (q.variables && Object.keys(q.variables).length) {
-        card.appendChild(el("p", "hint", "Dades: " +
+        card.appendChild(el("p", "hint", t("exam.data") + ": " +
           JSON.stringify(q.variables)));
       }
       (q.options || []).forEach(function (o, i) {
@@ -214,7 +229,7 @@
       var saved = (STATE.answers || {})[String(POS)];
       var get = buildInput(q, form, saved ? saved.answer : "");
       var row = el("p");
-      var save = el("button", "button button--secondary", "Desa");
+      var save = el("button", "button button--secondary", t("exam.save"));
       save.type = "submit";
       row.appendChild(save);
       form.appendChild(row);
@@ -241,11 +256,11 @@
   }
 
   function buildInput(q, form, saved) {
-    var t = q.type || "";
-    if (t === "TRUE_FALSE") {
+    var qt = q.type || "";
+    if (qt === "TRUE_FALSE") {
       var fs = el("fieldset");
-      fs.appendChild(el("legend", "label", "Vertader o fals"));
-      [["V", "Vertader"], ["F", "Fals"]].forEach(function (opt) {
+      fs.appendChild(el("legend", "label", t("practice.tfLegend")));
+      [["V", t("practice.true")], ["F", t("practice.false")]].forEach(function (opt) {
         var lab = el("label", "radio");
         var inp = document.createElement("input");
         inp.type = "radio"; inp.name = "xanswer"; inp.value = opt[0];
@@ -261,9 +276,9 @@
         return c ? c.value : "";
       };
     }
-    if (t === "MULTIPLE_CHOICE" && q.options && q.options.length) {
+    if (qt === "MULTIPLE_CHOICE" && q.options && q.options.length) {
       var fs2 = el("fieldset");
-      fs2.appendChild(el("legend", "label", "Tria una opció"));
+      fs2.appendChild(el("legend", "label", t("practice.mcLegend")));
       q.options.forEach(function (o, i) {
         var lab = el("label", "radio");
         var inp = document.createElement("input");
@@ -282,10 +297,10 @@
         return c ? c.value : "";
       };
     }
-    var label = el("label", "label", "La teva resposta");
+    var label = el("label", "label", t("practice.yourAnswer"));
     var inp;
-    if (t === "SHORT_ANSWER" || t === "OPEN" || t === "MULTI_STEP" ||
-        t === "CONCEPTUAL" || t === "THEORY") {
+    if (qt === "SHORT_ANSWER" || qt === "OPEN" || qt === "MULTI_STEP" ||
+        qt === "CONCEPTUAL" || qt === "THEORY") {
       inp = document.createElement("textarea");
       inp.className = "textarea";
       inp.rows = 5;
@@ -311,13 +326,13 @@
     }
     box.innerHTML = "";
     var card = el("div", "card");
-    card.appendChild(el("h2", "h3", "Entregar examen?"));
+    card.appendChild(el("h2", "h3", t("exam.submitConfirm")));
     card.appendChild(el("p", null,
-      "Respostes: " + Object.keys(ans).length + " de " + COUNT + "." +
-      (missing.length ? " Falten: " + missing.join(", ") + "." : "") +
-      " L'entrega és irreversible."));
+      t("exam.answered") + ": " + Object.keys(ans).length + " de " + COUNT + "." +
+      (missing.length ? " " + t("exam.missing") + ": " + missing.join(", ") + "." : "") +
+      " " + t("exam.irreversible")));
     var row = el("p");
-    var back = el("button", "button button--secondary", "Tornar");
+    var back = el("button", "button button--secondary", t("exam.back"));
     back.type = "button";
     back.addEventListener("click", function () { render(); });
     var go = el("button", "button", "Confirmar entrega");
@@ -338,13 +353,12 @@
   }
 
   function renderSubmitted(box) {
-    box.appendChild(el("p", null,
-      "Examen entregat. El backend el qualifica."));
-    var b = el("button", "button", "Qualifica");
+    box.appendChild(el("p", null, t("exam.submittedBody")));
+    var b = el("button", "button", t("exam.grade"));
     b.type = "button";
     b.addEventListener("click", function () {
       b.disabled = true;
-      b.textContent = "Qualificant…";
+      b.textContent = t("exam.grading");
       api("/api/exam/grade", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -355,44 +369,43 @@
   }
 
   function renderGradingIncomplete(box) {
-    box.appendChild(el("div", "state-block",
-      "La correcció encara no està disponible. Torna a consultar més tard."));
+    box.appendChild(el("div", "state-block", t("exam.gradingIncomplete")));
   }
 
   function renderGraded(box) {
     api("/api/exam/result?exam_session_id=" +
       encodeURIComponent(XS)).then(function (res) {
       if (res.status !== 200) {
-        box.appendChild(el("p", null, "Resultat no disponible."));
+        box.appendChild(el("p", null, t("exam.reasonUnknown")));
         return;
       }
       var r = res.data;
       var card = el("div", "card");
-      card.appendChild(el("h2", "h3", "Resultat"));
+      card.appendChild(el("h2", "h3", t("exam.result")));
       card.appendChild(el("p", null,
         "Nota: " + (r.percentage || "?") + "% · " +
-        "Correctes: " + (r.correct_count === undefined ? "?" :
+        t("exam.correct") + ": " + (r.correct_count === undefined ? "?" :
           r.correct_count) + " de " + (r.question_count || "?")));
       box.appendChild(card);
       api("/api/exam/review?exam_session_id=" +
         encodeURIComponent(XS)).then(function (rv) {
         if (rv.status !== 200) {
-          box.appendChild(el("p", null, "Revisió no disponible."));
+          box.appendChild(el("p", null, t("exam.reviewUnavailable")));
           return;
         }
-        box.appendChild(el("h2", null, "Revisió"));
+        box.appendChild(el("h2", null, t("exam.reviewTitle")));
         (rv.data.questions || []).forEach(function (q, i) {
           var fb = q.feedback || {};
           var qc = el("div", "card");
           qc.appendChild(el("h2", "h3", "Pregunta " + (i + 1)));
           qc.appendChild(el("p", null,
-            "Estat: " + (fb.status || "?") +
+            t("exam.statusLabel") + ": " + (fb.status || "?") +
             (fb.score === null || fb.score === undefined ? "" :
               " · " + fb.score)));
           if (fb.student_answer !== null &&
               fb.student_answer !== undefined) {
             qc.appendChild(el("p", null,
-              "La teva resposta: " + fb.student_answer));
+              t("practice.yourAnswer") + ": " + fb.student_answer));
           }
           (fb.errors || []).forEach(function (e) {
             qc.appendChild(el("p", null,
@@ -405,7 +418,7 @@
         });
         var more = el("p");
         var a = el("a", "button button--secondary",
-          "Veure mastery");
+          t("exam.viewMastery"));
         a.href = "#";
         a.addEventListener("click", function (ev) {
           ev.preventDefault();
@@ -413,7 +426,7 @@
         });
         more.appendChild(a);
         more.appendChild(document.createTextNode(" "));
-        var pr = el("a", "button", "Practicar");
+        var pr = el("a", "button", t("tutor.practice"));
         pr.href = "practice.html";
         more.appendChild(pr);
         box.appendChild(more);
@@ -435,7 +448,7 @@
           (u.mastery_status || "?")));
       });
       if (!(res.data.units || []).length) {
-        ul.appendChild(el("li", null, "Sense unitats."));
+        ul.appendChild(el("li", null, t("exam.noUnits")));
       }
       card.appendChild(ul);
       box.appendChild(card);
@@ -445,7 +458,7 @@
   XS = xsid();
   if (!XS) {
     root().innerHTML = "";
-    root().appendChild(el("p", null, "Falta l'identificador d'examen."));
+    root().appendChild(el("p", null, t("exam.missingId")));
   } else {
     load();
   }

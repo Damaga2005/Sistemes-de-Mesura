@@ -27,27 +27,27 @@ def bridge():
     return S.Bridge(workdir=tempfile.mkdtemp(prefix="sm-lt-"))
 
 
-# ---------- estructura learning ----------
-def test_learning_overview_structure():
-    t = page("learning.html")
-    for i in ("next-box", "pri-list", "mastery-box", "progress-box",
-              "unit-root"):
+# ---------- estructura progrés ----------
+def test_progres_overview_structure():
+    t = page("progres.html")
+    for i in ("prog-summary", "prog-mastery", "prog-recommend", "prog-unit"):
         assert 'id="%s"' % i in t, i
-    assert "learning.js" in t
+    assert "progres.js" in t and t.count("aria-live") >= 3
 
 
-def test_learn_js_wiring():
-    t = js("learning.js")
-    for ep in ("/api/learn/priorities", "/api/learn/progress",
-               "/api/learn/unit", "/api/learn/locate",
-               "/api/learn/start"):
+def test_progres_js_wiring():
+    t = js("progres.js")
+    for ep in ("/api/learn/progress", "/api/study/mastery",
+               "/api/learn/priorities", "/api/learn/unit", "/api/learn/start"):
         assert ep in t, ep
-    assert "practice.html?from=adaptive" in t
-    assert "sessionStorage" in t
+    assert "practice.html?from=adaptive" in t and "sessionStorage" in t
+    assert "reasons_display" in t
+    for s in ("priority_score", "policy_id", "seed", "weights"):
+        assert s not in t, s
 
 
 def test_learn_no_adaptive_duplication():
-    t = js("learning.js")
+    t = js("progres.js")
     for s in ("priority_score", "epsilon", "spacing:", "categoria:",
               "criticality", "threshold", "MASTERED", "attempts >=",
               "correct >=", "Math.random", ".sort("):
@@ -56,9 +56,9 @@ def test_learn_no_adaptive_duplication():
 
 
 def test_learn_a11y():
-    t = page("learning.html")
+    t = page("progres.html")
     assert t.count("aria-live") >= 3
-    t2 = js("learning.js")
+    t2 = js("progres.js")
     assert "role" in t2 and "status" in t2
 
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tutor IA: respostes amb evidència citada o abstenció explícita.">
+  <title>Tutor IA — Sistemes de Mesura</title>
+  <link rel="stylesheet" href="static/css/tokens.css">
+  <link rel="stylesheet" href="static/css/base.css">
+  <link rel="stylesheet" href="static/css/shell.css">
+  <link rel="stylesheet" href="static/css/components.css">
+  <link rel="stylesheet" href="static/css/pages.css">
+  <script src="static/js/i18n.js"></script>
+  <script src="static/js/shell.js"></script>
+  <script src="static/js/csrf.js" defer></script>
+  <script src="static/js/app.js" defer></script>
+  <script src="static/js/ui.js" defer></script>
+  <script src="static/js/tutor.js" defer></script>
+</head>
+<body data-route="tutor.html">
+  <a class="skip-link" href="#main">Salta al contingut</a>
+  <main class="main" id="main">
+    <div class="page">
+      <nav class="breadcrumbs" aria-label="Ruta"><ol><li><a href="index.html">Inici</a></li><li aria-current="page">Tutor IA</li></ol></nav>
+      <div class="page-header">
+        <h1>Tutor IA</h1>
+        <p>Què vols entendre?</p>
+      </div>
+      <div id="tutor-thread" class="chat tutor-thread" aria-live="polite"></div>
+      <form id="tutor-form" class="tutor-composer">
+        <label class="visually-hidden" for="tutor-input">La teva pregunta</label>
+        <textarea class="textarea" id="tutor-input" name="query" rows="2"
+          placeholder="Escriu la teva pregunta…"></textarea>
+        <button class="button" type="submit">Pregunta</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

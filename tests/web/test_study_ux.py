@@ -25,12 +25,10 @@ def test_study_pages_exist():
         assert (WEB / name).is_file(), name
 
 
-def test_study_hub_structure():
+def test_study_html_is_redirect_stub():
     t = page("study.html")
-    assert 'id="topics-grid"' in t and 'id="next-action"' in t
-    assert 'id="tutor-form"' in t and 'id="tutor-out"' in t
-    assert 'aria-live="polite"' in t
-    assert "practice.html" in t
+    assert 'location.replace("temari.html' in t
+    assert 'topics-grid' not in t and 'tutor-form' not in t
 
 
 def test_practice_player_structure():
@@ -46,12 +44,28 @@ def test_topic_content_params():
     assert "section_id" in js("topic.js") and "topic" in js("topic.js")
 
 
+def test_temari_structure():
+    t = page("temari.html")
+    assert 'id="topic-cards"' in t and 'data-route="temari.html"' in t
+    assert 'aria-live="polite"' in t
+    j = js("temari.js")
+    assert "/api/study/topics" in j
+    assert "statusFromMastery" in j  # reuses the frozen helper
+    assert "Math.random" not in j and ".sort(" not in j
+
+
 # ---------- tutor/practice JS ----------
+def test_tutor_structure():
+    t = page("tutor.html")
+    assert 'id="tutor-thread"' in t and 'id="tutor-input"' in t
+    assert 'data-route="tutor.html"' in t and 'aria-live="polite"' in t
+
+
 def test_tutor_flow_wiring():
-    t = js("study.js")
-    assert "/api/tutor/ask" in t and "/api/study/topics" in t
-    assert "/api/study/next" in t
-    assert "abstain" in t and "ABSTAIN" in t
+    j = js("tutor.js")
+    assert "/api/tutor/ask" in j
+    assert "abstain" in j and "ABSTAIN" in j
+    assert "Math.random" not in j and ".sort(" not in j
 
 
 def test_practice_flow_wiring():
@@ -71,37 +85,49 @@ def test_no_single_textarea_for_all():
 
 # ---------- B2.26 determinisme / B2.28 seguretat JS ----------
 def test_js_no_random_no_sort():
-    for name in ("app.js", "study.js", "practice.js", "topic.js"):
+    for name in ("app.js", "practice.js", "topic.js", "tutor.js"):
         t = js(name)
         assert "Math.random" not in t, name
         assert ".sort(" not in t, name
 
 
 def test_js_no_eval_no_storage_no_cookie():
-    for name in ("app.js", "study.js", "practice.js", "topic.js",
-                 "learning.js"):
+    for name in ("app.js", "practice.js", "topic.js",
+                 "progres.js", "tutor.js"):
         t = js(name)
         for s in ("eval(", "Function(", "localStorage",
                   "document.cookie"):
             assert s not in t, (name, s)
     # sessionStorage: només context transitori de navegació
     # (pregunta adaptativa), mai persistència (regla B3.14/B3.15).
-    for name in ("app.js", "study.js", "topic.js"):
+    for name in ("app.js", "topic.js", "tutor.js"):
         assert "sessionStorage" not in js(name), name
 
 
 def test_innerHTML_only_renderer_output():
-    # Permès: buidar ("") i HTML del renderer llista-blanca (fhtml).
-    for name in ("study.js", "practice.js", "topic.js"):
+    # Invariant (F17 final review): across EVERY page/shared script, the only
+    # `.innerHTML =` assignments are a clear ("") or the whitelisted formula
+    # renderer sites. shell.js is a named exemption: its header/nav chrome is
+    # built from the static i18n DICT (t(...)), never from API/URL data.
+    allowed = ('""', "''", "fhtml", "b.html", "f.formula.html")
+    ALL_JS = ("app.js", "shell.js", "ui.js", "i18n.js", "csrf.js",
+              "dashboard.js", "temari.js", "topic.js", "practice.js",
+              "tutor.js", "progres.js", "exams.js", "exam.js", "results.js",
+              "review.js", "documents.js", "calendar.js")
+    for name in ALL_JS:
         t = js(name)
         for m in re.finditer(r"\.innerHTML\s*=\s*([^;]+);", t):
             rhs = m.group(1).strip()
-            assert rhs in ('""', "''", "fhtml", "b.html"), (name, rhs[:80])
+            if name == "shell.js" and (
+                rhs == "html"
+                or rhs.startswith("'<button class=\"icon-button menu-toggle\"")):
+                continue  # shell chrome from static DICT, no external data
+            assert rhs in allowed, (name, rhs[:80])
 
 
 def test_no_domain_logic_js():
     blob = "".join(js(n) for n in
-                   ("app.js", "study.js", "practice.js", "topic.js"))
+                   ("app.js", "practice.js", "topic.js", "tutor.js"))
     low = blob.lower()
     for s in ("correct_answer", "formula_validation", "Math.max(score",
               "calculateScore"):

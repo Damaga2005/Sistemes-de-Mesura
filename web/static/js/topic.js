@@ -1,22 +1,18 @@
-/* Topic i Content (B2.4–B2.5): llistes KB + blocs. Tot textContent
-   excepte l'HTML de fórmules servit pel renderer llista-blanca. */
+/* Tema + Contingut (F17 Task 6). Presentation only, no domain logic.
+   Tema = learning unit: title, optional progress bar, "Continguts" list.
+   Content = prose reader; formula HTML comes from the whitelisted renderer
+   (B2.28) and is the only innerHTML assignment in this file. */
 (function () {
   "use strict";
 
-  function el(tag, cls, text) {
-    var e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (text !== undefined) e.textContent = text;
-    return e;
-  }
+  var ui = window.smUI;
+  var i18n = window.smI18n;
+  if (!ui) return;
 
-  function api(path) {
-    return window.fetch(path).then(function (r) {
-      return r.json().then(function (data) {
-        return { status: r.status, data: data };
-      });
-    });
-  }
+  var el = ui.el;
+  function t(key) { return i18n && i18n.t ? i18n.t(key) : key; }
+  function byId(id) { return document.getElementById(id); }
+  function enc(v) { return encodeURIComponent(v); }
 
   function params() {
     var q = {};
@@ -28,57 +24,84 @@
     return q;
   }
 
+  /* ---------- Tema ---------- */
+  function loadMastery(topicNo) {
+    var slot = byId("topic-progress");
+    if (!slot || !topicNo) return;
+    ui.api("/api/study/mastery").then(function (res) {
+      if (res.status !== 200) return;
+      var table = (res.data && res.data.mastery) || {};
+      var mrec = table[String(topicNo)];
+      if (mrec && mrec.attempts > 0) {
+        slot.appendChild(ui.progressBar(mrec.score, t("topic.progress")));
+      }
+    });
+  }
+
+  function loadSections(doc, list, topicNo) {
+    ui.api("/api/study/sections?doc_id=" + enc(doc.id)).then(function (res) {
+      if (res.status !== 200) return;
+      (res.data.sections || []).forEach(function (s) {
+        var li = el("li");
+        var a = el("a", null, s.h2 || ("Secció " + s.id));
+        a.href = "content.html?section_id=" + enc(s.id) + "&topic=" + enc(topicNo);
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+    });
+  }
+
+  function renderContents(root, docs, topicNo) {
+    ui.setState(root, "ready");
+    root.appendChild(el("h2", "contents__title", t("topic.contents")));
+    docs.forEach(function (d) {
+      var group = el("section", "contents-group");
+      group.appendChild(el("h3", "contents-group__title", d.title || ("Document " + d.id)));
+      var list = el("ul", "contents-list");
+      group.appendChild(list);
+      root.appendChild(group);
+      loadSections(d, list, topicNo);
+    });
+  }
+
   function loadTopic() {
-    var root = document.getElementById("topic-root");
+    var root = byId("topic-root");
     if (!root) return;
     var query = params();
-    var topic = query.topic || "";
+    var topicNo = query.topic || "";
     var docId = query.doc_id || "";
-    var path = "/api/study/documents?topic=" + encodeURIComponent(topic);
-    if (docId) path += "&doc_id=" + encodeURIComponent(docId);
-    api(path)
-      .then(function (res) {
-        root.innerHTML = "";
+
+    var title = byId("topic-title");
+    if (title) title.textContent = "Tema " + topicNo;
+
+    var practice = byId("act-practice");
+    if (practice) practice.href = "practice.html?topic=" + topicNo;
+    var tutor = byId("act-tutor");
+    if (tutor) tutor.href = "tutor.html?topic=" + topicNo;
+
+    loadMastery(topicNo);
+
+    ui.setState(root, "loading", { kind: "list" });
+    var path = "/api/study/documents?topic=" + enc(topicNo);
+    if (docId) path += "&doc_id=" + enc(docId);
+    ui.api(path).then(
+      function (res) {
         if (res.status !== 200) {
-          root.appendChild(el("p", null, "Tema no trobat."));
+          ui.setState(root, "error", { retry: loadTopic, code: res.status });
           return;
         }
-        var title = document.getElementById("topic-title");
-        if (title) title.textContent = "Tema " + topic;
-        (res.data.documents || []).forEach(function (d) {
-          var card = el("section", "card");
-          card.appendChild(el("h2", "h3", d.title || ("Document " + d.id)));
-          card.appendChild(el("p", null, "Tipus: " + (d.kind || "?")));
-          var secs = el("div");
-          secs.setAttribute("role", "status");
-          secs.textContent = "Carregant seccions…";
-          card.appendChild(secs);
-          root.appendChild(card);
-          loadSections(d, secs);
-        });
-        if (!(res.data.documents || []).length) {
-          root.appendChild(el("p", null, "Sense documents."));
+        var docs = (res.data && res.data.documents) || [];
+        if (!docs.length) {
+          ui.setState(root, "empty", { ctaText: t("topic.backTemari"), ctaHref: "temari.html" });
+          return;
         }
-      });
+        renderContents(root, docs, topicNo);
+      },
+      function () { ui.setState(root, "error", { retry: loadTopic }); }
+    );
   }
 
-  function loadSections(doc, box) {
-    api("/api/study/sections?doc_id=" + encodeURIComponent(doc.id))
-      .then(function (res) {
-        box.innerHTML = "";
-        if (res.status !== 200) return;
-        var ul = el("ul");
-        (res.data.sections || []).forEach(function (s) {
-          var li = el("li");
-          var a = el("a", null, s.h2 || ("Secció " + s.id));
-          a.href = "content.html?section_id=" + encodeURIComponent(s.id);
-          li.appendChild(a);
-          ul.appendChild(li);
-        });
-        box.appendChild(ul);
-      });
-  }
-
+  /* ---------- Contingut ---------- */
   function renderBlock(parent, b) {
     if (b.kind === "formula") {
       var f = el("p", "formula", "");
@@ -110,22 +133,31 @@
   }
 
   function loadContent() {
-    var root = document.getElementById("content-root");
+    var root = byId("content-root");
     if (!root) return;
     var sid = params().section_id || "";
-    api("/api/study/content?section_id=" + encodeURIComponent(sid))
-      .then(function (res) {
-        root.innerHTML = "";
+    var backTopic = params().topic || "";
+    var back = document.getElementById("content-back");
+    if (back) back.href = backTopic ? ("topic.html?topic=" + enc(backTopic)) : "temari.html";
+    ui.setState(root, "loading");
+    ui.api("/api/study/content?section_id=" + enc(sid)).then(
+      function (res) {
         if (res.status !== 200) {
-          root.appendChild(el("p", null, "Secció no trobada."));
+          ui.setState(root, "error", { retry: loadContent, code: res.status });
           return;
         }
-        var title = document.getElementById("content-title");
-        if (title) title.textContent = res.data.h2 || "Contingut";
-        (res.data.blocks || []).forEach(function (b) {
-          renderBlock(root, b);
-        });
-      });
+        var title = byId("content-title");
+        if (title) title.textContent = res.data.h2 || t("topic.contentFallback");
+        var blocks = (res.data && res.data.blocks) || [];
+        if (!blocks.length) {
+          ui.setState(root, "empty", { ctaText: t("topic.backTema"), ctaHref: "topic.html" });
+          return;
+        }
+        ui.setState(root, "ready");
+        blocks.forEach(function (b) { renderBlock(root, b); });
+      },
+      function () { ui.setState(root, "error", { retry: loadContent }); }
+    );
   }
 
   if (document.readyState === "loading") {

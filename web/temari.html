@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Resultat d'un examen.">
-  <title>Resultats — Sistemes de Mesura</title>
+  <meta name="description" content="Sistemes de Mesura — explorador del temari.">
+  <title>Temari — Sistemes de Mesura</title>
   <link rel="stylesheet" href="static/css/tokens.css">
   <link rel="stylesheet" href="static/css/base.css">
   <link rel="stylesheet" href="static/css/shell.css">
@@ -15,18 +15,18 @@
   <script src="static/js/csrf.js" defer></script>
   <script src="static/js/app.js" defer></script>
   <script src="static/js/ui.js" defer></script>
-  <script src="static/js/results.js" defer></script>
+  <script src="static/js/temari.js" defer></script>
 </head>
-<body data-route="results.html">
+<body data-route="temari.html">
   <a class="skip-link" href="#main">Salta al contingut</a>
   <main class="main" id="main">
     <div class="page">
-      <nav class="breadcrumbs" aria-label="Ruta"><ol><li><a href="exams.html#historial">Historial</a></li><li aria-current="page">Resultats</li></ol></nav>
+      <nav class="breadcrumbs" aria-label="Ruta"><ol><li><a href="index.html">Inici</a></li><li aria-current="page">Temari</li></ol></nav>
       <div class="page-header">
-        <h1 id="results-title">Resultats</h1>
-        <p id="results-sub"></p>
+        <h1>Temari</h1>
+        <p>Explora els deu temes de l'assignatura i el teu domini de cadascun.</p>
       </div>
-      <div id="results-root" aria-live="polite"><p>Carregant…</p></div>
+      <div id="topic-cards" class="grid-cards" aria-live="polite"></div>
     </div>
   </main>
 </body>

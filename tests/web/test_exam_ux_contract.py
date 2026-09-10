@@ -157,11 +157,27 @@ def test_history_route_preserves_forbidden_semantics(tmp_path):
 
 
 def test_review_results_history_pages_are_direct_entry_points(tmp_path):
-    for name in ("history.html", "results.html", "review.html"):
+    # F17 Task 11: history.html is now a redirect stub -> exams.html#historial
+    # (covered by test_b6_certification.test_legacy_urls_are_honest_redirects).
+    for name in ("results.html", "review.html"):
         page = (ROOT / "web" / name).read_text(encoding="utf-8")
         assert 'lang="ca"' in page
         assert 'id="main"' in page
         assert 'aria-live="polite"' in page
+    stub = (ROOT / "web" / "history.html").read_text(encoding="utf-8")
+    assert 'location.replace("exams.html#historial")' in stub
+
+
+def test_exams_structure():
+    h = (ROOT / "web/exams.html").read_text(encoding="utf-8")
+    for i in ("exam-list", "exam-historial", "cfg-kind", "cfg-topics",
+              "cfg-count", "cfg-type", "cfg-diff", "cfg-seed", "cfg-go"):
+        assert 'id="%s"' % i in h, i
+    assert 'id="historial"' in h and 'data-route="exams.html"' in h
+    j = (ROOT / "web/static/js/exams.js").read_text(encoding="utf-8")
+    for ep in ("/api/exam/mine", "/api/exam/history", "/api/exam/create"):
+        assert ep in j, ep
+    assert "Math.random" not in j and ".sort(" not in j
 
 
 def test_review_formula_uses_existing_safe_renderer_for_authorized_feedback():
