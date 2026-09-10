@@ -75,12 +75,20 @@ def main():
         if tmpdir is not None:
             os.environ["SM_PORT_FILE"] = str(port_file)
         argv = ["--host", "127.0.0.1", "--port", "0"]
+        if tmpdir is None:
+            # An externally-supplied path may still hold a port from a previous
+            # run; drop it so wait_for_port can't return that stale value.
+            try:
+                port_file.unlink()
+            except OSError:
+                pass
         th = threading.Thread(target=_server_thread, args=(argv, errbox), daemon=True)
         th.start()
 
         deadline = time.time() + WAIT_TIMEOUT
         port = wait_for_port(port_file, deadline, th, errbox)
-        if not wait_for_socket("127.0.0.1", port, deadline):
+        sock_deadline = time.time() + WAIT_TIMEOUT
+        if not wait_for_socket("127.0.0.1", port, sock_deadline):
             raise RuntimeError("server port %d never accepted a connection" % port)
 
         webview.create_window(

@@ -74,6 +74,40 @@ def test_honors_external_port_file(monkeypatch, tmp_path):
         s.close()
 
 
+def test_stale_external_port_file_is_ignored(monkeypatch, tmp_path):
+    import time
+    fake = types.SimpleNamespace(create_window=lambda *a, **k: None, start=lambda *a, **k: None)
+    mod = _load(monkeypatch, fake)
+    pf = tmp_path / "ext"
+    pf.write_text("11111", encoding="utf-8")  # bogus stale port from a "previous run"
+    monkeypatch.setenv("SM_PORT_FILE", str(pf))
+
+    held = []
+
+    def bind_and_publish_late(argv, errbox):
+        s = socket.socket()
+        s.bind(("127.0.0.1", 0))
+        s.listen(1)
+        held.append(s)
+        time.sleep(0.3)  # stale value is what's there when main() first polls
+        pf.write_text(str(s.getsockname()[1]), encoding="utf-8")
+
+    monkeypatch.setattr(mod, "_server_thread", bind_and_publish_late)
+    monkeypatch.setattr(mod, "wait_for_socket", lambda *a, **k: True)
+    win = {}
+    fake.create_window = lambda title, url, **k: win.update(title=title, url=url, **k)
+    fake.start = lambda *a, **k: win.update(started=k)
+
+    mod.main()
+
+    real_port = int(pf.read_text(encoding="utf-8").strip())
+    assert real_port != 11111
+    assert win["url"] == "http://127.0.0.1:%d/index.html" % real_port
+    assert "11111" not in win["url"]
+    for s in held:
+        s.close()
+
+
 def test_timeout_when_port_never_published(monkeypatch):
     fake = types.SimpleNamespace(create_window=lambda *a, **k: None, start=lambda *a, **k: None)
     mod = _load(monkeypatch, fake)
