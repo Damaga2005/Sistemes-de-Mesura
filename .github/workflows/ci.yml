@@ -42,3 +42,55 @@ jobs:
 
       - name: Artifact integrity check
         run: python -m app.cli check
+
+  desktop:
+    name: desktop build (windows)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install project + desktop/build extras
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev,desktop,build]"
+
+      - name: Run test suite
+        run: python -m pytest tests/ -q
+
+      - name: Initialise runtime dirs + artifact integrity
+        run: |
+          python -m app.cli init
+          python -m app.cli check
+
+      - name: Build EXE
+        run: python -m PyInstaller escritorio.spec --noconfirm --clean
+
+      - name: Headless startup smoke
+        # Validates the startup / headless contract ONLY: the exe brings the
+        # embedded server up on 127.0.0.1, publishes its port, and serves the
+        # SPA + API. It does NOT validate WebView2 render, manual interaction,
+        # or the F18-02 language-switch gate (those are the manual checklist
+        # in docs/F19_DESKTOP_APP.md).
+        shell: pwsh
+        run: |
+          $pf = Join-Path $env:RUNNER_TEMP "smoke-port"
+          $env:SM_PORT_FILE = $pf
+          $p = Start-Process ".\dist\SistemesDeMesura.exe" -PassThru
+          try {
+            $deadline = (Get-Date).AddSeconds(40)
+            while (-not (Test-Path $pf) -and (Get-Date) -lt $deadline) { Start-Sleep -Milliseconds 200 }
+            if (-not (Test-Path $pf)) { throw "exe never published its port" }
+            $port = [int](Get-Content $pf)
+            $r1 = Invoke-WebRequest "http://127.0.0.1:$port/index.html" -UseBasicParsing
+            $r2 = Invoke-WebRequest "http://127.0.0.1:$port/api/health" -UseBasicParsing
+            if ($r1.StatusCode -ne 200 -or $r2.StatusCode -ne 200) { throw "smoke HTTP != 200" }
+            Write-Host "smoke OK on port $port"
+          } finally {
+            Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue
+          }
