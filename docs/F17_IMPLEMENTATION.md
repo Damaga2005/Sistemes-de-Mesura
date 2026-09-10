@@ -105,6 +105,19 @@ $ git diff a9c153e..HEAD -- web/server.py app/
   s'infla per omplir marge.
 - **i18n de chrome CA/ES** (D-T13-b): diccionari data-only en un sol fitxer;
   `documents.js`/`calendar.js` queden CA-only (fora de nav — P2 acceptat).
+  L'abast traduït cobreix les pàgines de resultats/revisió i les cadenes del
+  flux principal del reproductor d'examen; unes poques literals CA/ES idèntiques
+  a `exam.js` (p. ex. `"Entregar examen"`, `"Confirmar entrega"`, `"Pregunta "`,
+  `"Nota: "`, `"Error: "`, `"Mastery (backend)"`, `"No disponible."`,
+  `"Examen no disponible"`) resten inline.
+- **Indicador de proveïdor NO memoritzat entre pàgines** (desviació acceptada):
+  l'spec §5.3 deia "cached from last /api/tutor/ask", però l'emmagatzematge està
+  limitat a `sm-lang`. Mostra "Tutor: preparat" fins que `tutor.js` rep una
+  resposta en viu a la pàgina actual.
+- **Stubs de redirecció** (`study/learning/history.html`): usen
+  `<meta http-equiv="refresh">` + `location.replace()` + un `<a>` de reserva
+  sempre visible al `<body>`, en lloc d'un `<noscript>` nu — superconjunt
+  funcional (l'enllaç visible serveix els usuaris sense JS). Desviació acceptada.
 
 ## Reconciliació de tests (Step 3)
 

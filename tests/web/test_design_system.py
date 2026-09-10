@@ -80,8 +80,6 @@ def shell_js():
 # ---------- rendering ----------
 def test_pages_exist_and_link_css_js():
     for name in PAGES:
-        if not (WEB / name).is_file():
-            continue
         t = page(name)
         for cssf in ("tokens.css", "base.css", "shell.css", "components.css",
                      "pages.css"):
@@ -100,8 +98,6 @@ def test_shell_landmarks_per_page():
     assert 'className = "header"' in sj
     assert 'className = "sidebar"' in sj and '"aria-label", "Principal"' in sj
     for name in PAGES:
-        if not (WEB / name).is_file():
-            continue
         t = page(name)
         assert "<main" in t and 'id="main"' in t, name
         assert 'class="skip-link"' in t, name
@@ -131,8 +127,6 @@ def test_active_route_matches_page():
     assert 'aria-current="page"' in sj
     assert "it.href === route" in sj
     for name in PAGES:
-        if not (WEB / name).is_file():
-            continue
         t = page(name)
         m = re.search(r'data-route="([a-z0-9\-]+\.html)"', t)
         assert m and m.group(1) == name, name
@@ -195,8 +189,6 @@ def test_states_covered():
 # ---------- accessibility ----------
 def test_a11y_basics_per_page():
     for name in PAGES:
-        if not (WEB / name).is_file():
-            continue
         t = page(name)
         assert re.search(r'\blang="(ca|es)"', t), name
         assert 'name="viewport"' in t, name
@@ -206,8 +198,6 @@ def test_a11y_basics_per_page():
 
 def test_inputs_have_labels():
     for name in PAGES:
-        if not (WEB / name).is_file():
-            continue
         t = page(name)
         for m in re.finditer(r'<(input|select|textarea)[^>]*>', t):
             tag = m.group(0)
@@ -220,8 +210,6 @@ def test_inputs_have_labels():
 
 def test_icon_buttons_named():
     for name in PAGES:
-        if not (WEB / name).is_file():
-            continue
         t = page(name)
         for m in re.finditer(r"<button[^>]*>.*?</button>", t, re.S):
             tag = m.group(0)[:200]

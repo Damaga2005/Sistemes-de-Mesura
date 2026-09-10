@@ -31,11 +31,7 @@ def test_shell_sets_single_active_route():
 def test_every_product_page_declares_a_known_route():
     for name in PRODUCT_PAGES:
         p = ROOT / "web" / name
-        if not p.is_file():
-            continue  # created in a later task
         html = p.read_text(encoding="utf-8")
-        if "data-route=" not in html:
-            continue  # exists but not yet migrated to the injected shell (own task)
         m = re.search(r'data-route="([a-z0-9\-]+\.html)"', html)
         assert m and m.group(1) == name, name
         assert 'aria-label="Principal"' not in html  # injected, not inline

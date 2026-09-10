@@ -128,6 +128,7 @@
   function statusFromMastery(m) {
     if (!m || !m.attempts || m.attempts <= 0) return { key: "none", labelKey: "status.none" };
     var v = m.score;
+    if (typeof v !== "number" || !isFinite(v)) return { key: "none", labelKey: "status.none" };
     if (v < 0.40) return { key: "reinforce", labelKey: "status.reinforce" };
     if (v < 0.75) return { key: "progress",  labelKey: "status.progress" };
     if (v < 0.95) return { key: "high",      labelKey: "status.high" };

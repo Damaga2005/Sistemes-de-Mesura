@@ -47,3 +47,6 @@ def test_status_thresholds_frozen():
     # attempts guard, not just the numeric substrings.
     assert "v < 0.40" in t and "v < 0.75" in t and "v < 0.95" in t
     assert re.search(r"!m\.attempts\s*\|\|\s*m\.attempts\s*<=\s*0", t)
+    # F17 final review: numeric-score guard so null/undefined score never
+    # renders "Reforçar"/"Completat" for an un-scored attempt.
+    assert re.search(r"typeof v !== .number. \|\| !isFinite\(v\)", t)

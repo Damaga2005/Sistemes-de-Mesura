@@ -23,6 +23,9 @@ def static_srv(tmp_path, free_tcp_port):
     tests/test_csrf_http.py). Exercises the actual HTTP static path, not
     just the _MIME dict."""
     srv = S.ThreadingHTTPServer(("127.0.0.1", free_tcp_port), S.Handler)
+    _MISSING = object()
+    _orig_config = S.Handler.__dict__.get("config", _MISSING)
+    _orig_local = S.Handler.__dict__.get("_local", _MISSING)
     S.Handler.config = {"kw": {"workdir": str(tmp_path)},
                         "sessions": {}, "lock": threading.Lock()}
     S.Handler._local = None
@@ -31,6 +34,12 @@ def static_srv(tmp_path, free_tcp_port):
         yield free_tcp_port
     finally:
         srv.shutdown()
+        for attr, orig in (("config", _orig_config), ("_local", _orig_local)):
+            if orig is _MISSING:
+                if attr in S.Handler.__dict__:
+                    delattr(S.Handler, attr)
+            else:
+                setattr(S.Handler, attr, orig)
 
 
 def _get(port, path):

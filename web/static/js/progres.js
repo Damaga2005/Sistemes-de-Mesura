@@ -89,6 +89,10 @@
   }
 
   /* ---------- Domini per tema: 10 rows from /api/study/mastery ---------- */
+  /* ponytail: client-side reconstruction of a backend-owned unit-id format
+     (carried over from the deleted learning.js); a miss degrades to the honest
+     empty state. Proper fix is /api/study/mastery returning the unit id — out
+     of scope for F17 (no backend change). */
   function topicUnit(n) { return n < 10 ? "topic:T0" + n : "topic:T" + n; }
 
   function masteryRow(n, rec) {

@@ -105,12 +105,24 @@ def test_js_no_eval_no_storage_no_cookie():
 
 
 def test_innerHTML_only_renderer_output():
-    # Permès: buidar ("") i HTML del renderer llista-blanca (fhtml).
-    for name in ("practice.js", "topic.js", "tutor.js"):
+    # Invariant (F17 final review): across EVERY page/shared script, the only
+    # `.innerHTML =` assignments are a clear ("") or the whitelisted formula
+    # renderer sites. shell.js is a named exemption: its header/nav chrome is
+    # built from the static i18n DICT (t(...)), never from API/URL data.
+    allowed = ('""', "''", "fhtml", "b.html", "f.formula.html")
+    ALL_JS = ("app.js", "shell.js", "ui.js", "i18n.js", "csrf.js",
+              "dashboard.js", "temari.js", "topic.js", "practice.js",
+              "tutor.js", "progres.js", "exams.js", "exam.js", "results.js",
+              "review.js", "documents.js", "calendar.js")
+    for name in ALL_JS:
         t = js(name)
         for m in re.finditer(r"\.innerHTML\s*=\s*([^;]+);", t):
             rhs = m.group(1).strip()
-            assert rhs in ('""', "''", "fhtml", "b.html"), (name, rhs[:80])
+            if name == "shell.js" and (
+                rhs == "html"
+                or rhs.startswith("'<button class=\"icon-button menu-toggle\"")):
+                continue  # shell chrome from static DICT, no external data
+            assert rhs in allowed, (name, rhs[:80])
 
 
 def test_no_domain_logic_js():

@@ -41,7 +41,7 @@ def test_all_product_pages_keep_shell_and_honest_navigation():
              "progres.html", "exams.html", "exam.html")
     for name in pages:
         html = (ROOT / "web" / name).read_text(encoding="utf-8")
-        assert re.search(r'\blang="(ca|es)"', html), name
+        assert 'lang="ca"' in html, name
         assert 'id="main"' in html, name
         assert 'data-route="%s"' % name in html, name
     # shell + "Principal" landmark now come from the single injected source
