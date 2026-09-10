@@ -65,6 +65,7 @@
 .chat__formulas { display: flex; flex-wrap: wrap; gap: var(--sp-2xs); }
 .chat__actions { display: flex; flex-wrap: wrap; gap: var(--sp-sm); margin-top: var(--sp-2xs); }
 .chat__bubble--error { border-color: var(--danger); background: var(--surface-sunken); }
+.chat__bubble--abstain { border-color: var(--warning); background: var(--warning-soft); }
 .chat__context {
   width: 100%; max-width: var(--reading-max); margin-inline: auto;
   font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--text-secondary);

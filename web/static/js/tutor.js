@@ -16,6 +16,7 @@
 
   var history = [];            // in-memory conversation only
   var thread, form, input, btn;
+  var pending = false;
 
   function providerOf(d) {
     return d && d.versions && d.versions.provider && d.versions.provider.provider;
@@ -135,38 +136,42 @@
   }
 
   function ask(query) {
+    if (pending) return;
     query = (query || "").trim();
     if (!query) return;
     history.push({ role: "user", text: query });
     userMessage(query);
-    var pending = loadingMessage();
+    var loadMsg = loadingMessage();
     scrollToEnd();
     var label = btn.textContent;
     btn.disabled = true;
     btn.textContent = t("tutor.pending");
+    pending = true;
     ui.api("/api/tutor/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query: query, top_k: 5 })
     }).then(function (res) {
+      pending = false;
       btn.disabled = false;
       btn.textContent = label;
       var d = res.data || {};
       if (res.status !== 200) {
-        renderError(pending, d, query);
+        renderError(loadMsg, d, query);
       } else if (d.abstain) {
-        renderAbstain(pending, d);
+        renderAbstain(loadMsg, d);
         history.push({ role: "tutor", text: d.answer || "" });
       } else {
-        renderAnswer(pending, d, query);
+        renderAnswer(loadMsg, d, query);
         history.push({ role: "tutor", text: d.answer || "" });
       }
       if (ui.setProvider) ui.setProvider(providerOf(d));
       scrollToEnd();
     }).catch(function () {
+      pending = false;
       btn.disabled = false;
       btn.textContent = label;
-      renderError(pending, {}, query);
+      renderError(loadMsg, {}, query);
       scrollToEnd();
     });
   }

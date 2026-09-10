@@ -190,6 +190,22 @@
     region.appendChild(stateBlock(kind, opts));
   }
 
+  function provText(p) {
+    if (p && typeof p === "object") {
+      if (typeof p.topic === "number") return "Tema " + p.topic;
+      if (p.topic != null && p.topic !== "") return "Tema " + p.topic;
+      return t("common.evidence");
+    }
+    return String(p);
+  }
+
+  function formulaText(f) {
+    if (f && typeof f === "object") {
+      return f.equation_id || f.id || "";
+    }
+    return String(f);
+  }
+
   function openEvidence(opts) {
     opts = opts || {};
     var prov = opts.provenance || [];
@@ -213,13 +229,13 @@
     var body = el("div", "drawer__body");
     if (prov.length) {
       var ul = el("ul", "drawer__list");
-      for (var i = 0; i < prov.length; i++) ul.appendChild(el("li", null, String(prov[i])));
+      for (var i = 0; i < prov.length; i++) ul.appendChild(el("li", null, provText(prov[i])));
       body.appendChild(ul);
     }
     if (formulas.length) {
       var chips = el("div", "drawer__formulas");
       for (var j = 0; j < formulas.length; j++) {
-        chips.appendChild(el("code", "chip-num", String(formulas[j])));
+        chips.appendChild(el("code", "chip-num", formulaText(formulas[j])));
       }
       body.appendChild(chips);
     }
