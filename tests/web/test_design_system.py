@@ -20,7 +20,11 @@ WEB = ROOT / "web"
 CSS = WEB / "static" / "css"
 JSDIR = WEB / "static" / "js"
 JS = JSDIR / "app.js"
-PAGES = ["index.html"]
+PAGES = ["index.html", "temari.html"]
+# Each product page links exactly its own page script. Later tasks extend
+# this map (tutor.js, progres.js, practice.js, exams.js); design-system.html
+# has no page script so it is deliberately absent.
+PAGE_JS = {"index.html": "dashboard.js", "temari.html": "temari.js"}
 
 TOKENS = ["--bg", "--surface", "--surface-elevated", "--surface-sunken",
           "--overlay", "--border", "--border-strong", "--text-primary",
@@ -83,7 +87,8 @@ def test_pages_exist_and_link_css_js():
         assert "static/js/shell.js" in t, name
         assert "static/js/app.js" in t, name
         assert "static/js/ui.js" in t, name
-        assert "static/js/dashboard.js" in t, name
+        if name in PAGE_JS:
+            assert ("static/js/%s" % PAGE_JS[name]) in t, name
 
 
 def test_shell_landmarks_per_page():

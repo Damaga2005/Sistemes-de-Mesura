@@ -46,6 +46,16 @@ def test_topic_content_params():
     assert "section_id" in js("topic.js") and "topic" in js("topic.js")
 
 
+def test_temari_structure():
+    t = page("temari.html")
+    assert 'id="topic-cards"' in t and 'data-route="temari.html"' in t
+    assert 'aria-live="polite"' in t
+    j = js("temari.js")
+    assert "/api/study/topics" in j
+    assert "statusFromMastery" in j  # reuses the frozen helper
+    assert "Math.random" not in j and ".sort(" not in j
+
+
 # ---------- tutor/practice JS ----------
 def test_tutor_flow_wiring():
     t = js("study.js")
