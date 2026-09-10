@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Progrés: resum, domini per tema i recomanacions personals.">
+  <title>Progrés — Sistemes de Mesura</title>
+  <link rel="stylesheet" href="static/css/tokens.css">
+  <link rel="stylesheet" href="static/css/base.css">
+  <link rel="stylesheet" href="static/css/shell.css">
+  <link rel="stylesheet" href="static/css/components.css">
+  <link rel="stylesheet" href="static/css/pages.css">
+  <script src="static/js/i18n.js"></script>
+  <script src="static/js/shell.js"></script>
+  <script src="static/js/csrf.js" defer></script>
+  <script src="static/js/app.js" defer></script>
+  <script src="static/js/ui.js" defer></script>
+  <script src="static/js/progres.js" defer></script>
+</head>
+<body data-route="progres.html">
+  <a class="skip-link" href="#main">Salta al contingut</a>
+  <main class="main" id="main">
+    <div class="page">
+      <nav class="breadcrumbs" aria-label="Ruta"><ol><li><a href="index.html">Inici</a></li><li aria-current="page">Progrés</li></ol></nav>
+      <div class="page-header">
+        <h1>Progrés</h1>
+        <p>Com vas, on posar-hi esforç i per què. Tot calculat al backend.</p>
+      </div>
+
+      <section class="prog-block" aria-labelledby="h-prog-summary">
+        <h2 id="h-prog-summary">Resum</h2>
+        <div id="prog-summary" class="prog-summary" aria-live="polite"></div>
+      </section>
+
+      <section class="prog-block" aria-labelledby="h-prog-mastery">
+        <h2 id="h-prog-mastery">Domini per tema</h2>
+        <div id="prog-mastery" class="prog-mastery" aria-live="polite"></div>
+      </section>
+
+      <section class="prog-block" aria-labelledby="h-prog-recommend">
+        <h2 id="h-prog-recommend">Recomanat per a tu</h2>
+        <div id="prog-recommend" class="prog-recommend" aria-live="polite"></div>
+      </section>
+
+      <section class="prog-block" aria-labelledby="h-prog-unit">
+        <h2 id="h-prog-unit">Detall d'unitat</h2>
+        <div id="prog-unit" class="prog-unit"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

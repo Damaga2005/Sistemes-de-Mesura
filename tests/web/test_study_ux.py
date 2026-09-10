@@ -93,7 +93,7 @@ def test_js_no_random_no_sort():
 
 def test_js_no_eval_no_storage_no_cookie():
     for name in ("app.js", "practice.js", "topic.js",
-                 "learning.js", "tutor.js"):
+                 "progres.js", "tutor.js"):
         t = js(name)
         for s in ("eval(", "Function(", "localStorage",
                   "document.cookie"):

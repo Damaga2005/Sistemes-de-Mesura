@@ -52,7 +52,16 @@
           "tutor.practice": "Practicar",
           "tutor.rephrase": "Explica-ho d'una altra manera",
           "tutor.rephraseHint": "Explica-ho de manera més senzilla.",
-          "tutor.context": "Context: Tema" },
+          "tutor.context": "Context: Tema",
+          "prog.startPractice": "Comença una pràctica",
+          "prog.attempts": "Preguntes", "prog.accuracy": "Precisió",
+          "prog.units": "Unitats treballades", "prog.lastActivity": "Última activitat",
+          "prog.topic": "Tema", "prog.domain": "Domini",
+          "prog.recommended": "Recomanació", "prog.start": "Començar",
+          "prog.preparing": "Preparant…", "prog.detail": "Detall",
+          "prog.correct": "Correctes", "prog.incorrect": "Incorrectes",
+          "prog.viewContent": "Veure contingut",
+          "prog.startError": "No s'ha pogut preparar la pràctica." },
     es: { "nav.inici": "Inicio", "nav.temari": "Temario", "nav.practica": "Práctica",
           "nav.tutor": "Tutor IA", "nav.progres": "Progreso", "nav.examens": "Exámenes",
           "nav.g.estudi": "Estudio", "nav.g.aprendre": "Aprender", "nav.g.avaluacio": "Evaluación",
@@ -103,7 +112,16 @@
           "tutor.practice": "Practicar",
           "tutor.rephrase": "Explícalo de otra manera",
           "tutor.rephraseHint": "Explícalo de manera más sencilla.",
-          "tutor.context": "Contexto: Tema" }
+          "tutor.context": "Contexto: Tema",
+          "prog.startPractice": "Empieza una práctica",
+          "prog.attempts": "Preguntas", "prog.accuracy": "Precisión",
+          "prog.units": "Unidades trabajadas", "prog.lastActivity": "Última actividad",
+          "prog.topic": "Tema", "prog.domain": "Dominio",
+          "prog.recommended": "Recomendación", "prog.start": "Empezar",
+          "prog.preparing": "Preparando…", "prog.detail": "Detalle",
+          "prog.correct": "Correctas", "prog.incorrect": "Incorrectas",
+          "prog.viewContent": "Ver contenido",
+          "prog.startError": "No se ha podido preparar la práctica." }
   };
   var lang = "ca";
   try { var s = window.localStorage.getItem("sm-lang");
