@@ -42,7 +42,10 @@ COMPONENTS = [".button", ".icon-button", ".input", ".select",
               ".badge", ".pill", ".divider", ".avatar", ".progress",
               ".spinner", ".skeleton", ".alert", ".toast", ".modal",
               ".dropdown", ".tab", ".breadcrumbs", ".tooltip",
-              ".state-block", ".formula", ".nav-link", ".skip-link"]
+              ".state-block", ".formula", ".nav-link", ".skip-link",
+              ".hero-card", ".topic-card", ".stat-card", ".rec-card",
+              ".progress__fill", ".progress-ring", ".chat__msg",
+              ".drawer", ".chip-num"]
 FORBIDDEN = ["score =", "mastery =", "grade =", "adaptive =",
              "correct_answer =", "formula_validation =",
              "permission =", "provenance =", "SELECT COUNT",
@@ -56,7 +59,7 @@ LIGHT_OVERRIDE = ["#f5f4fa", "#6a45f0", "#1c1a29"]
 def css():
     return "\n".join((CSS / f).read_text(encoding="utf-8")
                      for f in ("tokens.css", "base.css", "shell.css",
-                               "components.css"))
+                               "components.css", "pages.css"))
 
 
 def page(name):
@@ -73,11 +76,13 @@ def test_pages_exist_and_link_css_js():
         if not (WEB / name).is_file():
             continue
         t = page(name)
-        for cssf in ("tokens.css", "base.css", "shell.css", "components.css"):
+        for cssf in ("tokens.css", "base.css", "shell.css", "components.css",
+                     "pages.css"):
             assert cssf in t, (name, cssf)
         assert "static/js/i18n.js" in t, name
         assert "static/js/shell.js" in t, name
         assert "static/js/app.js" in t, name
+        assert "static/js/ui.js" in t, name
 
 
 def test_shell_landmarks_per_page():
@@ -226,6 +231,11 @@ def test_responsive_foundation():
 # ---------- no domain duplication / seguridad ----------
 def test_no_domain_logic_in_frontend():
     blob = css() + JS.read_text(encoding="utf-8")
+    # F17: shared chrome + helpers must stay presentation-only too.
+    for n in ("shell.js", "ui.js", "i18n.js", "dashboard.js", "temari.js",
+              "tutor.js", "progres.js"):
+        if (JSDIR / n).is_file():
+            blob += (JSDIR / n).read_text(encoding="utf-8")
     for name in PAGES:
         if not (WEB / name).is_file():
             continue

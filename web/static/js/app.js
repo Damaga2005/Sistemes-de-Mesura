@@ -1,22 +1,56 @@
-/* App JS (B1): millora progressiva. Sense lògica de domini. */
+/* App JS (B1 / F17): millora progressiva. Sense lògica de domini. */
 (function () {
   "use strict";
 
-  /* Navegació mòbil. */
-  document.querySelectorAll("[data-menu-toggle]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var nav = document.getElementById(btn.getAttribute("aria-controls"));
-      if (!nav) return;
-      var collapsed = nav.getAttribute("data-collapsed") === "true";
-      nav.setAttribute("data-collapsed", collapsed ? "false" : "true");
-      btn.setAttribute("aria-expanded", collapsed ? "true" : "false");
+  /* Focus-trap compartit: modal + drawer. Retorna una funció close(). */
+  function trapFocus(container, onClose) {
+    var prev = document.activeElement;
+    var SEL = 'a[href],button:not([disabled]),input:not([disabled]),' +
+      'select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+    function items() {
+      return Array.prototype.slice.call(container.querySelectorAll(SEL))
+        .filter(function (n) { return n.offsetParent !== null || n === document.activeElement; });
+    }
+    function onKey(ev) {
+      if (ev.key === "Escape") { ev.preventDefault(); close(); return; }
+      if (ev.key !== "Tab") return;
+      var f = items();
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (ev.shiftKey && document.activeElement === first) { ev.preventDefault(); last.focus(); }
+      else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first.focus(); }
+    }
+    function close() {
+      document.removeEventListener("keydown", onKey, true);
+      if (typeof onClose === "function") onClose();
+      if (prev && prev.focus) prev.focus();
+    }
+    document.addEventListener("keydown", onKey, true);
+    var f = items();
+    if (f.length) f[0].focus();
+    return close;
+  }
+  window.smTrapFocus = trapFocus;
+
+  /* Drawer (creat dinàmicament per ui.js): backdrop-click + [data-drawer-close] + Esc. */
+  var drawerClose = null;
+  window.smOpenDrawer = function (drawer, backdrop) {
+    drawerClose = trapFocus(drawer, function () {
+      if (backdrop) backdrop.remove();
+      drawer.remove();
+      drawerClose = null;
     });
-  });
+    drawer.setAttribute("data-open", "");
+    function bye() { if (drawerClose) drawerClose(); }
+    if (backdrop) backdrop.addEventListener("click", bye);
+    drawer.querySelectorAll("[data-drawer-close]").forEach(function (b) {
+      b.addEventListener("click", bye);
+    });
+  };
 
   /* Tabs (patró manual: botons reals + aria-selected). */
   document.querySelectorAll("[data-tabs]").forEach(function (group) {
-    var tabs = Array.prototype.slice.call(
-      group.querySelectorAll('[role="tab"]'));
+    var tabs = Array.prototype.slice.call(group.querySelectorAll('[role="tab"]'));
     tabs.forEach(function (tab, i) {
       tab.addEventListener("click", function () { select(i); });
       tab.addEventListener("keydown", function (ev) {
@@ -31,40 +65,24 @@
         var on = i === j;
         tab.setAttribute("aria-selected", on ? "true" : "false");
         tab.tabIndex = on ? 0 : -1;
-        var panel = document.getElementById(
-          tab.getAttribute("aria-controls"));
+        var panel = document.getElementById(tab.getAttribute("aria-controls"));
         if (panel) panel.hidden = !on;
       });
     }
   });
 
-  /* Modal: focus + Escape. */
-  var lastFocus = null;
+  /* Modal: focus-trap compartit + Escape. */
+  var closeModal = null;
   document.querySelectorAll("[data-modal-open]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var modal = document.getElementById(btn.getAttribute("data-modal-open"));
       if (!modal) return;
-      lastFocus = document.activeElement;
       modal.hidden = false;
-      var first = modal.querySelector("button, [href], input, select, textarea");
-      if (first) first.focus();
+      closeModal = trapFocus(modal, function () { modal.hidden = true; });
     });
   });
   document.querySelectorAll("[data-modal-close]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var modal = btn.closest(".modal-backdrop");
-      if (!modal) return;
-      modal.hidden = true;
-      if (lastFocus && lastFocus.focus) lastFocus.focus();
-    });
-  });
-  document.addEventListener("keydown", function (ev) {
-    if (ev.key !== "Escape") return;
-    document.querySelectorAll(".modal-backdrop:not([hidden])")
-      .forEach(function (modal) {
-        modal.hidden = true;
-        if (lastFocus && lastFocus.focus) lastFocus.focus();
-      });
+    btn.addEventListener("click", function () { if (closeModal) closeModal(); });
   });
 
   /* Toast de demostració (galeria). */
@@ -92,14 +110,13 @@
     });
   });
   document.addEventListener("click", function (ev) {
-    document.querySelectorAll(".dropdown-menu:not([hidden])")
-      .forEach(function (menu) {
-        var wrap = menu.closest(".dropdown");
-        if (wrap && !wrap.contains(ev.target)) {
-          menu.hidden = true;
-          var btn = wrap.querySelector("[data-dropdown]");
-          if (btn) btn.setAttribute("aria-expanded", "false");
-        }
-      });
+    document.querySelectorAll(".dropdown-menu:not([hidden])").forEach(function (menu) {
+      var wrap = menu.closest(".dropdown");
+      if (wrap && !wrap.contains(ev.target)) {
+        menu.hidden = true;
+        var btn = wrap.querySelector("[data-dropdown]");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      }
+    });
   });
 })();
