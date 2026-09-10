@@ -73,6 +73,46 @@ def test_icons_sprite_present_and_symbol_shaped():
         assert 'id="%s"' % sym in s
 
 
+def _sprite_symbol_ids():
+    import re
+    s = (ROOT / "web/static/icons.svg").read_text(encoding="utf-8")
+    return set(re.findall(r'<symbol id="([a-z0-9\-]+)"', s))
+
+
+def test_sprite_keeps_every_known_symbol():
+    # F18-04: hardening must not drop any icon the sprite already ships.
+    known = {"home", "book", "target", "sparkles", "chart", "clipboard-check",
+             "menu", "chevron-right", "close", "check", "x", "alert-triangle",
+             "info", "external-link", "arrow-right", "dot"}
+    assert known <= _sprite_symbol_ids()
+
+
+def test_every_use_reference_resolves_to_a_symbol():
+    # F18-04: no broken <use> targets anywhere in the shipped JS.
+    import re
+    ids = _sprite_symbol_ids()
+    shell = (ROOT / "web/static/js/shell.js").read_text(encoding="utf-8")
+    ui = (ROOT / "web/static/js/ui.js").read_text(encoding="utf-8")
+    # static string refs
+    for ref in re.findall(r'icons\.svg#([a-z0-9\-]+)', shell + "\n" + ui):
+        assert ref in ids, ref
+    # shell.js builds names dynamically from NAV + the "menu" button
+    nav_icons = set(re.findall(r'icon:\s*"([a-z0-9\-]+)"', shell)) | {"menu"}
+    assert nav_icons <= ids, nav_icons - ids
+
+
+def test_use_elements_carry_href_and_xlink_href():
+    # F18-04: both attributes, same target, for modern + legacy engines.
+    shell = (ROOT / "web/static/js/shell.js").read_text(encoding="utf-8")
+    ui = (ROOT / "web/static/js/ui.js").read_text(encoding="utf-8")
+    # shell.js icon(): <use href="..." xlink:href="...">
+    assert '<use href="' in shell and 'xlink:href="' in shell
+    assert 'xmlns:xlink="http://www.w3.org/1999/xlink"' in shell
+    # ui.js svgEl("use", {...}) passes both keys and routes xlink through NS
+    assert '"xlink:href": "static/icons.svg#alert-triangle"' in ui
+    assert 'setAttributeNS(XLINKNS' in ui
+
+
 # ---------- HTTP serving (F17 Task 14, Step 2) ----------
 def test_http_serves_woff2(static_srv):
     st, ctype, body = _get(static_srv, "/static/fonts/InterVariable.woff2")

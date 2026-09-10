@@ -23,7 +23,10 @@
     "review.html": "exams.html"
   };
   function icon(name) {
-    return '<svg class="icon" aria-hidden="true"><use href="static/icons.svg#' + name + '"></use></svg>';
+    /* href for modern engines, xlink:href for legacy Safari/WebKit + old Edge */
+    var ref = "static/icons.svg#" + name;
+    return '<svg class="icon" aria-hidden="true" xmlns:xlink="http://www.w3.org/1999/xlink">' +
+      '<use href="' + ref + '" xlink:href="' + ref + '"></use></svg>';
   }
   function renderHeader(header, nav) {
     header.innerHTML =
