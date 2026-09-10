@@ -1,17 +1,21 @@
-/* Practice player (B2.11–B2.19). Render per tipus; cap càlcul. */
+/* Practice player (B2.11–B2.19; F17 Task 7 restyle). Render per tipus; cap càlcul.
+   Presentation only: correctesa, errors i evidències venen del backend. */
 (function () {
   "use strict";
+
+  var ui = window.smUI || null;
+  var i18n = window.smI18n || null;
+  var el = (ui && ui.el) ? ui.el : function (tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  };
+  function t(key) { return (i18n && i18n.t) ? i18n.t(key) : key; }
 
   var TYPES = ["TRUE_FALSE", "MULTIPLE_CHOICE", "FORMULA", "NUMERICAL",
     "SHORT_ANSWER", "CONCEPTUAL", "OPEN", "MULTI_STEP", "THEORY"];
   var DIFFS = ["", "EASY", "MEDIUM", "HARD", "EXPERT"];
-
-  function el(tag, cls, text) {
-    var e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (text !== undefined) e.textContent = text;
-    return e;
-  }
 
   function api(path, opts) {
     return window.smFetch(path, opts).then(function (r) {
@@ -22,22 +26,19 @@
   }
 
   function showError(box, res, retryFn) {
+    var opts = { retry: retryFn || undefined };
+    if (res && res.data && res.data.message) opts.message = res.data.message;
+    if (res && res.data && res.data.code) opts.code = res.data.code;
+    if (ui && ui.setState) {
+      ui.setState(box, "error", opts);
+      return;
+    }
     box.innerHTML = "";
     var al = el("div", "alert alert--danger");
     al.setAttribute("role", "alert");
     al.appendChild(el("strong", null, "Error"));
-    al.appendChild(el("p", null,
-      (res.data && res.data.message) || "Torna-ho a provar."));
-    if (res.data && res.data.code) {
-      al.appendChild(el("span", "state-code", res.data.code));
-    }
+    al.appendChild(el("p", null, opts.message || t("common.retry")));
     box.appendChild(al);
-    if (retryFn) {
-      var b = el("button", "button button--secondary", "Reintenta");
-      b.type = "button";
-      b.addEventListener("click", retryFn);
-      box.appendChild(b);
-    }
   }
 
   function renderFormulaBox(parent, expr, fhtml) {
@@ -51,8 +52,8 @@
   }
 
   function answerField(q, box) {
-    var t = q.type || "";
-    if (t === "TRUE_FALSE") {
+    var t2 = q.type || "";
+    if (t2 === "TRUE_FALSE") {
       var fs = el("fieldset");
       fs.appendChild(el("legend", "label", "Vertader o fals"));
       [["V", "Vertader"], ["F", "Fals"]].forEach(function (opt) {
@@ -70,7 +71,7 @@
         return c ? c.value : "";
       };
     }
-    if (t === "MULTIPLE_CHOICE" && q.options && q.options.length) {
+    if (t2 === "MULTIPLE_CHOICE" && q.options && q.options.length) {
       var fs2 = el("fieldset");
       fs2.appendChild(el("legend", "label", "Tria una opció"));
       q.options.forEach(function (o, i) {
@@ -92,11 +93,11 @@
     }
     var label = el("label", "label", "La teva resposta");
     var inp;
-    if (t === "SHORT_ANSWER" || t === "OPEN" || t === "MULTI_STEP" ||
-        t === "CONCEPTUAL" || t === "THEORY") {
+    if (t2 === "SHORT_ANSWER" || t2 === "OPEN" || t2 === "MULTI_STEP" ||
+        t2 === "CONCEPTUAL" || t2 === "THEORY") {
       inp = document.createElement("textarea");
       inp.className = "textarea";
-      inp.rows = t === "SHORT_ANSWER" ? 3 : 6;
+      inp.rows = t2 === "SHORT_ANSWER" ? 3 : 6;
     } else {
       inp = document.createElement("input");
       inp.className = "input";
@@ -108,76 +109,106 @@
     label.setAttribute("for", "answer-input");
     box.appendChild(label);
     box.appendChild(inp);
-    if (t === "NUMERICAL" && q.variables) {
+    if (t2 === "NUMERICAL" && q.variables) {
       var vars = Object.keys(q.variables);
       if (vars.length) {
-        box.appendChild(el("p", "hint",
-          "Variables: " + vars.join(", ")));
+        box.appendChild(el("p", "hint", "Variables: " + vars.join(", ")));
       }
     }
     return function () { return inp.value; };
   }
 
+  function contextStrip(q) {
+    var parts = [];
+    var topic = (q.topic === undefined || q.topic === null || q.topic === "")
+      ? cfgVal("cfg-topic", "") : q.topic;
+    if (topic !== "" && topic !== undefined) {
+      parts.push(t("practice.topic") + " " + topic);
+    }
+    if (q.difficulty) parts.push(q.difficulty);
+    if (q.type) parts.push(q.type);
+    return el("p", "practice-context", parts.join(" · "));
+  }
+
+  function bannerVariant(status) {
+    if (status === "CORRECT") {
+      return { cls: "alert--success", icon: "✓", text: t("practice.correct") };
+    }
+    if (status === "NO_ANSWER") {
+      return { cls: "alert--warning", icon: "○", text: t("practice.noAnswer") };
+    }
+    return { cls: "alert--danger", icon: "✗", text: t("practice.incorrect") };
+  }
+
   function renderCorrection(box, res) {
     box.innerHTML = "";
     var r = res.result || {};
-    var head = el("div", "alert " + (r.status === "CORRECT"
-      ? "alert--success" : r.status === "NO_ANSWER"
-      ? "alert--warning" : "alert--danger"));
-    head.setAttribute("role", "status");
-    head.appendChild(el("strong", null,
-      r.status === "CORRECT" ? "Correcte" : r.status === "NO_ANSWER"
-      ? "Sense resposta" : "A corregir"));
-    var sc = (r.score === null || r.score === undefined) ? "" :
-      (" — nota: " + r.score);
-    head.appendChild(el("p", null, "Estat: " + (r.status || "?") + sc));
+    var wrap = el("div", "practice-result");
+
+    var v = bannerVariant(r.status);
+    var banner = el("div", "alert " + v.cls);
+    banner.setAttribute("role", "status");
+    var head = el("div", "practice-banner");
+    var glyph = el("span", "practice-banner__icon", v.icon);
+    glyph.setAttribute("aria-hidden", "true");
+    head.appendChild(glyph);
+    head.appendChild(el("strong", null, v.text));
+    banner.appendChild(head);
     if (r.replayed) {
-      head.appendChild(el("p", null,
+      banner.appendChild(el("p", null,
         "Ja corregida abans (idempotent, sense duplicar)."));
     }
-    box.appendChild(head);
+    wrap.appendChild(banner);
+
+    if (r.explanation) {
+      var exp = el("div", "card");
+      exp.appendChild(el("h2", "h3", t("practice.explanation")));
+      exp.appendChild(el("p", null, r.explanation));
+      wrap.appendChild(exp);
+    }
+
+    var prov = r.provenance || [];
+    var formulas = r.formulas || [];
+    if ((prov.length || formulas.length) && ui && ui.openEvidence) {
+      var ev = el("button", "button button--secondary", t("practice.evidence"));
+      ev.type = "button";
+      ev.addEventListener("click", function () {
+        ui.openEvidence({ provenance: prov, formulas: formulas });
+      });
+      wrap.appendChild(ev);
+    }
+
     (r.errors || []).forEach(function (e) {
       var card = el("div", "card");
       card.appendChild(el("h2", "h3", e.label || e.type || "Error"));
-      if (e.band) card.appendChild(el("p", null, "Severitat: " + e.band));
+      if (e.band) card.appendChild(el("p", "hint", e.band));
       if (e.hint) card.appendChild(el("p", null, e.hint));
-      box.appendChild(card);
+      wrap.appendChild(card);
     });
-    if ((r.mastery || []).length) {
-      var mc = el("div", "card");
-      mc.appendChild(el("h2", "h3", "Mastery (backend)"));
-      var ul = el("ul");
-      r.mastery.forEach(function (m) {
-        ul.appendChild(el("li", null,
-          (m.unit || "") + ": " + (m.score === null ||
-            m.score === undefined ? "?" : m.score) +
-          (m.status ? " (" + m.status + ")" : "")));
-      });
-      mc.appendChild(ul);
-      box.appendChild(mc);
-    }
-    var again = el("button", "button", "Nova pregunta");
+
+    var actions = el("div", "practice-actions");
+    var again = el("button", "button", t("practice.continue"));
     again.type = "button";
     again.addEventListener("click", function () { start(); });
-    box.appendChild(again);
-    var back = el("a", "button button--secondary",
-      "Veure l'actualització a Aprenentatge");
-    back.href = "learning.html";
-    box.appendChild(document.createTextNode(" "));
-    box.appendChild(back);
-    box.appendChild(el("span", "state-code",
-      "attempt: " + (res.attempt_id || "?")));
+    actions.appendChild(again);
+    var done = el("a", "button button--secondary", t("practice.finish"));
+    done.href = "index.html";
+    actions.appendChild(done);
+    wrap.appendChild(actions);
+
+    box.appendChild(wrap);
+  }
+
+  function cfgVal(id, dflt) {
+    var n = document.getElementById(id);
+    return n ? n.value : dflt;
   }
 
   function currentConfig() {
-    function val(id, dflt) {
-      var n = document.getElementById(id);
-      return n ? n.value : dflt;
-    }
-    return { topic: parseInt(val("cfg-topic", "2"), 10) || 2,
-             question_type: val("cfg-type", "TRUE_FALSE"),
-             difficulty: val("cfg-diff", ""),
-             seed: parseInt(val("cfg-seed", "0"), 10) || 0 };
+    return { topic: parseInt(cfgVal("cfg-topic", "2"), 10) || 2,
+             question_type: cfgVal("cfg-type", "TRUE_FALSE"),
+             difficulty: cfgVal("cfg-diff", ""),
+             seed: parseInt(cfgVal("cfg-seed", "0"), 10) || 0 };
   }
 
   function start() {
@@ -185,27 +216,22 @@
     var abox = document.getElementById("a-box");
     var cbox = document.getElementById("c-box");
     cbox.innerHTML = "";
-    qbox.innerHTML = "";
     abox.innerHTML = "";
-    var live = el("div", null, "");
-    live.setAttribute("role", "status");
-    live.textContent = "Generant pregunta…";
-    qbox.appendChild(live);
+    if (ui && ui.setState) ui.setState(qbox, "loading", { kind: "card" });
+    else qbox.innerHTML = "";
     var cfg = currentConfig();
     api("/api/practice/start", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(cfg)
     }).then(function (res) {
-      qbox.innerHTML = "";
       if (res.status !== 200) {
         showError(qbox, res, start);
         return;
       }
-      var q = res.data.question || {};
-      playQuestion(q);
+      if (ui && ui.setState) ui.setState(qbox, "ready");
+      playQuestion(res.data.question || {});
     }).catch(function () {
-      qbox.innerHTML = "";
       showError(qbox, { data: {} }, start);
     });
   }
@@ -217,61 +243,66 @@
     qbox.innerHTML = "";
     abox.innerHTML = "";
     cbox.innerHTML = "";
+
+    var col = el("div", "practice-q");
+    col.appendChild(contextStrip(q));
+
     var stem = el("div", "card");
-    stem.appendChild(el("h2", "h3",
-        "Pregunta · " + (q.type || "") + " · Tema " +
-        (q.topic === undefined ? "?" : q.topic)));
-      stem.appendChild(el("p", null, q.prompt || q.stem || ""));
-      (q.options || []).forEach(function (o, i) {
-        stem.appendChild(el("p", null,
-          String.fromCharCode(65 + i) + ") " + (o.text || "")));
+    stem.appendChild(el("h2", "h3", t("practice.question")));
+    stem.appendChild(el("p", null, q.prompt || q.stem || ""));
+    (q.options || []).forEach(function (o, i) {
+      stem.appendChild(el("p", null,
+        String.fromCharCode(65 + i) + ") " + (o.text || "")));
+    });
+    if (q.variables && Object.keys(q.variables).length) {
+      renderFormulaBox(stem, JSON.stringify(q.variables), null);
+    }
+    col.appendChild(stem);
+
+    var form = document.createElement("form");
+    form.id = "answer-form";
+    var get = answerField(q, form);
+    var btn = el("button", "button", t("practice.send"));
+    btn.type = "submit";
+    btn.id = "send-btn";
+    form.appendChild(btn);
+    col.appendChild(form);
+    qbox.appendChild(col);
+
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var answer = get();
+      if (!answer) return;
+      btn.disabled = true;
+      btn.textContent = t("practice.sending");
+      api("/api/practice/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answer: answer,
+                               attempt_id: "web-" + Date.now() })
+      }).then(function (r2) {
+        btn.disabled = false;
+        btn.textContent = t("practice.send");
+        if (r2.status !== 200) {
+          showError(cbox, r2, null);
+          return;
+        }
+        renderCorrection(cbox, r2.data);
+      }).catch(function () {
+        btn.disabled = false;
+        btn.textContent = t("practice.send");
+        showError(cbox, { data: {} }, null);
       });
-      if (q.variables && Object.keys(q.variables).length) {
-        renderFormulaBox(stem, JSON.stringify(q.variables), null);
-      }
-      qbox.appendChild(stem);
-      var form = document.createElement("form");
-      form.id = "answer-form";
-      var get = answerField(q, form);
-      var btn = el("button", "button", "Envia la resposta");
-      btn.type = "submit";
-      btn.id = "send-btn";
-      form.appendChild(btn);
-      abox.appendChild(form);
-      form.addEventListener("submit", function (ev) {
-        ev.preventDefault();
-        var answer = get();
-        if (!answer) return;
-        btn.disabled = true;
-        btn.textContent = "Corregint…";
-        api("/api/practice/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ answer: answer,
-                                 attempt_id: "web-" + Date.now() })
-        }).then(function (r2) {
-          btn.disabled = false;
-          btn.textContent = "Envia la resposta";
-          if (r2.status !== 200) {
-            showError(cbox, r2, null);
-            return;
-          }
-          renderCorrection(cbox, r2.data);
-        }).catch(function () {
-          btn.disabled = false;
-          btn.textContent = "Envia la resposta";
-          showError(cbox, { data: {} }, null);
-        });
-      });
+    });
   }
 
   function bindConfig() {
     var tsel = document.getElementById("cfg-type");
     if (tsel && !tsel.options.length) {
-      TYPES.forEach(function (t) {
+      TYPES.forEach(function (ty) {
         var o = document.createElement("option");
-        o.value = t;
-        o.textContent = t;
+        o.value = ty;
+        o.textContent = ty;
         tsel.appendChild(o);
       });
       tsel.value = "TRUE_FALSE";

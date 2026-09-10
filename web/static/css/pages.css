@@ -37,3 +37,24 @@
 .contents-list li:last-child { border-bottom: 0; }
 .contents-list a { display: block; padding: var(--sp-sm) 0; color: var(--text-primary); text-decoration: none; }
 .contents-list a:hover { color: var(--accent); }
+
+/* ---- Pràctica (§4.4) ---- */
+.practice-config { display: grid; gap: var(--sp-md); grid-template-columns: 1fr; }
+@media (width >= 48rem) {
+  .practice-config { grid-template-columns: repeat(2, 1fr); }
+  .practice-config > h2, .practice-config > .button { grid-column: 1 / -1; }
+}
+.practice-config > .button { justify-self: start; }
+
+.practice-q,
+.practice-result {
+  max-width: var(--reading-max); margin-inline: auto;
+  display: flex; flex-direction: column; gap: var(--sp-md);
+}
+.practice-context {
+  margin: 0; font-family: var(--font-mono);
+  font-size: var(--fs-meta); color: var(--text-secondary);
+}
+.practice-banner { display: flex; align-items: center; gap: var(--sp-sm); }
+.practice-banner__icon { font-size: var(--fs-h2); line-height: 1; }
+.practice-actions { display: flex; flex-wrap: wrap; gap: var(--sp-sm); }

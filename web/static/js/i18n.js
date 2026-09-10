@@ -37,7 +37,13 @@
           "temari.formulas": "fórmules", "temari.mastery": "Domini",
           "temari.open": "Obrir tema →", "temari.emptyCta": "Torna a l'inici",
           "topic.progress": "Domini del tema", "topic.contents": "Continguts",
-          "topic.backTema": "Torna al tema", "topic.backTemari": "Torna al temari" },
+          "topic.backTema": "Torna al tema", "topic.backTemari": "Torna al temari",
+          "practice.topic": "Tema", "practice.question": "Pregunta",
+          "practice.send": "Envia la resposta", "practice.sending": "Corregint…",
+          "practice.correct": "Correcte", "practice.incorrect": "Incorrecte",
+          "practice.noAnswer": "Sense resposta",
+          "practice.explanation": "Explicació", "practice.evidence": "Veure evidències",
+          "practice.continue": "Continua", "practice.finish": "Acaba" },
     es: { "nav.inici": "Inicio", "nav.temari": "Temario", "nav.practica": "Práctica",
           "nav.tutor": "Tutor IA", "nav.progres": "Progreso", "nav.examens": "Exámenes",
           "nav.g.estudi": "Estudio", "nav.g.aprendre": "Aprender", "nav.g.avaluacio": "Evaluación",
@@ -73,7 +79,13 @@
           "temari.formulas": "fórmulas", "temari.mastery": "Dominio",
           "temari.open": "Abrir tema →", "temari.emptyCta": "Vuelve al inicio",
           "topic.progress": "Dominio del tema", "topic.contents": "Contenidos",
-          "topic.backTema": "Volver al tema", "topic.backTemari": "Volver al temario" }
+          "topic.backTema": "Volver al tema", "topic.backTemari": "Volver al temario",
+          "practice.topic": "Tema", "practice.question": "Pregunta",
+          "practice.send": "Envía la respuesta", "practice.sending": "Corrigiendo…",
+          "practice.correct": "Correcto", "practice.incorrect": "Incorrecto",
+          "practice.noAnswer": "Sin respuesta",
+          "practice.explanation": "Explicación", "practice.evidence": "Ver evidencias",
+          "practice.continue": "Continuar", "practice.finish": "Acabar" }
   };
   var lang = "ca";
   try { var s = window.localStorage.getItem("sm-lang");
