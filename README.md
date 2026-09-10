@@ -75,10 +75,16 @@ Windows, `~/.local/share/sistemes-de-mesura` en POSIX).
 
 ## Estado
 
-`v1.0.0`. F0–F11 certificadas; operación local (F12 redefinida)
-implementada; F13 parcial; F14 avanzada sin certificar; F15/F16 no
-iniciadas. Detalle completo en
+`v1.0.0` (tag `a9c153e`), `main` en `d50adb7`. F0–F11 certificadas;
+operación local (F12 redefinida) e integración Gemini implementadas; F13
+parcial; F14 packaging verificado end-to-end; **F17** (rediseño de producto
+/ UI), **F18** (residuales de F17) y **F19** (aplicación de escritorio
+Windows) completadas y mergeadas. F15/F16 (despliegue, certificación
+operativa) no iniciadas — fuera de alcance del producto local. Detalle en
 [`docs/ESTADO_DEL_PROYECTO.md`](docs/ESTADO_DEL_PROYECTO.md).
 
-Pruebas: `python -m pytest tests/ -q` → `2 failed, 872 passed`. Los 2
-fallos son tests live de Gemini que requieren `GEMINI_API_KEY` válida.
+Pruebas (`main` `d50adb7`, 2026-09-11): `python -m pytest tests/ -q` →
+`952 passed, 1 skipped, 0 failed` en local (Windows); `947 passed, 6
+skipped, 0 failed` en CI (Linux, sin `GEMINI_API_KEY`: los 5 tests live de
+Gemini se saltan). CI Linux + Windows en verde; `main` protegido con check
+requerido `tests + integrity`.
