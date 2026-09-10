@@ -123,10 +123,16 @@ Checklist manual, no cubierto por CI:
    posición de la pregunta, el `?xsid=` de la sesión y el temporizador en marcha.
 6. Repetir ES→CA.
 
-Estado: **MANUAL PENDING**. Se intentó automatizar con computer-use
-(2026-09-10); el host denegó el acceso a la ventana del `.exe` empaquetado
-(app no registrada en el sistema), así que este gate queda pendiente de
-ejecución manual con captura de evidencia. No se infiere PASS.
+Estado: **PASS** — ejecutado manualmente sobre el `.exe` real (build de
+PyInstaller) el 2026-09-10. En el cambio CA→ES y de vuelta ES→CA sobreviven,
+sin parpadeo de recarga, los cuatro elementos: la respuesta escrita sin
+enviar, la posición/pregunta, el `?xsid=` de la sesión y el temporizador en
+marcha.
+
+Traza: la automatización con computer-use se intentó y quedó bloqueada (el
+host no controla la ventana del `.exe`, y otra aplicación en primer plano
+robaba el foco), por lo que la verificación se hizo a mano. CI **no** cubre
+este gate (§8).
 
 ## 10. El carve-out `SM_PORT_FILE`
 
