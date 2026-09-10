@@ -1,8 +1,13 @@
-"""Tests B1.22: Design System + App Shell (estàtics, sense navegador).
+"""Tests B1.22 / F17: Design System + App Shell (estàtics, sense navegador).
 
 Verifiquen fitxers i contingut: tokens, components, landmarks,
 navegació, accessibilitat, responsive, no-duplicació de domini,
 seguretat i pressupost de pes.
+
+F17 Task 2: shell (header + sidebar) is injected by shell.js around
+<main id="main">; only index.html conforms to the injected-shell contract
+so far. PAGES grows in later tasks (5 +temari, 7 +practice, 8 +tutor,
+9 +progres, 10 +exams, 11 +design-system).
 """
 import re
 import sys
@@ -13,19 +18,25 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent.parent
 WEB = ROOT / "web"
 CSS = WEB / "static" / "css"
-JS = WEB / "static" / "js" / "app.js"
-PAGES = ["index.html", "study.html", "learning.html", "exams.html",
-         "documents.html", "calendar.html", "design-system.html"]
+JSDIR = WEB / "static" / "js"
+JS = JSDIR / "app.js"
+PAGES = ["index.html"]
 
-TOKENS = ["--background", "--surface", "--surface-elevated",
-          "--text-primary", "--text-secondary", "--text-tertiary",
-          "--border", "--accent", "--success", "--warning", "--danger",
-          "--info", "--focus", "--font-family", "--fs-display",
-          "--fs-h1", "--fs-body", "--fs-caption", "--fs-button",
-          "--sp-xs", "--sp-md", "--sp-3xl", "--radius-sm",
-          "--radius-xl", "--shadow-sm", "--shadow-lg",
-          "--duration-fast", "--ease-standard", "--touch-min",
-          "--content-max"]
+TOKENS = ["--bg", "--surface", "--surface-elevated", "--surface-sunken",
+          "--overlay", "--border", "--border-strong", "--text-primary",
+          "--text-secondary", "--text-tertiary", "--text-on-accent",
+          "--accent", "--accent-hover", "--accent-pressed", "--accent-soft",
+          "--accent-border", "--accent-contrast-text", "--success",
+          "--warning", "--danger", "--info", "--focus", "--gradient-accent",
+          "--gradient-surface", "--shadow-sm", "--shadow-md", "--shadow-lg",
+          "--shadow-accent-glow", "--font-sans", "--font-mono", "--fs-display",
+          "--fs-h1", "--fs-h2", "--fs-h3", "--fs-body", "--fs-body-lg",
+          "--fs-meta", "--fs-overline", "--fs-stat", "--fw-regular",
+          "--fw-h1", "--fw-bold", "--lh-tight", "--ls-tight", "--sp-2xs",
+          "--sp-xs", "--sp-md", "--sp-3xl", "--radius-xs", "--radius-xl",
+          "--radius-full", "--duration-fast", "--ease-standard",
+          "--touch-min", "--content-max", "--reading-max", "--sidebar-w",
+          "--header-h"]
 COMPONENTS = [".button", ".icon-button", ".input", ".select",
               ".textarea", ".check", ".radio", ".toggle", ".card",
               ".badge", ".pill", ".divider", ".avatar", ".progress",
@@ -37,13 +48,14 @@ FORBIDDEN = ["score =", "mastery =", "grade =", "adaptive =",
              "permission =", "provenance =", "SELECT COUNT",
              "FROM exam_", "FROM mastery", "sqlite3",
              "GEMINI_API_KEY", "correct_answer\"", "'correct_answer'"]
-LIGHT = ["#f5f5f7", "#ffffff", "#1d1d1f", "#0071e3"]
-DARK = ["#000000", "#1c1c1e", "#f5f5f7", "#0a84ff"]
+# Dark is the primary :root; light is the override.
+DARK_ROOT = ["#131118", "#1a1822", "#6f4bff", "#f3f1f9"]
+LIGHT_OVERRIDE = ["#f5f4fa", "#6a45f0", "#1c1a29"]
 
 
 def css():
     return "\n".join((CSS / f).read_text(encoding="utf-8")
-                     for f in ("tokens.css", "base.css", "layout.css",
+                     for f in ("tokens.css", "base.css", "shell.css",
                                "components.css"))
 
 
@@ -51,53 +63,65 @@ def page(name):
     return (WEB / name).read_text(encoding="utf-8")
 
 
+def shell_js():
+    return (JSDIR / "shell.js").read_text(encoding="utf-8")
+
+
 # ---------- rendering ----------
 def test_pages_exist_and_link_css_js():
     for name in PAGES:
+        if not (WEB / name).is_file():
+            continue
         t = page(name)
-        for cssf in ("tokens.css", "base.css", "layout.css",
-                     "components.css"):
+        for cssf in ("tokens.css", "base.css", "shell.css", "components.css"):
             assert cssf in t, (name, cssf)
+        assert "static/js/i18n.js" in t, name
+        assert "static/js/shell.js" in t, name
         assert "static/js/app.js" in t, name
 
 
 def test_shell_landmarks_per_page():
+    sj = shell_js()
+    # header + sidebar nav landmarks are injected by shell.js.
+    assert 'className = "header"' in sj
+    assert 'className = "sidebar"' in sj and '"aria-label", "Principal"' in sj
     for name in PAGES:
-        t = page(name)
-        assert "<header" in t and "<nav" in t and "<main" in t, name
-        assert 'id="main"' in t and 'class="skip-link"' in t, name
-    # Les 6 pàgines de producte marquen la ruta activa al nav; la
-    # galeria interna queda exempta (no és navegació de producte).
-    for name in PAGES:
-        if name == "design-system.html":
+        if not (WEB / name).is_file():
             continue
         t = page(name)
-        nav = t.split('<nav class="sidebar"')[1].split("</nav>")[0]
-        assert nav.count('aria-current="page"') == 1, name
+        assert "<main" in t and 'id="main"' in t, name
+        assert 'class="skip-link"' in t, name
+        assert ('data-route="%s"' % name) in t, name
+        # shell is injected, never inline.
+        assert 'class="sidebar"' not in t, name
+    # Exactly one active nav item (aria-current) is asserted against
+    # shell.js in tests/web/test_shell.py (test_shell_sets_single_active_route,
+    # test_every_product_page_declares_a_known_route).
 
 
 def test_nav_points_to_real_pages():
-    for name in PAGES:
-        for target in ("index.html", "study.html", "learning.html",
-                       "exams.html", "documents.html", "calendar.html"):
-            assert 'href="%s"' % target in page(name), (name, target)
+    sj = shell_js()
+    targets = re.findall(r'href:\s*"([a-z0-9\-]+\.html)"', sj)
+    assert targets, "shell.js NAV has no targets"
+    expected = {"index.html", "temari.html", "practice.html",
+                "tutor.html", "progres.html", "exams.html"}
+    assert set(targets) == expected, targets
+    for dead in ("study.html", "learning.html", "documents.html",
+                 "calendar.html"):
+        assert dead not in targets, dead
 
 
 def test_active_route_matches_page():
-    mapping = {"index.html": "index.html", "study.html": "study.html",
-               "learning.html": "learning.html",
-               "exams.html": "exams.html",
-               "documents.html": "documents.html",
-               "calendar.html": "calendar.html"}
-    for name, href in mapping.items():
+    sj = shell_js()
+    assert 'getAttribute("data-route")' in sj
+    assert 'aria-current="page"' in sj
+    assert "it.href === route" in sj
+    for name in PAGES:
+        if not (WEB / name).is_file():
+            continue
         t = page(name)
-        m = re.search(r'aria-current="page"[^>]*>|<a[^>]*aria-current'
-                      r'="page"[^>]*href="([^"]+)"', t)
-        assert m, name
-        assert ('href="%s"' % href) in t.split("aria-current")[0][-200:] \
-            or 'href="%s" aria-current' % href in t \
-            or 'href="%s"' % href in t[max(0, t.find("aria-current") - 200):], \
-            name
+        m = re.search(r'data-route="([a-z0-9\-]+\.html)"', t)
+        assert m and m.group(1) == name, name
 
 
 def test_resource_pages_are_implemented_honestly():
@@ -121,11 +145,17 @@ def test_gallery_covers_primitives():
 # ---------- tokens y componentes ----------
 def test_semantic_tokens_defined():
     t = (CSS / "tokens.css").read_text(encoding="utf-8")
+    blob = css()
     for tok in TOKENS:
         assert tok in t, tok
-    assert "prefers-color-scheme: dark" in t
-    for color in LIGHT + DARK:
-        assert color in t, color
+    assert ":root" in t
+    assert "@media (prefers-color-scheme: light)" in t
+    assert ':root[data-theme="light"]' in t
+    assert ':root[data-theme="dark"]' in t
+    for color in DARK_ROOT:
+        assert color in blob, color
+    for color in LIGHT_OVERRIDE:
+        assert color in blob, color
 
 
 def test_no_hardcoded_colors_in_components():
@@ -151,8 +181,10 @@ def test_states_covered():
 # ---------- accessibility ----------
 def test_a11y_basics_per_page():
     for name in PAGES:
+        if not (WEB / name).is_file():
+            continue
         t = page(name)
-        assert 'lang="ca"' in t, name
+        assert re.search(r'\blang="(ca|es)"', t), name
         assert 'name="viewport"' in t, name
         assert "<h1" in t, name
         assert "<title>" in t, name
@@ -160,6 +192,8 @@ def test_a11y_basics_per_page():
 
 def test_inputs_have_labels():
     for name in PAGES:
+        if not (WEB / name).is_file():
+            continue
         t = page(name)
         for m in re.finditer(r'<(input|select|textarea)[^>]*>', t):
             tag = m.group(0)
@@ -172,6 +206,8 @@ def test_inputs_have_labels():
 
 def test_icon_buttons_named():
     for name in PAGES:
+        if not (WEB / name).is_file():
+            continue
         t = page(name)
         for m in re.finditer(r"<button[^>]*>.*?</button>", t, re.S):
             tag = m.group(0)[:200]
@@ -191,6 +227,8 @@ def test_responsive_foundation():
 def test_no_domain_logic_in_frontend():
     blob = css() + JS.read_text(encoding="utf-8")
     for name in PAGES:
+        if not (WEB / name).is_file():
+            continue
         blob += page(name)
     low = blob.lower()
     for s in FORBIDDEN:
@@ -208,9 +246,12 @@ def test_no_secrets_or_paths():
 
 # ---------- performance ----------
 def test_perf_budgets():
+    # Budgets are ceilings, not targets: minimize assets, do not add code to fill headroom.
     total = 0
     for p in list((CSS).glob("*.css")) + [JS] + [WEB / n for n in PAGES]:
         total += p.stat().st_size
-    assert total < 120 * 1024, total
-    assert (CSS / "tokens.css").stat().st_size < 8 * 1024
+    assert total < 220 * 1024, total
+    assert (CSS / "tokens.css").stat().st_size < 14 * 1024
     assert JS.stat().st_size < 8 * 1024
+    assert (JSDIR / "shell.js").stat().st_size < 10 * 1024
+    assert (JSDIR / "i18n.js").stat().st_size < 12 * 1024

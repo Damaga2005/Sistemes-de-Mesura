@@ -2,7 +2,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  font-family: var(--font-family);
+  font-family: var(--font-sans);
   font-size: 100%;
   line-height: var(--lh-normal);
   color-scheme: light dark;
@@ -10,9 +10,10 @@ html {
 
 body {
   margin: 0;
-  background: var(--background);
+  background: var(--bg);
   color: var(--text-primary);
   font-size: var(--fs-body);
+  font-feature-settings: "cv05" 1, "cv11" 1, "ss01" 1;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -24,7 +25,7 @@ h2, .h2 { font-size: var(--fs-h2); line-height: var(--lh-tight);
 h3, .h3 { font-size: var(--fs-h3); font-weight: var(--fw-semibold);
   margin: var(--sp-md) 0 var(--sp-sm); }
 p { margin: 0 0 var(--sp-md); }
-small, .caption { font-size: var(--fs-caption);
+small, .caption { font-size: var(--fs-meta);
   color: var(--text-secondary); }
 
 a { color: var(--accent); }
@@ -38,11 +39,11 @@ a:hover { color: var(--accent-hover); }
 
 .skip-link {
   position: absolute; left: var(--sp-md); top: -100%;
-  background: var(--accent); color: var(--on-accent);
+  background: var(--accent); color: var(--text-on-accent);
   padding: var(--sp-sm) var(--sp-md); border-radius: var(--radius-sm);
   z-index: 100; transition: top var(--duration-fast) var(--ease-standard);
 }
-.skip-link:focus { top: var(--sp-md); color: var(--on-accent); }
+.skip-link:focus { top: var(--sp-md); color: var(--text-on-accent); }
 
 img, svg { max-width: 100%; }
 table { border-collapse: collapse; width: 100%; }
