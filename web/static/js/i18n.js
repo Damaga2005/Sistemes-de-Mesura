@@ -43,7 +43,16 @@
           "practice.correct": "Correcte", "practice.incorrect": "Incorrecte",
           "practice.noAnswer": "Sense resposta",
           "practice.explanation": "Explicació", "practice.evidence": "Veure evidències",
-          "practice.continue": "Continua", "practice.finish": "Acaba" },
+          "practice.continue": "Continua", "practice.finish": "Acaba",
+          "tutor.pending": "Pensant…", "tutor.status": "Estat",
+          "tutor.abstain": "ABSTAIN",
+          "tutor.reformulate": "Prova a reformular-ho o revisa el contingut.",
+          "tutor.errorTitle": "Alguna cosa ha fallat",
+          "tutor.emptyQuestion": "Escriu una pregunta primer.",
+          "tutor.practice": "Practicar",
+          "tutor.rephrase": "Explica-ho d'una altra manera",
+          "tutor.rephraseHint": "Explica-ho de manera més senzilla.",
+          "tutor.context": "Context: Tema" },
     es: { "nav.inici": "Inicio", "nav.temari": "Temario", "nav.practica": "Práctica",
           "nav.tutor": "Tutor IA", "nav.progres": "Progreso", "nav.examens": "Exámenes",
           "nav.g.estudi": "Estudio", "nav.g.aprendre": "Aprender", "nav.g.avaluacio": "Evaluación",
@@ -85,7 +94,16 @@
           "practice.correct": "Correcto", "practice.incorrect": "Incorrecto",
           "practice.noAnswer": "Sin respuesta",
           "practice.explanation": "Explicación", "practice.evidence": "Ver evidencias",
-          "practice.continue": "Continuar", "practice.finish": "Acabar" }
+          "practice.continue": "Continuar", "practice.finish": "Acabar",
+          "tutor.pending": "Pensando…", "tutor.status": "Estado",
+          "tutor.abstain": "ABSTAIN",
+          "tutor.reformulate": "Prueba a reformularlo o revisa el contenido.",
+          "tutor.errorTitle": "Algo ha fallado",
+          "tutor.emptyQuestion": "Escribe una pregunta primero.",
+          "tutor.practice": "Practicar",
+          "tutor.rephrase": "Explícalo de otra manera",
+          "tutor.rephraseHint": "Explícalo de manera más sencilla.",
+          "tutor.context": "Contexto: Tema" }
   };
   var lang = "ca";
   try { var s = window.localStorage.getItem("sm-lang");

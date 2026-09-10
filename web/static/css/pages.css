@@ -58,3 +58,22 @@
 .practice-banner { display: flex; align-items: center; gap: var(--sp-sm); }
 .practice-banner__icon { font-size: var(--fs-h2); line-height: 1; }
 .practice-actions { display: flex; flex-wrap: wrap; gap: var(--sp-sm); }
+
+/* ---- Tutor IA (§4.5): centered thread + sticky composer ---- */
+.tutor-thread { padding-bottom: var(--sp-lg); }
+.chat__col { display: flex; flex-direction: column; gap: var(--sp-xs); min-width: 0; }
+.chat__formulas { display: flex; flex-wrap: wrap; gap: var(--sp-2xs); }
+.chat__actions { display: flex; flex-wrap: wrap; gap: var(--sp-sm); margin-top: var(--sp-2xs); }
+.chat__bubble--error { border-color: var(--danger); background: var(--surface-sunken); }
+.chat__context {
+  width: 100%; max-width: var(--reading-max); margin-inline: auto;
+  font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--text-secondary);
+}
+.tutor-composer {
+  position: sticky; bottom: 0; z-index: 10;
+  width: 100%; max-width: var(--reading-max); margin-inline: auto;
+  display: flex; align-items: flex-end; gap: var(--sp-sm);
+  padding: var(--sp-md) 0;
+  background: var(--bg); border-top: 1px solid var(--border);
+}
+.tutor-composer .textarea { flex: 1; min-height: 2.75rem; resize: vertical; }
