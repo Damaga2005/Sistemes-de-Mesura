@@ -83,6 +83,7 @@ def test_pages_exist_and_link_css_js():
         assert "static/js/shell.js" in t, name
         assert "static/js/app.js" in t, name
         assert "static/js/ui.js" in t, name
+        assert "static/js/dashboard.js" in t, name
 
 
 def test_shell_landmarks_per_page():

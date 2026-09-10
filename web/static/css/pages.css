@@ -1,10 +1,29 @@
 /* Pages (F17): per-page compositions. Page-specific rules are added by the
    later page tasks (5 temari, 7 practice, 8 tutor, 9 progres, 10 exams). */
 
-.dashboard-grid {
-  display: grid; gap: var(--sp-md);
-  grid-template-columns: 1fr;
+/* ---- Inici dashboard (§4.1) ---- */
+.dashboard { display: flex; flex-direction: column; gap: var(--sp-xl); }
+.dash-greeting { font-size: var(--fs-body-lg); color: var(--text-secondary); margin: 0; }
+.dash-block { display: flex; flex-direction: column; gap: var(--sp-md); }
+
+.dash-stats { display: grid; gap: var(--sp-md); grid-template-columns: 1fr; }
+@media (width >= 48rem) {
+  .dash-stats { grid-template-columns: repeat(3, 1fr); }
+}
+
+.dash-reinforce { display: grid; gap: var(--sp-md); grid-template-columns: 1fr; }
+@media (width >= 48rem) {
+  .dash-reinforce { grid-template-columns: repeat(2, 1fr); }
 }
 @media (width >= 64rem) {
-  .dashboard-grid { grid-template-columns: repeat(3, 1fr); }
+  .dash-reinforce { grid-template-columns: repeat(3, 1fr); }
 }
+
+.dash-recent { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.dash-recent li {
+  display: flex; justify-content: space-between; gap: var(--sp-md);
+  padding: var(--sp-sm) 0; border-bottom: 1px solid var(--border);
+}
+.dash-recent li:last-child { border-bottom: 0; }
+.dash-recent__unit { color: var(--text-primary); font-family: var(--font-mono); font-size: var(--fs-meta); }
+.dash-recent__time { color: var(--text-tertiary); font-size: var(--fs-meta); white-space: nowrap; }

@@ -60,6 +60,7 @@
   }
 
   var SVGNS = "http://www.w3.org/2000/svg";
+  var ringSeq = 0;
   function svgEl(tag, attrs) {
     var node = document.createElementNS(SVGNS, tag);
     for (var k in attrs) {
@@ -71,10 +72,11 @@
     var p = clampPct(v);
     var radius = 52;
     var circ = 2 * Math.PI * radius;
+    var gid = "sm-ring-grad-" + (++ringSeq);
     var root = svgEl("svg", { "class": "progress-ring", viewBox: "0 0 120 120", role: "img" });
     root.setAttribute("aria-label", (label ? label + " " : "") + p + "%");
     var defs = svgEl("defs", {});
-    var grad = svgEl("linearGradient", { id: "sm-ring-grad", x1: "0", y1: "0", x2: "1", y2: "1" });
+    var grad = svgEl("linearGradient", { id: gid, x1: "0", y1: "0", x2: "1", y2: "1" });
     grad.appendChild(svgEl("stop", { offset: "0", "stop-color": "var(--accent)" }));
     grad.appendChild(svgEl("stop", { offset: "1", "stop-color": "var(--accent-hover)" }));
     defs.appendChild(grad);
@@ -86,10 +88,28 @@
     root.appendChild(svgEl("circle", {
       "class": "progress-ring__value", cx: "60", cy: "60", r: String(radius),
       fill: "none", "stroke-width": "10", "stroke-linecap": "round",
-      stroke: "url(#sm-ring-grad)", transform: "rotate(-90 60 60)",
+      stroke: "url(#" + gid + ")", transform: "rotate(-90 60 60)",
       "stroke-dasharray": String(circ),
       "stroke-dashoffset": String(circ * (1 - p / 100))
     }));
+    var centre = svgEl("text", {
+      "class": "progress-ring__text", x: "60", y: "60",
+      "text-anchor": "middle", "dominant-baseline": "central"
+    });
+    var num = svgEl("tspan", {
+      x: "60", style: "font-size:var(--fs-h1);font-weight:var(--fw-bold);fill:var(--text-primary)"
+    });
+    num.textContent = p + "%";
+    centre.appendChild(num);
+    if (label) {
+      var sub = svgEl("tspan", {
+        x: "60", dy: "1.4em",
+        style: "font-size:var(--fs-meta);fill:var(--text-secondary)"
+      });
+      sub.textContent = label;
+      centre.appendChild(sub);
+    }
+    root.appendChild(centre);
     return root;
   }
 

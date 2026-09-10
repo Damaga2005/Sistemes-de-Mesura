@@ -15,35 +15,34 @@
   <script src="static/js/csrf.js" defer></script>
   <script src="static/js/app.js" defer></script>
   <script src="static/js/ui.js" defer></script>
+  <script src="static/js/dashboard.js" defer></script>
 </head>
 <body data-route="index.html">
   <a class="skip-link" href="#main">Salta al contingut</a>
   <main class="main" id="main">
-    <div class="page">
-      <nav class="breadcrumbs" aria-label="Ruta"><ol><li aria-current="page">Inici</li></ol></nav>
+    <div class="page dashboard">
+      <p class="dash-greeting" id="greeting"></p>
       <div class="page-header">
         <h1>Sistemes de Mesura</h1>
         <p>Estudia, practica i avalua't amb contingut verificat de l'assignatura.</p>
       </div>
-      <div class="grid-cards grid-cards--3">
-        <section class="card" aria-labelledby="c-study">
-          <h2 class="h3" id="c-study">Estudi</h2>
-          <p>Tutor verificat i pràctica amb correcció immediata.</p>
-          <p><a class="button button--secondary" href="study.html">Obrir Estudi</a></p>
-        </section>
-        <section class="card" aria-labelledby="c-learn">
-          <h2 class="h3" id="c-learn">Aprenentatge</h2>
-          <p>Recomanacions adaptatives i progrés de mastery.</p>
-          <p><a class="button button--secondary" href="learning.html">Obrir Aprenentatge</a></p>
-        </section>
-        <section class="card" aria-labelledby="c-exam">
-          <h2 class="h3" id="c-exam">Exàmens</h2>
-          <p>Simulacres amb temporitzador i revisió cega.</p>
-          <p><a class="button button--secondary" href="exams.html">Obrir Exàmens</a></p>
-        </section>
-      </div>
-      <hr class="divider">
-      <p><small>Estat del sistema: contingut verificat · 2896 fórmules · <a href="design-system.html">galeria del sistema visual</a></small></p>
+      <section class="dash-hero" id="hero-continue" aria-label="Continua estudiant"></section>
+      <section class="dash-block" aria-labelledby="dash-progress-h">
+        <h2 class="h3" id="dash-progress-h">El teu progrés</h2>
+        <div class="dash-stats">
+          <div class="stat-card card" id="stat-domini"></div>
+          <div class="stat-card card" id="stat-precisio"></div>
+          <div class="stat-card card" id="stat-preguntes"></div>
+        </div>
+      </section>
+      <section class="dash-block" id="reinforce-section" aria-labelledby="dash-reinforce-h">
+        <h2 class="h3" id="dash-reinforce-h">Necessites reforçar</h2>
+        <div class="dash-reinforce" id="reinforce-cards"></div>
+      </section>
+      <section class="dash-block" aria-labelledby="dash-recent-h">
+        <h2 class="h3" id="dash-recent-h">Activitat recent</h2>
+        <div id="recent-activity"></div>
+      </section>
     </div>
   </main>
   <footer class="footer">Sistemes de Mesura (230920) — capa de presentació B1. Sense lògica de domini al frontend.</footer>
