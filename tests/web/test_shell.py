@@ -25,6 +25,7 @@ def test_shell_sets_single_active_route():
     # shell.js marks aria-current when it.href === route (one match max)
     assert 'aria-current="page"' in SHELL
     assert "getAttribute(\"data-route\")" in SHELL
+    assert SHELL.count('aria-current="page"') == 1
 
 
 def test_every_product_page_declares_a_known_route():
