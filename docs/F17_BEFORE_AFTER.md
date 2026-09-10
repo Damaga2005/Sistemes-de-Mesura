@@ -23,9 +23,9 @@ BASE `340400a`. Sense canvis de backend (excepció: 1 línia `_MIME`).
 pàgines i comprovació addicional a 1440×900 i 1920×1080 de les pàgines més
 denses (Inici, Temari, Pràctica, Exàmens). El servidor va servir les pàgines i
 els seus assets (incloent `InterVariable.woff2` → 200 `font/woff2`) sense error.
-Les captures es van fer amb la suite `pytest` executant-se en paral·lel; alguns
-primers fotogrames mostraven l'estat `loading` (skeletons) que es resolia en el
-següent fotograma — comportament esperat, no defecte.
+Els fotogrames es van inspeccionar en viu (no s'han desat imatges al repositori);
+alguns primers fotogrames mostraven l'estat `loading` (skeletons) que es resolia
+en el següent fotograma — comportament esperat, no defecte.
 
 ### Pàgines revisades (1366×768)
 
