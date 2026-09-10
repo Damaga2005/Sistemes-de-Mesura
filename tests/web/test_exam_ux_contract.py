@@ -157,11 +157,15 @@ def test_history_route_preserves_forbidden_semantics(tmp_path):
 
 
 def test_review_results_history_pages_are_direct_entry_points(tmp_path):
-    for name in ("history.html", "results.html", "review.html"):
+    # F17 Task 11: history.html is now a redirect stub -> exams.html#historial
+    # (covered by test_b6_certification.test_legacy_urls_are_honest_redirects).
+    for name in ("results.html", "review.html"):
         page = (ROOT / "web" / name).read_text(encoding="utf-8")
         assert 'lang="ca"' in page
         assert 'id="main"' in page
         assert 'aria-live="polite"' in page
+    stub = (ROOT / "web" / "history.html").read_text(encoding="utf-8")
+    assert 'location.replace("exams.html#historial")' in stub
 
 
 def test_exams_structure():

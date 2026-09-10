@@ -21,7 +21,7 @@ CSS = WEB / "static" / "css"
 JSDIR = WEB / "static" / "js"
 JS = JSDIR / "app.js"
 PAGES = ["index.html", "temari.html", "practice.html", "tutor.html",
-         "progres.html", "exams.html"]
+         "progres.html", "exams.html", "design-system.html"]
 # Each product page links exactly its own page script. Later tasks extend
 # this map (tutor.js, progres.js, practice.js, exams.js); design-system.html
 # has no page script so it is deliberately absent.

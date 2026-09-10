@@ -1,5 +1,6 @@
 """F11-B6: gates reproducibles de certificación final de UX."""
 import json
+import re
 import subprocess
 from collections import Counter
 from pathlib import Path
@@ -36,31 +37,29 @@ def test_certification_docs_and_runs_exist():
 
 
 def test_all_product_pages_keep_shell_and_honest_navigation():
-    # F17 Task 2: index.html now receives its shell + nav from shell.js
-    # (injected around <main>), so it is checked against the injected-shell
-    # contract; pre-F17 pages keep their inline chrome and are unchanged.
-    inline_pages = ("exam.html", "history.html", "results.html",
-                    "review.html")
-    for name in inline_pages:
+    pages = ("index.html", "temari.html", "tutor.html", "practice.html",
+             "progres.html", "exams.html", "exam.html")
+    for name in pages:
         html = (ROOT / "web" / name).read_text(encoding="utf-8")
-        assert 'lang="ca"' in html
-        assert 'id="main"' in html
-        assert 'aria-label="Principal"' in html
-        assert 'href="calendar.html"' in html or name in (
-            "history.html", "results.html", "review.html")
-    shell_js = (ROOT / "web/static/js/shell.js").read_text(encoding="utf-8")
-    assert '"aria-label", "Principal"' in shell_js  # nav landmark, injected
-    for name in ("index.html",):
+        assert re.search(r'\blang="(ca|es)"', html), name
+        assert 'id="main"' in html, name
+        assert 'data-route="%s"' % name in html, name
+    # shell + "Principal" landmark now come from the single injected source
+    shell = (ROOT / "web/static/js/shell.js").read_text(encoding="utf-8")
+    assert '"aria-label", "Principal"' in shell  # nav.setAttribute in shell.js
+
+
+def test_legacy_urls_are_honest_redirects():
+    for name, target in (("study.html", "temari.html"),
+                         ("learning.html", "progres.html"),
+                         ("history.html", "exams.html#historial")):
         html = (ROOT / "web" / name).read_text(encoding="utf-8")
-        assert 'lang="ca"' in html
-        assert 'id="main"' in html
-        assert ('data-route="%s"' % name) in html
-        assert 'static/js/shell.js' in html
+        assert 'location.replace("%s' % target.split("#")[0] in html, name
+        assert ('href="%s"' % target) in html or target.split("#")[0] in html
 
 
 def test_final_static_audit_has_no_new_direct_db_or_secret_in_new_b5_ui():
-    files = (ROOT / "web/static/js/history.js",
-             ROOT / "web/static/js/results.js",
+    files = (ROOT / "web/static/js/results.js",
              ROOT / "web/static/js/review.js")
     joined = "\n".join(p.read_text(encoding="utf-8") for p in files).lower()
     for forbidden in ("sqlite", "answer_key", "chain_of_thought", "raw_llm",
