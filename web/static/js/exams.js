@@ -58,7 +58,7 @@
     if (act) {
       card.appendChild(link("button button--secondary exam-card__cta",
         t(act.key),
-        act.page + "?exam_session_id=" + encodeURIComponent(id)));
+        act.page + "?xsid=" + encodeURIComponent(id)));
     } else {
       var closed = el("span", "badge badge--neutral", t("exam.closed"));
       card.appendChild(closed);
@@ -99,7 +99,7 @@
     if (r.available) {
       resCell.appendChild(link("button button--ghost exam-hist__revisar",
         t("exam.review"),
-        "review.html?exam_session_id=" + encodeURIComponent(id)));
+        "review.html?xsid=" + encodeURIComponent(id)));
     } else {
       resCell.appendChild(el("span", "exam-hist__muted",
         r.reason || t("exam.noResult")));
@@ -210,7 +210,7 @@
           out.appendChild(al);
           return;
         }
-        window.location.href = "exam.html?exam_session_id=" +
+        window.location.href = "exam.html?xsid=" +
           encodeURIComponent(res.data.exam_session.session_id);
       }).catch(function () {
         go.disabled = false;
