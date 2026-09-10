@@ -60,11 +60,14 @@
   }
 
   var SVGNS = "http://www.w3.org/2000/svg";
+  var XLINKNS = "http://www.w3.org/1999/xlink";
   var ringSeq = 0;
   function svgEl(tag, attrs) {
     var node = document.createElementNS(SVGNS, tag);
     for (var k in attrs) {
-      if (Object.prototype.hasOwnProperty.call(attrs, k)) node.setAttribute(k, attrs[k]);
+      if (!Object.prototype.hasOwnProperty.call(attrs, k)) continue;
+      if (k === "xlink:href") node.setAttributeNS(XLINKNS, k, attrs[k]);
+      else node.setAttribute(k, attrs[k]);
     }
     return node;
   }
@@ -152,7 +155,8 @@
     wrap.setAttribute("aria-hidden", "true");
     if (kind === "error") {
       var svg = svgEl("svg", {});
-      svg.appendChild(svgEl("use", { href: "static/icons.svg#alert-triangle" }));
+      svg.appendChild(svgEl("use", { href: "static/icons.svg#alert-triangle",
+                                     "xlink:href": "static/icons.svg#alert-triangle" }));
       wrap.appendChild(svg);
     } else {
       /* no empty-state symbol in icons.svg sprite -> keep glyph for empty */
