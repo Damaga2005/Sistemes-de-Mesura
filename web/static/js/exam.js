@@ -7,6 +7,8 @@
   var COUNT = 0;
   var POS = 0;
   var TIMER = null;
+  var CURRENT_GET = null;   /* reader for the current question's live input */
+  var PENDING_SEED = null;  /* one-shot {pos,value}: unsaved input kept across a re-render */
 
   var smUI = window.smUI || null;
   var t = (window.smI18n && window.smI18n.t) || function (k) { return k; };
@@ -200,6 +202,7 @@
   }
 
   function loadQuestion(qbox) {
+    CURRENT_GET = null;
     qbox.innerHTML = "";
     var live = el("p", null, t("common.loading"));
     live.setAttribute("role", "status");
@@ -227,7 +230,11 @@
       qbox.appendChild(card);
       var form = document.createElement("form");
       var saved = (STATE.answers || {})[String(POS)];
-      var get = buildInput(q, form, saved ? saved.answer : "");
+      var seed = saved ? saved.answer : "";
+      if (PENDING_SEED && PENDING_SEED.pos === POS) seed = PENDING_SEED.value;
+      PENDING_SEED = null;
+      var get = buildInput(q, form, seed);
+      CURRENT_GET = get;
       var row = el("p");
       var save = el("button", "button button--secondary", t("exam.save"));
       save.type = "submit";
@@ -453,6 +460,25 @@
       card.appendChild(ul);
       box.appendChild(card);
     });
+  }
+
+  /* Language switch: re-render in place instead of reloading the page, so an
+     in-progress exam keeps its unsaved answer, position, timer and session.
+     Saved answers, status and expiry are server-owned and come back via
+     load()/render(); only the volatile unsaved input needs carrying over. */
+  function relang() {
+    if (!STATE) return true;
+    if (STATE.status === "IN_PROGRESS" && CURRENT_GET) {
+      var v = CURRENT_GET();
+      if (typeof v === "string" && v !== "") {
+        PENDING_SEED = { pos: POS, value: v };
+      }
+    }
+    render();
+    return true;
+  }
+  if (window.smI18n && window.smI18n.onChange) {
+    window.smI18n.onChange(relang);
   }
 
   XS = xsid();

@@ -208,18 +208,30 @@
   var lang = "ca";
   try { var s = window.localStorage.getItem("sm-lang");
         if (s === "ca" || s === "es") lang = s; } catch (e) { /* no storage: CA */ }
+  var listeners = [];
   function t(key) {
     var table = DICT[lang] || DICT.ca;
     return Object.prototype.hasOwnProperty.call(table, key) ? table[key]
          : (DICT.ca[key] !== undefined ? DICT.ca[key] : key);
+  }
+  /* Register a live re-render callback. If any callback returns true the page
+     has re-rendered itself in place and setLang skips the full reload — this
+     is how the exam player keeps in-progress answers on a CA<->ES switch. */
+  function onChange(fn) {
+    if (typeof fn === "function") listeners.push(fn);
   }
   function setLang(l) {
     if (l !== "ca" && l !== "es") return;
     lang = l;
     try { window.localStorage.setItem("sm-lang", l); } catch (e) { /* ignore */ }
     document.documentElement.setAttribute("lang", l);
-    window.location.reload();
+    var handled = false;
+    for (var i = 0; i < listeners.length; i++) {
+      try { if (listeners[i]() === true) handled = true; } catch (e) { /* ignore */ }
+    }
+    if (!handled) window.location.reload();
   }
   document.documentElement.setAttribute("lang", lang);
-  window.smI18n = { get lang() { return lang; }, t: t, setLang: setLang, dict: DICT };
+  window.smI18n = { get lang() { return lang; }, t: t, setLang: setLang,
+                    onChange: onChange, dict: DICT };
 })();
