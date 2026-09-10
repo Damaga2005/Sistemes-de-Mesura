@@ -6,6 +6,15 @@
 > en el packaging, `.gitattributes` para EOL reproducible, y CI mínima en
 > GitHub Actions (verde). Ver DECISION_LOG D179–D182 y §5. Sustituye a
 > cualquier lectura de roadmap anterior que asuma multiusuario.
+>
+> **Posterior a este snapshot (2026-09-09):** el cuerpo describe `main` en
+> v1.0.0. Después se mergearon, cada uno vía su PR y sin merge directo,
+> **F17** (rediseño de producto / UI; merge `80a0ddb`), **F18** (residuales
+> de F17; merge `2bb4842`) y **F19** (aplicación de escritorio para Windows;
+> merge `740f14d`, HEAD actual de `main`). Para F19 ver
+> `docs/F19_DESKTOP_APP.md` y `CHANGELOG.md`. Las secciones §2–§6 de abajo
+> aún describen el estado v1.0.0 y su actualización a F17–F19 queda para una
+> pasada propia.
 
 ## 1. Qué es este producto (y qué no es)
 

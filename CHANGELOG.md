@@ -2,6 +2,26 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/).
 
+## [Unreleased]
+
+### Added
+- **Aplicación de escritorio para Windows** (F19): `SistemesDeMesura.exe`,
+  ventana `pywebview` / WebView2 sobre el servidor local, empaquetada con
+  PyInstaller en un solo fichero. `escritorio.py` lanza `web.server` en un
+  hilo daemon con `--port 0` y descubre el puerto efímero vía `$SM_PORT_FILE`;
+  sin puente JS↔Python. Se genera con `.\build.ps1`; extras opcionales
+  `pip install -e ".[desktop,build]"`. La instalación base y el job Linux de
+  CI no cambian; se añade un job `desktop` independiente en `windows-latest`.
+  Requiere el WebView2 Runtime (no se empaqueta). Ver `docs/F19_DESKTOP_APP.md`
+  y DECISION_LOG D188.
+
+### Changed
+- `web/server.py::main()`: publicación de puerto **opt-in** — si
+  `$SM_PORT_FILE` está definido, escribe el puerto realmente enlazado tras el
+  `bind` del `ThreadingHTTPServer` y antes de `serve_forever()` (sin sonda
+  `bind→close→rebind`). Con la variable sin definir, el servidor es idéntico
+  al anterior.
+
 ## [1.0.0] - 2026-09-09
 
 ### Added

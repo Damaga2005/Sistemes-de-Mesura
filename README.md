@@ -20,6 +20,7 @@ sin respaldo suficiente, el sistema se abstiene
 | `Tema 1/` … `Tema 10/` | **Material del curso** (HTML de teoría + PDF de apunts, en catalán). Fuente inmutable, solo lectura. |
 | `app/` | Pipeline y dominio: ingesta, retrieval, reasoning, examiner, correction, mastery, adaptive, exam, review, application layer, CLI, migraciones, backup, integridad, logs. |
 | `web/` | Servidor HTTP stdlib + UI (HTML/CSS/JS vanilla, sin frameworks). |
+| `escritorio.py`, `escritorio.spec`, `build.ps1`, `icono.ico` | Empaquetado de escritorio para Windows (`pywebview` + PyInstaller → `SistemesDeMesura.exe`). Ver [`docs/F19_DESKTOP_APP.md`](docs/F19_DESKTOP_APP.md). |
 | `data/processed/`, `data/index/`, `data/generated/` | Artefactos derivados del material (SQLite + índice). Versionados. |
 | `docs/` | Documentación del proyecto (español). Empieza por `ESTADO_DEL_PROYECTO.md`. |
 | `tests/` | `pytest`, stdlib. |
@@ -34,6 +35,11 @@ tests).
 
 **Windows (doble clic):** `scripts/abrir-app.cmd` — hace `init`, abre el
 navegador y arranca el servidor en `http://127.0.0.1:8901`.
+
+**Windows (aplicación de escritorio):** `SistemesDeMesura.exe` — ventana
+nativa WebView2 sobre el mismo servidor local, empaquetada con PyInstaller.
+Se genera con `.\build.ps1` (requiere `pip install -e ".[desktop,build]"`).
+Detalle en [`docs/F19_DESKTOP_APP.md`](docs/F19_DESKTOP_APP.md).
 
 **Cualquier plataforma:**
 
