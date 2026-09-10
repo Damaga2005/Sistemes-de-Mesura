@@ -18,6 +18,10 @@ datas = [
     _d("data/evaluation/eval.sqlite", "data/evaluation"),
     _d("data/ARTIFACT-MANIFEST.json", "data"),
     _d(".env.example", "."),
+    _d("app/llm/prompts", "app/llm/prompts"),
+    _d("app/examiner/prompts", "app/examiner/prompts"),
+    _d("app/correction/prompts", "app/correction/prompts"),
+    _d("app/migrations", "app/migrations"),
 ]
 
 a = Analysis(

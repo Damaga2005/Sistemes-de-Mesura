@@ -13,6 +13,10 @@ REQUIRED = [
     '"data/evaluation/eval.sqlite"',
     '"data/ARTIFACT-MANIFEST.json"',
     '".env.example"',
+    '_d("app/llm/prompts"',
+    '_d("app/examiner/prompts"',
+    '_d("app/correction/prompts"',
+    '_d("app/migrations"',
 ]
 FORBIDDEN = ["chunks.jsonl", "formulas.jsonl", "students.sqlite",
              "data/metadata", "ingestion_report", "data/student"]
