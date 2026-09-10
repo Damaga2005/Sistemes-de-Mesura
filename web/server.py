@@ -1169,7 +1169,16 @@ def main(argv=None) -> int:
     Handler.timeout = int(os.environ.get("SM_REQUEST_TIMEOUT") or 30)
     srv = ThreadingHTTPServer((args.host, args.port), Handler)
     print("Sistemes de Mesura a http://%s:%d (dades: %s)"
-          % (args.host, args.port, data))
+          % (args.host, srv.server_address[1], data))
+    # F19: opt-in port publication for the desktop launcher. Only when
+    # SM_PORT_FILE is set; written after the real bind, before serving; the
+    # server's own bind is the only bind (no TOCTOU probe/close/rebind).
+    _port_file = os.environ.get("SM_PORT_FILE")
+    if _port_file:
+        try:
+            Path(_port_file).write_text(str(srv.server_address[1]), encoding="utf-8")
+        except OSError:
+            pass
     try:
         srv.serve_forever()
     except KeyboardInterrupt:

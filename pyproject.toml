@@ -11,6 +11,13 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest"]
+desktop = [
+    "pywebview>=5.4",
+    "pythonnet>=3.0; sys_platform=='win32'",
+]
+build = [
+    "pyinstaller>=6.0",
+]
 
 [project.scripts]
 sistemes-web = "web.server:main"
