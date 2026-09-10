@@ -14,6 +14,14 @@
     { group: "nav.g.avaluacio", items: [
       { key: "nav.examens", href: "exams.html", icon: "clipboard-check" } ] }
   ];
+  /* Sub-pages that belong to a nav section but are not themselves nav targets.
+     Their route resolves to the parent section so the sidebar still shows one
+     active item. Pages outside every section (documents/calendar) map nowhere. */
+  var SECTION_OF = {
+    "topic.html": "temari.html", "content.html": "temari.html",
+    "exam.html": "exams.html", "results.html": "exams.html",
+    "review.html": "exams.html"
+  };
   function icon(name) {
     return '<svg class="icon" aria-hidden="true"><use href="static/icons.svg#' + name + '"></use></svg>';
   }
@@ -38,12 +46,13 @@
   }
 
   function renderNav(nav, route) {
+    var section = SECTION_OF[route] || route;
     var html = '<a class="brand brand--rail" href="index.html">' +
       '<span class="brand-mark" aria-hidden="true">Σ</span>Sistemes de Mesura</a><ul class="nav-list">';
     NAV.forEach(function (sec) {
       if (sec.group) html += '<li class="nav-group" aria-hidden="true">' + t(sec.group) + '</li>';
       sec.items.forEach(function (it) {
-        var active = it.href === route;
+        var active = it.href === route || it.href === section;
         html += '<li><a class="nav-link" href="' + it.href + '"' +
           (active ? ' aria-current="page"' : '') + '>' + icon(it.icon) +
           '<span>' + t(it.key) + '</span></a></li>';
