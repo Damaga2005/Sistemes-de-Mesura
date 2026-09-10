@@ -146,12 +146,23 @@
     return t("time.ago") + " " + Math.round(hrs / 24) + " " + t("time.day");
   }
 
+  function stateIcon(kind) {
+    var wrap = el("div", "state-block__icon");
+    wrap.setAttribute("aria-hidden", "true");
+    if (kind === "error") {
+      var svg = svgEl("svg", {});
+      svg.appendChild(svgEl("use", { href: "static/icons.svg#alert-triangle" }));
+      wrap.appendChild(svg);
+    } else {
+      /* no empty-state symbol in icons.svg sprite -> keep glyph for empty */
+      wrap.textContent = "○";
+    }
+    return wrap;
+  }
+
   function stateBlock(kind, opts) {
     var block = el("div", "state-block");
-    var mark = kind === "error" ? "△" : "○";
-    var iconWrap = el("div", "state-block__icon", mark);
-    iconWrap.setAttribute("aria-hidden", "true");
-    block.appendChild(iconWrap);
+    block.appendChild(stateIcon(kind));
     block.appendChild(el("h2", null,
       t(kind === "error" ? "state.errorTitle" : "state.emptyTitle")));
     block.appendChild(el("p", null, opts.message ||
@@ -251,18 +262,29 @@
     }
   }
 
-  var PROVIDER_COLOR = {
-    gemini: "var(--accent)", fallback: "var(--warning)",
-    local: "var(--text-tertiary)", ready: "var(--text-tertiary)"
+  /* raw /api/tutor/ask provider value -> internal key (spec §5.3) */
+  var PROVIDER_KEY = {
+    "gemini": "gemini",
+    "extractive-fallback": "fallback",
+    "extractive": "local"
   };
+  var PROVIDER_KEYS = ["gemini", "fallback", "local", "ready"];
   function setProvider(providerName) {
-    var name = String(providerName || "ready").toLowerCase();
-    if (!PROVIDER_COLOR[name]) name = "ready";
+    var raw = String(providerName || "").toLowerCase();
+    var key = PROVIDER_KEY[raw] || "ready";
+    var hint = key === "fallback" ? t("provider.fallbackHint") : null;
     var dot = document.getElementById("provider-dot");
     var label = document.getElementById("provider-label");
-    if (dot) dot.style.color = PROVIDER_COLOR[name];
+    if (dot) {
+      for (var i = 0; i < PROVIDER_KEYS.length; i++) {
+        dot.classList.remove("provider-dot--" + PROVIDER_KEYS[i]);
+      }
+      dot.classList.add("provider-dot--" + key);
+      if (hint) dot.setAttribute("title", hint); else dot.removeAttribute("title");
+    }
     if (label) {
-      label.textContent = t(name === "ready" ? "provider.ready" : "provider." + name);
+      label.textContent = t("provider." + key);
+      if (hint) label.setAttribute("title", hint); else label.removeAttribute("title");
     }
   }
 

@@ -88,6 +88,11 @@ body { min-height: 100dvh; }
   inline-size: 8px; block-size: 8px; border-radius: var(--radius-full);
   background: currentColor; flex: none;
 }
+/* provider indicator state (spec §5.3) -- class toggle, no inline style */
+.provider-dot--gemini { color: var(--accent); }
+.provider-dot--fallback { color: var(--warning); }
+.provider-dot--local,
+.provider-dot--ready { color: var(--text-tertiary); }
 
 /* ---- content ---- */
 .main { padding: var(--sp-lg) var(--sp-md) var(--sp-3xl); }

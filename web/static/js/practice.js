@@ -137,7 +137,11 @@
     if (status === "NO_ANSWER") {
       return { cls: "alert--warning", icon: "○", text: t("practice.noAnswer") };
     }
-    return { cls: "alert--danger", icon: "✗", text: t("practice.incorrect") };
+    if (status === "INCORRECT") {
+      return { cls: "alert--danger", icon: "✗", text: t("practice.incorrect") };
+    }
+    /* PARTIALLY_CORRECT / NEEDS_REVIEW / UNGRADABLE: neutral, not a hard "wrong" */
+    return { cls: "alert--neutral", icon: "•", text: t("practice.review") };
   }
 
   function renderCorrection(box, res) {

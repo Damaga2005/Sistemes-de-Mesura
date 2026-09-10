@@ -88,6 +88,13 @@
     });
   }
 
+  // Known /api/exam/history result.reason tokens -> friendly CA/ES copy.
+  var REASON = { RESULT_NOT_AVAILABLE: "exam.reasonNotAvailable" };
+  function reasonText(reason) {
+    if (!reason) return t("exam.noResult");
+    return REASON[reason] ? t(REASON[reason]) : t("exam.reasonUnknown");
+  }
+
   function historyRow(item) {
     var id = String(item.session_id);
     var tr = el("tr", "exam-hist__row");
@@ -101,8 +108,7 @@
         t("exam.review"),
         "review.html?xsid=" + encodeURIComponent(id)));
     } else {
-      resCell.appendChild(el("span", "exam-hist__muted",
-        r.reason || t("exam.noResult")));
+      resCell.appendChild(el("span", "exam-hist__muted", reasonText(r.reason)));
     }
     tr.appendChild(resCell);
 

@@ -326,6 +326,7 @@ a.card:hover, .card--link:hover {
 .alert--warning { border-left-color: var(--warning); background: var(--warning-soft); }
 .alert--danger { border-left-color: var(--danger); background: var(--danger-soft); }
 .alert--info { border-left-color: var(--info); background: var(--info-soft); }
+.alert--neutral { border-left-color: var(--border-strong); }
 
 /* ---- Toast ---- */
 .toast-region {
@@ -402,6 +403,7 @@ a.card:hover, .card--link:hover {
   background: var(--surface-elevated); border-radius: var(--radius-lg);
   font-size: 2.5rem; color: var(--text-secondary);
 }
+.state-block__icon svg { inline-size: 2rem; block-size: 2rem; }
 .state-block h2 { font-size: var(--fs-h2); margin-bottom: var(--sp-sm); }
 .state-block p { color: var(--text-secondary); margin: 0 auto var(--sp-md); }
 .state-code {
@@ -414,4 +416,5 @@ a.card:hover, .card--link:hover {
   .skeleton { animation: none; background: var(--surface-elevated); }
   .chat__typing span { animation: none; opacity: 0.6; }
   .progress__fill, .progress-ring__value { transition: none; }
+  .drawer { transition: none; }
 }

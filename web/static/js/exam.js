@@ -8,6 +8,9 @@
   var POS = 0;
   var TIMER = null;
 
+  var smUI = window.smUI || null;
+  var t = (window.smI18n && window.smI18n.t) || function (k) { return k; };
+
   function el(tag, cls, text) {
     var e = document.createElement(tag);
     if (cls) e.className = cls;
@@ -74,6 +77,15 @@
     api("/api/exam/state?exam_session_id=" + encodeURIComponent(XS))
       .then(function (res) {
         if (res.status !== 200) {
+          stopTimer();
+          if (smUI && smUI.setState) {
+            smUI.setState(box, "error", {
+              code: res.status,
+              message: (res.data && res.data.message) || undefined,
+              retry: function () { load(); }
+            });
+            return;
+          }
           box.innerHTML = "";
           var al = el("div", "alert alert--danger");
           al.setAttribute("role", "alert");
@@ -81,16 +93,19 @@
           al.appendChild(el("p", null,
             (res.data && res.data.message) || ""));
           box.appendChild(al);
-          stopTimer();
           return;
         }
         STATE = res.data;
         render();
       }).catch(function () {
-        if (!silent) {
-          box.innerHTML = "";
-          box.appendChild(el("p", null, "Error de xarxa."));
+        if (silent) return;
+        stopTimer();
+        if (smUI && smUI.setState) {
+          smUI.setState(box, "error", { retry: function () { load(); } });
+          return;
         }
+        box.innerHTML = "";
+        box.appendChild(el("p", null, "Error de xarxa."));
       });
   }
 
@@ -186,7 +201,7 @@
 
   function loadQuestion(qbox) {
     qbox.innerHTML = "";
-    var live = el("p", null, "Carregant pregunta…");
+    var live = el("p", null, t("common.loading"));
     live.setAttribute("role", "status");
     qbox.appendChild(live);
     api("/api/exam/question?exam_session_id=" + encodeURIComponent(XS) +

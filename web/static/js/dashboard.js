@@ -131,7 +131,7 @@
     }
     if (seen) {
       ui.setState(dom, "ready");
-      dom.appendChild(ui.progressRing(total / seen, t("dash.domini")));
+      dom.appendChild(ui.progressRing(total / seen));
       dom.appendChild(ui.el("div", "stat-card__label", t("dash.domini")));
     } else {
       statCard(dom, DASH, t("dash.domini"), t("dash.noData"));
@@ -159,8 +159,9 @@
           return;
         }
         var list = (priRes.data && priRes.data.priorities) || [];
-        var topics = (topRes.status === 200 && topRes.data && topRes.data.topics) || [];
-        renderReinforce(region, section, list, topics);
+        var topicsOk = topRes.status === 200;
+        var topics = (topicsOk && topRes.data && topRes.data.topics) || [];
+        renderReinforce(region, section, list, topics, topicsOk);
       },
       function () { ui.setState(region, "error", { retry: loadReinforce }); }
     );
@@ -173,13 +174,16 @@
     return null;
   }
 
-  function topicCard(no, info) {
+  function topicCard(no, info, topicsOk) {
     var card = ui.el("article", "topic-card card");
     var head = ui.el("div", "topic-card__head");
     head.appendChild(ui.el("span", "pill", t("dash.topic") + " " + no));
     var mInfo = info && info.mastery ? info.mastery : null;
-    var state = ui.statusFromMastery(mInfo);
-    head.appendChild(ui.badge(t(state.labelKey), state.key));
+    /* topics/mastery fetch failed -> status unknown, show no badge (not a false "No iniciat") */
+    if (topicsOk) {
+      var state = ui.statusFromMastery(mInfo);
+      head.appendChild(ui.badge(t(state.labelKey), state.key));
+    }
     card.appendChild(head);
     if (hasScore(mInfo)) {
       card.appendChild(ui.progressBar(mInfo.score, t("dash.domini")));
@@ -195,7 +199,7 @@
     return card;
   }
 
-  function renderReinforce(region, section, list, topics) {
+  function renderReinforce(region, section, list, topics, topicsOk) {
     var picked = [], byTopic = {}, i, tp;
     for (i = 0; i < list.length && picked.length < 3; i++) {
       tp = list[i] && list[i].targets ? list[i].targets.topic : null;
@@ -210,7 +214,7 @@
     if (section) section.hidden = false;
     ui.setState(region, "ready");
     for (i = 0; i < picked.length; i++) {
-      region.appendChild(topicCard(picked[i], findTopic(topics, picked[i])));
+      region.appendChild(topicCard(picked[i], findTopic(topics, picked[i]), topicsOk));
     }
   }
 
