@@ -11,16 +11,21 @@ CASES = ROOT / "data/evaluation/phase_11_b5_review_results_history_benchmark.jso
 def evaluate() -> dict:
     cases = [json.loads(line) for line in CASES.read_text(
         encoding="utf-8").splitlines() if line.strip()]
+    # Post-F17: history.js was removed and the Historial view folded into the
+    # Exàmens page; its presentation surface is now web/static/js/exams.js /
+    # web/exams.html (F17 Task 10). history.html is an honest redirect stub.
     scripts = "\n".join((ROOT / "web/static/js" / name).read_text(
-        encoding="utf-8") for name in ("history.js", "results.js", "review.js"))
+        encoding="utf-8") for name in ("results.js", "review.js", "exams.js"))
     pages = [ROOT / "web" / name for name in
-             ("history.html", "results.html", "review.html")]
+             ("exams.html", "results.html", "review.html")]
     checks = {
         "RESULTS": lambda: "api/exam/result" in scripts and
         "student_id" not in scripts,
         "REVIEW": lambda: all(x not in scripts for x in
                                ("correct_answer", "expected_answer", "solution")),
-        "HISTORY": lambda: "api/exam/history" in scripts,
+        "HISTORY": lambda: "api/exam/history" in scripts and
+        'location.replace("exams.html#historial")' in (
+            ROOT / "web/history.html").read_text(encoding="utf-8"),
         "REAL_EXAM_BLIND": lambda: all(x not in scripts for x in
                                         ("answer_key", "provider", "raw_llm")),
         "SECURITY_IDOR": lambda: all('aria-live="polite"' in p.read_text(

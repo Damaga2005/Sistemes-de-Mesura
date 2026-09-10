@@ -17,16 +17,34 @@ def _text(path):
 
 
 def _checks():
-    pages = [ROOT / "web" / name for name in
-             ("index.html", "study.html", "learning.html", "practice.html",
-              "exams.html", "exam.html", "history.html", "results.html",
-              "review.html")]
+    # Post-F17: every product page keeps its own <main id="main">, but the
+    # shared chrome and the "Principal" nav landmark now come from the single
+    # injected source (web/static/js/shell.js). study/learning/history are
+    # honest redirect stubs, not app-shell pages (F17 D186).
+    shell_pages = [ROOT / "web" / name for name in
+                   ("index.html", "temari.html", "tutor.html", "practice.html",
+                    "progres.html", "exams.html", "exam.html", "results.html",
+                    "review.html")]
+    legacy_redirects = {"study.html": "temari.html",
+                        "learning.html": "progres.html",
+                        "history.html": "exams.html#historial"}
+    shell_js = _text(ROOT / "web/static/js/shell.js")
+    # history.js was removed in F17; the exam-history presentation surface is
+    # now web/static/js/exams.js (Historial folded into Exàmens, F17 Task 10).
     js = "\n".join(_text(ROOT / "web/static/js" / name) for name in
-                       ("history.js", "results.js", "review.js"))
+                       ("results.js", "review.js", "exams.js"))
+
+    def _honest_redirect(src, tgt):
+        html = _text(ROOT / "web" / src)
+        base = tgt.split("#")[0]
+        return ('location.replace("%s' % base) in html and base in html
+
     checks = {}
-    checks["APP_SHELL"] = all('id="main"' in _text(p) and
-                               'aria-label="Principal"' in _text(p)
-                               for p in pages)
+    checks["APP_SHELL"] = (
+        all('id="main"' in _text(p) for p in shell_pages)
+        and '"aria-label", "Principal"' in shell_js
+        and all(_honest_redirect(src, tgt)
+                for src, tgt in legacy_redirects.items()))
 
     from web.server import Bridge
     with tempfile.TemporaryDirectory(prefix="sm-b6-") as work:
