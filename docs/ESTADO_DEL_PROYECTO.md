@@ -7,14 +7,27 @@
 > GitHub Actions (verde). Ver DECISION_LOG D179–D182 y §5. Sustituye a
 > cualquier lectura de roadmap anterior que asuma multiusuario.
 >
-> **Posterior a este snapshot (2026-09-09):** el cuerpo describe `main` en
-> v1.0.0. Después se mergearon, cada uno vía su PR y sin merge directo,
-> **F17** (rediseño de producto / UI; merge `80a0ddb`), **F18** (residuales
-> de F17; merge `2bb4842`) y **F19** (aplicación de escritorio para Windows;
-> merge `740f14d`, HEAD actual de `main`). Para F19 ver
-> `docs/F19_DESKTOP_APP.md` y `CHANGELOG.md`. Las secciones §2–§6 de abajo
-> aún describen el estado v1.0.0 y su actualización a F17–F19 queda para una
-> pasada propia.
+> **Estado actual — 2026-09-11, `main` en `d50adb7`.** El snapshot base de
+> arriba es el cierre v1.0.0 (2026-09-09). Desde entonces se mergearon, cada
+> uno vía PR y sin merge directo a `main`:
+> - **F17** — rediseño de producto / UI (dark-first, shell inyectada por JS,
+>   i18n CA/ES del chrome, componentes compartidos, navegación reducida).
+>   Merge `80a0ddb` (PR #1). DECISION_LOG D183–D187, `docs/F17_*`.
+> - **F18** — residuales de F17 (estado de examen estable al cambiar idioma,
+>   `aria-current`, compat de iconos SVG, benchmarks de certificación,
+>   limpieza). Merge `2bb4842` (PR #2), items F18-01…F18-05.
+> - **F19** — aplicación de escritorio para Windows (`SistemesDeMesura.exe`,
+>   `pywebview`/WebView2 + PyInstaller). Merge `740f14d` (PR #3) + cierre
+>   documental `d50adb7` (PR #4). DECISION_LOG D188, `docs/F19_DESKTOP_APP.md`.
+>   Gates PASS: build, smoke del `.exe`, persistencia, security review, cambio
+>   de idioma en runtime (F18-02) manual sobre el `.exe` (2026-09-10).
+>
+> Actualizadas en esta pasada: §2 (tabla de fases: +F17/F18/F19), §3
+> (filas nuevas de app de escritorio y CI/branch-protection en 🟢; se retiran
+> de 🔴 los ítems ya cerrados de CI/protección/tag), §5 (pruebas), §6
+> (repositorio). Las secciones §1, §4 y §7, y el resto de §3 🟢/🟡,
+> conservan el detalle de v1.0.0 (vigente). `docs/PHASE_*` y `docs/F17_*`
+> son registro histórico y no se tocan.
 
 ## 1. Qué es este producto (y qué no es)
 
@@ -56,11 +69,15 @@ multiusuario, load testing.
 | **Integración Gemini** | Tutor con `GeminiProvider` real (selección `auto\|gemini\|extractive`) + fallback extractivo ante fallo del proveedor | 🟢 **Implementada y validada end-to-end** (`a3e5d5e`) |
 | **F13** | Vertical Documents + contrato Calendar | 🟡 **Parcial** (ver §4) |
 | **F14** | Packaging local `1.0.0` | 🟢 **Verificada end-to-end** (2026-09-09): `package.ps1` → carpeta nueva → `install.ps1` → `init`/`check`/`serve` → `/api/health` `ok` → smoke tutor/practice + persistencia tras reinicio. Ver `docs/PHASE_14_PACKAGING.md`. Sin instalador MSI (fuera de alcance). |
+| **F17** | Rediseño de producto / UI (dark-first, shell inyectada, i18n CA/ES, componentes, nav reducida) | 🟢 **Completada** — merge `80a0ddb` (PR #1). D183–D187. Docs `F17_UI_AUDIT` / `F17_UI_DESIGN` / `F17_IMPLEMENTATION` / `F17_BEFORE_AFTER`. |
+| **F18** | Residuales de F17 (estado de examen al cambiar idioma, `aria-current`, iconos SVG, benchmarks, limpieza) | 🟢 **Completada** — merge `2bb4842` (PR #2), items F18-01…F18-05. |
+| **F19** | Aplicación de escritorio para Windows (`SistemesDeMesura.exe`, `pywebview`/WebView2 + PyInstaller) | 🟢 **Completada** — merge `740f14d` (PR #3) + `d50adb7` (PR #4). D188, `docs/F19_DESKTOP_APP.md`. Gates PASS: build, smoke del `.exe`, persistencia, security review, cambio de idioma F18-02 (manual sobre el `.exe`, 2026-09-10). CI Linux + Windows verde. |
 | **F15** | Despliegue (staging → producción, proxy, HTTPS) | 🔴 No iniciada (fuera de alcance por decisión) |
 | **F16** | Certificación operativa (smoke post-deploy, load test, dependency audit, release) | 🔴 No iniciada |
 
 Los `docs/PHASE_0..11_*.md` son los registros históricos de certificación
-de F0–F11 y no se modifican.
+de F0–F11 y no se modifican. Los `docs/F17_*` son el registro de F17 y
+tampoco se tocan.
 
 ## 3. Estado por funcionalidad
 
@@ -83,7 +100,9 @@ de F0–F11 y no se modifican.
 | Health check | `GET /api/health` → 200/503, sin auth ni CSRF. |
 | Logs | `app/logsetup.py`: `serve.log` + `error.log` rotados (5 MiB × 5), sin contenido de estudiante, línea por petición (método/ruta/status/ms). |
 | CLI | `sistemes init | serve | ingest | check | backup | restore` (+ alias `sistemes-web`). |
-| Packaging | `pyproject.toml` `1.0.0`, `requires-python >=3.11,<3.15`, `dependencies = []`. `scripts/install.ps1`, `scripts/package.ps1`, `scripts/abrir-app.cmd`. `CHANGELOG.md`, `docs/RELEASE_CHECKLIST.md`. |
+| Packaging | `pyproject.toml` `1.0.0`, `requires-python >=3.11,<3.15`, `dependencies = []`. `scripts/install.ps1`, `scripts/package.ps1`, `scripts/abrir-app.cmd`. `CHANGELOG.md`, `docs/RELEASE_CHECKLIST.md`. Extras opcionales `desktop` / `build` para F19. |
+| App de escritorio Windows (F19) | `escritorio.py` (ventana `pywebview`/WebView2) + `escritorio.spec` + `build.ps1` + `icono.ico` → `SistemesDeMesura.exe` (PyInstaller, un fichero). Único cambio de backend: publicación de puerto opt-in `$SM_PORT_FILE` en `web/server.py::main()`. Datos escribibles siguen en `%LOCALAPPDATA%\SistemesDeMesura\`. Ver `docs/F19_DESKTOP_APP.md`, D188. |
+| CI / branch protection | `.github/workflows/ci.yml` (D182): job `tests + integrity` (ubuntu, Python 3.14, `pytest` + `app.cli check`) como check **requerido**, y job `desktop build (windows)` (windows-latest, build + smoke del `.exe`, añadido en F19). `main` con `protected = true`. Tag `v1.0.0` → `a9c153e`. |
 
 ### 🟡 Parcial / con matices
 
@@ -105,10 +124,8 @@ de F0–F11 y no se modifican.
 | Study tras la Application Layer | El bridge abre SQLite del KB directamente (`web/server.py`: `_kb()`, `kb_topics/kb_documents/kb_sections/kb_content`). Deuda reconocida en F13. |
 | Despliegue (F15): WSGI/ASGI, reverse proxy, HTTPS gestionado, staging, producción | Fuera de alcance del producto local (D170). |
 | Certificación operativa (F16): smoke post-deploy, test de carga, dependency audit formal, release de producción | Depende de F15. |
-| CI (GitHub Actions) | No existe `.github/workflows/`. |
-| Branch protection en `main` | `protected = false`, sin required status checks. |
-| Firma de commits | Los commits no están firmados. |
-| Release `v1.0.0` publicado | Sin tag `v1.0.0` ni release en GitHub; `RELEASE_CHECKLIST.md` es un checklist, no evidencia de ejecución. |
+| Firma de commits locales | Los commits locales no van firmados; los merge commits que crea GitHub (PR #1–#4) sí llevan firma GPG de GitHub. |
+| Objeto *Release* en GitHub | El tag `v1.0.0` existe (→ `a9c153e`), pero no hay un GitHub *Release* publicado; `RELEASE_CHECKLIST.md` sigue siendo un checklist. |
 
 ## 4. Deudas técnicas conocidas (ninguna es P0)
 
@@ -134,16 +151,35 @@ de F0–F11 y no se modifican.
 ## 5. Estado de pruebas
 
 ```
-# Local (Windows, Python 3.14, con GEMINI_API_KEY) — dos pasadas consecutivas
-python -m pytest tests/ -q   ->  889 passed, 0 failed, 0 skipped   (605 s / 772 s)
+# main d50adb7 — 2026-09-11
+# Local (Windows, Python 3.14, GEMINI_API_KEY presente en el entorno)
+python -m pytest tests/ -q       ->  952 passed, 1 skipped, 0 failed
+python -m app.cli check          ->  check OK
+python -m app.cli check --status ->  sin desajustes
+python -m app.final_certification_benchmark     ->  125/125
+python -m app.review_results_history_benchmark  ->  100/100
 
-# CI (GitHub Actions, ubuntu-latest, Python 3.14, sin GEMINI_API_KEY)
-python -m pytest tests/ -q   ->  884 passed, 6 skipped, 0 failed
+# CI (GitHub Actions, ubuntu-latest, Python 3.14, sin GEMINI_API_KEY) — run 34533713174
+python -m pytest tests/ -q   ->  947 passed, 6 skipped, 0 failed
 python -m app.cli check      ->  check OK
+# (el job `desktop build (windows)` de F19 ejecuta la misma suite + build + smoke del .exe: verde)
+
+# Referencia histórica — cierre v1.0.0 (2026-09-09): local 889/0/0, CI 884/6/0.
 ```
 
-Los 6 skips en CI: 4 `@NEEDS_KEY` de Gemini (sin clave → ruta extractiva) +
-`test_home_defaults_..._on_windows` (skip en POSIX, con companion `..._xdg_on_posix`).
+El skip local (1): `test_home_defaults_..._xdg_on_posix` (companion POSIX,
+se salta en Windows). Los 6 skips en CI (Linux): el par invertido
+(`..._on_windows` se salta en POSIX) + los 5 tests marcados `@NEEDS_KEY`
+(`skipif(not GEMINI_API_KEY)`): `tests/reasoning/test_provider.py`
+(`test_live_theory_answer_verified`, `test_live_abstention_out_of_scope`,
+`test_live_calculation_verified`),
+`tests/correction/test_assist.py::test_live_assist_open` y
+`tests/web/test_tutor_provider.py::test_live_tutor_gemini_identifica_proveedor`.
+El delta local↔CI (+5 passed) son exactamente esos 5. Verificado 2026-09-11:
+en local, con `GEMINI_API_KEY` válida, los 5 corren contra la API real de
+Gemini (`gemini-3.5-flash-lite`; `versions.provider = {"provider":"gemini",
+"fallback_reason":null}`) y pasan; se saltan de forma honesta sólo si la API
+responde 429/5xx tras reintentos. Sin clave (CI) se saltan por el `skipif`.
 
 **Verde total.** Dos defectos, ambos preexistentes y ajenos a la
 integración Gemini, resueltos en el cierre:
@@ -161,11 +197,15 @@ integración Gemini, resueltos en el cierre:
   orden de las señales recency-weighted → score no determinista. Corregido a
   `timespec="microseconds"` (DECISION_LOG D180). Verificado 0/30 tras el fix.
 
-Los tests live de Gemini (`@NEEDS_KEY`) se ejecutan en este entorno (hay
-`GEMINI_API_KEY`) y pasan; en este shell la clave da 401, así que lo hacen
-por la ruta de fallback extractivo verificado. La validación con **Gemini
-real** se hizo por separado contra el servidor local en marcha (§3, provider
-de razonamiento).
+Los tests live de Gemini (`@NEEDS_KEY`) se ejecutan en local porque hay
+`GEMINI_API_KEY` en el entorno; con la clave actual alcanzan la API real
+(`gemini-3.5-flash-lite`, sin fallback) y pasan — verificado 2026-09-11.
+La validación end-to-end del proveedor real contra el servidor local en
+marcha se documenta en §3 (`a3e5d5e`).
+
+> Nota: hasta el cierre v1.0.0 la clave de este entorno devolvía 401 y estos
+> tests pasaban por la ruta de fallback extractivo verificado; con la clave
+> vigente ya llegan a Gemini real.
 
 ## 6. Repositorio
 
@@ -175,8 +215,14 @@ de razonamiento).
   `data/` derivados, `docs/`, `tests/`, packaging).
 - El material `Tema N/` es **fuente inmutable**: solo lectura, los
   derivados van a `data/processed/` con trazabilidad por hash.
-- Sin ramas adicionales. Historia lineal. Último commit relevante:
-  `a3e5d5e` (integración Gemini en el tutor), sobre `187610e` (docs).
+- Desde el cierre v1.0.0 la historia lleva merges de PR: `80a0ddb` (F17,
+  PR #1), `2bb4842` (F18, PR #2), `740f14d` (F19, PR #3), `d50adb7` (cierre
+  documental de F19, PR #4). **HEAD de `main`: `d50adb7`.** Tag `v1.0.0` →
+  `a9c153e`. Antes de F17 la historia era lineal; el último commit lineal
+  relevante fue `a3e5d5e` (integración Gemini) sobre `187610e` (docs).
+- Ramas de fase ya mergeadas que siguen en `origin` sin limpiar:
+  `feature/f17-product-ui`, `f18-residuals`. Las ramas de F19
+  (`f19-desktop-app`, `docs/f19-finalize`) se borraron tras el merge.
 
 ## 7. Si el objetivo vuelve a ser multiusuario
 

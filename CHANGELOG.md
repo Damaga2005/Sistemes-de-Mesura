@@ -16,11 +16,33 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/).
   y DECISION_LOG D188.
 
 ### Changed
-- `web/server.py::main()`: publicación de puerto **opt-in** — si
+- **Rediseño de producto / UI** (F17): sistema de tokens *dark-first* con
+  acento violeta, shell (cabecera + navegación) inyectada por JS, i18n CA/ES
+  completa del *chrome*, componentes compartidos (`web/static/js/ui.js`),
+  todas las páginas re-skinned, navegación reducida a funcionalidad real
+  (`Inici · Temari · Pràctica · Tutor IA · Progrés · Exàmens`);
+  `study.html` / `learning.html` / `history.html` pasan a *stubs* de
+  redirección. Inter *self-hosted*
+  (`web/static/fonts/InterVariable.woff2`) + una línea en `_MIME` de
+  `web/server.py` (`.woff2`) — único cambio de backend de F17. DECISION_LOG
+  D183–D187; `docs/F17_*`.
+- `web/server.py::main()`: publicación de puerto **opt-in** (F19) — si
   `$SM_PORT_FILE` está definido, escribe el puerto realmente enlazado tras el
   `bind` del `ThreadingHTTPServer` y antes de `serve_forever()` (sin sonda
   `bind→close→rebind`). Con la variable sin definir, el servidor es idéntico
   al anterior.
+
+### Removed
+- Borrador obsoleto de la UI de producto de F17 (F18-05).
+
+### Fixed
+- Estado de examen estable al cambiar de idioma en marcha: la respuesta sin
+  enviar, la posición/pregunta, el `xsid` de la sesión y el temporizador
+  sobreviven CA↔ES sin recarga (F18-02).
+- `aria-current="page"` en el elemento de navegación activo (F18-03).
+- Compatibilidad de los iconos SVG externos endurecida (F18-04).
+- Benchmarks de certificación manuales (`app/*_benchmark.py`) adaptados al
+  shell de F17 (F18-01).
 
 ## [1.0.0] - 2026-09-09
 
