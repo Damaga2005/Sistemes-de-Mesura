@@ -43,3 +43,7 @@ def test_status_thresholds_frozen():
     # exact boundary literals must appear (frozen contract)
     assert "0.4" in t and "0.75" in t and "0.95" in t
     assert "statusFromMastery" in t
+    # F17 Task 14 hardening: freeze the exact comparison operators and the
+    # attempts guard, not just the numeric substrings.
+    assert "v < 0.40" in t and "v < 0.75" in t and "v < 0.95" in t
+    assert re.search(r"!m\.attempts\s*\|\|\s*m\.attempts\s*<=\s*0", t)
