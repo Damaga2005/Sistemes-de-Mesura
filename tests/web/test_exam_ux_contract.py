@@ -164,6 +164,18 @@ def test_review_results_history_pages_are_direct_entry_points(tmp_path):
         assert 'aria-live="polite"' in page
 
 
+def test_exams_structure():
+    h = (ROOT / "web/exams.html").read_text(encoding="utf-8")
+    for i in ("exam-list", "exam-historial", "cfg-kind", "cfg-topics",
+              "cfg-count", "cfg-type", "cfg-diff", "cfg-seed", "cfg-go"):
+        assert 'id="%s"' % i in h, i
+    assert 'id="historial"' in h and 'data-route="exams.html"' in h
+    j = (ROOT / "web/static/js/exams.js").read_text(encoding="utf-8")
+    for ep in ("/api/exam/mine", "/api/exam/history", "/api/exam/create"):
+        assert ep in j, ep
+    assert "Math.random" not in j and ".sort(" not in j
+
+
 def test_review_formula_uses_existing_safe_renderer_for_authorized_feedback():
     server = (ROOT / "web" / "server.py").read_text(encoding="utf-8")
     review = (ROOT / "web" / "static" / "js" / "review.js").read_text(

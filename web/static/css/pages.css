@@ -119,3 +119,32 @@
 .prog-unit__event:last-child { border-bottom: 0; }
 .prog-unit__event-time { color: var(--text-tertiary); font-size: var(--fs-meta); white-space: nowrap; }
 .prog-unit__event-label { font-family: var(--font-mono); font-size: var(--fs-meta); }
+
+/* Exàmens (F17 Task 10) */
+.exam-block { margin-bottom: var(--sp-2xl); }
+.exam-list { display: grid; gap: var(--sp-md); grid-template-columns: 1fr; }
+@media (width >= 48rem) {
+  .exam-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (width >= 64rem) {
+  .exam-list { grid-template-columns: repeat(3, 1fr); }
+}
+.exam-card { display: flex; flex-direction: column; gap: var(--sp-sm); }
+.exam-card__title { font-size: var(--fs-h3); margin: 0; }
+.exam-card__meta { display: flex; flex-wrap: wrap; gap: var(--sp-xs); margin: 0; }
+.exam-card__detail { color: var(--text-secondary); font-size: var(--fs-meta); margin: 0; }
+.exam-card__cta { margin-top: auto; align-self: start; }
+
+.exam-historial { overflow-x: auto; }
+.exam-hist { width: 100%; border-collapse: collapse; font-size: var(--fs-meta); }
+.exam-hist th, .exam-hist td {
+  text-align: left; padding: var(--sp-xs) var(--sp-sm);
+  border-bottom: 1px solid var(--border);
+}
+.exam-hist th { color: var(--text-tertiary); font-weight: var(--fw-semibold); }
+.exam-hist__title { color: var(--text-primary); }
+.exam-hist__muted { color: var(--text-tertiary); }
+.exam-hist__date { color: var(--text-tertiary); white-space: nowrap; }
+
+.exam-new { display: flex; flex-direction: column; gap: var(--sp-md); max-width: var(--reading-max); }
+.exam-new__topics { display: flex; flex-wrap: wrap; gap: var(--sp-sm); }

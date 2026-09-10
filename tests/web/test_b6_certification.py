@@ -39,7 +39,7 @@ def test_all_product_pages_keep_shell_and_honest_navigation():
     # F17 Task 2: index.html now receives its shell + nav from shell.js
     # (injected around <main>), so it is checked against the injected-shell
     # contract; pre-F17 pages keep their inline chrome and are unchanged.
-    inline_pages = ("exams.html", "exam.html", "history.html", "results.html",
+    inline_pages = ("exam.html", "history.html", "results.html",
                     "review.html")
     for name in inline_pages:
         html = (ROOT / "web" / name).read_text(encoding="utf-8")

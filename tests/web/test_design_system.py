@@ -21,13 +21,13 @@ CSS = WEB / "static" / "css"
 JSDIR = WEB / "static" / "js"
 JS = JSDIR / "app.js"
 PAGES = ["index.html", "temari.html", "practice.html", "tutor.html",
-         "progres.html"]
+         "progres.html", "exams.html"]
 # Each product page links exactly its own page script. Later tasks extend
 # this map (tutor.js, progres.js, practice.js, exams.js); design-system.html
 # has no page script so it is deliberately absent.
 PAGE_JS = {"index.html": "dashboard.js", "temari.html": "temari.js",
            "practice.html": "practice.js", "tutor.html": "tutor.js",
-           "progres.html": "progres.js"}
+           "progres.html": "progres.js", "exams.html": "exams.js"}
 
 TOKENS = ["--bg", "--surface", "--surface-elevated", "--surface-sunken",
           "--overlay", "--border", "--border-strong", "--text-primary",
