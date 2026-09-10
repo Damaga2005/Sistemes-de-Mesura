@@ -147,7 +147,7 @@
           return;
         }
         var title = byId("content-title");
-        if (title) title.textContent = res.data.h2 || "Contingut";
+        if (title) title.textContent = res.data.h2 || t("topic.contentFallback");
         var blocks = (res.data && res.data.blocks) || [];
         if (!blocks.length) {
           ui.setState(root, "empty", { ctaText: t("topic.backTema"), ctaHref: "topic.html" });

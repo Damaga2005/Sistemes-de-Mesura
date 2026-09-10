@@ -55,8 +55,8 @@
     var t2 = q.type || "";
     if (t2 === "TRUE_FALSE") {
       var fs = el("fieldset");
-      fs.appendChild(el("legend", "label", "Vertader o fals"));
-      [["V", "Vertader"], ["F", "Fals"]].forEach(function (opt) {
+      fs.appendChild(el("legend", "label", t("practice.tfLegend")));
+      [["V", t("practice.true")], ["F", t("practice.false")]].forEach(function (opt) {
         var lab = el("label", "radio");
         var inp = document.createElement("input");
         inp.type = "radio"; inp.name = "answer"; inp.value = opt[0];
@@ -73,7 +73,7 @@
     }
     if (t2 === "MULTIPLE_CHOICE" && q.options && q.options.length) {
       var fs2 = el("fieldset");
-      fs2.appendChild(el("legend", "label", "Tria una opció"));
+      fs2.appendChild(el("legend", "label", t("practice.mcLegend")));
       q.options.forEach(function (o, i) {
         var lab = el("label", "radio");
         var inp = document.createElement("input");
@@ -91,7 +91,7 @@
         return c ? c.value : "";
       };
     }
-    var label = el("label", "label", "La teva resposta");
+    var label = el("label", "label", t("practice.yourAnswer"));
     var inp;
     if (t2 === "SHORT_ANSWER" || t2 === "OPEN" || t2 === "MULTI_STEP" ||
         t2 === "CONCEPTUAL" || t2 === "THEORY") {
@@ -159,8 +159,7 @@
     head.appendChild(el("strong", null, v.text));
     banner.appendChild(head);
     if (r.replayed) {
-      banner.appendChild(el("p", null,
-        "Ja corregida abans (idempotent, sense duplicar)."));
+      banner.appendChild(el("p", null, t("practice.replayed")));
     }
     wrap.appendChild(banner);
 
@@ -316,7 +315,7 @@
       DIFFS.forEach(function (d) {
         var o = document.createElement("option");
         o.value = d;
-        o.textContent = d === "" ? "Automàtica" : d;
+        o.textContent = d === "" ? t("exam.autoDiff") : d;
         dsel.appendChild(o);
       });
     }

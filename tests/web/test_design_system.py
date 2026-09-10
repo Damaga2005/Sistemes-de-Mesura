@@ -273,4 +273,7 @@ def test_perf_budgets():
     assert (CSS / "tokens.css").stat().st_size < 14 * 1024
     assert JS.stat().st_size < 8 * 1024
     assert (JSDIR / "shell.js").stat().st_size < 10 * 1024
-    assert (JSDIR / "i18n.js").stat().st_size < 12 * 1024
+    # F17 Task 13: budget raised 12->16 KiB for the complete CA+ES chrome
+    # dictionary (exam player, results and review pages). Still data-only,
+    # single file, no logic added.
+    assert (JSDIR / "i18n.js").stat().st_size < 16 * 1024
