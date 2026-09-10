@@ -177,6 +177,10 @@
     if (!region) return;
     opts = opts || {};
     region.innerHTML = "";
+    if (kind === "ready") {
+      region.removeAttribute("aria-busy");
+      return;
+    }
     if (kind === "loading") {
       region.setAttribute("aria-busy", "true");
       region.appendChild(skeleton(opts.kind || "card"));

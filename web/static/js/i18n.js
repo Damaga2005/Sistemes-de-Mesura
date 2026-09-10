@@ -33,7 +33,7 @@
           "dash.sections": "seccions", "dash.formulas": "fórmules",
           "dash.reinforceCta": "Reforça aquest tema",
           "dash.startPractice": "Comença una pràctica",
-          "temari.title": "Temari", "temari.sections": "seccions",
+          "temari.sections": "seccions",
           "temari.formulas": "fórmules", "temari.mastery": "Domini",
           "temari.open": "Obrir tema →", "temari.emptyCta": "Torna a l'inici" },
     es: { "nav.inici": "Inicio", "nav.temari": "Temario", "nav.practica": "Práctica",
@@ -67,7 +67,7 @@
           "dash.sections": "secciones", "dash.formulas": "fórmulas",
           "dash.reinforceCta": "Refuerza este tema",
           "dash.startPractice": "Empieza una práctica",
-          "temari.title": "Temario", "temari.sections": "secciones",
+          "temari.sections": "secciones",
           "temari.formulas": "fórmulas", "temari.mastery": "Dominio",
           "temari.open": "Abrir tema →", "temari.emptyCta": "Vuelve al inicio" }
   };

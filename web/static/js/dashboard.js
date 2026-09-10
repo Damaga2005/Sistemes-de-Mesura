@@ -56,7 +56,7 @@
   }
 
   function renderHero(region, rec, mastMap) {
-    clear(region);
+    ui.setState(region, "ready");
     var card = ui.el("section", "hero-card");
     card.appendChild(ui.el("p", "hero-card__eyebrow", t("dash.hero.eyebrow")));
     var topicNo = rec && rec.target_topic != null ? rec.target_topic : null;
@@ -130,15 +130,19 @@
       }
     }
     if (seen) {
-      clear(dom);
+      ui.setState(dom, "ready");
       dom.appendChild(ui.progressRing(total / seen, t("dash.domini")));
       dom.appendChild(ui.el("div", "stat-card__label", t("dash.domini")));
     } else {
       statCard(dom, DASH, t("dash.domini"), t("dash.noData"));
     }
     var correct = progress.correct || 0;
-    statCard(pre, Math.round((correct / attempts) * 100) + "%", t("dash.precisio"), null);
-    statCard(preg, String(attempts), t("dash.preguntes"), null);
+    ui.setState(pre, "ready");
+    pre.appendChild(ui.el("div", "stat-card__value", Math.round((correct / attempts) * 100) + "%"));
+    pre.appendChild(ui.el("div", "stat-card__label", t("dash.precisio")));
+    ui.setState(preg, "ready");
+    preg.appendChild(ui.el("div", "stat-card__value", String(attempts)));
+    preg.appendChild(ui.el("div", "stat-card__label", t("dash.preguntes")));
   }
 
   /* ---- Necessites reforçar: /api/learn/priorities (+ topics for card meta) ---- */
@@ -204,7 +208,7 @@
       return;
     }
     if (section) section.hidden = false;
-    clear(region);
+    ui.setState(region, "ready");
     for (i = 0; i < picked.length; i++) {
       region.appendChild(topicCard(picked[i], findTopic(topics, picked[i])));
     }
@@ -233,7 +237,7 @@
         { ctaText: t("dash.startPractice"), ctaHref: "practice.html" });
       return;
     }
-    clear(region);
+    ui.setState(region, "ready");
     var list = ui.el("ul", "dash-recent");
     for (var i = 0; i < recent.length && i < 5; i++) {
       var it = recent[i] || {};

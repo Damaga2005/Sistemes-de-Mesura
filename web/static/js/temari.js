@@ -49,7 +49,7 @@
         { ctaText: t("temari.emptyCta"), ctaHref: "index.html" });
       return;
     }
-    clear(container);
+    ui.setState(container, "ready");
     for (var i = 0; i < topics.length; i++) {
       container.appendChild(topicCard(topics[i]));
     }
