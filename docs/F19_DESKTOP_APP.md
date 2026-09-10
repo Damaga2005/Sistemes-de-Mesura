@@ -123,8 +123,10 @@ Checklist manual, no cubierto por CI:
    posición de la pregunta, el `?xsid=` de la sesión y el temporizador en marcha.
 6. Repetir ES→CA.
 
-Estado: **MANUAL PENDING** — pendiente de ejecutar con evidencia de
-computer-use (lo completa el controlador / Task 9).
+Estado: **MANUAL PENDING**. Se intentó automatizar con computer-use
+(2026-09-10); el host denegó el acceso a la ventana del `.exe` empaquetado
+(app no registrada en el sistema), así que este gate queda pendiente de
+ejecución manual con captura de evidencia. No se infiere PASS.
 
 ## 10. El carve-out `SM_PORT_FILE`
 
