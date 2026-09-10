@@ -61,12 +61,19 @@ def wait_for_socket(host, port, deadline):
 
 
 def main():
-    tmpdir = tempfile.mkdtemp(prefix="sm-desktop-")
-    port_file = Path(tmpdir) / "port"
+    ext = os.environ.get("SM_PORT_FILE")
+    if ext:
+        # External caller (operator/CI) owns this path and its cleanup; honor it
+        # verbatim so the exe's bound port stays observable from outside.
+        tmpdir = None
+        port_file = Path(ext)
+    else:
+        tmpdir = tempfile.mkdtemp(prefix="sm-desktop-")
+        port_file = Path(tmpdir) / "port"
     errbox = []
     try:
-        env_backup = os.environ.get("SM_PORT_FILE")
-        os.environ["SM_PORT_FILE"] = str(port_file)
+        if tmpdir is not None:
+            os.environ["SM_PORT_FILE"] = str(port_file)
         argv = ["--host", "127.0.0.1", "--port", "0"]
         th = threading.Thread(target=_server_thread, args=(argv, errbox), daemon=True)
         th.start()
@@ -84,18 +91,14 @@ def main():
         webview.start(debug=False)
         return 0
     finally:
-        try:
+        if tmpdir is not None:
             os.environ.pop("SM_PORT_FILE", None)
-            if env_backup is not None:
-                os.environ["SM_PORT_FILE"] = env_backup
-        except Exception:  # noqa: BLE001
-            pass
-        try:
-            if port_file.is_file():
-                port_file.unlink()
-            os.rmdir(tmpdir)
-        except OSError:
-            pass
+            try:
+                if port_file.is_file():
+                    port_file.unlink()
+                os.rmdir(tmpdir)
+            except OSError:
+                pass
 
 
 if __name__ == "__main__":

@@ -44,6 +44,36 @@ def test_server_argv_is_localhost_dynamic_port(monkeypatch):
     assert "js_api" not in win
 
 
+def test_honors_external_port_file(monkeypatch, tmp_path):
+    fake = types.SimpleNamespace(create_window=lambda *a, **k: None, start=lambda *a, **k: None)
+    mod = _load(monkeypatch, fake)
+    ext = tmp_path / "ext"
+    monkeypatch.setenv("SM_PORT_FILE", str(ext))
+
+    held = []
+
+    def bind_and_publish(argv, errbox):
+        s = socket.socket()
+        s.bind(("127.0.0.1", 0))
+        s.listen(1)
+        held.append(s)
+        ext.write_text(str(s.getsockname()[1]), encoding="utf-8")
+
+    monkeypatch.setattr(mod, "_server_thread", bind_and_publish)
+    monkeypatch.setattr(mod, "wait_for_socket", lambda *a, **k: True)
+    win = {}
+    fake.create_window = lambda title, url, **k: win.update(title=title, url=url, **k)
+    fake.start = lambda *a, **k: win.update(started=k)
+
+    mod.main()
+
+    port = int(ext.read_text(encoding="utf-8").strip())
+    assert win["url"] == "http://127.0.0.1:%d/index.html" % port
+    assert ext.is_file(), "launcher must not delete an externally-owned port file"
+    for s in held:
+        s.close()
+
+
 def test_timeout_when_port_never_published(monkeypatch):
     fake = types.SimpleNamespace(create_window=lambda *a, **k: None, start=lambda *a, **k: None)
     mod = _load(monkeypatch, fake)
