@@ -36,4 +36,4 @@
 .contents-list li { border-bottom: 1px solid var(--border); }
 .contents-list li:last-child { border-bottom: 0; }
 .contents-list a { display: block; padding: var(--sp-sm) 0; color: var(--text-primary); text-decoration: none; }
-.contents-list a:hover { color: var(--accent-contrast-text); }
+.contents-list a:hover { color: var(--accent); }

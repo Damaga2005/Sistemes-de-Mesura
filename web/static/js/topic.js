@@ -38,20 +38,20 @@
     });
   }
 
-  function loadSections(doc, list) {
+  function loadSections(doc, list, topicNo) {
     ui.api("/api/study/sections?doc_id=" + enc(doc.id)).then(function (res) {
       if (res.status !== 200) return;
       (res.data.sections || []).forEach(function (s) {
         var li = el("li");
         var a = el("a", null, s.h2 || ("Secció " + s.id));
-        a.href = "content.html?section_id=" + enc(s.id);
+        a.href = "content.html?section_id=" + enc(s.id) + "&topic=" + enc(topicNo);
         li.appendChild(a);
         list.appendChild(li);
       });
     });
   }
 
-  function renderContents(root, docs) {
+  function renderContents(root, docs, topicNo) {
     ui.setState(root, "ready");
     root.appendChild(el("h2", "contents__title", t("topic.contents")));
     docs.forEach(function (d) {
@@ -60,7 +60,7 @@
       var list = el("ul", "contents-list");
       group.appendChild(list);
       root.appendChild(group);
-      loadSections(d, list);
+      loadSections(d, list, topicNo);
     });
   }
 
@@ -95,7 +95,7 @@
           ui.setState(root, "empty", { ctaText: t("topic.backTemari"), ctaHref: "temari.html" });
           return;
         }
-        renderContents(root, docs);
+        renderContents(root, docs, topicNo);
       },
       function () { ui.setState(root, "error", { retry: loadTopic }); }
     );
@@ -136,6 +136,9 @@
     var root = byId("content-root");
     if (!root) return;
     var sid = params().section_id || "";
+    var backTopic = params().topic || "";
+    var back = document.getElementById("content-back");
+    if (back) back.href = backTopic ? ("topic.html?topic=" + enc(backTopic)) : "temari.html";
     ui.setState(root, "loading");
     ui.api("/api/study/content?section_id=" + enc(sid)).then(
       function (res) {
