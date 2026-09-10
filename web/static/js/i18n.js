@@ -35,7 +35,9 @@
           "dash.startPractice": "Comença una pràctica",
           "temari.sections": "seccions",
           "temari.formulas": "fórmules", "temari.mastery": "Domini",
-          "temari.open": "Obrir tema →", "temari.emptyCta": "Torna a l'inici" },
+          "temari.open": "Obrir tema →", "temari.emptyCta": "Torna a l'inici",
+          "topic.progress": "Domini del tema", "topic.contents": "Continguts",
+          "topic.backTema": "Torna al tema", "topic.backTemari": "Torna al temari" },
     es: { "nav.inici": "Inicio", "nav.temari": "Temario", "nav.practica": "Práctica",
           "nav.tutor": "Tutor IA", "nav.progres": "Progreso", "nav.examens": "Exámenes",
           "nav.g.estudi": "Estudio", "nav.g.aprendre": "Aprender", "nav.g.avaluacio": "Evaluación",
@@ -69,7 +71,9 @@
           "dash.startPractice": "Empieza una práctica",
           "temari.sections": "secciones",
           "temari.formulas": "fórmulas", "temari.mastery": "Dominio",
-          "temari.open": "Abrir tema →", "temari.emptyCta": "Vuelve al inicio" }
+          "temari.open": "Abrir tema →", "temari.emptyCta": "Vuelve al inicio",
+          "topic.progress": "Dominio del tema", "topic.contents": "Contenidos",
+          "topic.backTema": "Volver al tema", "topic.backTemari": "Volver al temario" }
   };
   var lang = "ca";
   try { var s = window.localStorage.getItem("sm-lang");
