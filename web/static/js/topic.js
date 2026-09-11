@@ -104,17 +104,16 @@
   /* ---------- Contingut ---------- */
   function renderBlock(parent, b) {
     if (b.kind === "formula") {
-      var f = el("p", "formula", "");
-      if (b.html) {
-        f.innerHTML = b.html; /* B2.28: només renderer llista-blanca */
-      } else {
-        f.textContent = b.expression || "";
-      }
+      /* MathJax renders from the canonical LaTeX (b.expression) directly;
+         the server-side whitelist HTML (b.html, render_latex()) stays in
+         the DTO but is no longer consumed here. */
+      var f = el("p", "formula", b.expression || "");
       var cap = el("p", null, "");
       var code = el("code", "mono", b.equation_id || "");
       cap.appendChild(code);
       parent.appendChild(f);
       parent.appendChild(cap);
+      if (window.smMath) window.smMath.renderMath(f);
       return;
     }
     if (b.kind === "table") {
@@ -128,7 +127,10 @@
       return;
     }
     (b.text || "").split("\n").forEach(function (para) {
-      if (para.trim()) parent.appendChild(el("p", null, para));
+      if (!para.trim()) return;
+      var p = el("p", null, para);
+      parent.appendChild(p);
+      if (window.smMath) window.smMath.renderMath(p);
     });
   }
 

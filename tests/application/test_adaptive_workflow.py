@@ -247,3 +247,42 @@ def test_16_ungeneratable_fails_loud(tmp_path):
     with pytest.raises(AppError) as e:
         w.generate(c, r["data"]["session"], forms[0], seed=7)
     assert e.value.code == "GENERATION_ERROR"
+
+def test_17_mode_study_practice_recovery(tmp_path):
+    from app.adaptive.modes import MODES
+    assert MODES == ("STUDY", "PRACTICE", "RECOVERY", "EXAM")
+    app, w = wf(tmp_path)
+    c, s = ctx(app, workflow="ADAPTIVE_PRACTICE"), sess(
+        app, workflow="ADAPTIVE_PRACTICE")
+    seed_weak(app)
+    for mode, code in (("STUDY", "mode_study"),
+                       ("PRACTICE", "mode_practice"),
+                       ("RECOVERY", "mode_recovery")):
+        r = rec1(app, w, c, s, mode=mode)
+        assert r["ok"] and r["data"]["recommendations"]
+        assert all(code in x.get("reasons", [])
+                   for x in r["data"]["recommendations"]), mode
+
+
+def test_18_mode_invalid_rejected(tmp_path):
+    app, w = wf(tmp_path)
+    c, s = ctx(app, workflow="ADAPTIVE_PRACTICE"), sess(
+        app, workflow="ADAPTIVE_PRACTICE")
+    with pytest.raises(AppError) as e:
+        rec1(app, w, c, s, mode="NOPE")
+    assert e.value.code == "VALIDATION_ERROR"
+    with pytest.raises(AppError) as e:
+        w.next(c, s, mode="EXAM")
+    assert e.value.code == "VALIDATION_ERROR"
+
+
+def test_19_mode_next_passthrough(tmp_path):
+    app, w = wf(tmp_path)
+    c, s = ctx(app, workflow="ADAPTIVE_PRACTICE"), sess(
+        app, workflow="ADAPTIVE_PRACTICE")
+    seed_weak(app)
+    a = w.next(c, s, mode="STUDY")
+    b = w.next(c, s, mode="PRACTICE")
+    assert a["ok"] and b["ok"]
+    assert all("mode_study" in x.get("reasons", [])
+               for x in a["data"]["recommendations"])

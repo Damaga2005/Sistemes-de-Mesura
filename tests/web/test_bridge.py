@@ -164,6 +164,51 @@ def test_practice_double_submit_idempotent(bridge):
     assert st == 200 and sub["result"]["replayed"] is True
 
 
+def test_practice_adaptive_next_e2e(bridge):
+    _, _, c = bridge.route(
+        "POST", "/api/practice/start",
+        body={"topic": 2, "question_type": "TRUE_FALSE", "seed": 11})
+    c = ck(c)
+    st, sub, _ = bridge.route(
+        "POST", "/api/practice/submit",
+        body={"answer": "F", "attempt_id": "att-b2loop1",
+              "adaptive": True, "seed": 7}, cookie=c)
+    assert st == 200
+    r = sub["result"]
+    assert r["status"] == "INCORRECT" and r["next"] is not None
+    q2 = r["next"]["question"]
+    assert q2 is not None and q2["question_id"] != "q-93f3e2c4c7fd"
+    assert "correct_answer" not in repr(r["next"])
+    st, sub2, _ = bridge.route(
+        "POST", "/api/practice/submit",
+        body={"answer": "V", "attempt_id": "att-b2loop2",
+              "adaptive": True, "seed": 7}, cookie=c)
+    assert st == 200 and sub2["result"]["next"] is not None
+
+
+def test_practice_manual_submit_has_no_next(bridge):
+    _, _, c = bridge.route(
+        "POST", "/api/practice/start",
+        body={"topic": 2, "question_type": "TRUE_FALSE", "seed": 11})
+    c = ck(c)
+    st, sub, _ = bridge.route(
+        "POST", "/api/practice/submit",
+        body={"answer": "V", "attempt_id": "att-b2man"}, cookie=c)
+    assert st == 200 and sub["result"]["next"] is None
+
+
+def test_practice_adaptive_bad_seed(bridge):
+    _, _, c = bridge.route(
+        "POST", "/api/practice/start",
+        body={"topic": 2, "question_type": "TRUE_FALSE", "seed": 11})
+    c = ck(c)
+    st, data, _ = bridge.route(
+        "POST", "/api/practice/submit",
+        body={"answer": "V", "attempt_id": "att-b2seed",
+              "adaptive": True, "seed": -1}, cookie=c)
+    assert st == 400 and data["code"] == "VALIDATION_ERROR"
+
+
 # ---------- renderer unitats (B2.6) ----------
 def test_latex_subset():
     assert S.render_latex("a_c") == "a<sub>c</sub>"

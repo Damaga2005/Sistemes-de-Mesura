@@ -44,6 +44,31 @@ def category_for(*, critical: bool, explored: bool, action: str,
     return 4
 
 
+def _unit_review_codes(svc, student_id: str, item: LearningPathItem,
+                       now: str | None) -> list[str]:
+    """Códigos Fase 10 para la unidad recomendada: `spacing_due` si su
+    revision vence (con historial), `coverage_unseen` si nunca se
+    intentó, `coverage_weak` si su estado es AT_RISK/EMERGING con
+    intentos. Misma regla de clasificacion que
+    StudentService.get_coverage (ver alli). Solo lectura."""
+    from datetime import datetime, timezone
+    codes: list[str] = []
+    kind, _, ref = item.knowledge_unit_id.partition(":")
+    if kind and ref:
+        sp = svc.get_spacing(student_id, kind, ref)
+        if sp is not None:
+            moment = now or datetime.now(timezone.utc).isoformat(
+                timespec="seconds")
+            if sp["next_review"] <= moment:
+                codes.append("spacing_due")
+    m = svc.get_mastery(student_id, item.knowledge_unit_id)
+    if m is None or int(m.get("attempt_count", 0) or 0) <= 0:
+        codes.append("coverage_unseen")
+    elif m.get("status", "") in ("AT_RISK", "EMERGING"):
+        codes.append("coverage_weak")
+    return codes
+
+
 class RecommendationBuilder:
     def __init__(self, student_service, *,
                  spacing_policy: Policy | None = None,
@@ -129,7 +154,7 @@ class RecommendationBuilder:
             item, sp, cat = seen[u]
             out.append(self._recommend(student_id, item, sp, cat, src,
                                        bypass=u in deferred
-                                       and sp.verdict == DEFER))
+                                       and sp.verdict == DEFER, now=now))
         return out
 
     def _covered_parent(self, item: LearningPathItem,
@@ -150,13 +175,37 @@ class RecommendationBuilder:
 
     def _recommend(self, student_id: str, item: LearningPathItem,
                    sp: SpacingState, cat: int, src: dict,
-                   bypass: bool) -> Recommendation:
+                   bypass: bool, now: str | None = None) -> Recommendation:
         codes = list(item.reasons) + ["categoria:%d:%s" % (cat, CATEGORIES[cat - 1])]
         if sp.critical:
             codes.append("debilidad_critica")
         codes.extend("spacing:%s" % r for r in sp.reasons)
         if bypass:
             codes.append("inclusion_sin_alternativa")
+        # Fase 9: patron de error recurrente del estudiante (Error Memory).
+        # Solo observabilidad: no entra en scoring/orden/routing (ningun
+        # prefijo consumido aguas abajo lo interpreta) y no altera el
+        # orden determinista existente.
+        rec = self.svc.get_recurrent_errors(student_id)
+        if rec:
+            codes.append("error_recurrent:%s:x%d" % (rec[0]["error_key"],
+                                                     rec[0]["error_count"]))
+        # Fase 10: estado de revision y cobertura de ESTA unidad.
+        # Solo observabilidad (igual que arriba): scoring, orden,
+        # spacing-verdict y routing intactos.
+        codes.extend(_unit_review_codes(self.svc, student_id, item, now))
+        # Fase 12: estado canonico de retention (observabilidad).
+        # No entra en scoring/orden/routing; solo annota la unidad.
+        try:
+            from .retention import calculate_retention, retention_code
+            _r = calculate_retention(
+                self.svc, student_id, item.knowledge_unit_id,
+                now=now).state
+            _rc = retention_code(_r)
+            if _rc:
+                codes.append(_rc)
+        except Exception:
+            pass
         return Recommendation(
             student_id=student_id, knowledge_unit_id=item.knowledge_unit_id,
             unit_kind=item.unit_kind, priority_score=item.priority,

@@ -188,6 +188,29 @@
       if (e.hint) card.appendChild(el("p", null, e.hint));
       wrap.appendChild(card);
     });
+    var fb = r.feedback || {};
+    (fb.points || []).forEach(function (p) {
+      if (!p.why && !p.how_to_fix) return;
+      var card = el("div", "card");
+      card.appendChild(el("h2", "h3", t("practice.why")));
+      if (p.why) card.appendChild(el("p", null, p.why));
+      if (p.how_to_fix) card.appendChild(el("p", null, p.how_to_fix));
+      wrap.appendChild(card);
+    });
+    if ((r.mastery || []).length) {
+      var mc = el("div", "card");
+      mc.appendChild(el("h2", "h3", t("practice.mastery")));
+      var ul = el("ul");
+      r.mastery.forEach(function (m) {
+        ul.appendChild(el("li", null,
+          (m.unit || "") + ": " + (m.score === null ||
+            m.score === undefined ? "?" : m.score) +
+          (m.status ? " (" + m.status + ")" : "")));
+      });
+      mc.appendChild(ul);
+      wrap.appendChild(mc);
+    }
+    if (window.smMath) window.smMath.renderMath(wrap);
 
     var actions = el("div", "practice-actions");
     var again = el("button", "button", t("practice.continue"));
@@ -198,6 +221,22 @@
     done.href = "index.html";
     actions.appendChild(done);
     wrap.appendChild(actions);
+
+    var nxt = r.next;
+    if (nxt && nxt.question && nxt.question.question_id) {
+      var nb = el("div", "card");
+      nb.appendChild(el("h2", "h3", t("practice.nextReady")));
+      var go = el("button", "button", t("practice.nextGo"));
+      go.type = "button";
+      go.addEventListener("click", function () {
+        if (nb.parentNode) nb.parentNode.removeChild(nb);
+        playQuestion(nxt.question, true);
+      });
+      nb.appendChild(go);
+      box.appendChild(nb);
+    } else if (nxt && !nxt.question) {
+      box.appendChild(el("p", "hint", t("practice.nextUnavailable")));
+    }
 
     box.appendChild(wrap);
   }
@@ -239,13 +278,13 @@
     });
   }
 
-  function playQuestion(q) {
+  function playQuestion(q, keepCorrection) {
     var qbox = document.getElementById("q-box");
     var abox = document.getElementById("a-box");
     var cbox = document.getElementById("c-box");
     qbox.innerHTML = "";
     abox.innerHTML = "";
-    cbox.innerHTML = "";
+    if (!keepCorrection) cbox.innerHTML = "";
 
     var col = el("div", "practice-q");
     col.appendChild(contextStrip(q));
@@ -260,6 +299,7 @@
     if (q.variables && Object.keys(q.variables).length) {
       renderFormulaBox(stem, JSON.stringify(q.variables), null);
     }
+    if (window.smMath) window.smMath.renderMath(stem);
     col.appendChild(stem);
 
     var form = document.createElement("form");
@@ -278,11 +318,13 @@
       if (!answer) return;
       btn.disabled = true;
       btn.textContent = t("practice.sending");
+      var adaptive = window.location.search.indexOf("from=adaptive") !== -1;
       api("/api/practice/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ answer: answer,
-                               attempt_id: "web-" + Date.now() })
+                               attempt_id: "web-" + Date.now(),
+                               adaptive: adaptive })
       }).then(function (r2) {
         btn.disabled = false;
         btn.textContent = t("practice.send");

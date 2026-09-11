@@ -209,21 +209,57 @@
     if (!region) return;
     showSection(region, true);
     ui.setState(region, "loading", { kind: "list" });
-    ui.api("/api/learn/priorities?limit=3").then(function (res) {
+    var tabs = ui.el("div", "prog-modes");
+    tabs.setAttribute("role", "tablist");
+    tabs.setAttribute("aria-label", t("prog.recommended"));
+    [["study", "prog.modeStudy"], ["practice", "prog.modePractice"],
+     ["recovery", "prog.modeRecovery"]].forEach(function (pair, idx) {
+      var b = ui.el("button", "button button--ghost", t(pair[1]));
+      b.type = "button";
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-selected", idx === 1 ? "true" : "false");
+      b.addEventListener("click", function () {
+        var btns = tabs.querySelectorAll('[role="tab"]');
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].setAttribute("aria-selected",
+            btns[i] === b ? "true" : "false");
+        }
+        fetchMode(pair[0]);
+      });
+      tabs.appendChild(b);
+    });
+    region.appendChild(tabs);
+    var list = ui.el("div", "prog-mode-list");
+    region.appendChild(list);
+    fetchMode("practice");
+  }
+
+  function fetchMode(mode) {
+    var region = byId("prog-recommend");
+    var list = region ? region.querySelector(".prog-mode-list") : null;
+    if (!list) return;
+    list.innerHTML = "";
+    ui.setState(list, "loading", { kind: "list" });
+    ui.api("/api/learn/priorities?limit=3&mode=" +
+      encodeURIComponent(mode)).then(function (res) {
+      list.innerHTML = "";
       if (res.status !== 200) {
-        ui.setState(region, "error", { retry: loadRecommend, code: res.status });
+        ui.setState(list, "error",
+          { retry: function () { fetchMode(mode); }, code: res.status });
         return;
       }
-      var list = (res.data && res.data.priorities) || [];
-      if (!list.length) {
-        ui.setState(region, "empty",
+      var items = (res.data && res.data.priorities) || [];
+      if (!items.length) {
+        ui.setState(list, "empty",
           { ctaText: t("prog.startPractice"), ctaHref: "practice.html" });
         return;
       }
-      ui.setState(region, "ready");
-      list.forEach(function (rec) { region.appendChild(recCard(rec)); });
+      ui.setState(list, "ready");
+      items.forEach(function (rec) { list.appendChild(recCard(rec)); });
     }, function () {
-      ui.setState(region, "error", { retry: loadRecommend });
+      list.innerHTML = "";
+      ui.setState(list, "error",
+        { retry: function () { fetchMode(mode); } });
     });
   }
 

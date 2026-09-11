@@ -91,6 +91,7 @@ REASON_PREFIX = {"mastery:": "Mastery", "evidencia:": "Evidència",
                  "confianza_baja:": "Confiança",
                  "raiz:": "Error principal",
                  "fallo_reciente:": "Fallo recent",
+                 "error_recurrent:": "Error recurrent",
                  "dificultad:": "Dificultat"}
 
 
@@ -419,10 +420,20 @@ class Bridge:
                 "reasons_display": reasons,
                 "mastery": mastery, "errors": errs}
 
-    def learn_priorities(self, limit=5, lang="ca"):
+    def learn_priorities(self, limit=5, lang="ca", mode="PRACTICE"):
         items = self.app.adaptive.recommend(
-            self.student, limit=limit, seed=7)
+            self.student, limit=limit, seed=7, mode=mode)
         return [self.project_rec(i, lang) for i in items]
+
+    def learn_plan(self, horizon="full", limit=0):
+        from app.adaptive.planner import CurriculumPlanner
+        planner = CurriculumPlanner(self.app.students)
+        plan = planner.generate(self.student, horizon=horizon or "full")
+        d = plan.to_dict()
+        if isinstance(limit, int) and limit > 0:
+            for k in ("today", "next_7_days", "later"):
+                d[k] = d[k][:limit]
+        return d
 
     def learn_locate(self, unit):
         """Unitat -> URL real (topic/content) o null honest."""
@@ -768,8 +779,24 @@ class Bridge:
                         query.get("limit", 5))))
                 except ValueError:
                     lim = 5
-                return 200, {"priorities": self.learn_priorities(
-                    lim, lang)}, set_cookie
+                try:
+                    items = self.learn_priorities(
+                        lim, lang, mode=str(query.get("mode", "PRACTICE")))
+                except ValueError as e:
+                    raise AppError("VALIDATION_ERROR", str(e)[:200])
+                return 200, {"priorities": items}, set_cookie
+            if method == "GET" and path == "/api/learn/plan":
+                try:
+                    lim = int(query.get("limit", 0) or 0)
+                except ValueError:
+                    lim = 0
+                try:
+                    plan = self.learn_plan(
+                        horizon=str(query.get("horizon", "full")),
+                        limit=max(0, lim))
+                except ValueError as e:
+                    raise AppError("VALIDATION_ERROR", str(e)[:200])
+                return 200, {"plan": plan}, set_cookie
             if method == "GET" and path == "/api/learn/progress":
                 return 200, self.learn_progress(), set_cookie
             if method == "GET" and path == "/api/learn/unit":
@@ -841,10 +868,15 @@ class Bridge:
                 if not ps:
                     raise AppError("STATE_ERROR", "sin pregunta activa")
                 sess = ApplicationSession.from_dict(ps)
+                adaptive = body.get("adaptive", False)
+                seed = body.get("seed", 7)
+                if not isinstance(seed, int) or seed < 0:
+                    raise AppError("VALIDATION_ERROR", "seed invàlid")
                 r = self.flows["practice"].submit_answer(
                     self._ctx("PRACTICE", lang), sess,
                     str(body.get("answer", "")),
-                    attempt_id=str(body.get("attempt_id", "")))
+                    attempt_id=str(body.get("attempt_id", "")),
+                    adaptive=bool(adaptive), seed=seed)
                 self._put(tok, r["data"]["session"])
                 res = dict(r["data"]["result"])
                 res["errors"] = self.enrich_errors(res.get("errors"),

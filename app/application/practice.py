@@ -72,11 +72,17 @@ class PracticeWorkflow:
             points=10.0, required=True, session_id=sess.session_id)}
 
     def submit_answer(self, ctx: ApplicationContext, session,
-                      answer: str, attempt_id: str = "") -> dict:
+                      answer: str, attempt_id: str = "",
+                      *, adaptive: bool = False,
+                      seed: int = 7) -> dict:
         sess = self._session(session)
         self._own(ctx, sess)
         if not isinstance(answer, str):
             raise AppError("VALIDATION_ERROR", "respuesta debe ser str")
+        if not isinstance(adaptive, bool):
+            raise AppError("VALIDATION_ERROR", "adaptive debe ser bool")
+        if not isinstance(seed, int) or seed < 0:
+            raise AppError("VALIDATION_ERROR", "seed inválido")
         ref = sess.active_reference or {}
         if ref.get("kind") != "question" or not ref.get("id"):
             raise AppError("STATE_ERROR", "sin pregunta activa")
@@ -98,6 +104,7 @@ class PracticeWorkflow:
                                "persistencia: %s" % type(e).__name__)
             raise
         corr = out.get("correction", {})
+        fb = corr.get("feedback", {}) or {}
         data = {"attempt_id": out.get("attempt_id", ""),
                 "replayed": bool(out.get("replayed", False)),
                 "status": corr.get("status", ""),
@@ -106,14 +113,85 @@ class PracticeWorkflow:
                             "severity": e.get("severity", ""),
                             "root": bool(e.get("root_cause", False))}
                            for e in corr.get("detected_errors", []) or []],
+                "feedback": {
+                    "what_was_correct": list(
+                        fb.get("what_was_correct", []) or []),
+                    "what_was_wrong": list(
+                        fb.get("what_was_wrong", []) or []),
+                    "points": [{"error": p.get("error", ""),
+                                "severity": p.get("severity", ""),
+                                "why": p.get("why", ""),
+                                "how_to_fix": p.get("how_to_fix", "")}
+                               for p in fb.get("points", []) or []],
+                    "feedback_version": fb.get("feedback_version", "")},
+                "claims": [{"text": c.get("text", ""),
+                            "type": c.get("type", ""),
+                            "status": c.get("status", ""),
+                            "evidence_ids": list(
+                                c.get("evidence_ids", []) or [])}
+                           for c in corr.get("claims", []) or []],
+                "formulas": [{"status": f.get("status", ""),
+                              "detail": f.get("detail", "")}
+                             for f in corr.get("formula_results", [])
+                             or []],
+                "calculations": [{"match": bool(c.get("match", False))}
+                                 for c in corr.get("calculation_results",
+                                                   []) or []],
+                "units": [{"status": u.get("status", "")}
+                          for u in corr.get("unit_results", []) or []],
+                "provenance": [{"source_path": p.get("source_path", "")}
+                               for p in corr.get("provenance", []) or []],
                 "mastery": [{"unit": u.get("unit", ""),
                              "score": u.get("score", 0.0),
                              "status": u.get("status", "")}
-                            for u in out.get("mastery_updates", []) or []]}
-        sess.touch({"kind": "question", "id": ref["id"],
+                            for u in out.get("mastery_updates", [])
+                            or []],
+                "next": None}
+        nxt = self._next_question(ctx, sess, adaptive, seed)
+        data["next"] = nxt
+        nxt_q = (nxt or {}).get("question") or {}
+        sess.touch({"kind": "question",
+                    "id": nxt_q.get("question_id") or ref["id"],
                     "attempt": out.get("attempt_id", "")})
         return {"ok": True, "data": {"session": sess.to_dict(),
                                      "result": data}}
+
+    def _next_question(self, ctx: ApplicationContext,
+                       sess: ApplicationSession, adaptive: bool,
+                       seed: int) -> dict | None:
+        """Cierre del loop: recommend+generate canónicos vía loop.step().
+
+        Manual -> None (sin pregunta adicional). Adaptive -> siguiente
+        pregunta o rechazo honesto. La corrección ya está registrada;
+        un fallo aquí no la invalida (next lleva el error).
+        """
+        if not adaptive:
+            return None
+        self.app.require(self.app.__dict__, "adaptive", "examiner")
+        try:
+            out = self.app.adaptive.step(
+                ctx.technical_student_id, self.app.examiner,
+                limit=1, seed=seed)
+        except AppError as e:
+            return {"question": None, "item": None,
+                    "generation": {"rejected": "%s: %s" % (e.code,
+                                                           e.message)}}
+        question = out.get("question")
+        if question is None:
+            return {"question": None,
+                    "item": (out.get("recommendations") or [None])[0],
+                    "generation": out.get("generate_log", {})}
+        body = dict(question)
+        view = stem_view(body, position=0,
+                         question_version=str(body.get("version", "")),
+                         points=10.0, required=True,
+                         session_id=sess.session_id)
+        sess.touch({"kind": "question", "id": view["question_id"]})
+        return {"question": view,
+                "item": out.get("selected"),
+                "generation": {k: v for k, v in
+                               out.get("generate_log", {}).items()
+                               if k != "blueprint_obj"}}
 
     def get_result(self, ctx: ApplicationContext, session,
                    units: list) -> dict:

@@ -95,7 +95,9 @@
 
   function renderAnswer(msg, d, query) {
     var col = resetShell(msg);
-    col.appendChild(el("div", "chat__bubble", d.answer || ""));
+    var bubble = el("div", "chat__bubble", d.answer || "");
+    col.appendChild(bubble);
+    if (window.smMath) window.smMath.renderMath(bubble);
     var formulas = d.formulas || [];
     if (formulas.length) {
       var chips = el("div", "chat__formulas");
@@ -115,7 +117,9 @@
     var bubble = el("div", "chat__bubble chat__bubble--abstain");
     bubble.appendChild(ui.badge ? ui.badge(t("tutor.abstain"), "info")
                                 : el("span", "badge badge--info", "ABSTAIN"));
-    bubble.appendChild(el("p", null, d.answer || ""));
+    var abstainText = el("p", null, d.answer || "");
+    bubble.appendChild(abstainText);
+    if (window.smMath) window.smMath.renderMath(abstainText);
     col.appendChild(bubble);
     col.appendChild(el("div", "chat__status", t("tutor.reformulate")));
   }

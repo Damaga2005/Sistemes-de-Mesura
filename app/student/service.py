@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sqlite3
 from datetime import datetime, timezone
 
 from app.correction import errors as ERR
@@ -69,6 +70,9 @@ class StudentService:
             self._persist_correction(con, corr, attempt_id, version=1, reason="initial")
             updates = self._update_mastery(con, student_id, question_id, attempt_id, corr)
             mems = self._refresh_memories(con, student_id)
+            self._record_seen(con, student_id, question_id, attempt_id, corr)
+            self._record_errors(con, student_id, question_id, attempt_id, corr)
+            self._record_reviews(con, student_id, attempt_id, corr, updates)
             con.execute("INSERT INTO audit_log(action,ref_id,detail,created_at) VALUES(?,?,?,?)",
                         ("submit", attempt_id,
                          json.dumps({"correction": corr.correction_id,
@@ -189,6 +193,315 @@ class StudentService:
                             "status": MAS.status_of(
                                 state, prior_signals[-3:] + ([signal] if signal is not None else []))})
         return updates
+
+    @staticmethod
+    def _record_seen(con, student_id: str, question_id: str,
+                     attempt_id: str, corr: Correction) -> None:
+        """Historial por estudiante (Fase 8): upsert atomico en la misma
+        transaccion del submit. first_seen se conserva; replay nunca llega
+        aqui (retorna antes), asi que attempt_count no se duplica."""
+        now = _now()
+        con.execute(
+            "INSERT INTO question_history(student_id,question_id,"
+            "first_seen,last_seen,attempt_count,last_status,last_score,"
+            "last_attempt_id) VALUES(?,?,?,?,?,?,?,?) "
+            "ON CONFLICT(student_id,question_id) DO UPDATE SET "
+            "last_seen=excluded.last_seen,"
+            "attempt_count=attempt_count+1,"
+            "last_status=excluded.last_status,"
+            "last_score=excluded.last_score,"
+            "last_attempt_id=excluded.last_attempt_id",
+            (student_id, question_id, now, now, 1, corr.status,
+             float(corr.score), attempt_id))
+
+    def has_seen(self, student_id: str, question_id: str) -> bool:
+        con = self.store.connect()
+        try:
+            row = con.execute("SELECT 1 FROM question_history WHERE "
+                              "student_id=? AND question_id=?",
+                              (student_id, question_id)).fetchone()
+        finally:
+            con.close()
+        return row is not None
+
+    def get_history(self, student_id: str,
+                    question_id: str) -> dict | None:
+        con = self.store.connect()
+        try:
+            row = con.execute("SELECT first_seen, last_seen, attempt_count,"
+                              " last_status, last_score, last_attempt_id"
+                              " FROM question_history WHERE student_id=? AND"
+                              " question_id=?",
+                              (student_id, question_id)).fetchone()
+        finally:
+            con.close()
+        if not row:
+            return None
+        return {"student_id": student_id, "question_id": question_id,
+                "first_seen": row[0], "last_seen": row[1],
+                "attempt_count": row[2], "last_status": row[3],
+                "last_score": row[4], "last_attempt_id": row[5]}
+
+    def get_recent_question_ids(self, student_id: str,
+                                limit: int = 20) -> list[str]:
+        if not isinstance(limit, int) or limit < 1:
+            raise ValueError("limit inválido")
+        con = self.store.connect()
+        try:
+            rows = con.execute("SELECT question_id FROM question_history"
+                               " WHERE student_id=? ORDER BY last_seen DESC,"
+                               " question_id ASC LIMIT ?",
+                               (student_id, limit)).fetchall()
+        finally:
+            con.close()
+        return [r[0] for r in rows]
+
+    @staticmethod
+    def _record_errors(con, student_id: str, question_id: str,
+                       attempt_id: str, corr: Correction) -> None:
+        """Error Memory (Fase 9): agregacion por (estudiante, error_key)
+        en la misma transaccion del submit. Solo errores que
+        CorrectionService detecto (nunca inferidos por score).
+        Replay nunca llega aqui, asi que error_count no se duplica."""
+        now = _now()
+        for e in corr.detected_errors or []:
+            key = e.error_type or ""
+            if not key:
+                continue
+            con.execute(
+                "INSERT INTO error_memory(student_id,error_key,"
+                "first_seen,last_seen,error_count,severity,last_status,"
+                "last_question_id,last_attempt_id)"
+                " VALUES(?,?,?,?,?,?,?,?,?) "
+                "ON CONFLICT(student_id,error_key) DO UPDATE SET "
+                "last_seen=excluded.last_seen,"
+                "error_count=error_count+1,"
+                "severity=excluded.severity,"
+                "last_status=excluded.last_status,"
+                "last_question_id=excluded.last_question_id,"
+                "last_attempt_id=excluded.last_attempt_id",
+                (student_id, key, now, now, 1, e.severity or "",
+                 corr.status, question_id, attempt_id))
+
+    def get_error_memory(self, student_id: str) -> list[dict]:
+        con = self.store.connect()
+        try:
+            rows = con.execute("SELECT error_key, first_seen, last_seen,"
+                               " error_count, severity, last_status,"
+                               " last_question_id, last_attempt_id"
+                               " FROM error_memory WHERE student_id=?"
+                               " ORDER BY error_key ASC",
+                               (student_id,)).fetchall()
+        finally:
+            con.close()
+        return [{"student_id": student_id, "error_key": r[0],
+                 "first_seen": r[1], "last_seen": r[2],
+                 "error_count": r[3], "severity": r[4],
+                 "last_status": r[5], "last_question_id": r[6],
+                 "last_attempt_id": r[7]} for r in rows]
+
+    def get_recurrent_errors(self, student_id: str,
+                             min_count: int = 2) -> list[dict]:
+        """Errores con count>=min_count, orden determinista: severidad
+        ponderada (misma escala que priority-policy) -> count ->
+        recencia -> clave. Sin empates incidentales."""
+        if not isinstance(min_count, int) or min_count < 1:
+            raise ValueError("min_count inválido")
+        sev_w = policy.PRIORITY_POLICY.parameters.get(
+            "severity_weight", {})
+        mem = [m for m in self.get_error_memory(student_id)
+               if m["error_count"] >= min_count]
+        # Orden total determinista por sorts estables compuestos:
+        # severidad ponderada -> count -> recencia -> clave.
+        mem.sort(key=lambda m: m["error_key"])
+        mem.sort(key=lambda m: m["last_seen"], reverse=True)
+        mem.sort(key=lambda m: m["error_count"], reverse=True)
+        mem.sort(key=lambda m: float(sev_w.get(m["severity"], 0.0)),
+                 reverse=True)
+        return mem
+
+    def get_error_history(self, student_id: str,
+                          error_key: str) -> dict | None:
+        con = self.store.connect()
+        try:
+            row = con.execute("SELECT first_seen, last_seen, error_count,"
+                              " severity, last_status, last_question_id,"
+                              " last_attempt_id FROM error_memory"
+                              " WHERE student_id=? AND error_key=?",
+                              (student_id, error_key)).fetchone()
+        finally:
+            con.close()
+        if not row:
+            return None
+        return {"student_id": student_id, "error_key": error_key,
+                "first_seen": row[0], "last_seen": row[1],
+                "error_count": row[2], "severity": row[3],
+                "last_status": row[4], "last_question_id": row[5],
+                "last_attempt_id": row[6]}
+
+    @staticmethod
+    def _record_reviews(con, student_id: str, attempt_id: str,
+                        corr: Correction, updates: list) -> None:
+        """Memoria de revision (Fase 10): una fila por unidad tocada por
+        el submit, en la misma transaccion. Intervalos de REVIEW_POLICY:
+        correct duplica (tope max), partial fija, incorrect reinicia,
+        otros estados conservan. Replay nunca llega aqui."""
+        from datetime import timedelta
+        from .policy import REVIEW_POLICY
+        p = REVIEW_POLICY.parameters
+        now = _now()
+        outcome = {"CORRECT": "correct",
+                   "PARTIALLY_CORRECT": "partial",
+                   "INCORRECT": "incorrect"}.get(corr.status, "other")
+        for u in updates or []:
+            uid = u.get("unit", "")
+            kind, _, ref = uid.partition(":")
+            if not kind or not ref:
+                continue
+            row = con.execute("SELECT interval_days FROM student_spacing"
+                              " WHERE student_id=? AND unit_kind=? AND"
+                              " unit_id=?",
+                              (student_id, kind, ref)).fetchone()
+            prev = int(row[0]) if row else None
+            if prev is None:
+                interval = {"correct": p["initial_days"]["correct"],
+                            "partial": p["partial_days"],
+                            "incorrect": p["incorrect_days"],
+                            "other": int(p["min_interval_days"])}[outcome]
+            elif outcome == "correct":
+                interval = min(int(prev * p["growth_factor"]),
+                               int(p["max_interval_days"]))
+            elif outcome == "partial":
+                interval = int(p["partial_days"])
+            elif outcome == "incorrect":
+                interval = int(p["incorrect_days"])
+            else:
+                interval = prev
+            interval = max(int(p["min_interval_days"]), interval)
+            nxt = (datetime.fromisoformat(now) +
+                   timedelta(days=interval)).isoformat(timespec="seconds")
+            con.execute(
+                "INSERT INTO student_spacing(student_id,unit_kind,unit_id,"
+                "first_review,last_review,next_review,review_count,"
+                "interval_days,last_status,last_score,last_attempt_id)"
+                " VALUES(?,?,?,?,?,?,?,?,?,?,?) "
+                "ON CONFLICT(student_id,unit_kind,unit_id) DO UPDATE SET "
+                "last_review=excluded.last_review,"
+                "next_review=excluded.next_review,"
+                "review_count=review_count+1,"
+                "interval_days=excluded.interval_days,"
+                "last_status=excluded.last_status,"
+                "last_score=excluded.last_score,"
+                "last_attempt_id=excluded.last_attempt_id",
+                (student_id, kind, ref, now, now, nxt, 1, interval,
+                 corr.status, float(corr.score), attempt_id))
+
+    def get_spacing(self, student_id: str, kind: str,
+                    ref: str) -> dict | None:
+        con = self.store.connect()
+        try:
+            row = con.execute("SELECT first_review, last_review,"
+                              " next_review, review_count, interval_days,"
+                              " last_status, last_score, last_attempt_id"
+                              " FROM student_spacing WHERE student_id=? AND"
+                              " unit_kind=? AND unit_id=?",
+                              (student_id, kind, ref)).fetchone()
+        finally:
+            con.close()
+        if not row:
+            return None
+        return {"student_id": student_id, "unit_kind": kind,
+                "unit_id": ref, "first_review": row[0],
+                "last_review": row[1], "next_review": row[2],
+                "review_count": row[3], "interval_days": row[4],
+                "last_status": row[5], "last_score": row[6],
+                "last_attempt_id": row[7]}
+
+    def get_due_units(self, student_id: str, limit: int = 20,
+                      now: str | None = None) -> list[dict]:
+        """Unidades con next_review vencido. `now` inyectable para tests
+        deterministas; por defecto tiempo real. Orden: next_review,
+        unit_kind, unit_id (total, sin incidentales)."""
+        if not isinstance(limit, int) or limit < 1:
+            raise ValueError("limit inválido")
+        moment = now or _now()
+        con = self.store.connect()
+        try:
+            rows = con.execute("SELECT unit_kind, unit_id, next_review,"
+                               " review_count, interval_days, last_status"
+                               " FROM student_spacing WHERE student_id=?"
+                               " AND next_review <= ? ORDER BY next_review ASC,"
+                               " unit_kind ASC, unit_id ASC LIMIT ?",
+                               (student_id, moment, limit)).fetchall()
+        finally:
+            con.close()
+        return [{"unit_kind": r[0], "unit_id": r[1],
+                 "knowledge_unit_id": "%s:%s" % (r[0], r[1]),
+                 "next_review": r[2], "review_count": r[3],
+                 "interval_days": r[4], "last_status": r[5]}
+                for r in rows]
+
+    def get_coverage(self, student_id: str) -> dict:
+        """Cobertura sobre el universo KB (topics+formulas+concepts+
+        sections con h2). Estados derivados de MasteryState existente:
+        mastered (status MASTERED), weak (AT_RISK/EMERGING con intentos),
+        learning (resto con intentos), unseen (sin fila o 0 intentos).
+        Solo lectura; determinista (conteos + orden fijo)."""
+        conkb = sqlite3.connect("file:%s?mode=ro" % self.kb_path, uri=True)
+        try:
+            topics = ["topic:T%02d" % t for t in range(1, 11)]
+            formulas = ["formula:" + r[0] for r in conkb.execute(
+                "SELECT equation_id FROM formulas ORDER BY equation_id")]
+            concepts = ["concept:" + r[0] for r in conkb.execute(
+                "SELECT DISTINCT term_ca FROM concepts WHERE"
+                " LENGTH(term_ca)>0 ORDER BY term_ca")]
+            sections = ["section:T%02d:%s" % (r[0], r[1]) for r in
+                        conkb.execute(
+                            "SELECT d.topic, s.h2 FROM sections s JOIN"
+                            " documents d ON d.id=s.doc_id WHERE"
+                            " LENGTH(s.h2)>0 ORDER BY d.topic, s.h2")]
+        finally:
+            conkb.close()
+        universe = {"topic": topics, "formula": formulas,
+                    "concept": concepts, "section": sections}
+        con = self.store.connect()
+        try:
+            states = {r[0]: (r[1], r[2], r[3]) for r in con.execute(
+                "SELECT knowledge_unit_id, status, score, attempt_count"
+                " FROM mastery_states WHERE student_id=?", (student_id,))}
+        finally:
+            con.close()
+
+        def _classify(uid):
+            st = states.get(uid)
+            if st is None or int(st[2]) <= 0:
+                return "unseen"
+            if st[0] == "MASTERED":
+                return "mastered"
+            if st[0] in ("AT_RISK", "EMERGING"):
+                return "weak"
+            return "learning"
+
+        by_kind, total_seen = {}, 0
+        for kind, uids in universe.items():
+            counts = {"total": len(uids), "seen": 0, "unseen": 0,
+                      "mastered": 0, "weak": 0, "learning": 0}
+            for uid in uids:
+                c = _classify(uid)
+                counts[c] += 1
+                if c != "unseen":
+                    counts["seen"] += 1
+            total_seen += counts["seen"]
+            counts["coverage_ratio"] = round(
+                counts["seen"] / counts["total"], 4) if counts["total"] \
+                else 0.0
+            by_kind[kind] = counts
+        total = sum(v["total"] for v in by_kind.values())
+        return {"total_units": total, "seen_units": total_seen,
+                "unseen_units": total - total_seen,
+                "coverage_ratio": round(total_seen / total, 4) if total
+                else 0.0,
+                "by_kind": by_kind}
 
     def _refresh_memories(self, con, student_id: str) -> list[dict]:
         rows = con.execute("SELECT knowledge_unit_id, unit_kind, score, confidence,"

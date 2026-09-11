@@ -12,15 +12,15 @@ def test_fresh_db_reaches_target(tmp_path):
     con = sqlite3.connect(tmp_path / "s.sqlite")
     assert _v(con) == 0
     new = migrate.migrate(con, "student")
-    assert new == migrate.TARGETS["student"] == 1
-    assert _v(con) == 1
+    assert new == migrate.TARGETS["student"] == 4
+    assert _v(con) == 4
 
 
 def test_migrate_is_idempotent(tmp_path):
     con = sqlite3.connect(tmp_path / "s.sqlite")
     migrate.migrate(con, "student")
-    assert migrate.migrate(con, "student") == 1
-    assert _v(con) == 1
+    assert migrate.migrate(con, "student") == 4
+    assert _v(con) == 4
 
 
 def test_newer_snapshot_is_rejected(tmp_path):

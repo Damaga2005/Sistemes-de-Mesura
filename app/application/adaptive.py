@@ -33,14 +33,19 @@ class AdaptivePracticeWorkflow:
                            "sesión no disponible para este estudiante")
 
     def recommend(self, ctx: ApplicationContext, session, *,
-                  limit: int = 5, seed: int = 0) -> dict:
+                  limit: int = 5, seed: int = 0,
+                  mode: str = "PRACTICE") -> dict:
         sess = self._session(session)
         self._own(ctx, sess)
         if not isinstance(limit, int) or limit < 1:
             raise AppError("VALIDATION_ERROR", "limit inválido")
         self.app.require(self.app.__dict__, "adaptive")
-        items = guard(self.app.adaptive.recommend,
-                      ctx.technical_student_id, limit=limit, seed=seed)
+        try:
+            items = guard(self.app.adaptive.recommend,
+                          ctx.technical_student_id, limit=limit, seed=seed,
+                          mode=mode)
+        except ValueError as e:
+            raise AppError("VALIDATION_ERROR", str(e)[:200])
         return {"ok": True, "data": {"session": sess.to_dict(),
                                      "recommendations": [
                                          _project_item(i) for i in items]}}
@@ -141,10 +146,12 @@ class AdaptivePracticeWorkflow:
                                      "mastery": states}}
 
     def next(self, ctx: ApplicationContext, session, *,
-             limit: int = 5, seed: int = 0) -> dict:
+             limit: int = 5, seed: int = 0,
+             mode: str = "PRACTICE") -> dict:
         """Una transición explícita: recomienda de nuevo con el estado
         actual (datos reales F5/F6, nunca heurística local)."""
-        return self.recommend(ctx, session, limit=limit, seed=seed)
+        return self.recommend(ctx, session, limit=limit, seed=seed,
+                              mode=mode)
 
 
 def _project_item(item) -> dict:

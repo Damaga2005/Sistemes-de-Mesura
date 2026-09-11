@@ -1,0 +1,2 @@
+-- 004 compatibilidad con student v4: fichero compartido F5+F7, mismo
+-- PRAGMA user_version. Sin DDL (ver 002_student_history_compat.sql).

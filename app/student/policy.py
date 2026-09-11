@@ -123,11 +123,73 @@ SPACING_POLICY = Policy(
     },
     status="active",
 )
+REVIEW_POLICY = Policy(
+    policy_id="review-schedule-policy",
+    version="v1",
+    parameters={
+        # Memoria de revision persistente (Fase 10): cuando volver a
+        # practicar cada unidad. Determinista, explicable, testeable.
+        # outcome: intervalo inicial en dias para fila nueva.
+        "initial_days": {"correct": 7, "partial": 3, "incorrect": 1},
+        # correct duplica el intervalo previo (crecimiento); partial
+        # fija 3 dias; incorrect reinicia a 1 dia. Otros estados
+        # (NO_ANSWER, NEEDS_REVIEW, ...) conservan intervalo previo
+        # (1 dia si la fila es nueva).
+        "growth_factor": 2.0,
+        "partial_days": 3,
+        "incorrect_days": 1,
+        "max_interval_days": 30,
+        "min_interval_days": 1,
+    },
+    status="active",
+)
+RETENTION_POLICY = Policy(
+    policy_id="retention-policy",
+    version="v1",
+    parameters={
+        # Fase 12: interpreta Mastery + Spacing + History + Errors.
+        # Sin decaimiento cientifico: solo reglas deterministicas sobre
+        # la politica de spacing existente (intervalos 1/3/7 x2 cap 30).
+        # AT_RISK cuando el tiempo transcurrido supera esta fraccion
+        # del intervalo vigente en una unidad previamente consolidada.
+        "at_risk_lead_ratio": 0.5,
+        # FORGOTTEN exige historial fuerte + vencimiento + evidencia
+        # negativa fresca (ausencia de evidencia != evidencia de olvido).
+        "forgotten_min_correct": 3,
+        "forgotten_min_attempts": 3,
+        # Sin fila de spacing: solo se declara AT_RISK por antiguedad
+        # si la unidad es fuerte y lleva al menos estos dias sin practica.
+        "no_spacing_at_risk_days": 14,
+    },
+    status="active",
+)
+CURRICULUM_POLICY = Policy(
+    policy_id="curriculum-policy",
+    version="v1",
+    parameters={
+        # Fase 13: tamanos de horizonte del plan (unidades por bucket).
+        # Sin calendario real: TODAY / NEXT_7_DAYS / LATER son colas
+        # ordenadas, no fechas. Solo presentacion; el orden dentro de
+        # cada bucket lo da la Priority congelada + reglas de clase.
+        "today_limit": 5,
+        "week_limit": 10,
+        "later_limit": 5,
+        # Tope del pool de formulas no-vistas por estudiante (KB real:
+        # 2896 formulas; el plan solo necesita la cabeza curricular).
+        "unseen_pool_cap": 60,
+        # Ventana de "vence pronto" para NEXT_7_DAYS (dias).
+        "due_soon_days": 7,
+    },
+    status="active",
+)
 POLICIES: dict[str, Policy] = {
     MASTERY_POLICY.key(): MASTERY_POLICY,
     PRIORITY_POLICY.key(): PRIORITY_POLICY,
     DIFFICULTY_POLICY.key(): DIFFICULTY_POLICY,
     SPACING_POLICY.key(): SPACING_POLICY,
+    REVIEW_POLICY.key(): REVIEW_POLICY,
+    RETENTION_POLICY.key(): RETENTION_POLICY,
+    CURRICULUM_POLICY.key(): CURRICULUM_POLICY,
 }
 
 

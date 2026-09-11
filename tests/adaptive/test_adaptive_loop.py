@@ -229,7 +229,13 @@ def test_step_is_single_iteration(tmp_path):
               last="2026-05-01T09:00:00+00:00")
     import inspect as _insp
     lines = [ln.strip() for ln in _insp.getsource(AdaptiveLoop.step).splitlines()]
-    assert not any(ln.startswith(("for ", "while ")) for ln in lines)
+    # Sin agente autonomo: prohibido `while`; todo `for` debe iterar un
+    # range() acotado por max_attempts (Fase 8: reintentos de novedad
+    # deterministas, nunca loop abierto).
+    assert not any(ln.startswith("while ") for ln in lines)
+    for ln in lines:
+        if ln.startswith("for "):
+            assert "range(" in ln, ln
     loop = AdaptiveLoop(svc)
     recs = loop.recommend("t", limit=1, seed=7,
                           now="2026-06-01T12:00:00+00:00")

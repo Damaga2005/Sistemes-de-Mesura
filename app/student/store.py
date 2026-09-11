@@ -2,7 +2,10 @@
 
 Tablas: students, attempts (UNIQUE attempt_id), corrections (attempt+version),
 mastery_states, mastery_events (inmutables, UNIQUE event_id), memories,
-reviews, audit_log. FK + constraints (§143-144). Transacciones atomicas.
+reviews, audit_log, question_history (UNIQUE student+question),
+error_memory (UNIQUE student+error), student_spacing (UNIQUE
+student+kind+unit). FK +
+constraints (§143-144). Transacciones atomicas.
 """
 from __future__ import annotations
 
@@ -55,6 +58,39 @@ CREATE TABLE IF NOT EXISTS reviews(
 CREATE TABLE IF NOT EXISTS audit_log(
   seq INTEGER PRIMARY KEY AUTOINCREMENT, action TEXT NOT NULL, ref_id TEXT NOT NULL,
   detail TEXT NOT NULL, created_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS question_history(
+  student_id TEXT NOT NULL REFERENCES students(student_id),
+  question_id TEXT NOT NULL,
+  first_seen TEXT NOT NULL, last_seen TEXT NOT NULL,
+  attempt_count INTEGER NOT NULL DEFAULT 0,
+  last_status TEXT NOT NULL DEFAULT '',
+  last_score REAL NOT NULL DEFAULT 0.0,
+  last_attempt_id TEXT NOT NULL DEFAULT '',
+  PRIMARY KEY(student_id, question_id));
+CREATE INDEX IF NOT EXISTS idx_qh_student_seen ON question_history(student_id, last_seen);
+CREATE TABLE IF NOT EXISTS error_memory(
+  student_id TEXT NOT NULL REFERENCES students(student_id),
+  error_key TEXT NOT NULL,
+  first_seen TEXT NOT NULL, last_seen TEXT NOT NULL,
+  error_count INTEGER NOT NULL DEFAULT 0,
+  severity TEXT NOT NULL DEFAULT '',
+  last_status TEXT NOT NULL DEFAULT '',
+  last_question_id TEXT NOT NULL DEFAULT '',
+  last_attempt_id TEXT NOT NULL DEFAULT '',
+  PRIMARY KEY(student_id, error_key));
+CREATE INDEX IF NOT EXISTS idx_em_student_seen ON error_memory(student_id, last_seen);
+CREATE TABLE IF NOT EXISTS student_spacing(
+  student_id TEXT NOT NULL REFERENCES students(student_id),
+  unit_kind TEXT NOT NULL, unit_id TEXT NOT NULL,
+  first_review TEXT NOT NULL, last_review TEXT NOT NULL,
+  next_review TEXT NOT NULL,
+  review_count INTEGER NOT NULL DEFAULT 0,
+  interval_days INTEGER NOT NULL DEFAULT 1,
+  last_status TEXT NOT NULL DEFAULT '',
+  last_score REAL NOT NULL DEFAULT 0.0,
+  last_attempt_id TEXT NOT NULL DEFAULT '',
+  PRIMARY KEY(student_id, unit_kind, unit_id));
+CREATE INDEX IF NOT EXISTS idx_ss_student_next ON student_spacing(student_id, next_review);
 """
 
 

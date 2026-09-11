@@ -1,0 +1,6 @@
+-- 002 compatibilidad con student v2: la student DB canonica aloja DOS
+-- esquemas (F5 student + F7 exam) bajo un unico PRAGMA user_version.
+-- StudentStore ya migro el fichero a v2 (tabla question_history); este
+-- script no ejecuta DDL, solo alinea el objetivo de exam_sessions para
+-- que ExamStore no rechace el fichero compartido. Tablas exam via
+-- CREATE TABLE IF NOT EXISTS idempotente en el store.

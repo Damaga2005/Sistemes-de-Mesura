@@ -38,3 +38,19 @@ ni generación de F7/F10.
 
 Regresión completa: `802 passed`; los 2 fallos restantes son externos al
 proyecto (`Gemini HTTP 401`). Fórmula `2896/2896` e aislamiento final PASS.
+
+## Fase 7 — Practice Learning Loop Closure
+
+Cierre del loop en modo adaptive reutilizando `AdaptiveLoop.step()`
+(recomendación + generación canónicas, sin duplicar `to_spec` ni
+`examiner.generate`). `PracticeWorkflow.submit_answer()` acepta
+`adaptive: bool = False, seed: int = 7`; en manual `next` es `None`.
+El DTO conserva feedback pedagógico existente (`feedback`,
+`claims`, `formulas`, `calculations` sin `expected`, `units` sin
+`expected`, `provenance`, `mastery_updates`); la sesión apunta a Q2
+para el siguiente submit. Frontend: corrección muestra porqués,
+cómo corregir y mastery; botón explícito de siguiente adaptativa
+que conserva la corrección visible. Sin LLM en decisiones, sin
+answer keys (`correct_answer`/`expected` jamás salen), fórmula
+`2896/2896`, idempotencia intacta. Límite documentado: sin
+historial visto-por-alumno (dedupe solo por fingerprint).

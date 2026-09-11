@@ -228,6 +228,7 @@
           String.fromCharCode(65 + i) + ") " + (o.text || "")));
       });
       qbox.appendChild(card);
+      if (window.smMath) window.smMath.renderMath(card);
       var form = document.createElement("form");
       var saved = (STATE.answers || {})[String(POS)];
       var seed = saved ? saved.answer : "";
@@ -422,6 +423,7 @@
             qc.appendChild(el("p", null, g.hint || ""));
           });
           box.appendChild(qc);
+          if (window.smMath) window.smMath.renderMath(qc);
         });
         var more = el("p");
         var a = el("a", "button button--secondary",

@@ -67,6 +67,17 @@ table { border-collapse: collapse; width: 100%; }
 .fr .den { padding: 0 0.3em; }
 .rt > span { border-top: 1px solid currentcolor; padding: 0 0.15em; }
 
+/* MathJax (self-hosted, tex-svg): inherit text color so dark/light both
+   work with zero extra rules; scroll ONLY the display-math container on
+   long/multiline formulas instead of ever breaking the page layout. */
+mjx-container { color: inherit; }
+mjx-container[display="true"] {
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
 code, .mono { font-family: var(--font-mono); font-size: 0.9em; }
 
 @media (prefers-reduced-motion: reduce) {

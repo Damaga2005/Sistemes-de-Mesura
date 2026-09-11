@@ -9,7 +9,7 @@ from app import paths as _paths
 
 MIGRATIONS_DIR = Path(__file__).resolve().parent / "migrations"
 TARGETS: dict[str, int] = {
-    "student": 1, "questions": 1, "exam_sessions": 1, "knowledge": 1,
+    "student": 4, "questions": 1, "exam_sessions": 4, "knowledge": 1,
 }
 _NAME_RE = re.compile(r"^(\d{3})_[a-z0-9_]+\.sql$")
 

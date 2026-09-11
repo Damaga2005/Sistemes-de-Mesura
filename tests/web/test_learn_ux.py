@@ -189,3 +189,30 @@ def test_learn_start_invalid(bridge):
                                    "target_formulas": [],
                                    "reasons": []}})
     assert st == 502 and data["code"] == "GENERATION_ERROR"
+
+def test_priorities_mode_param(bridge):
+    st, data, _ = bridge.route("GET", "/api/learn/priorities",
+                               {"limit": "5", "mode": "study"})
+    assert st == 200 and isinstance(data["priorities"], list)
+    st, data, _ = bridge.route("GET", "/api/learn/priorities",
+                               {"limit": "5", "mode": "NOPE"})
+    assert st == 400
+    st, data, _ = bridge.route("GET", "/api/learn/priorities",
+                               {"limit": "5", "mode": "exam"})
+    assert st == 400
+
+
+def test_e2e_study_mode_flow(bridge):
+    bridge.route("POST", "/api/practice/start",
+                 body={"topic": 2, "question_type": "FORMULA",
+                       "formula_id": "eq-02-0034", "seed": 14})
+    tok = list(bridge.sessions)[-1]
+    bridge.route("POST", "/api/practice/submit",
+                 body={"answer": "$U=u_c/k$",
+                       "attempt_id": "att-mode1"},
+                 cookie="sm_session=" + tok)
+    st, data, _ = bridge.route("GET", "/api/learn/priorities",
+                               {"limit": "5", "mode": "recovery"})
+    assert st == 200
+    for rec in data["priorities"]:
+        assert "mode_recovery" in rec["reasons"]
